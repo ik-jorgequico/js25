@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /data -->
+<!-- REGLAS MULTICOMPANY PARA QUE SE VEAN SOLO LOS REGISTROS DE LAS EMPRESA ACTUAL Y LUGAR DE CREACION 
+    EL MODELO DEBE DE TENER EL CAMPO company_id-->
+<odoo>
+    <data>
+        <record id="data_cuentas_bancarias_employee" model="ir.rule">
+            <field name="name">Cuentas Bancarias de empleados multi-company</field>
+            <!-- ref="model_hr_bank_account" ESTA EN EL SECURITY DEL MODELO -->
+            <field name="model_id" ref="model_hr_bank_account"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

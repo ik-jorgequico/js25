@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_canal_tree" model="ir.ui.view">
+            <field name="name">account.canal.tree</field>
+            <field name="model">account.canal</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Account Canal">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_canal" model="ir.actions.act_window">
+            <field name="name">Canal</field>
+            <field name="res_model">account.canal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id"></field>
+            <field name="search_view_id"/>
+        </record>
+
+        <menuitem id="menu_account_canal"
+            name="Canal"
+            action="action_account_canal"
+            parent="account.account_account_menu"
+            sequence="6"/>
+    </data>
+</odoo>

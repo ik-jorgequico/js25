@@ -1,0 +1,1661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <!--Tipo de estructura-->
+        <record id="type_str_rg" model="hr.payroll.structure.type">
+            <field name="country_id" eval="173" />
+            <field name="name">Régimen Laboral Peruano</field>
+            <field name="wage_type">monthly</field>
+            <field name="abbr">RLP</field>
+            <field name = "default_work_entry_type_id" eval="1"/>
+            <field name="company_id" eval="1"/>
+		</record>
+
+        <!--Estructuras-->
+        <record id="str_men_rg" model="hr.payroll.structure">
+            <field name="type_id" ref="type_str_rg" />
+            <field name="name">Mensual</field>
+            <field name="abbr">MENSUAL</field>
+            <field name="use_worked_day_lines" eval="True" />
+            <field name="country_id" eval="173" />
+            <field name="schedule_pay">monthly</field>
+            
+		</record>
+
+
+        <record id="BASIC_NA" model="hr.salary.rule.category">
+            <field name="name">Ingreso no Afecto</field>
+            <field name="code">BASIC_NA</field>
+		</record>
+
+        <!--Reglas-->
+        <record id="rule_basic" model="hr.salary.rule">
+            <field name="name">Remuneración Básica</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="code">BASIC</field>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">1</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">daily_wage = contract.wage / 30
+total_days = worked_days.WORK100.number_of_days
+#Días de ausencia  add_basic_salary en True
+for worked_day in payslip.worked_days_line_ids:
+    for leave_type in worked_day.work_entry_type_id.leave_type_ids:
+    #add_basic_salary es True, lo sumamos a los días totales
+        if leave_type.add_basic_salary:
+            total_days += worked_day.number_of_days
+result = daily_wage * total_days</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="22" />
+		</record>
+
+        <!--Asignación Familiar-->
+        <record id="rule_asig_fam" model="hr.salary.rule">
+            <field name="name">Asignación Familiar</field>
+            <field name="code">ASIG_FAM</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">2</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">extra_benefit_asig_fam = any(benefit.code == 'ASIG_FAM' for benefit in employee.contract_id.extra_benefits_ids)
+result = 102.5 if (employee.children &gt; 0 and (employee.contract_id.peru_employee_regime.abbr == "RG" or extra_benefit_asig_fam)) else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">extra_benefit_asig_fam = any(benefit.code == 'ASIG_FAM' for benefit in employee.contract_id.extra_benefits_ids)
+result = 102.5 if (employee.children &gt; 0 and (employee.contract_id.peru_employee_regime.abbr == "RG" or extra_benefit_asig_fam)) else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="31" />
+		</record>
+
+        <!--Compra de Vacacione-->
+        <record id="rule_comvac" model="hr.salary.rule">
+            <field name="name">Compra de Vacaciones</field>
+            <field name="code">COMVAC</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">6</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_COMVAC.amount if inputs.I_COMVAC else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_COMVAC.amount if inputs.I_COMVAC else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="18" />
+		</record>
+
+        <!--Descanso Médico-->
+        <record id="rule_ds_med" model="hr.salary.rule">
+            <field name="name">Descanso Médico</field>
+            <field name="code">DS_MED</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">7</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.wage/30*worked_days.LEAVE20.number_of_days if worked_days.LEAVE20 else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage/30*worked_days.LEAVE20.number_of_days if worked_days.LEAVE20 else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="True" />
+            <field name="have_holiday" eval="True" />
+            <field name="plame_id" eval="113" />
+		</record>
+
+        <!--Mov. Sup. Asistencia-->
+        <record id="rule_move_sa" model="hr.salary.rule">
+            <field name="name">Mov. Sup. Asistencia</field>
+            <field name="code">MOVE_SA</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">50</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.move_sa</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.move_sa</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="87" />
+		</record>
+
+        <!--Reintegro Afecto-->
+        <record id="rule_re_af" model="hr.salary.rule">
+            <field name="name">Reintegro Afecto</field>
+            <field name="code">RE_AF</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">8</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_RE_AF.amount if inputs.I_RE_AF else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_RE_AF.amount if inputs.I_RE_AF else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="111" />
+		</record>
+
+        
+        <!--Reintegro No Afecto-->
+        <record id="rule_re_naf" model="hr.salary.rule">
+            <field name="name">Reintegro No Afecto</field>
+            <field name="code">RE_NAF</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">51</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_RE_NAF.amount if inputs.I_RE_NAF else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_RE_NAF.amount if inputs.I_RE_NAF else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="116" />
+		</record>
+
+        <!--Reintegro No Afecto-->
+        <record id="rule_1_may" model="hr.salary.rule">
+            <field name="name">Rem 1ro de Mayo</field>
+            <field name="code">1_MAY</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">9</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_1_MAY if inputs.I_1_MAY else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_1_MAY if inputs.I_1_MAY else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="16" />
+		</record>
+
+        <!--Subsidio Maternidad-->
+        <record id="rule_sub_ma" model="hr.salary.rule">
+            <field name="name">Subsidio Maternidad</field>
+            <field name="code">SUB_MA</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">10</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 0 
+if worked_days.LEAVE09:
+    result = contract.wage/30*worked_days.LEAVE09.number_of_days</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0 
+if worked_days.LEAVE09:
+    result = contract.wage/30*worked_days.LEAVE09.number_of_days</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="93" />
+		</record>
+
+        <record id="rule_uti" model="hr.salary.rule">
+
+            <!--Hacia arrriba revisar la categoria-->
+            <field name="name">Utilidades</field>
+            <field name="code">UTI</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">52</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_UTI.amount if inputs.I_UTI else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="89" />
+		</record>
+
+        <record id="rule_bono" model="hr.salary.rule">
+            <field name="name">Bono Regular</field>
+            <field name="code">BONO</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">11</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_BONO.amount if inputs.I_BONO else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BONO.amount if inputs.I_BONO else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="True" />
+            <field name="plame_id" eval="51" />
+		</record>
+
+        <record id="rule_bon_alc_obj" model="hr.salary.rule">
+            <field name="name">Bono por Alcance de Objetivo</field>
+            <field name="code">BON_ALC_OBJ</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">12</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_BON_ALC_OBJ.amount if inputs.I_BON_ALC_OBJ else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BON_ALC_OBJ.amount if inputs.I_BON_ALC_OBJ else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="117" />
+		</record>
+
+        <record id="rule_COMISIONES_LBS" model="hr.salary.rule">
+            <field name="name">Comisiones - LBS</field>
+            <field name="code">COMIS_LBS</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">5</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.I_COMIS_LBS.amount if inputs.I_COMIS_LBS else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result =  inputs.I_COMIS_LBS.amount if inputs.I_COMIS_LBS else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="103" />
+		</record>
+
+        <record id="rule_lic_pat" model="hr.salary.rule">
+            <field name="name">Licencia por Paternidad</field>
+            <field name="code">LIC_PAT</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">13</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 0
+if worked_days.LEAVE28:
+    result = contract.wage/30*worked_days.LEAVE28.number_of_days</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0
+if worked_days.LEAVE28:
+    result = contract.wage/30*worked_days.LEAVE28.number_of_days</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="110" />
+		</record>
+
+        <record id="rule_vacac_trun" model="hr.salary.rule">
+            <field name="name">Vacaciones Truncas</field>
+            <field name="code">VACAC_TRUN</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">14</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_VACAC_TRUN.amount*-1 if inputs.I_VACAC_TRUN else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="15" />
+		</record>
+
+        <record id="rule_idem_vacac" model="hr.salary.rule">
+            <field name="name">Indemnización Vacacional</field>
+            <field name="code">IDEM_VACAC</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">53</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_IDEM_VACAC.amount*1 if inputs.I_IDEM_VACAC else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_IDEM_VACAC.amount*1 if inputs.I_IDEM_VACAC else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="74" />
+		</record>
+
+        <record id="rule_grat_ley_trunc" model="hr.salary.rule">
+            <field name="name">Gratificación Ley 30334 Trunca</field>
+            <field name="code">GRAT_LEY_TRUNC</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">54</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_GRAT_LEY_TRUNC.amount*1 if inputs.I_GRAT_LEY_TRUNC else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="66" />
+		</record>
+
+        <record id="rule_bon_ley_trunc" model="hr.salary.rule">
+            <field name="name">Bonificación Ley 30334 Trunca</field>
+            <field name="code">BON_LEY_TRUNC</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">55</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BON_LEY_TRUNC.amount*1 if inputs.I_BON_LEY_TRUNC else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="58" />
+		</record>
+
+        <record id="rule_cts_trunc" model="hr.salary.rule">
+            <field name="name">CTS Trunca</field>
+            <field name="code">CTS_TRUNC</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">56</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_CTS_TRUNC.amount*1 if inputs.I_CTS_TRUNC else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_CTS_TRUNC.amount*1 if inputs.I_CTS_TRUNC else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="82" />
+		</record>
+
+        <record id="rule_grati" model="hr.salary.rule">
+            <field name="name">Gratificación FP - Nav Ley 30334</field>
+            <field name="code">GRATI</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">57</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_GRATI.amount if inputs.I_GRATI else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_GRATI.amount if inputs.I_GRATI else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_cts" model="hr.salary.rule">
+            <field name="name">CTS</field>
+            <field name="code">CTS</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">58</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_CTS.amount if inputs.I_CTS else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_CTS.amount if inputs.I_CTS else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_rem_vac" model="hr.salary.rule">
+            <field name="name">Remuneracion Vacacional</field>
+            <field name="code">REM_VAC</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">15</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 0
+result_children = 0
+if employee.children &gt; 0:
+    result_children = 102.50
+result_vacional_input = inputs.I_VACAC.amount*-1 if inputs.I_VACAC else 0
+if worked_days.LEAVE23:
+    result = (contract.wage + result_children )/30*worked_days.LEAVE23.number_of_days + result_vacional_input</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0
+result_children = 0
+if employee.children &gt; 0:
+    result_children = 102.50
+result_vacional_input = inputs.I_VACAC.amount*-1 if inputs.I_VACAC else 0
+if worked_days.LEAVE23:
+    result = (contract.wage + result_children)/30*worked_days.LEAVE23.number_of_days + result_vacional_input
+            </field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="19" />
+		</record>
+
+        <record id="rule_v_al" model="hr.salary.rule">
+            <field name="name">Vale de Alimentos</field>
+            <field name="code">V_AL</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">59</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_V_AL.amount if inputs.I_V_AL else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_V_AL.amount if inputs.I_V_AL else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="14" />
+		</record>
+
+        <!--#########################################################################################-->
+
+        <record id="rule_BON_PRODUCT" model="hr.salary.rule">
+            <field name="name">Bono de Productividad</field>
+            <field name="code">BON_PRODUCT</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">60</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_BON_PRODUCT.amount if inputs.I_BON_PRODUCT else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BON_PRODUCT.amount if inputs.I_BON_PRODUCT else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_BON_INGRESO" model="hr.salary.rule">
+            <field name="name">Bono de Ingreso</field>
+            <field name="code">BON_INGRESO</field>
+            <field name="category_id" ref="BASIC_NA"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">25</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_BON_INGRESO.amount if inputs.I_BON_INGRESO else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BON_INGRESO.amount if inputs.I_BON_INGRESO else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_DEV_IMP_5TA" model="hr.salary.rule">
+            <field name="name">Devolución Impuesto 5ta</field>
+            <field name="code">DEV_IMP_5TA</field>
+            <field name="category_id" ref="BASIC_NA" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">61</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_DEV_IMP_5TA.amount if inputs.I_DEV_IMP_5TA else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_DEV_IMP_5TA.amount if inputs.I_DEV_IMP_5TA else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <!--#########################################################################################-->
+
+
+        <!-- Total Ingreso Afecto -->
+        <record id="rule_gross" model="hr.salary.rule">
+            <field name="name">Total Ingreso Afecto</field>
+            <field name="code">GROSS</field>
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">24</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = categories.BASIC</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+            <!-- Total Ingreso No Afecto -->
+        <record id="rule_gross_na" model="hr.salary.rule">
+            <field name="name">Total Ingreso No Afecto</field>
+            <field name="code">GROSS_NA</field>
+            <field name="category_id" ref="hr_payroll.GROSS" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">99</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = categories.BASIC_NA</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC_NA</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_afp_fondo" model="hr.salary.rule">
+            <field name="name">Afp - Fondo</field>
+            <field name="code">AFP_FONDO</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">102</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name != 'ONP':
+    result = -1*(comis.fund/100*categories.BASIC)
+else :
+    result = 0
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name != 'ONP':
+    result = -1*(comis.fund/100*categories.BASIC)
+else :
+    result = 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="231" />
+		</record>
+
+        <record id="rule_afp_seg" model="hr.salary.rule">
+            <field name="name">Afp - Seguro</field>
+            <field name="code">AFP_SEG</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">103</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name != 'ONP':
+    if comis.rem_max &lt; categories.BASIC:
+        result = -1*(comis.bonus/100*comis.rem_max)
+    else:
+        result = -1*(comis.bonus/100*categories.BASIC)
+else :
+    result = 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name != 'ONP':
+    if comis.rem_max &lt; categories.BASIC:
+        result = -1*(comis.bonus/100*comis.rem_max)
+    else:
+        result = -1*(comis.bonus/100*categories.BASIC)
+else :
+    result = 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="229" />
+		</record>
+
+        <record id="rule_afp_comis" model="hr.salary.rule">
+            <field name="name">Afp - Comisión</field>
+            <field name="code">AFP_COMIS</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">104</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 1 if employee.pension_system_id.name != 'ONP' else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+    if employee.pension_system_id.name != 'ONP':
+        if employee.pension_mode == "flujo":
+            result = -1*(comis.flow/100*categories.BASIC)
+        elif employee.pension_mode in ["flujo","mixto"]:
+            result = -1*(comis.balance/100*categories.BASIC)
+        else:
+            result = 0
+    else:
+        result = 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="224" />
+		</record>
+
+        <record id="rule_onp" model="hr.salary.rule">
+            <field name="name">ONP</field>
+            <field name="code">ONP</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">105</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 0
+comis = employee.pension_system_id.comis_pension_ids.filtered(lambda res: res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name == 'ONP':
+    result = -1*(13/100*categories.BASIC)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0
+comis = employee.pension_system_id.comis_pension_ids.filtered(lambda res: res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+if employee.pension_system_id.name == 'ONP':
+    result = -1*(13/100*categories.BASIC)
+            </field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_prest" model="hr.salary.rule">
+            <field name="name">Préstamos</field>
+            <field name="code">PREST</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">106</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_PREST.amount if inputs.I_PREST else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_PREST.amount if inputs.I_PREST else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="251" />
+		</record>
+
+        <record id="rule_desc_eps" model="hr.salary.rule">
+            <field name="name">Descuento EPS</field>
+            <field name="code">DESC_EPS</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">107</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_DESC_EPS.amount if inputs.I_DESC_EPS else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_DESC_EPS.amount if inputs.I_DESC_EPS else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="251" />
+		</record>
+<!-- scs -->
+        <record id="rule_adel_bon_obj" model="hr.salary.rule">
+            <field name="name">Adelanto Bono por Alcance de Objetivo</field>
+            <field name="code">ADEL_BON_OBJ</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">108</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_BON_OBJ.amount if inputs.I_ADEL_BON_OBJ else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_BON_OBJ.amount if inputs.I_ADEL_BON_OBJ else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="246" />
+		</record>
+
+        <record id="rule_adel_util" model="hr.salary.rule">
+            <field name="name">Adelanto Utilidades</field>
+            <field name="code">ADEL_UTIL</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">109</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_UTIL.amount if inputs.I_ADEL_UTIL else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_UTIL.amount if inputs.I_ADEL_UTIL else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="246" />
+		</record>
+
+        <record id="rule_adel_sueldo" model="hr.salary.rule">
+            <field name="name">Adelanto Sueldo</field>
+            <field name="code">ADEL_SUELDO</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">110</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_SUELDO.amount if inputs.I_ADEL_SUELDO else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_SUELDO.amount if inputs.I_ADEL_SUELDO else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="246" />
+		</record>
+
+        <record id="rule_adel_liq" model="hr.salary.rule">
+            <field name="name">Adelanto Liquidación</field>
+            <field name="code">ADEL_LIQ</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">120</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_LIQ.amount if inputs.I_ADEL_LIQ else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_LIQ.amount if inputs.I_ADEL_LIQ else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="246" />
+		</record>
+
+        <!--################################################################3-->
+
+        <record id="rule_adel_liq" model="hr.salary.rule">
+            <field name="name">Otros Descuentos</field>
+            <field name="code">OTROS_DESC</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">111</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_OTROS_DESC.amount if inputs.I_OTROS_DESC else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_OTROS_DESC.amount if inputs.I_OTROS_DESC else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+
+		</record>
+
+        <!--########################################################################-->
+
+        <record id="rule_5ta" model="hr.salary.rule">
+            <field name="name">I.R. 5ta</field>
+            <field name="code">5TA</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">112</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_5TA.amount*-1 if inputs.I_5TA else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="228" />
+		</record>
+
+        <!--###########################################################################-->
+
+        <record id="rule_ADEL_GRATI" model="hr.salary.rule">
+            <field name="name">Adelanto Gratificación</field>
+            <field name="code">ADEL_GRATI</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">113</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_GRATI.amount if inputs.I_ADEL_GRATI else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_GRATI.amount if inputs.I_ADEL_GRATI else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ADEL_GRAT_EXTRA" model="hr.salary.rule">
+            <field name="name">Adelanto Gratificación Extraordinaria</field>
+            <field name="code">ADEL_GRAT_EXTRA</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">114</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_GRAT_EXTRA.amount if inputs.I_ADEL_GRAT_EXTRA else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_GRAT_EXTRA.amount if inputs.I_ADEL_GRAT_EXTRA else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ADEL_AGUINALDO" model="hr.salary.rule">
+            <field name="name">Adelanto de Aguinaldo</field>
+            <field name="code">ADEL_AGUINALDO</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">115</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_AGUINALDO.amount if inputs.I_ADEL_AGUINALDO else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_AGUINALDO.amount if inputs.I_ADEL_AGUINALDO else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ADEL_BON_EXTRA" model="hr.salary.rule">
+            <field name="name">Adelanto Bonificación Extraordinaria</field>
+            <field name="code">ADEL_BON_EXTRA</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">116</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_BON_EXTRA.amount if inputs.I_ADEL_BON_EXTRA else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_BON_EXTRA.amount if inputs.I_ADEL_BON_EXTRA else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ADEL_ADEL_BON_PRODUCT" model="hr.salary.rule">
+            <field name="name">Adelanto Bono de Productividad</field>
+            <field name="code">ADEL_BON_PRODUCT</field>
+            <field name="category_id" ref="hr_payroll.DED" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="False" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">119</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = -1*inputs.I_ADEL_BON_PRODUCT.amount if inputs.I_ADEL_BON_PRODUCT else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -1*inputs.I_ADEL_BON_PRODUCT.amount if inputs.I_ADEL_BON_PRODUCT else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <!--###########################################################################-->
+
+        <record id="rule_tot_ded" model="hr.salary.rule">
+            <field name="name">Total Deducción</field>
+            <field name="code">TOT_DED</field>
+            <field name="category_id" ref="hr_payroll.GROSS" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">200</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.DED</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_net" model="hr.salary.rule">
+            <field name="name">Salario Neto</field>
+            <field name="code">NET</field>
+            <field name="category_id" ref="hr_payroll.NET" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">300</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC + categories.BASIC_NA + categories.DED</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ess_reg_675" model="hr.salary.rule">
+            <field name="name">Essalud 6.75%</field>
+            <field name="code">ESS_REG_675 </field>
+            <field name="category_id" eval="6" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">401</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = categories.BASIC * 6.75/100 if employee.health_regime_id.code == "02" else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC * 6.75/100 if employee.health_regime_id.code == "02" else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ess_reg_9" model="hr.salary.rule">
+            <field name="name">Essalud 9%</field>
+            <field name="code">ESS_REG_9</field>
+            <field name="category_id" eval="6" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">402</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = categories.BASIC * 9/100 if employee.health_regime_id.code == "01" else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC * 9/100 if employee.health_regime_id.code == "01" else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_ess_eps" model="hr.salary.rule">
+            <field name="name">Essalud - Eps</field>
+            <field name="code">ESS_EPS</field>
+            <field name="category_id" eval="6" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">403</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 0
+if employee.health_regime_id.code == "02" and categories.BASIC &lt;1025:
+    result = categories.BASIC * 2.25/100
+elif employee.health_regime_id.code == "02" and categories.BASIC &gt;1025:
+    result = 1025 * 2.25/100</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0
+if employee.health_regime_id.code == "02" and categories.BASIC &lt;1025:
+    result = categories.BASIC * 2.25/100
+elif employee.health_regime_id.code == "02" and categories.BASIC &gt;1025:
+    result = 1025 * 2.25/100
+            </field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_vida_ley" model="hr.salary.rule">
+            <field name="name">Vida Ley</field>
+            <field name="code">VIDA_LEY</field>
+            <field name="category_id" eval="6" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">404</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">	### TASA = 0.31 ## TASA DE VIDA LEY
+comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+result_asig_fam = 102.50 if employee.children &gt; 0 else 0
+result_base = contract.wage + result_asig_fam 
+result = result_base * 0.31/100
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">### TASA = 0.31 ## TASA DE VIDA LEY
+comis=employee.pension_system_id.comis_pension_ids.filtered(lambda res : res.date_from == payslip.date_from and res.date_to == payslip.date_to)
+result_asig_fam = 102.50 if employee.children &gt; 0 else 0
+result_base = contract.wage + result_asig_fam 
+result = result_base * 0.31/100
+            </field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+		</record>
+
+        <record id="rule_sis" model="hr.salary.rule">
+            <field name="name">SIS</field>
+            <field name="code">SIS</field>
+            <field name="category_id" eval="6" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">405</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 15 if employee.health_regime_id.code == "03" else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 15 if employee.health_regime_id.code == "03" else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_gratification" eval="False" />
+            <field name="have_cts" eval="False" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="False" />
+            <field name="plame_id" eval="264" />
+		</record>
+
+        <record id="rule_bon_result" model="hr.salary.rule">
+            <field name="name">Bono por resultados</field>
+            <field name="code">BON_RESULT</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">5</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_BON_RESULT.amount if inputs.I_BON_RESULT else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_BON_RESULT.amount if inputs.I_BON_RESULT else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="True" />
+            <field name="plame_id" eval="51"/>
+		</record>
+
+        <record id="rule_comisiones" model="hr.salary.rule">
+            <field name="name">Comisiones</field>
+            <field name="code">COMISIONES</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="struct_id" ref="str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">5</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_COMIS.amount if inputs.I_COMIS else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_COMIS.amount if inputs.I_COMIS else 0</field>
+            <field name="have_5ta" eval="True" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="False" />
+            <field name="have_holiday" eval="True" />
+            <field name="plame_id" eval="103" />
+		</record>
+
+        <!--Otros tipos de entrada-->
+
+        <record id="input_i_bon_result" model="hr.payslip.input.type">
+            <field name="name">Bono por resultados</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_RESULT</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_comis" model="hr.payslip.input.type">
+            <field name="name">Comisiones</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_COMIS</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+        
+        <record id="input_i_bono" model="hr.payslip.input.type">
+            <field name="name">Bono Regular</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BONO</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_comvac" model="hr.payslip.input.type">
+            <field name="name">Compra de Vacaciones</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_COMVAC</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_re_af" model="hr.payslip.input.type">
+            <field name="name">Reintegro Afecto</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_RE_AF</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_re_naf" model="hr.payslip.input.type">
+            <field name="name">Reintegro No Afecto</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_RE_NAF</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_v_al" model="hr.payslip.input.type">
+            <field name="name">Vale de Alimentos</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_V_AL</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_sub_ma" model="hr.payslip.input.type">
+            <field name="name">Subsidio Maternidad</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_SUB_MA</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_1_may" model="hr.payslip.input.type">
+            <field name="name">Remuneracion 1 de Mayo</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_1_MAY</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_uti" model="hr.payslip.input.type">
+            <field name="name">Utilidades</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_UTI</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_5ta" model="hr.payslip.input.type">
+            <field name="name">Impuesto 5ta</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_5TA</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_rem_desc_med" model="hr.payslip.input.type">
+            <field name="name">Rem Descano Médico</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_REM_DESC_MED</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_bon_alc_obj" model="hr.payslip.input.type">
+            <field name="name">Bono porAlcance de Objetivos</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_ALC_OBJ</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_lic_pat" model="hr.payslip.input.type">
+            <field name="name">Licencia Paternidad</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_LIC_PAT</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_prest" model="hr.payslip.input.type">
+            <field name="name">Préstamo</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_PREST</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_desc_eps" model="hr.payslip.input.type">
+            <field name="name">Descuento EPS</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_DESC_EPS</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_adel_bon_obj" model="hr.payslip.input.type">
+            <field name="name">Adelanto Bono por Alcance de Objetivo</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_BON_OBJ</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_vacac" model="hr.payslip.input.type">
+            <field name="name">Vacaciones</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_VACAC</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_vacac_trun" model="hr.payslip.input.type">
+            <field name="name">Vacaciones Truncas</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_VACAC_TRUN</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_idem_vacac" model="hr.payslip.input.type">
+            <field name="name">Indemnización Vacacional</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_IDEM_VACAC</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_grat_lry_trunc" model="hr.payslip.input.type">
+            <field name="name">Gratificación Ley 30334 Trunca</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_GRAT_LEY_TRUNC</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_bon_lry_trunc" model="hr.payslip.input.type">
+            <field name="name">Bonificación Ley 30334 Trunca</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_LEY_TRUNC</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_cts_trunca" model="hr.payslip.input.type">
+            <field name="name">CTS Trunca</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_CTS_TRUNC</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_adel_sueldo" model="hr.payslip.input.type">
+            <field name="name">Adelanto Sueldo</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_SUELDO</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_adel_util" model="hr.payslip.input.type">
+            <field name="name">Adelanto Utilidades</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_UTIL</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_adel_liq" model="hr.payslip.input.type">
+            <field name="name">Adelanto Liquidación</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_LIQ</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_grati" model="hr.payslip.input.type">
+            <field name="name">Gratificación</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_GRATI</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_i_cts" model="hr.payslip.input.type">
+            <field name="name">CTS</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_CTS</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_o_desc" model="hr.payslip.input.type">
+            <field name="name">Otros Descuentos</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_OTROS_DESC</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_DEV_IMP_5TA" model="hr.payslip.input.type">
+            <field name="name">Devolución Impuesto 5ta</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_DEV_IMP_5TA</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_BON_EXT_TEMP_30334" model="hr.payslip.input.type">
+            <field name="name">Bonificación Extraordinaria Temporal 30334</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_EXT_TEMP_30334</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_GRATS_EXTRA" model="hr.payslip.input.type">
+            <field name="name">Gratificaciones Extraordinarias</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_GRATS_EXTRA</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_AGUI_NAV" model="hr.payslip.input.type">
+            <field name="name">Aguinaldo de Navidad</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_AGUI_NAV</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_ADEL_GRATI" model="hr.payslip.input.type">
+            <field name="name">Adelanto Gratificación</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_GRATI</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_ADEL_AGUINALDO" model="hr.payslip.input.type">
+            <field name="name">Adelanto de Aguinaldo</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_AGUINALDO</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_ADEL_GRAT_EXTRA" model="hr.payslip.input.type">
+            <field name="name">Adelanto Gratificación Extraordinaria</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_GRAT_EXTRA</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_BON_EXTR" model="hr.payslip.input.type">
+            <field name="name">Bonificación Extraordinaria</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_EXTR</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_ADEL_BON_EXTRA" model="hr.payslip.input.type">
+            <field name="name">Adelanto Bonificación Extraordinaria</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_BON_EXTRA</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_BON_PRODUCT" model="hr.payslip.input.type">
+            <field name="name">Bono de Productividad</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_PRODUCT</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_BON_INGRESO" model="hr.payslip.input.type">
+            <field name="name">Bono de Ingreso</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_BON_INGRESO</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+
+        <record id="input_I_ADEL_BON_PRODUCT" model="hr.payslip.input.type">
+            <field name="name">Adelanto Bono de Productividad</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_ADEL_BON_PRODUCT</field>
+            <field name="is_affected" eval="False" />
+            <field name="struct_ids" eval="[(4, ref('str_men_rg'))]" />
+		</record>
+        <!-- REGIMEN DE SALUD -->
+        <record id="health_essalud" model="health.regime">
+            <field name="code">01</field>
+            
+            <field name="health_description">ESSALUD</field>
+            <field name="name">ESSALUD</field>
+		</record>
+
+        <record id="health_eps" model="health.regime">
+            <field name="code">02</field>
+            <field name="health_description">EPS</field>
+            <field name="name">EPS</field>
+		</record>
+
+        <record id="health_sis" model="health.regime">
+            <field name="code">03</field>
+            <field name="health_description">SIS</field>
+            <field name="name">SIS</field>
+		</record>
+
+        <!-- SISTEMA DE PENSIONES  -->
+            <record id="pension_system_integra" model="pension.system">
+            <field name="code">01</field>
+            <field name="pension_system">INTEGRA</field>
+            <field name="name">INTEGRA</field>
+            <field name="private_sector">True</field>
+            <field name="public_sector">False</field>
+            <field name="cuspp">True</field>
+            <field name="other_entities">False</field>
+            <field name="comis_pension_ids" eval = "False"/>
+		</record>
+
+        <record id="pension_system_habitat" model="pension.system">
+            <field name="code">03</field>
+            <field name="pension_system">HABITAT</field>
+            <field name="name">HABITAT</field>
+            <field name="private_sector">True</field>
+            <field name="public_sector">False</field>
+            <field name="cuspp">True</field>
+            <field name="other_entities">False</field>
+            <field name="comis_pension_ids" eval = "False"/>
+		</record>
+
+        <record id="pension_system_profuturo" model="pension.system">
+            <field name="code">04</field>
+            <field name="pension_system">PROFUTURO</field>
+            <field name="name">PROFUTURO</field>
+            <field name="private_sector">True</field>
+            <field name="public_sector">False</field>
+            <field name="cuspp">False</field>
+            <field name="other_entities">False</field>
+            <field name="comis_pension_ids" eval = "False"/>
+		</record>
+
+        <record id="pension_system_onp" model="pension.system">
+            <field name="code">05</field>
+            <field name="pension_system">ONP</field>
+            <field name="name">ONP</field>
+            <field name="private_sector">False</field>
+            <field name="public_sector">False</field>
+            <field name="cuspp">False</field>
+            <field name="other_entities">False</field>
+            <field name="comis_pension_ids" eval = "False"/>
+		</record>
+
+        <record id="pension_system_prima" model="pension.system">
+            <field name="code">06</field>
+            <field name="pension_system">PRIMA</field>
+            <field name="name">PRIMA</field>
+            <field name="private_sector">True</field>
+            <field name="public_sector">False</field>
+            <field name="cuspp">False</field>
+            <field name="other_entities">False</field>
+            <field name="comis_pension_ids" eval = "False"/>
+		</record>
+    </data>
+</odoo>

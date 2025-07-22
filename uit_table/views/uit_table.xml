@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="uit_table_tree_view" model="ir.ui.view" >
+        <field name="name">uit.table.tree.view</field >
+        <field name="model">uit.table</field>
+        <field name="arch" type="xml">
+            <tree string = "Tabla de UIT" >
+                <field name="name" />
+                <field name="year" />
+                <field name="code" />
+                <field name="value" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_uit_table" model="ir.actions.act_window">
+        <field name="name">Tabla de UIT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">uit.table</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem
+        id="menu_action_uit_table"
+        action="uit_table.action_uit_table"
+        name="Tabla UIT"
+        parent="tramo_5ta.menu_hr_5ta_category"
+        sequence="40"/>
+        
+</odoo>

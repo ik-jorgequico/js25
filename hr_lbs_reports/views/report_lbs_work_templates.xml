@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_lbs_work">
+        <t t-call="web.basic_layout" t-lang="o.employee_id.company_id.partner_id.lang">
+            <style>
+                .row {
+                        font-size: 16px;
+                        text-transform: uppercase;
+                    }
+                .bold{
+                        text-transform: uppercase;
+                }
+                .page{
+                    font-family: Times new roman;
+                }
+                td {
+                width: 25%;
+                }
+            </style>
+            
+            <!--/web/image?model=res.company&id=' + str(company.id) + '&field=logo -->
+            <div class="page">
+                <br/>
+                <div class="row">
+                    <div class="col-8" style="padding-top: 80px; padding-left: 100px;">
+                        <p><b><span t-field="o.employee_id.company_id.name"/></b></p>
+                    </div>
+                    <div class="col-4 text-right" style="margin-right: 80px;">
+                        <img style="width: 220px" t-if="o.employee_id.company_id.logo" t-att-src="image_data_uri(o.employee_id.company_id.logo)" alt="Company Logo" class="float-left" />
+                
+                        <!-- <img style="width: 220px;" t-if="o.employee_id.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(o.employee_id.company_id.logo)"/> -->
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <h3 class="text-center" font-family="'Times New Roman', Times, serif"><b>CERTIFICADO DE TRABAJO</b></h3>
+                </div>
+
+                <div style="padding-right: 70px; padding-left: 70px">
+                    <div class="container-fluid fst-normal fs-3 small">
+                        <br/>
+                        <br/>
+                        <h5>CERTIFICAMOS:</h5>
+                    </div>
+                    <div class="container-fluid fst-normal fs-3 small" style="font-size: 15px;">
+                        <div style="text-align: justify;">
+                            <br/>
+                            <br/>
+                            <p>Que el Sr. <b><span class="bold" style="text-transform: uppercase;" t-field="o.employee_id.name"/></b> ha laborado en nuestra empresa desde el <span t-field="o.first_contract_date_words"/> hasta el <span t-field="o.last_contract_date_words"/>, con el cargo de <b><span style="text-transform: uppercase;" t-field="o.employee_id.job_id"/></b>. </p>
+                            
+                            <br/>
+                            
+                            <p>El Sr. <span style="text-transform: uppercase;" t-field="o.employee_id.name"/> se retira de nuestra empresa libre de todo compromiso, salvo el de respetar el secreto profesional concerniente a los negocios de nuestra empresa y el de nuestra representada.</p>
+                            
+                            <br/>
+                            <br/>
+                            
+                            <p>Se expide la presente para los fines requeridos.</p>
+                        </div> 
+                        <br/>
+                        <br/>
+                        <div style="text-align: right;">
+                            <p>Lima, <span t-field="o.last_contract_date_words"/></p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div>
+                            <p>Atentamente,</p>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+
+        <div class="row small">
+            <div class="col-12 text-center">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <span>________________________________________________</span>
+                <br />
+                <span t-field="o.employee_id.company_id.gerente_name" style="text-transform: uppercase; font-weight: normal;"/>
+                <br>Gerente General</br>
+            </div>
+        </div>
+    </div>
+</t>
+</template>
+
+<template id="report_lbs_work_lang">
+<t t-call="web.html_container">
+    <t t-foreach="docs" t-as="o">
+        <t t-set="o" t-value="o.with_context(lang=o.employee_id.sudo().address_home_id.lang or o.env.lang)" />
+        <t t-call="hr_lbs_reports.report_lbs_work" t-lang="o.env.lang" />
+    </t>
+</t>
+</template>
+
+</odoo>

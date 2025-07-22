@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_pdf_profile" model="ir.actions.report">
+        <field name="name">Perfil del puesto de trabajo</field>
+        <field name="model">hr.job</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_job_profile.report_pdf_profile_job</field>
+        <field name="report_file">hr_job_profile.report_pdf_profile_job</field>
+        <!-- <field name="print_report_name">pdf</field> -->
+        <field name="binding_model_id" ref="model_hr_job" />
+        <field name="binding_type">report</field>
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False" />
+    </record>
+
+    <template id="report_pdf_profile_job">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout" t-lang="o.company_id.partner_id.lang">
+                    <div class="header">
+                        <div class="container">
+                            <div class="row" style="padding-top: 60px;">
+                                <div class="col-6">
+                                    <!-- <img
+                                        style="width: 250px"
+                                        src="/hr_job_profile/static/src/img/logo_extend_name.PNG"
+                                    /> -->
+                                </div>
+                                <div style="padding-top: 37px" class="col-6">
+                                    <div style="font-size: 10pt; text-align: right; color: #0069aa;">
+                                        <b>FORMULARIO DE DESCRIPCIÓN FUNCIÓN/POSICIÓN</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border-color: #20BFFF" />
+                    </div>
+
+                    <div class="page">
+                        <style>
+                            .page{
+                            font-size: 10pt;
+                            }
+
+                            .thead-blue{
+                            background: #0069aa;
+                            border-solid: #0069aa;
+                            border-color: #0069aa;
+                            color: #ffffff;
+                            text-align: left;
+                            }
+
+                            table {
+                            border-collapse:collapse;
+                            }
+
+                            th {
+                            padding: 5px;
+                            font-size: 18px;
+                            }
+
+                            td {
+                            border-bottom: 0.5px solid #0096c8;
+                            padding: 5px;
+                            vertical-align: middle;
+                            }
+
+                            .bordered{
+                            border: 2px solid #0096c8;
+                            border-radius: 20px;
+                            padding: 30px;
+                            text-align: center;
+                            margin-left: 40px;
+                            margin-right: 40px;
+                            margin-top: -5px;
+                            margin-bottom: -5px;
+                            }
+                        </style>
+
+                        <table style="width: 100%;">
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th colspan="4">1. INFORMACIÓN GENERAL</th>
+                                </tr>
+                                <tr>
+                                    <td style="color: #0069aa; width: 20%;">
+                                        <b>Título de puesto</b>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <b>
+                                            <span t-field="o.name" />
+                                        </b>
+                                    </td>
+                                    <td style="color: #0069aa; width: 20%;">
+                                        <b>Fecha de aprobación</b>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <span t-field="o.date_approbation" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #0069aa; ">
+                                        <b>Localización (ubicación zonal)</b>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.location_id.name" />
+                                    </td>
+                                    <td style="color: #0069aa; ">
+                                        <b>Preparado por</b>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.prepare_by" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #0069aa;">
+                                        <b>Dependencia jerárquica (jefe directo)</b>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.direct_boss" />
+                                    </td>
+                                    <td style="color: #0069aa;">
+                                        <b>Aprobado por</b>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.approve_by" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th colspan="1">2. MISIÓN DEL PUESTO</th>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%; text-align: justify;">
+                                        <span />
+                                        <span t-field="o.mision" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+
+                            <tbody class="tbody-blue">
+
+                                <tr class="thead-blue">
+                                    <th colspan="2">3. PRINCIPALES FUNCIONES</th>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2" style="color: #0069aa; ">CUADRO DE FUNCIONES</td>
+                                </tr>
+
+                                <t t-set="cont" t-value="1"></t>
+                                <t t-foreach="o.jobs_ids" t-as="job">
+                                    <tr>
+
+                                        <td style="text-align: center;">
+                                            <span t-esc="cont" />
+                                        </td>
+                                        <td style="border-left: 0.5px solid #0096c8; width: 95%">
+                                            <span t-field="job.function" />
+                                        </td>
+                                        <t t-set="cont" t-value="cont + 1"></t>
+
+
+                                    </tr>
+                                </t>
+
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+
+                            <tbody>
+                                <tr class="thead-blue">
+                                    <th colspan="4">4. ORGANIZACIÓN (Puestos que dependen
+                                        jerárquicamente)</th>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" style="border: none;">
+                                        <div style="height:20px; ">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <t t-set="direct_boss"
+                                    t-value="o.parents_boss.split('|||')[::-1][1:]" />
+
+
+                                <t t-set="count" t-value="1" />
+                                <t t-foreach="direct_boss" t-as="boss">
+                                    <tr>
+                                        <td style="width: 33%; border:none; padding-left: 100px;">
+                                            <t t-if="direct_boss[0] == boss">
+                                                <b>PROCESO:</b> <br /> Superior Jerarquico </t>
+                                            <t t-else="">
+                                                <t t-if="direct_boss[-1] == boss">
+                                                    <b>PUESTO A <br /> DESCRIBIR:</b>
+
+                                                </t>
+                                                <t t-else="">
+                                                    Superior Inmediato
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td colspan="2" style="width: 34%; border: none;">
+                                            <div class="bordered">
+                                                <t t-if="direct_boss[-1] == boss">
+                                                    <b>
+                                                        <span t-esc="boss" />
+                                                    </b>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="boss" />
+                                                </t>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td style="width: 33%; border: none; color: #0069aa;">
+
+                                            <t t-if="floor((len(direct_boss)*2)/2) == count">
+                                                <div style="font-size: 8px; padding-left: 60px;">
+                                                    <b>El Organigrama es un modelo así <br />que
+                                                        dependiendo de la estructura <br />del área
+                                                        puede cambiar</b>
+                                                </div>
+                                            </t>
+                                            <t t-else="">
+                                                <div style="color: #fff; font-size: 8px;">
+                                                    <b>El Organigrama es un modelo así <br />que
+                                                        dependiendo de la estructura <br />del área
+                                                        puede cambiar</b>
+                                                </div>
+                                            </t>
+                                            <t t-set="count" t-value="count + 1" />
+
+                                        </td>
+
+                                    </tr>
+
+                                    <t t-if="boss != direct_boss[-1]">
+
+                                        <tr>
+                                            <td colspan="2" style="width: 50%; border: none;">
+                                                <div style="height:20px; ">
+                                                </div>
+                                            </td>
+
+                                            <td colspan="2"
+                                                style="width: 50%; border-bottom: none; border-left: 2px solid #0096c8;">
+                                                <t t-if="floor((len(direct_boss)*2)/2) == count">
+                                                    <div
+                                                        style="font-size: 8px; padding-left: 200px; color: #0069aa;">
+                                                        <b>El Organigrama es un modelo así <br />que
+                                                            dependiendo de la estructura <br />del
+                                                            área puede cambiar</b>
+                                                    </div>
+                                                </t>
+                                                <t t-set="count" t-value="count + 1" />
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <t t-else="">
+                                        <tr>
+                                            <td colspan="4" style="border: none;">
+                                                <div style="height:20px; ">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="4"></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+
+                        <table style="width: 100%;">
+
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th colspan="10">5. ASPECTOS BAJO SU RESPONSABILIDAD</th>
+                                </tr>
+                                <tr class="thead-blue"
+                                    style="background: #0096c8; text-align: center;">
+                                    <th style="width: 26%; font-size: 14px;">ASPECTOS</th>
+                                    <th style="width: 6%; font-size: 14px;"> ALTA</th>
+                                    <th style="width: 6%; font-size: 14px;"> MEDIA</th>
+                                    <th style="width: 6%; font-size: 14px; "> BAJA</th>
+                                    <th style="width: 6%; font-size: 14px;">N/A</th>
+                                    <th style="width: 24%; font-size: 14px;">ASPECTOS</th>
+                                    <th style="width: 6%; font-size: 14px;"> ALTA</th>
+                                    <th style="width: 6%; font-size: 14px;"> MEDIA</th>
+                                    <th style="width: 6%; font-size: 14px;"> BAJA</th>
+                                    <th style="width: 6%; font-size: 14px;">N/A</th>
+                                </tr>
+
+                                <t t-set="cont" t-value="range(0,round(len(o.jobs_aspect_ids)),2)" />
+
+                                <t t-foreach="cont" t-as="i">
+                                    <tr>
+                                        <td style="width: 100px;">
+                                            <span t-field="o.jobs_aspect_ids[i].aspect" />
+                                        </td>
+                                        <td
+                                            style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="o.jobs_aspect_ids[i].measure == '01'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                        <td
+                                            style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="o.jobs_aspect_ids[i].measure == '02'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                        <td
+                                            style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="o.jobs_aspect_ids[i].measure == '03'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                        <td
+                                            style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="o.jobs_aspect_ids[i].measure == '04'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+
+                                        <t t-if="cont[-1] == i">
+                                            <t t-if="len(o.jobs_aspect_ids) == i+1">
+                                                <td style="width: 100px;">Otros</td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center"></td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center"></td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center"></td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center"></td>
+                                            </t>
+                                            <t t-else="">
+                                                <td style="width: 100px;">
+                                                    <span t-field="o.jobs_aspect_ids[i+1].aspect" />
+                                                </td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                    <t t-if="o.jobs_aspect_ids[i+1].measure == '01'">
+                                                        <b>X</b>
+                                                    </t>
+                                                </td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                    <t t-if="o.jobs_aspect_ids[i+1].measure == '02'">
+                                                        <b>X</b>
+                                                    </t>
+                                                </td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                    <t t-if="o.jobs_aspect_ids[i+1].measure == '03'">
+                                                        <b>X</b>
+                                                    </t>
+                                                </td>
+                                                <td
+                                                    style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                    <t t-if="o.jobs_aspect_ids[i+1].measure == '04'">
+                                                        <b>X</b>
+                                                    </t>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <td style="width: 100px;">
+                                                <span t-field="o.jobs_aspect_ids[i+1].aspect" />
+                                            </td>
+                                            <td
+                                                style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                <t t-if="o.jobs_aspect_ids[i+1].measure == '01'">
+                                                    <b>X</b>
+                                                </t>
+                                            </td>
+                                            <td
+                                                style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                <t t-if="o.jobs_aspect_ids[i+1].measure == '02'">
+                                                    <b>X</b>
+                                                </t>
+                                            </td>
+                                            <td
+                                                style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                <t t-if="o.jobs_aspect_ids[i+1].measure == '03'">
+                                                    <b>X</b>
+                                                </t>
+                                            </td>
+                                            <td
+                                                style="width: 6%; border-left: 0.5px solid #0096c8; text-align: center">
+                                                <t t-if="o.jobs_aspect_ids[i+1].measure == '04'">
+                                                    <b>X</b>
+                                                </t>
+                                            </td>
+                                        </t>
+
+                                    </tr>
+                                </t>
+
+
+                            </tbody>
+                        </table>
+
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th>6. CONTEXTO</th>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100%;  text-align: justify;">
+                                        <span t-field="o.context" />
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th colspan="4">7. PERFIL REQUERIDO</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"
+                                        style="width: 100%;  text-align: justify; padding-top: 40px;">
+                                        <b>A. CARACTERISTICAS GENERALES:</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 55%; border-right: 0.5px solid #0096c8;">Edad:</td>
+                                    <td style="width: 15%; border-right: 0.5px solid #0096c8;">Mínima
+                                        ( <t t-if="o.age_min">
+                                            <span t-field="o.age_min" />
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                    <td style="width: 15%; border-right: 0.5px solid #0096c8;">Máxima
+                                        ( <t t-if="o.age_max">
+                                            <span t-field="o.age_max" />
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        )</td>
+                                    <td style="width: 15%; border-right: 0.5px solid #0096c8;">Indiferente
+                                        ( <t t-if="o.age_indiferent">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        )</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 0.5px solid #0096c8;">Sexo:</td>
+                                    <td style="border-right: 0.5px solid #0096c8;">M ( <t
+                                            t-if="o.gender == '01'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                    <td style="border-right: 0.5px solid #0096c8;">F ( <t
+                                            t-if="o.gender == '02'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Indiferente ( <t
+                                            t-if="o.gender == '03'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 0.5px solid #0096c8;">Nivel de
+                                        Educación:</td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Universitario ( <t
+                                            t-if="o.degree == '01'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Técnico ( <t
+                                            t-if="o.degree == '02'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Otros ( <t
+                                            t-if="o.degree == '03'">
+                                            <b>
+                                                <span t-field="o.degree_other" />
+                                            </b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        ) </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 0.5px solid #0096c8;">Formación
+                                        Académica deseada:</td>
+                                    <td colspan="3"
+                                        style="border-right: 0.5px solid #0096c8; text-align: center">
+                                        <span t-field="o.desirable_degree" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 0.5px solid #0096c8;">Disponibilidad
+                                        para viajar:</td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Indispensable ( <t
+                                            t-if="o.travel == '03'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        )</td>
+                                    <td style="border-right: 0.5px solid #0096c8;">Deseable ( <t
+                                            t-if="o.travel == '02'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        )</td>
+                                    <td style="border-right: 0.5px solid #0096c8;">No requerido ( <t
+                                            t-if="o.travel == '01'">
+                                            <b>X</b>
+                                        </t>
+                                                <t
+                                            t-else="">
+                                            &#160;&#160;&#160;
+                                        </t>
+                                        )</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"
+                                        style="width: 100%;  text-align: justify; padding-top: 40px;">
+                                        <b>B. EXPERIENCIA LABORAL PREVIA (posición /tiempo):</b>
+                                    </td>
+                                </tr>
+
+                                <t t-foreach="o.jobs_experience_ids" t-as="experience">
+                                    <tr>
+                                        <td colspan="4">
+                                            <span t-field="experience.experience" />
+                                        </td>
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="4"
+                                        style="width: 100%;  text-align: justify; padding-top: 40px;">
+                                        <b>C. CONOCIMIENTOS ESPECIFICOS: (Técnicos y/o funcionales):</b>
+                                    </td>
+                                </tr>
+
+                                <t t-foreach="o.jobs_functional_ids" t-as="functional">
+                                    <tr>
+                                        <td style="border-right: 0.5px solid #0096c8; width: 55%;">
+                                            <span t-field="functional.functional" />
+                                        </td>
+
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center; width: 15%;">Indispensable
+                                            (<t t-if="functional.measure == '03'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center; width: 15%;">Deseable
+                                            (<t t-if="functional.measure == '02'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center; width: 15%;">No
+                                            requerido (<t t-if="functional.measure == '01'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+
+                                    </tr>
+
+                                </t>
+
+                                <t t-foreach="o.jobs_technical_ids" t-as="technical">
+                                    <tr>
+                                        <td style="border-right: 0.5px solid #0096c8;">
+                                            <span t-field="technical.technical" />
+                                        </td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">Avanzado
+                                            (<t t-if="technical.measure == '03'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">Intermedio
+                                            (<t t-if="technical.measure == '02'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">Básico
+                                            (<t t-if="technical.measure == '01'">
+                                                <b>X</b>
+                                            </t><t
+                                                t-else="">&#160;&#160;&#160;</t>)</td>
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="4"
+                                        style="width: 100%;  text-align: justify; padding-top: 40px;">
+                                        <b>D. COMPETENCIAS Y HABILIDADES:</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-right: 0.5px solid #0096c8;"></td>
+                                    <td
+                                        style="border-right: 0.5px solid #0096c8; text-align: center">
+                                        <b>ALTA</b>
+                                    </td>
+                                    <td
+                                        style="border-right: 0.5px solid #0096c8; text-align: center">
+                                        <b>MEDIA</b>
+                                    </td>
+                                    <td
+                                        style="border-right: 0.5px solid #0096c8; text-align: center">
+                                        <b>BAJA</b>
+                                    </td>
+                                </tr>
+
+                                <t t-foreach="o.jobs_skill_ids" t-as="skill">
+                                    <tr>
+                                        <td style="border-right: 0.5px solid #0096c8;">
+                                            <span t-field="skill.skill" />
+                                        </td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="skill.measure == '01'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="skill.measure == '02'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                        <td
+                                            style="border-right: 0.5px solid #0096c8; text-align: center">
+                                            <t t-if="skill.measure == '03'">
+                                                <b>X</b>
+                                            </t>
+                                        </td>
+                                    </tr>
+
+                                </t>
+
+
+                            </tbody>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <table style="width: 100%;">
+                            <tbody class="tbody-blue">
+                                <tr class="thead-blue">
+                                    <th colspan="2">8. BENEFICIOS (a completarse por RRHH)</th>
+                                </tr>
+                                <t t-foreach="o.jobs_benefit_ids" t-as="benefit">
+                                    <tr style="border: 0.5px solid #0096c8;">
+                                        <td style="width: 50%">
+                                            <span t-field="benefit.benefit" />
+                                        </td>
+                                        <td
+                                            style="border-left: 0.5px solid #0096c8; width: 50%; text-align: center;">
+                                            <span t-field="benefit.description" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

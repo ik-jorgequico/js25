@@ -1,0 +1,79 @@
+<odoo>
+    <data noupdate="0">
+        <template id="template_style_contrato">
+            <style>
+                .page{
+                    font-size: 11pt;
+                    text-align: justify;
+                    line-height: 2em;
+                }
+                .without {
+                    border-right: 0px;
+                    border-top: 0px;
+                    border-left: 0px;
+                    border-bottom: 0px;
+                }
+                .under {
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+                .with {
+                border-bottom: 1px solid black;
+                }
+                .ident{
+                    text-indent: 30px;
+                }
+                .h5-title {
+                    text-align: center;
+                    text-decoration: underline;
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                }
+                /* Clase para alinear texto al centro */
+                .text-center {
+                    text-align: center;
+                }
+                /* Clase para los elementos con fuente de 9pt */
+                .font-small {
+                    font-size: 9pt;
+                }
+                /* Clase para separar las filas con una línea horizontal */
+                .hr-line {
+                    border-top: 1px solid;
+                    margin: 24px auto;
+                    width: 75%;
+                }
+                /* Clase para las celdas de la tabla con fuente de 10pt */
+                .table-cell {
+                    font-size: 10pt;
+                    height: 10px;
+                    line-height: 1.2;
+                    text-align: center;
+                }
+                .checklist {
+                    list-style-type: none; /* Elimina los números de la lista */
+                    padding-left: 0; /* Elimina el espacio a la izquierda de la lista */
+                }
+                .checklist li:before {
+                    content: "✓ ";
+                    color: black;
+                    font-weight: bold;
+                    margin-right: 5px;
+                    font-size: 1.5em
+                }
+                ol.sub-checklist {
+                    list-style-type: none; /* Elimina la numeración */
+                    padding-left: 0; /* Ajusta el espacio a la izquierda */
+                }
+                
+                ol.sub-checklist li:before {
+                    content: " ◦ ";
+                    font-size: 1em; /* Ajusta el tamaño del círculo */
+                    margin-right: 5px;
+                    color: black; /* Cambia el color del círculo si lo deseas */
+                }
+                
+            </style>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_vacation,hr.vacation,model_hr_vacation,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_line,hr.vacation.line,model_hr_vacation_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_subline,hr.vacation.subline,model_hr_vacation_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_acum_line,hr.vacation.acum.line,model_hr_vacation_acum_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_report,hr.vacation.report,model_hr_vacation_report,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_report_line,hr.vacation.report.line,model_hr_vacation_report_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_report_subline,hr.vacation.report.subline,model_hr_vacation_report_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_report_acum_line,hr.vacation.report.acum.line,model_hr_vacation_report_acum_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_calculate,hr.vacation.calculate,model_hr_vacation_calculate,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_calculate_line,hr.vacation.calculate.line,model_hr_vacation_calculate_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_calculate_subline,hr.vacation.calculate.subline,model_hr_vacation_calculate_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_deduction_line,hr.vacation.deduction.line,model_hr_vacation_deduction_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_vacation_purchased,hr.vacation.purchased,model_hr_vacation_purchased,hr_contract.group_hr_contract_manager,1,1,1,1

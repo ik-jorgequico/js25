@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_dec_streets">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.internal_layout" > -->
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+
+							<div style="text-align: center; font-size: 22px; font-family: Lato-Medium">
+								<h2>DECLARACION JURADA DE DOMICILIO</h2>
+								<h2>(Ley N° 28882, Ley de Simplificación de la Certificación Domiciliaria)</h2>
+							</div>
+							<br/>
+							<br/>
+
+							<div class="body" style="text-align: justify; font-size: 15px; text-indent: 1.5em; line-height : 45px; font-family: Lato-Medium">
+								<p style="font-size: 15px;">Yo, <t t-esc="o.name"/>, con <t t-esc="o.l10n_latam_identification_type_id.name"/>: <t t-esc="o.identification_id"/>,
+								en pleno ejercicio de mis Derechos Ciudadanos y de conformidad con lo <strong>Dispuesto en la Ley N° 28882 de Simplificación de la Certificación Domiciliaria</strong>, en su artículo 1° DECLARO BAJO JURAMENTO que mi domicilio actual se encuentra ubicado en:<br/>
+
+								________________________________________________________________________________<br/>
+
+								________________________________________________________________________________			
+								</p>
+								
+								
+								<p>Realizo la presente declaración jurada manifestando que la información proporcionada es verdadera y autorizo la verificación de lo declarado. En caso de falsedad declaro haber incurrido en el delito Contra la Fe Pública, falsificación de Documentos, (Artículo 427° del Código Penal, en concordancia con el Artículo IV inciso 1.7) <strong> "Principio de Presunción de Veracidad"</strong> del Título Preliminar de la Ley de Procedimiento Administrativo General, Ley N° 27444.						
+								</p>
+								<br/>
+								
+								<p>En señal de conformidad firmo el presente documento.</p>
+								<br/>
+								
+
+								<strong>Miraflores, <span t-esc="o.first_contract_date.strftime('%d')"/> de 
+									<span t-esc="o.first_contract_date.strftime('%m')          .replace('01','Enero')          .replace('02','Febrero')          .replace('03','Marzo')          .replace('04','Abril')          .replace('05','Mayo')          .replace('06','Junio')          .replace('07','Julio')          .replace('08','Agosto')          .replace('09','Septiembre')          .replace('10','Octubre')          .replace('11','Noviembre')          .replace('12','Diciembre')"/> del 
+									<span t-esc="o.first_contract_date.strftime('%Y')"/></strong>
+								<br/>
+
+								<p>
+									
+								</p>
+
+								<div class="container">
+								<style>
+									.square {
+										float: rigth;
+										height: 200px;
+										width: 200px;
+										<!-- margin-bottom: 45px; -->
+										border: 2px solid black;
+										<!-- clear: both; -->
+									  }
+								</style>
+									<div class="row" style="text-align: center;">
+										<span>___________________________</span>
+										<br/>
+										<span>Firma y Huella Digital</span>
+										
+										
+										<!-- <div class="square"></div> -->
+										
+									</div>
+								</div>
+
+
+
+
+
+
+
+							</div>
+							
+						</div>
+					</t>
+				</t>
+		</t>
+
+</template>
+</odoo>

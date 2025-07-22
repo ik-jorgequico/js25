@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_bank_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="cci" />
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='acc_number']" position="attributes">
+                <field name="cci" />
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="replace"/>
+            <xpath expr="//field[@name='acc_holder_name']" position="replace"/> -->
+
+            <!-- <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="company_id" />
+            </xpath> -->
+
+            <!-- <xpath expr="//group" position="after">
+                <group string ="Datos del Titular de la Cuenta">
+                    <field name="l10n_latam_identification_type_id"/>
+                    <field name="vat"/>  
+                    <field name="acc_holder_name"/>
+                </group>
+            </xpath> -->
+
+        </field>
+    </record> 
+</odoo>

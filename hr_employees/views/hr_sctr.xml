@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_sctr_tree_view" model="ir.ui.view">
+        <field name="name">hr_sctr_tree_view</field>
+        <field name="model">hr.sctr</field>
+        <field name="arch" type="xml">
+            <tree string="SCTR">
+                <field name="insurer" />
+                <field name="name" readonly="1" force_save="1" />
+                <field name="sctr_salud" />
+                <field name="sctr_pension" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_sctr_form_view" model="ir.ui.view">
+        <field name="name">hr_sctr_form_view</field>
+        <field name="model">hr.sctr</field>
+        <field name="arch" type="xml">
+            <form string="SCTR">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="insurer" />
+                        </group>
+                        <group>
+                            <field name="name" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <field name="sctr_salud" />
+                        </group>
+                        <group>
+                            <field name="sctr_pension" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_sctr" model="ir.actions.act_window">
+        <field name="name">SCTR</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.sctr</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_action_hr_sctr" 
+    action="action_hr_sctr" 
+    name="SCTR" 
+    parent="hr_payroll.menu_hr_salary_configuration" 
+    sequence="105" />
+</odoo>

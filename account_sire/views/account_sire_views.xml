@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_sire_form_base" model="ir.ui.view">
+		<field name="name">account.sire.form.base</field>
+		<field name="model">account.sire</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<header>
+						<field name="sire_check" widget="statusbar" nolabel="1"/>
+					</header>
+					<group>
+						<group>
+							<field name="invoice_date"/>
+							<field name="invoice_date_due"/>
+							<field name="type_cpe"/>
+							<field name="serie_cpe"/>
+							<field name="year_dua"/>
+							<field name="num_cpe"/>
+							<field name="num_final"/>
+							<field name="type_doc"/>
+							<field name="vendor_doc"/>
+							<field name="vendor_name"/>
+							<field name="base_dg"/>
+							<field name="igv_dg"/>
+							<field name="inafecto"/>
+							<field name="isc"/>
+							<field name="icbper"/>
+							<field name="otros"/>
+							<field name="total_cpe"/>
+							<field name="currency"/>
+							<field name="exchange"/>
+							<field name="invoice_date_nc"/>
+							<field name="type_cpe_nc"/>
+							<field name="serie_cpe_nc"/>
+							<field name="num_cpe_nc"/>
+							<field name="id_project"/>
+							<field name="type_note"/>
+							<field name="est_comp"/>
+						</group>
+						<group>
+							<field name="company_ruc"/>
+							<field name="company_name"/>
+							<field name="periodo"/>
+							<field name="car_sunat"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="account_sire_tree_base" model="ir.ui.view">
+		<field name="name">account.sire.tree.base</field>
+		<field name="model">account.sire</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="sire_check" widget="badge" decoration-danger="sire_check == 'not_found'" decoration-warning="sire_check == 'pending'" decoration-success="sire_check == 'checked'"/>
+				<field name="company_ruc" optional="hide"/>
+				<field name="company_name" optional="hide"/>
+				<field name="periodo" optional="hide"/>
+				<field name="car_sunat" optional="hide"/>
+				<field name="invoice_date"/>
+				<field name="invoice_date_due" optional="hide"/>
+				<field name="type_cpe"/>
+				<field name="serie_cpe"/>
+				<field name="year_dua"/>
+				<field name="num_cpe"/>
+				<field name="num_final" optional="hide"/>
+				<field name="type_doc"/>
+				<field name="vendor_doc"/>
+				<field name="vendor_name"/>
+				<field name="base_dg"/>
+				<field name="igv_dg"/>
+				<field name="inafecto"/>
+				<field name="isc"/>
+				<field name="icbper"/>
+				<field name="otros"/>
+				<field name="total_cpe"/>
+				<field name="currency"/>
+				<field name="exchange"/>
+				<field name="invoice_date_nc"/>
+				<field name="type_cpe_nc"/>
+				<field name="serie_cpe_nc"/>
+				<field name="num_cpe_nc"/>
+				<field name="id_project" optional="hide"/>
+				<field name="type_note" optional="hide"/>
+				<field name="est_comp" optional="hide"/>
+			</tree>
+		</field>
+	</record>
+</odoo>

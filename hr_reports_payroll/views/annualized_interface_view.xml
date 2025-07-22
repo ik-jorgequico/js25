@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="annualized_interface_view_tree" model="ir.ui.view">
+        <field name="name">annualized.interface.view.tree</field>
+        <field name="model">annualized.interface</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date_from" />
+                <field name="date_to" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="annualized_interface_view_form" model="ir.ui.view">
+        <field name="name">annualized.interface.view.form</field>
+        <field name="model">annualized.interface</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <header>
+                    <button name="compute_sheet"
+                        string="CALCULAR"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_annualized_interface" class="oe_stat_button"
+                            icon="fa-book"
+                            type="object" invisible ="child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="child_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Registros Anualizados</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <group>
+                                <field name="date_from" />
+                            </group>
+                            <group>
+                                <field name="date_to" />
+                                <field name="date_initial_years" invisible="1" />
+                                <field name="date_final_years" invisible="1" />
+                                <field name="date_initial_month" invisible="1" />
+                                <field name="date_final_month" invisible="1" />
+                            </group>
+                        </group>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Registros">
+                        <field name="child_ids" nolabel="1" readonly="1" />
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_annualized_interface" model="ir.actions.act_window">
+        <field name="name">Reporte Nomina Anualizado</field>
+        <field name="res_model">annualized.interface</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hr_reports_annualized_interface_pdf_payroll"
+        name="Reporte Anualizado"
+        parent="menu_hr_reports_pdf"
+        action="action_annualized_interface"
+    />
+
+    <record id="annualized_interface_line_view_tree" model="ir.ui.view">
+        <field name="name">annualized.interface.line.view.tree</field>
+        <field name="model">annualized.interface.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="ref_emp" optional="hide"/>
+                <field name="employee_id" />
+                <!-- <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/> -->
+                <field name="job" />
+                <field name="first_contract_date" />
+                <field name="total_incomes" />
+                <field name="total_deductions" />
+                <field name="total_aportations" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="annualized_interface_line_view_form" model="ir.ui.view">
+        <field name="name">annualized.interface.line.view.form</field>
+        <field name="model">annualized.interface.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="ref_emp" />
+                            <field name="employee_id" />
+                            <field name="job" />
+                            <field name="first_contract_date" />
+                        </group>
+                        <group>
+                            <field name="total_incomes" />
+                            <field name="total_deductions" />
+                            <field name="total_aportations" />
+                        </group>
+                        <group>
+                            <field name="xls_filename" invisible="1" />
+                            <field name="xls_binary" filename="xls_filename" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Montos">
+                        <field name="child_ids" nolabel="1" readonly="1" />
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular_annualized">
+        <field name="name">Generar Reporte Anualizado</field>
+        <field name="model_id" ref="hr_reports_payroll.model_annualized_interface_line" />
+        <field name="binding_model_id" ref="hr_reports_payroll.model_annualized_interface_line" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_dowload_report_tabular_annualized()
+        </field>
+    </record>
+
+    <record id="annualized_interface_line_amount_view_tree" model="ir.ui.view">
+        <field name="name">annualized.interface.line.amount.view.tree</field>
+        <field name="model">annualized.interface.line.amount</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="type" />
+                <field name="description" />
+                <field name="period" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

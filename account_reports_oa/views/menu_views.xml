@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <menuitem id="menu_oa_reports" name="REPORTES OA" parent="account.menu_finance_reports" sequence="0" groups="account.group_account_manager">
+        <menuitem id="menu_sunat_movyear" name="Balance Anual" groups="account.group_account_manager" action="action_data_movyear"/>
+    </menuitem>
+</odoo>

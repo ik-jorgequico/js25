@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+        <!--Tipo de estructura-->
+        <record id = "step_1" model = "tramo.5ta">
+            <field name = "code">1</field>
+            <field name = "name">HASTA 5 UIT</field>
+            <field name = "uit_from" >0</field>
+            <field name = "uit_to" >5</field>
+            <field name = "percentage" >8</field>
+        </record>
+
+        <record id = "step_2" model = "tramo.5ta">
+            <field name = "code">2</field>
+            <field name = "name">Más de 5 UIT hasta 20 UIT</field>
+            <field name = "uit_from" >5</field>
+            <field name = "uit_to" >20</field>
+            <field name = "percentage" >14</field>
+        </record>
+
+        <record id = "step_3" model = "tramo.5ta">
+            <field name = "code">3</field>
+            <field name = "name">Más de 20 UIT hasta 35 UIT</field>
+            <field name = "uit_from" >20</field>
+            <field name = "uit_to" >35</field>
+            <field name = "percentage" >17</field>
+        </record>
+
+        <record id = "step_4" model = "tramo.5ta">
+            <field name = "code">4</field>
+            <field name = "name">Más de 35 UIT hasta 45 UIT</field>
+            <field name = "uit_from" >35</field>
+            <field name = "uit_to" >45</field>
+            <field name = "percentage" >20</field>
+        </record>
+
+        <record id = "step_5" model = "tramo.5ta">
+            <field name = "code">5</field>
+            <field name = "name">Más de 45</field>
+            <field name = "uit_from" >45</field>
+            <field name = "uit_to" >1000000</field>
+            <field name = "percentage" >30</field>
+        </record>
+
+	</data>
+</odoo>

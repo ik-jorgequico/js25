@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.rule" id="data_ple_51_comp_rule">
+        <field name="name">Libro Diario 51 multi-company</field>
+        <field name="model_id" ref="model_data_ple51"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="data_ple_53_comp_rule">
+        <field name="name">Libro Diario 53 multi-company</field>
+        <field name="model_id" ref="model_data_ple53"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="data_ple_61_comp_rule">
+        <field name="name">Libro Mayor 61 multi-company</field>
+        <field name="model_id" ref="model_data_ple61"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="data_purchase_comp_rule">
+        <field name="name">Registro de Compras multi-company</field>
+        <field name="model_id" ref="model_data_purchase"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="data_purchase_nodom_comp_rule">
+        <field name="name">Registro de Compras no domiciliadas multi-company</field>
+        <field name="model_id" ref="model_data_purchase_nodom"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record model="ir.rule" id="data_sales_comp_rule">
+        <field name="name">Registro de Ventas multi-company</field>
+        <field name="model_id" ref="model_data_sales"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>

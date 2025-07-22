@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_utilities">
+        <t t-call="web.basic_layout" t-lang="o.employee_id.company_id.partner_id.lang">
+            <style>
+                .td-col-1 {
+                width: 80%;
+                padding-right:10px;
+
+                }
+                .td-col-2 {
+                width: 15%;
+                background-color: #E3E7EA;
+                min-width: 312px; 
+                }
+            </style>
+            <div class="page"
+                style="border: 1px solid black; padding:15px">
+                <div class="container-fluid fst-normal fs-3 small"
+                    style="background-color: #2F4254; color:white;">
+                    <h4 class="text-center">LIQUIDACIÓN DE DISTRIBUCIÓN DE UTILIDADES
+                        CORRESPONDIENTES AL EJERCICIO <span t-field="o.parent_id.anio" />
+                    </h4>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <span t-field="o.parent_id.company_id.name" /> identificada con RUC Nº <span
+                        t-field="o.employee_id.company_id.vat" /> domiciliada en <span
+                        t-field="o.employee_id.company_id.street" />
+                        <!-- <span t-field="o.street_number"/>oficina <span t-field="o.street_number2"/> -->
+                         , debidamente representada
+                    por su Gerente General el <b><span t-field="o.company_id.gerente_name"/></b> en su calidad de empleador y en cumplimiento de
+                    lo dispuesto por el D.L. N° 892 y el D.S. N° 009-98-TR, deja constancia de la
+                    determinación, distribución y pago de la participación en las utilidades del
+                    trabajador(a) <span t-field="o.employee_id.name" /> con <span
+                        t-field="o.employee_id.l10n_latam_identification_type_id.name" /> Nº <span
+                        t-field="o.employee_id.identification_id" /> por el periodo <span
+                        t-field="o.parent_id.anio" />.
+
+                </div>
+                <br />
+                <div style="background-color: #2F4254; color:white;">
+                    <h6 class="text-left">CALCULO DEL MONTO DE LA PARTICIPACIÓN EN LAS UTILIDADES <span
+                            t-field="o.parent_id.anio" />
+                    </h6>
+                </div>
+                <div style="font-weight: 900;">
+                    1. Utilidad por distribuir
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-7">
+                            <table
+                                style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            - Renta anual de la empresa antes de impuestos
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            - Porcentaje a distribuir
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            - Monto a distribuir
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-2" style="background-color: #E3E7EA; ">
+                            <table
+                                style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody class="text-right">
+                                    <tr>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.parent_id.amount_client"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.parent_id.percent_client" />%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.parent_id.amount_100_utilities"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div style="font-weight: 900;">
+                    <span>2. Cálculo de la participación</span>
+                </div>
+                <br />
+                <div style="margin-left:15px">
+                    <div style="font-weight: 900;">
+                        <span>2.1. Según el periodo laborado</span>
+                    </div>
+                    <br />
+                    <div class="container-fluid fst-normal fs-3 small">
+                        <div class="row">
+                            <div class="col-12">
+                                <table
+                                    style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Número total de días (u horas) laborados durante
+                                                el
+                                                ejercicio <span
+                        t-field="o.parent_id.anio" /> por todos los trabajadores de la
+                                                empresa con derecho a percibir utilidades
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.parent_id.days_total" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Número de días (u horas) laborados durante el
+                                                ejercicio <span
+                        t-field="o.parent_id.anio" /> por el trabajador
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.days_work" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1"> <![CDATA[&nbsp;]]>
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                ___________________________________
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Participación del trabajador según los días
+                                                laborados
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.utilities_days"
+                                                    t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <div style="font-weight: 900;">
+
+                        <span>2.2. Según las remuneraciones percibidas</span>
+                    </div>
+
+                    <div class="container-fluid fst-normal fs-3 small">
+                        <div class="row">
+                            <div class="col-12">
+                                <table
+                                    style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Remuneración computable total pagada durante el
+                                                ejercicio <span
+                        t-field="o.parent_id.anio" /> a todos los trabajadores de la
+                                                empresa
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.parent_id.bimp_total"
+                                                    t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Remuneración computable percibida durante el
+                                                ejercicio
+                                                <span
+                        t-field="o.parent_id.anio" /> por el trabajador
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.bimp_total"
+                                                    t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1"> <![CDATA[&nbsp;]]>
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                ___________________________________
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-col-1">
+                                                - Participación del trabajador según las
+                                                remuneraciones
+                                                percibidas
+                                            </td>
+                                            <td class="text-right td-col-2">
+                                                <span t-field="o.utilities_total"
+                                                    t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div style="font-weight: 900;">
+                    <span>3. Monto de la participación a percibir por el trabajador</span>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-12">
+                            <table
+                                style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            - Participación según los días (u horas) laborados
+                                        </td>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.utilities_days"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            - Participación según las remuneraciones percibidas
+                                        </td>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.utilities_total"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-col-1"> <![CDATA[&nbsp;]]>
+                                            </td>
+                                        <td class="text-right td-col-2">
+                                            ___________________________________
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            - Total de la participación del trabajador en las
+                                            utilidades brutas
+                                        </td>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.utilities_total_amount"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div style="font-weight: 900;">
+                    <span>4. Impuesto a la Renta</span>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-12">
+                            <table
+                                style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            - Retención directa de quinta categoría
+                                        </td>
+                                           <td class="text-right td-col-2"  >
+                                            <span t-field="o.ir_qdir"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+
+                <div style="font-weight: 900;">
+                    <span>5. Descuentos</span>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-12">
+                            <table
+                                style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            - Descuento
+                                        </td>
+                                           <td class="text-right td-col-2">
+                                            <span t-field="o.loan"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-col-1"> <![CDATA[&nbsp;]]>
+                                            </td>
+                                        <td class="text-right td-col-2">
+                                            ___________________________________
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-col-1">
+                                            <strong>- Total de la participación del trabajador en
+                                                las utilidades netas</strong>
+                                        </td>
+                                        <td class="text-right td-col-2">
+                                            <span t-field="o.utilities_total_amount_neta"
+                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.parent_id.company_id.currency_id}' />
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <div class="row small">
+                    <div class="col-6 text-center">
+                        <br />
+                        <br />
+                        <span>______________________________________</span>
+                        <br />
+                        <span> </span>
+                        <br>GERENTE GENERAL</br>
+                    </div>
+                    <div class="col-6 text-center">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <span>________________________________</span>
+                        <br />
+                        <span>FIRMA DEL TRABAJADOR</span>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_utilities_lang">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="o"
+                    t-value="o.with_context(lang=o.employee_id.sudo().address_home_id.lang or o.env.lang)" />
+                <t t-call="hr_utilities.report_utilities" t-lang="o.env.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

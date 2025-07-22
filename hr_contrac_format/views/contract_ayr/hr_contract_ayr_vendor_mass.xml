@@ -1,0 +1,166 @@
+<odoo>
+    <data>
+        <!-- <report id = "report_ayr_vendor_mass"
+        string = "Contrato Modelo Vendedor Masivo"
+        model = "hr.contract"
+        report_type = "qweb-pdf"
+        name = "hr_contrac_format.report_pdf_template_ayr_vendor_mass"
+        menu = "False"
+        /> -->
+
+        <record id="report_ayr_vendor_mass" model="ir.actions.report">
+            <field name="name">Contrato Modelo Vendedor Masivo</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.report_pdf_template_ayr_vendor_mass</field>
+            <!-- <field name="report_file">hr_contrac_format.report_pdf_template_adm_hybrid</field> -->
+            <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/> -->
+        </record>
+
+
+        <!-- CONTRATO VENDEDOR MASIVO -->
+        <template id="report_pdf_template_ayr_vendor_mass">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <!-- Estilos del Contrato -->
+                        <t t-call="hr_contrac_format.template_style_contrato"/>
+
+                        <div class="page">
+                            <h5 class="h5-title">
+                                CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR INICIO O INCREMENTO DE ACTIVIDAD PRODUCTIVA<br/>
+                                <span t-field="o.company_id.name" />
+                            </h5>
+
+                            <p>Conste por el presente documento el Contrato de Trabajo de Naturaleza Temporal por Inicio o Incremento de Actividad Productiva que celebran de una parte, la empresa  <span t-field="o.company_id.name"/>  con RUC Nro. <span t-field="o.company_id.vat"/>, con domicilio en <span t-field="o.company_id.street"/>, distrito de <span t-field="o.company_id.city"/> , Provincia y Departamento de <span t-field="o.company_id.state_id"/>, debidamente representada por su Gerente Titular señor <span t-field="o.company_id.gerente_name"/>, identificado con <span t-field="o.company_id.gerente_doc_type"/> Nro. <span t-field="o.company_id.gerente_doc"/>, según poderes inscritos en la Partida Electrónica Nro.<span t-field="o.company_id.gerente_partida_electroc"/>  del Registro de Personas Jurídicas de la Oficina Registral de Lima, mencionar adicionalmente que el régimen a pertenecer corresponde a la Microempresa con Registro REMYPE N° 0002141463-2023; a quien en adelante se le denominará <span t-field="o.company_id.company_abbr"/> ; y de la otra parte el señor (a) (ita) <span t-field="o.employee_id.name"/> identificado con <span t-field="o.employee_id.l10n_latam_identification_type_id.name"/> Nro. <span t-field="o.employee_id.identification_id"/>, con domicilio en <span t-field="o.employee_id.address_home_id.street"/>, Provincia y Departamento de <span t-field="o.employee_id.address_home_id.city_id.name"/>, correo <span t-field="o.employee_id.address_home_id.email"/> y Número de telefónico <span t-field="o.employee_id.address_home_id.mobile"/> en adelante el <b>TRABAJADOR</b>, en los terminos y condiciones siguientes: </p>
+
+                            <p><b class="under">PRIMERO</b>: En tal sentido, <span t-field="o.company_id.company_abbr"/> es una empresa que se dedica a la prestación de servicios de preventa, postventa y cobranza de productos, asesoría, consultoría y servicios de outsourcing en administración, finanzas, contabilidad y recursos humanos, servicios que son brindados en forma directa.</p>
+
+                            <p><span t-field="o.company_id.company_abbr"/>, va a desarrollar en forma temporal y exclusiva un nuevo Proyecto, por el cual incorporará a las actividades que realiza una nueva línea de comercialización. En tal sentido, en vista que esta implementación es novedosa requerimos de la contratación temporal de personal porque desconocemos como responderá el mercado a la incorporación de esta nueva línea de comercialización, pues es la primera vez que se lanza al mercado dicho proyecto, constituyendo esto un riesgo.</p>
+
+                            <p>El <b>TRABAJADOR</b> deja constancia de haber sido informado, conocer, entender y aceptar que la <u>causa objetiva</u> en la que <span t-field="o.company_id.company_abbr"/> justifica su contratación temporal es porque recién estamos implementando dentro de nuestra línea de comercialización el Proyecto, constituyendo esta implementación algo nuevo dentro de nuestras actividades comerciales.</p>
+
+                            <p>En tal sentido, <span t-field="o.company_id.company_abbr"/> requiere contratar en forma temporal los servicios de una persona que cubra el cargo de <u><span t-field="o.job_id.name"/></u>, cargo que será ejercido bajo supervisión del área <b>COMERCIAL</b>, encontrándose debidamente sustenta y detallada la <u>causa objetiva</u> que justifica la contratación temporal del  <b>TRABAJADOR</b>.</p>
+
+                            <p>El <b>TRABAJADOR</b> es una persona preparada para el puesto indicado y goza de la experiencia suficiente y que se requiere para desarrollar las funciones y/o obligaciones que dicho puesto demandan.</p>
+
+                            <p><b class="under">SEGUNDO:</b> Atendiendo a lo dispuesto en la cláusula primera, <span t-field="o.company_id.company_abbr"/> al amparo de las normas del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral, contrata los servicios del <b>TRABAJADOR</b> para que desempeñe las labores propias y complementarias del puesto referido en la cláusula precedente.</p>
+                            <p>Sin perjuicio de lo indicado anteriormente serán también obligaciones del <b>TRABAJADOR</b> lo siguiente:</p>
+                            
+                            <ol class="checklist">
+                                <li>Realizar contacto presencial con los clientes identificados con la finalidad de levantar información y evaluación de estos.</li>
+                                <li>Trabajar en una propuesta comercial según requerimiento y necesidad del cliente con una cartera de productos estacionales en venta.</li>
+                                <li>Concretar la venta en forma física o a través de un aplicativo móvil.</li>
+                                <li>Reportar en forma constante a su Superior Jerárquico inmediato del avance de los proyectos de ventas.</li>
+                                <li>Asistir a las reuniones programadas por su Jefatura y/o Supervisor.</li>
+                                <li>Apoyar en otras tareas que le sean asignadas por su Jefe inmediato. </li>
+                            </ol>
+
+                            <p><span t-field="o.company_id.company_abbr"/>. señala que además de las labores para las cuales ha sido contratado en el DAM, serán también funciones de El <b>TRABAJADOR</b> las siguientes:</p>
+
+                            <ol class="checklist">
+                                <li>Reforzar la oferta comercial post pago y realizar la venta prepago y los beneficios de esta.</li>
+                                <li>Validar el stock físico de chips y equipos en PDV.</li>
+                                <li>Mostrar catálogo de equipos y reforzar ofertas</li>
+                            </ol>
+
+                            <p>Es responsabilidad del vendedor el uso biométrico asignado y las ventas que active con este.</p>
+                            <p>Teniendo en cuenta que el <b>TRABAJADOR</b> no solo desarrollará labores de venta sino también de cobranza pues será el encargado de cobrar todas las ventas que realice, éste tiene la obligación de 
+                                (i) informar a su superior jerárquico al final de la jornada diaria laboral las ventas efectuadas en el día, 
+                                (ii) presentar la liquidación de las cobranzas realizadas y 
+                                (iii) entregar el producto de dichas cobranzas.</p>
+                            <p>Al final del día el <b>TRABAJADOR</b> también cumplirá las funciones de:</p>
+
+                            <ol class="checklist">
+                                <li>Depositar todas de las cobranzas efectuadas en el día, debiendo para ello remitir a su superior jerárquico la o las constancias de depósitos realizadas.  Toda cobranza debe depositarse en el día.  El incumplimiento de esta obligación será considerado una falta grave.</li>
+
+                            </ol>
+                            <p>El incumplimiento de cualquiera de las obligaciones indicadas anteriormente constituye una falta grave que puede acarrear el término de la relación laboral.</p>
+
+                            <p>En caso de que, <span t-field="o.company_id.company_abbr"/> detecte que el <b>TRABAJADOR</b> no ha cumplido con entregar el producto de alguna cobranza realizada, apropiándose indebidamente de ella, <span t-field="o.company_id.company_abbr"/> procederá a cobrar el monto no entregado por el <b>TRABAJADOR</b> de la remuneración mensual y/o de los Beneficios Sociales que pudiese corresponder percibir al <b>TRABAJADOR</b> respectivamente, sin perjuicio de las acciones legales que pudiese adoptar <span t-field="o.company_id.company_abbr"/> por el ilícito cometido.  El <b>TRABAJADOR</b> desde ya manifiesta su conformidad a la retención que <span t-field="o.company_id.company_abbr"/> pueda efectuar en el supuesto que ocurra lo indicado anteriormente, siendo señal de dicha conformidad la firma puesta en el presente contrato.</p>
+
+                            <p>Asimismo, teniendo en cuenta que para el desarrollo de las labores de venta del <b>TRABAJADOR</b>, <span t-field="o.company_id.company_abbr"/> le hará entrega de bienes de propiedad de terceros, éste será responsable de cualquier pérdida, robo y/o extravío de dichos bienes, siempre que no pruebe que dicha pérdida, robo y/o extravío no le es imputable a él. La responsabilidad importa que <span t-field="o.company_id.company_abbr"/> pueda retener de la remuneración mensual y/o de los Beneficios Sociales que pudiese corresponder percibir al  <b>TRABAJADOR</b> respectivamente,	el	valor	total	de	los bienes perdidos, robados y/o extraviados. El <b>TRABAJADOR</b> desde ya manifiesta su conformidad a la retención que <span t-field="o.company_id.company_abbr"/> pueda efectuar en el supuesto que ocurra lo indicado anteriormente, siendo señal de dicha conformidad la firma puesta en el presente contrato.</p>
+
+                            <p><b class="under">TERCERO:</b> Queda expresamente convenido que el presente contrato es de naturaleza temporal en la modalidad de inicio de actividad por implementación en nuestra línea de promoción y comercialización el Proyecto Agencias Masivas, figura contemplada en el artículo 57º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.</p>
+
+                            <p><b class="under"> CUARTO:</b> El plazo de duración del presente contrato es de <span t-esc="o.month_contract + o.year_contract * 12"/> meses y <span t-field="o.day_contract"/> días, contados a partir del <span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/> hasta el <span t-esc="o.date_end.day"/> de <span t-field="o.month_end_word"/> del <span t-esc="o.date_end.year"/>, fecha en que concluye indefectiblemente, pudiendo ser renovado por acuerdo mutuo entre las partes, la misma que deberá constar por escrito.</p>
+
+                            <p><b class="under">QUINTO:</b> La jornada laboral, el horario de trabajo y el día de descanso semanal obligatorio del <b>TRABAJADOR</b> no serán fijos sino, por el contrario, flexibles, esto es que <span t-field="o.company_id.company_abbr"/> implementará un sistema rotativo no fiscalizables.</p>
+
+                            <p>El <b>TRABAJADOR</b> declara conocer y aceptar que la jornada de laboral, el horario de trabajo y el día de descanso semanal obligatorio que tendrá será rotativo.</p>
+
+                            <p><span t-field="o.company_id.company_abbr"/> tiene la facultad de modificarlos en cualquier momento, bastando para ello que dicha modificación o variación sea comunicada al <b>TRABAJADOR</b> por escrito o por correo electrónico. El <b>TRABAJADOR</b> deberá acatar la disposición dada de manera inmediata.</p>
+
+                            <p>El <b>TRABAJADOR</b> gozará de un tiempo para refrigerio, en cumplimiento de lo que establece la ley. El tiempo de refrigerio no forma parte de la jornada de trabajo y se producirá en el horario que determine <span t-field="o.company_id.company_abbr"/> El tiempo de refrigerio podrá ser modificado por <span t-field="o.company_id.company_abbr"/> de acuerdo con sus necesidades, siempre respetando el límite establecido en la ley.</p>
+
+                            <p><b>TRABAJADOR</b> declara conocer que no está autorizado a realizar trabajo en sobretiempo, a menos que éste haya sido previamente aprobado por <span t-field="o.company_id.company_abbr"/> de la manera como lo indican sus políticas y procedimientos internos, esto es mediante documento escrito.</p>
+
+                            <p>Asimismo, el <b>TRABAJADOR</b> realizará sus labores diarias básicamente en el local que <span t-field="o.company_id.company_abbr"/> designe dentro de la region de <span t-field="o.employee_id.location_id"/>.</p>
+                            
+                            <p><b class="under">SEXTO:</b> El <b>TRABAJADOR</b> por el servicio efectivo que preste percibirá una remuneración fija mensual ascendente a S/<span t-field="o.wage"/> (<span t-field="o.salary_word"/>), la misma que será abonada al <b>TRABAJADOR</b> en las mismas oportunidades que a los demás trabajadores de <span t-field="o.company_id.company_abbr"/></p>
+
+                            <p>Adicionalmente <span t-field="o.company_id.company_abbr"/> le hará entrega al <b>TRABAJADOR</b> un importe variable por concepto de comisiones, las mismas que serán calculadas de acuerdo con el esquema de ventas que se encuentre vigente al momento de percibir la comisión.  Esta cantidad variable tiene carácter remunerativo, por lo que formará parte de la remuneración computable del <b>TRABAJADOR</b> para el cálculo de todos sus derechos laborales que le corresponden percibir.</p>
+
+                            <p><b class="under">SÉTIMO:</b> El otorgamiento de comisiones aplica a aquellos trabajadores que tienen una gestión directa sobre las ventas de la empresa. EL <b>TRABAJADOR</b> tendrá derecho al pago de una Comisión por Ventas Mensuales, (en adelante “la comisión”), en tanto se cumpla con las metas fijadas por la Empresa, de acuerdo con lo siguiente:</p>
+                            
+                            <ol class="checklist">
+                                <li>De acuerdo con esta política, el Gerente Comercial fijará, de manera mensual, las metas a cumplir por la fuerza de ventas de su marca y/o equipo.</li>
+                                <li>El Gerente Comercial comunicará las metas mensuales a las tiendas a su cargo.</li>
+                                <li>La Empresa ingresará en el último día hábil del mes anterior las metas mensuales en el sistema.</li>
+                                <li>EL <b>TRABAJADOR</b> tendrá acceso a este sistema, que se encuentra disponible en los medios informáticos de cada tienda.</li>
+                                <li>EL <b>TRABAJADOR</b> que se haga valer de medios fraudulentos o cualquier clase de aducía, contrarios a la buena fe contractual para concretar ventas, no tendrá derecho al cobro de comisiones y se le aplicaran las sanciones correspondientes a la ley laboral vigente.</li>
+                            </ol>
+
+                            <p>La oportunidad de pago se dará de la siguiente manera:</p>
+
+                            <p><b>Personal Activo:</b> El pago se otorgará al mes siguiente de la realización de la meta de ventas, por lo cual el primer mes de labores el <b>TRABAJADOR</b> no recibirá comisión, de igual manera cuando el <b>TRABAJADOR</b> culmine su vínculo laboral, la empresa pagará adicionalmente la comisión pendiente del mes de cese según el punto 4.2.</p>
+
+                            <p><b>Personal Cesado:</b> El pago se otorgará al sexto (06) mes siguiente a la culminación de su relación laboral,<b class="under"> siempre y cuando las líneas y equipos vendidos se mantengan activos.</b></p>
+
+                            <p>El cálculo de la comisión:</p>
+                            <p>
+
+                            <ol class="checklist">
+                                <li>El pago de las comisiones está sujeto al cumplimiento de metas dispuestas por el Gerente Comercial, de acuerdo con los siguientes valores:</li>
+                                <ol class="sub-checklist">
+                                    <li>Porcentaje de Cumplimiento de meta.</li>
+                                    <li>Monto de Comisión (proporcional a los días trabajados).</li>
+                                </ol>
+                                <li>Es importante señalar que, el valor de la comisión podrá variar en función al cargo o categoría, remuneración y marca (tienda) para la que EL <b>TRABAJADOR</b> presta servicio.</li>
+                                <li>Si se termina el vínculo laboral antes de finalizar el mes la comisión se pagará de acuerdo al alcance meta de la tienda al día del cese, proporcionalmente a los días trabajados.</li>
+                            </ol></p>
+
+                            <p>La comisión es determinada en base a un porcentaje histórico producto de las ventas colectivas mensuales de cada equipo o marca asignada a EL <b>TRABAJADOR</b>.</p>
+
+                            <p><b class="under">OCTAVO:</b> Queda entendido que el presente contrato al término del plazo indicado en la cláusula cuarta quedará resuelto automáticamente, sin que sea necesario para ello dar aviso previo, salvo que las partes hayan suscrito un nuevo contrato ampliando el plazo de vigencia de la relación laboral.</p>
+
+                            <p><b class="under">NOVENO:</b> Asimismo, queda expresamente convenido entre las partes que al presente contrato le son aplicables lo dispuesto en los artículos 10º y 75º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.  En este sentido se acuerda un período de prueba para el <b>TRABAJADOR</b> de tres (03) meses.</p>
+
+                            <p><b class="under">DECIMO:</b> Sin perjuicio de lo indicado en la cláusula sétima, <span t-field="o.company_id.company_abbr"/> podrá resolver el presente contrato si el <b>TRABAJADOR</b> se conduce o realiza sus labores en forma negligente sin observar las directivas de sus superiores y/o el Reglamento Interno de <span t-field="o.company_id.company_abbr"/> y/o incurre en cualquiera de las faltas que constituyen causas justas de despido referidas en el T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.  De igual forma el <b>TRABAJADOR</b> en cualquier momento podrá dar término al presente contrato con la sola limitación de presentar su carta de renuncia con una anticipación de treinta (30) días.</p>
+
+                            <p><b class="under">DECIMO PRIMERO:</b>Las partes señalan como sus respectivos domicilios los especificados en la introducción del presente acuerdo, por lo que se reputarán válidas todas las comunicaciones y notificaciones dirigidas a las mismas con motivo de la ejecución del presente documento. El cambio de domicilio por cualquiera de las partes surtirá efecto desde la fecha de comunicación de dicho cambio por cualquier medio escrito, siempre que se señale el domicilio dentro del radio urbano de <span t-field="o.employee_id.location_id"/></p>
+
+                            <p>El <b>TRABAJADOR</b> reconoce como válidas las comunicaciones dirigidas a su correo electrónico personal detallado en la introducción del presente acuerdo, siendo de su responsabilidad, el comunicar su cambio, mediante la actualización de la respectiva Ficha de Ingreso. El cambio de dirección de correo electrónico surtirá efecto desde la fecha de comunicación de dicho cambio, por cualquier medio escrito. Del mismo modo, El <b>TRABAJADOR</b> faculta a la empresa a incluir su número de celular para las comunicaciones grupales, según el área de trabajo.</p>
+
+                            <p><b class="under">DECIMO SEGUNDO:</b> A la conclusión del presente contrato y en los casos de terminación anticipada <span t-field="o.company_id.company_abbr"/> le abonará al <b>TRABAJADOR</b> sus beneficios sociales de acuerdo a ley</p>
+
+                            <p>Si es que las partes no llegaran a suscribir un nuevo contrato de trabajo de naturaleza temporal que importe la renovación del plazo del presente contrato, <span t-field="o.company_id.company_abbr"/> procederá al pago de los correspondientes beneficios sociales del TRABAJADOR pues la no renovación implica el cese de la relación laboral existente entre las partes.</p>
+                            <p>La renovación del plazo de vigencia del presente contrato importa la continuidad de la relación laboral, no existiendo por ende la obligación de <span t-field="o.company_id.company_abbr"/> de abonar suma alguna por concepto de beneficios sociales toda vez que la relación laboral se encuentre vigente.</p>
+                            
+                            <t t-set="day" t-value="o.date_start.day"/>
+                            <t t-set="month" t-value="o.date_start.strftime('%B')"/>
+                            <t t-set="year" t-value="o.date_start.year"/>
+                            <!-- Firma del Gerente y Empleado -->
+                            <t t-call="hr_contrac_format.template_firma"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

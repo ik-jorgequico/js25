@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_pe_edi_invoice_number,l10n_pe_edi.invoice.number,model_l10n_pe_edi_invoice_number,base.group_user,1,0,0,0
+access_l10n_pe_edi_invoice_number_account,l10n_pe_edi.invoice.number.account,model_l10n_pe_edi_invoice_number,account.group_account_invoice,1,1,1,0
+access_l10n_pe_edi_invoice_number_manager,l10n_pe_edi.invoice.number.manager,model_l10n_pe_edi_invoice_number,base.group_erp_manager,1,1,1,1
+access_stock_canceled_edi_picking,stock.canceled.edi.picking,model_stock_canceled_edi_picking,base.group_user,1,1,1,1

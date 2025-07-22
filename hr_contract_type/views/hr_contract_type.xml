@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="hr_contract_type_form_view" model="ir.ui.view" >
+        <field name="name">hr.contract.type.form.view</field >
+        <field name="model">hr.contract.type</field>
+        
+        <field name="arch" type="xml">
+            
+            <form>                
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="cod" />
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="description" />
+                        </group>
+                    </group>
+                </sheet>
+
+            </form>
+
+            <!--</tree>-->
+        </field>
+    </record>
+
+    <record id="hr_contract_type_tree_view" model="ir.ui.view" >
+        <field name="name">hr.contract.type.tree.view</field >
+        <field name="model">hr.contract.type</field>
+        
+        <field name="arch" type="xml">
+            <tree  >
+                <field name="cod" />
+                <field name="name" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_hr_contract_type" model="ir.actions.act_window">
+        <field name="name">Tipo de contrato</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.contract.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_hr_contract_type"
+        name="Tipo de contrato"
+        parent="hr.menu_human_resources_configuration"
+        action="action_hr_contract_type"
+        sequence="122"
+    />
+
+</odoo>

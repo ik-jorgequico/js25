@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record id="report_plame_tax_settlements" model="ir.actions.report">
+    <field name="name">Liquidación de Impuestos</field>
+    <field name="model">plame.files</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">hr_reports_payroll.report_plame_tax_settlement</field>
+    <field name="report_file">hr_reports_payroll.report_plame_tax_settlement</field>
+    <field name="binding_type">report</field>
+    <field name="binding_model_id" ref="hr_reports_payroll.model_plame_files"/> 
+    </record>
+    <record id="report_afp_interfaces" model="ir.actions.report">
+        <field name="name">Reporte AFP PDF</field>
+        <field name="model">afp.interface</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_reports_payroll.report_afp_interface</field>
+        <field name="report_file">hr_reports_payroll.report_afp_interface</field>
+        <field name="binding_type">report</field>
+        <field name="binding_model_id" ref="hr_reports_payroll.model_afp_interface"/>
+    </record>
+</odoo>

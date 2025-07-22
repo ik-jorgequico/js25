@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="edit_holiday_status_form_inherit" model="ir.ui.view">
+            <field name="name">edit.holiday.status.form.inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+            <field name="arch" type="xml">
+                <field name="allocation_validation_type" position="after">
+                    <sheet>
+                        <h2>No afecta a ?</h2>
+                        <group>
+                            <field name="have_gratification" />
+                            <field name="have_cts" />
+                            <field name="have_utilities" />
+                            <field name="have_holiday" />
+                        </group>
+                    </sheet>
+                </field>
+                <field name="have_holiday" position="after">
+                    <h2>Código</h2>
+                    <field name="code" />
+                </field>
+                <field name="leave_validation_type" position="after">
+                    <field name="add_basic_salary" />
+                </field>
+            </field>
+        </record>
+        <record id="hr_holidays_view_holiday_status_normal_tree_inherint" model="ir.ui.view">
+            <field name="name">hr.holidays.view.holiday.status.normal.tree.inherint</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree" />
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="code" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

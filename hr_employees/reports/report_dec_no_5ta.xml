@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_dec_no_5ta">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.internal_layout" > -->
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<style>
+								*{
+									font-family: Lato;
+								}
+								.top-part {
+									text-align: center;
+									font-size: 18px;
+								  }
+
+								.body {
+									text-align: justify;
+									font-size: 18px;
+									text-indent: 1.5em;
+									line-height : 45px;
+								  }
+								.inicio{
+									text-align: left;
+									font-size: 18px;
+									<!-- text-indent: 0.5em; -->
+									line-height : 15px;
+								  }
+								.espaciador-grande{
+									font-size: 30px;
+								}
+								.date-word{
+									text-align: left;
+									font-size: 18px;
+									line-height : 15px;
+								}
+							</style>
+
+							<div class="top-part">
+								<h2>DECLARACION JURADA DE RENTAS DE QUINTA CATEGORIA</h2>
+								<h2>(TUO de la ley del Impuesto a la Renta D.S. No. 054-99-EF Reglamentada por D.S. Nro. 122-94-EF)</h2>
+							</div>
+							<br/>
+							<br/>
+
+							<div class="date-word">
+								<strong>Miraflores, <span t-esc="o.first_contract_date.strftime('%d')"/> de 
+									<span t-esc="o.first_contract_date.strftime('%m')          .replace('01','Enero')          .replace('02','Febrero')          .replace('03','Marzo')          .replace('04','Abril')          .replace('05','Mayo')          .replace('06','Junio')          .replace('07','Julio')          .replace('08','Agosto')          .replace('09','Septiembre')          .replace('10','Octubre')          .replace('11','Noviembre')          .replace('12','Diciembre')"/> del 
+									<span t-esc="o.first_contract_date.strftime('%Y')"/></strong>
+							</div>
+
+
+							<div class="inicio">
+								<p>Señores</p>
+								<p><strong><t t-esc="o.company_id.partner_id.name"/></strong></p>
+								<p>Presente:</p>
+							</div>
+							<br/>
+							<div class="body">
+								<p>Yo, <t t-esc="o.name"/>, identificado con <t t-esc="o.l10n_latam_identification_type_id.name"/> N° <t t-esc="o.identification_id"/>,
+								declaro NO haber recibido ingresos ni percibido renta alguna generada por quinta categoría durante el presente año. 	
+								</p>
+								<p>Atentamente,</p>
+							</div>	
+
+							
+
+								<div class="espaciador-grande">
+									<br/>
+								</div>
+
+								<div class="final">
+									<span>_______________________________________</span>
+									<br/>
+									<span><t t-esc="o.name"/></span>
+									<br/>
+									<span><t t-esc="o.identification_id"/></span>	
+								</div>
+
+								<div class="espaciador-grande">
+									<br/><br/><br/>
+								</div>
+
+
+							<p>(*) El colaborador es responsable de la veracidad de los datos descritos en el presente documento.</p>
+							
+						</div>
+					</t>
+				</t>
+		</t>
+
+</template>
+</odoo>

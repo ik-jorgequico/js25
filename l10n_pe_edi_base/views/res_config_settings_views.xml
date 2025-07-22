@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.l10n_pe_edi_base</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="E-Documents" string="E-Documents" name="l10n_pe_edi_base" groups="account.group_account_manager">
+                    <block title="Electronic documents configuration" name="l10n_pe_edi_base_settings" id="l10n_pe_edi_base_settings">
+                        <setting id="odoofact_einvoicing_pse" help="Select your PSE / OSE provider">
+                            <field name="l10n_pe_edi_send_invoice"/>
+                            <field  invisible="l10n_pe_edi_send_invoice == False"
+                                    name="l10n_pe_edi_ose_id"
+                                    required="l10n_pe_edi_send_invoice == True"
+                                    options="{'no_create': True, 'no_create_edit': True}"
+                                />
+                            <div class="mt8" invisible="l10n_pe_edi_send_invoice == False">
+                                <button
+                                    name="%(l10n_pe_edi_base.l10n_pe_edi_shop_action)d"
+                                    icon="fa-arrow-right"
+                                    type="action"
+                                    string="Configure Shops and Tokens"
+                                    class="btn-link"                                
+                                />                   
+                            </div>
+                        </setting>
+                        <setting id="odoofact_einvoicing_active" string="Activation" help="Active your account and configure Odoo following the insructions" invisible="not l10n_pe_edi_send_invoice">
+                            <div class="mt16">
+                                <ul>
+                                    <li>
+                                        <a href="https://www.nubefact.com/registro" class="oe-link" target="_blank"> Request an account</a>
+                                    </li>
+                                    <li>
+                                        <a  href="https://www.operu.pe/r/xPU" class="oe-link" target="_blank">Follow the instructions</a>
+                                    </li>
+                                </ul>            
+                            </div>
+                        </setting>
+                        <setting id="odoofact_einvoicing_cron" string="Send e-documents automatically" help="Choose the period to send e-documents" invisible="not l10n_pe_edi_send_invoice">
+                            <div class="text-nowrap fw-bold">
+                                Interval Unit for sending 
+                                <field name="l10n_pe_edi_send_invoice_interval_unit" required="l10n_pe_edi_send_invoice"/>
+                            </div>
+                            <div class="text-nowrap fw-bold">
+                                Next Execution 
+                                <field name="l10n_pe_edi_send_invoice_next_execution_date" required="l10n_pe_edi_send_invoice"/>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Peruvian Services Configuration" name="l10n_pe_edi_base_service_block" id="l10n_pe_edi_base_service_block">
+                        <setting id="l10n_pe_edi_pe_service_setting" string="Active Peruvian Services" help="Insert the token for unlimited requests">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="l10n_pe_service_token" string="Token" class="col-lg-4 o_light_label"/>
+                                    <field name="l10n_pe_service_token" class="col-lg-4 oe_inline"/>
+                                </div>
+                                <div class="text-muted mb8">
+                                    Set a Peruvian service token to generate unlimited queries of RUC, DNI and Exchange Rate.</div>
+                                <div>
+                                    <a href="https://www.operu.pe/shop/libros-ple-ilimitados-92" class="oe_link" target="_blank">
+                                        <i class="fa fa-arrow-right"/> Get unlimited token
+                                    </a>
+                                    <widget name="iap_buy_more_credits" service_name="l10n_pe_data" hide_service="1"/>
+                                </div>                                
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Electronic Guide Remission Configuration" name="l10n_pe_edi_base_picking_settings" id="l10n_pe_edi_base_picking_settings">
+                        <setting id="odoofact_epicking_pse" help="Select your PSE / OSE provider">
+                            <field name="l10n_pe_edi_send_picking"/>
+                        </setting>
+                        <setting id="odoofact_epicking_config" string="Configuration" invisible="not l10n_pe_edi_send_picking">
+                            <div class="mt16">
+                                <button
+                                    name="%(stock.action_picking_type_list)d"
+                                    icon="fa-arrow-right"
+                                    type="action"
+                                    string="Operation Types"
+                                    class="btn-link"
+                                />
+                            </div>
+                        </setting>
+                        <setting id="odoofact_epicking_default_data" string="Default Data" help="Default data for E-Picking" invisible="not l10n_pe_edi_send_picking">
+                            <div class="text-nowrap fw-bold">
+                                Transport Type
+                                <field name="l10n_pe_edi_picking_default_catalog_18_id"/>
+                            </div>
+                            <div class="text-nowrap fw-bold">
+                                Carrier
+                                <field name="l10n_pe_edi_picking_default_carrier_id"/>
+                            </div>
+                            <div class="text-nowrap fw-bold">
+                                Driver
+                                <field name="l10n_pe_edi_picking_default_driver_id"/>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="l10n_pe_edi_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'l10n_pe_edi_base', 'bin_size': False}</field>
+    </record> -->
+</odoo>

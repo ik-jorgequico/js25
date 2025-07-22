@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_cts_form_view" model="ir.ui.view">
+        <field name="name">hr.cts.form.view</field>
+        <field name="model">hr.cts</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_sheet" string="CALCULAR" type="object" class="btn-primary"/>
+                    <button name="action_dowload_report_pdf" string="LIQUIDACIÓN PDF" type="object"/>
+                    <button name="action_submit" type="object" string="Enviar" invisible="state != 'draft'" />
+                    <button name="action_cancel" type="object" string="Cancelar" invisible="state != 'draft'" />
+                    <button name="action_approve" type="object" string="Aprobar" invisible="state != 'verify'" groups="hr.group_hr_manager" />
+                    <button name="action_refuse" type="object" string="Rechazar" invisible="state not in ['draft','verify']" groups="hr.group_hr_manager" />
+                    <button name="action_draft" type="object" string="Borrar" invisible="state not in ['draft','verify','refuse']" groups="hr.group_hr_manager" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,verify,approve" invisible ="1" />
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_cts" class="oe_stat_button" icon="fa-book"
+                            type="object" invisible = "child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="child_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Registros CTS</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+
+                    <group>
+                        <group>
+                            <field name="anio" />
+                            <field name="period" />
+                            <field name="period_name" force_save="1" readonly="1" />
+                            <field name="payday"/>
+                        </group>
+                        <group>
+                                <field name="date_from" force_save="1" readonly="1" invisible="1"/>
+                                <field name="date_to" force_save="1" readonly="1" invisible="1"/>
+                                <field name="xls_filename" invisible="1" />
+                                <field name="xls_binary" filename="xls_filename" readonly="1" />
+                                <field name="company_id" force_save="1" readonly="1" options="{'no_open': true}"/>
+                        </group>                        
+                    </group>
+                    <notebook>
+                        <page string="Registros">
+                            <field name="child_ids" nolabel="1" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- seccion correo -->
+				<div class = "oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="activity_ids" widget="mail_activity"/>
+					<field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+				</div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_cts_tree_view" model="ir.ui.view">
+        <field name="name">hr.cts.tree.view</field>
+        <field name="model">hr.cts</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf" string="LIQUIDACIÓN PDF" type="object" />
+                    <button name="action_submit" type="object" string="Submit" invisible="state != 'draft'" />
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state != 'draft'" />
+                    <button name="action_approve" type="object" string="Approve" invisible="state != 'verify'" groups="hr.group_hr_manager" />
+                    <button name="action_refuse" type="object" string="Refuse" invisible="state not in ['draft','verify']" groups="hr.group_hr_manager" />
+                </header> -->
+                <field name="name" force_save="1" readonly="1" />
+                <field name="period_name" force_save="1" readonly="1" />
+                <field name="date_from" force_save="1" readonly="1" />
+                <field name="date_to" force_save="1" readonly="1" />
+                <field name="payday" />
+                <field name="company_id" force_save="1" readonly="1" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular">
+        <field name="name">Generar Reporte Tabular</field>
+        <field name="model_id" ref="hr_cts.model_hr_cts" />
+        <field name="binding_model_id" ref="hr_cts.model_hr_cts" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_dowload_report_tabular()
+        </field>
+    </record>
+
+    <record id="action_cts" model="ir.actions.act_window">
+        <field name="name">CTS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.cts</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_action_cts" action="action_cts" name="CTS" parent="hr_grati.menu_action_beneficio_social" sequence="105" />
+
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_account_pendings_tree" model="ir.ui.view">
+			<field name="name">view.account.pendings.tree</field>
+			<field name="model">account.pendings</field>
+			<field name="arch" type="xml">
+                <tree string="Transacciones" editable="bottom">
+                    <field name="external_id" optional="hide"/>
+                    <field name="date"/>
+                    <field name="journal_bank_id"/>
+                    <field name="name_statement"/>
+                    <field name="ref"/>
+                    <field name="payment_ref"/>
+                    <field name="currency_id"/>
+                    <field name="amount"/>
+                    <field name="expense_concept" readonly="0" force_save="1"/>
+                    <field name="account_zonal" readonly="0" force_save="1"/>
+                    <field name="account_canal" readonly="0" force_save="1"/>
+                    <field name="note"/>
+                </tree>
+			</field>
+		</record>
+        
+        <record id="action_account_pendings" model="ir.actions.act_window">
+            <field name="name">Clasificación Pendiente</field>
+            <field name="res_model">account.pendings</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id"></field>
+            <field name="search_view_id"/>
+        </record>
+        
+        <menuitem id="menu_account_pendings"
+            name="Clasificación Pendiente"
+            action="action_account_pendings"
+            parent="account_treasury.menu_account_journal_treasury"
+            sequence="6"/>
+	</data>
+</odoo>

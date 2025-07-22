@@ -1,0 +1,170 @@
+<odoo>
+    <data>
+
+        <template id="report_pdf_template_ayr_coordinador">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <!-- Estilos del Contrato -->
+                        <t t-call="hr_contrac_format.template_style_contrato"/>
+
+                        <div class="page">
+                            <h5 class="h5-title">
+                                CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR INICIO DE ACTIVIDAD PRODUCTIVA<br/>
+                                <span t-field="o.company_id.name" />
+                            </h5>
+
+                            <p>Conste por el presente documento el <b>Contrato de Trabajo de Naturaleza Temporal por Inicio o Incremento de Actividad Productiva </b> que celebran de una parte, la empresa <b><span t-field="o.company_id.name"/></b> con RUC Nro. <b><span t-field="o.company_id.vat"/></b>, con domicilio en <b><span t-field="o.company_id.street"/></b>, distrito de <b><span t-field="o.company_id.city"/></b> , Provincia y Departamento de <b><span t-field="o.company_id.state_id"/></b>, debidamente representada por su Gerente Titular señor<b><span t-field="o.company_id.gerente_name"/></b>,identificado con <b><span t-field="o.company_id.gerente_doc_type"/></b> Nro. <b><span t-field="o.company_id.gerente_doc"/></b>, según poderes inscritos en la Partida Electrónica Nro.<b><span t-field="o.company_id.gerente_partida_electroc"/></b>  del Registro de Personas Jurídicas de la Oficina Registral de Lima, REMYPE N° 0002141463-2023; a quien en adelante se le denominará <span t-field="o.company_id.company_abbr"/>; y de la otra parte el señor(a)(ita) <b><span t-field="o.employee_id.name"/></b> identificado con <span t-field="o.employee_id.l10n_latam_identification_type_id.name"/> Nro. <span t-field="o.employee_id.identification_id"/>, con domicilio en <span t-field="o.employee_id.address_home_id.street"/>, Provincia y Departamento de <span t-field="o.employee_id.address_home_id.city_id.name"/>,correo <span t-field="o.employee_id.address_home_id.email"/> y Número de telefónico<span t-field="o.employee_id.address_home_id.mobile"/>en adelante el <b>EL TRABAJADOR</b>, en los terminos y condiciones siguientes:</p>
+
+                            <p class="under"><b>PRIMERO: JUSTIFICACIÓN DE CONTRATACIÓN TEMPORAL (CAUSA OBJETIVA)</b></p>
+
+                            <p>1.1  En tal sentido,<span t-field="o.company_id.company_abbr"/> es una empresa que se dedica a la prestación de servicios de preventa, postventa y cobranza de productos, asesoría, consultoría y servicios de outsourcing en administración, finanzas, contabilidad y recursos humanos, servicios que son brindados en forma directa.</p>
+
+                            <p><span t-field="o.company_id.company_abbr"/>, va a desarrollar en forma temporal y exclusiva un nuevo Proyecto, por el cual incorporará a las actividades que realiza una nueva línea de comercialización. En tal sentido, en vista que esta implementación es novedosa requerimos de la contratación temporal de personal porque desconocemos como responderá el mercado a la incorporación de esta nueva línea de comercialización, pues es la primera vez que se lanza al mercado dicho proyecto, constituyendo esto un riesgo.</p>
+
+                            <p><b>EL TRABAJADOR</b>deja constancia de haber sido informado, conocer, entender y aceptar que la <u>causa objetiva</u> en la que <span t-field="o.company_id.company_abbr"/> justifica su contratación temporal es porque recién estamos implementando dentro de nuestra línea de comercialización el Proyecto, constituyendo esta implementación algo nuevo dentro de nuestras actividades comerciales.</p>
+
+                            <p>1.2  <b>EL TRABAJADOR</b> deja constancia de haber sido informado, conocer, entender y aceptar que la <u>causa objetiva</u> en la que <span t-field="o.company_id.company_abbr"/> justifica su contratación temporal es porque recién estamos implementando dentro de nuestra línea de comercialización el Proyecto Agencias Masivas, constituyendo esta implementación algo nuevo dentro de nuestras actividades comerciales.</p>
+
+                            <p>1.3  En tal sentido, <span t-field="o.company_id.company_abbr"/> requiere contratar en forma temporal los servicios de una persona que cubra el cargo de <u> <span t-field="o.job_id.name"/></u> , cargo que será ejercido bajo supervisión del área <b>COMERCIAL</b>, encontrándose debidamente sustenta y detallada la <u>causa objetiva</u> que justifica la contratación temporal del <b>EL TRABAJADOR</b>.</p>
+
+                            <p>1.4  <b>EL TRABAJADOR</b>es una persona preparada para el puesto indicado y goza de la experiencia suficiente y que se requiere para desarrollar las funciones y/o obligaciones que dicho puesto demandan.</p>
+
+                            <p class="under"><b>SEGUNDO: OBLIGACIONES DEL TRABAJADO</b></p>
+
+                            <p>2.1  Atendiendo a lo dispuesto en la cláusula primera, <span t-field="o.company_id.company_abbr"/> al amparo de las normas del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral, contrata los servicios del <b>TRABAJADOR</b> para que desempeñe las labores propias y complementarias del puesto referido en la cláusula precedente.</p>
+
+                            <p>2.2	Sin perjuicio de lo indicado anteriormente serán también obligaciones del TRABAJADOR lo siguiente:</p>
+                            <ol type="a">
+                                <li>Desarrollar las labores propias y complementarias del puesto para el que fue contratado con carácter de exclusividad, actuando en nombre y representación de <span t-field="o.company_id.company_abbr"/>, por lo que su conducta siempre deberá ser responsable.</li>
+                                <li>Presentar en forma (diaria, semanal,) a su superior jerárquico, según se requiera, los informes en la que se detalle las ventas realizadas por el personal a su cargo, así como la productividad de su equipo de trabajo.</li>
+                                <li>Dirigir y supervisar de forma continua el desempeño y productividad de su equipo comercial.</li>
+                                <li>Asegurar el cumplimiento de los objetivos comerciales.</li>
+                                <li>Acompañamiento al equipo de ventas en campo (cuando sea necesario)</li>
+                                <li>Realizar reuniones periódicas con la FFVV.</li>
+                                <li>Verificar objetivamente las ventas y el proceso de ingreso de venta de su equipo comercial.</li>
+                                <li>Participar en las reuniones internas y externas.</li>
+                            </ol>
+
+                            <p>El TRABAJADOR dentro de sus funciones se encuentra la de recibir y/o recabar el producto de las ventas realizadas, dinero que es de propiedad de <span t-field="o.company_id.company_abbr"/>.</p>
+                            <p>Por ello <span t-field="o.company_id.company_abbr"/> establece que el <b>TRABAJADOR</b> tiene la obligación de depositar en la cuenta de <span t-field="o.company_id.company_abbr"/> toda suma de dinero que ingrese a su cuenta personal y que corresponda al dinero proveniente de las ventas efectuadas de los productos que distribuye <span t-field="o.company_id.company_abbr"/>. Esta obligación debe ser cumplida por el <b>TRABAJADOR</b> dentro de las cuarenta y ocho (48) horas de haber recibido dicho dinero.</p>
+
+                            <p>2.3	El incumplimiento de cualquiera de las obligaciones indicadas anteriormente constituye una falta grave que puede acarrear el término de la relación laboral.</p>
+
+                            <p>2.4  En caso que, <span t-field="o.company_id.company_abbr"/> detecte que el <b>TRABAJADOR</b> no ha cumplido con entregar el producto de alguna cobranza realizada, apropiándose indebidamente de ella, <span t-field="o.company_id.company_abbr"/> procederá a cobrar el monto no entregado por el <b>TRABAJADOR</b> de la remuneración mensual y/o de las gratificaciones legales y/o de las bonificaciones extraordinarias y/o de la remuneración vacacional y/o de la Compensación por Tiempo de Servicios - CTS que le pudiese corresponder percibir al <b>TRABAJADOR</b> respectivamente, sin perjuicio de las acciones legales que pudiese adoptar <span t-field="o.company_id.company_abbr"/> por el ilícito cometido. El TRABAJADOR desde ya manifiesta su conformidad a la retención que <span t-field="o.company_id.company_abbr"/> pueda efectuar en el supuesto que ocurra lo indicado anteriormente, siendo señal de dicha conformidad la firma puesta en el presente contrato.</p>
+                            <!-- __________________________________ -->
+                            <p>2.6  Asimismo, teniendo en cuenta que para el desarrollo de las labores de venta del <b>TRABAJADOR</b>, <span t-field="o.company_id.company_abbr"/> le hará entrega de bienes de propiedad de terceros, éste será responsable de cualquier pérdida, robo y/o extravío de dichos bienes, siempre que no pruebe que dicha pérdida, robo y/o extravío no le es imputable a él. La responsabilidad importa que <span t-field="o.company_id.company_abbr"/> pueda retener de la remuneración mensual y/o de las gratificaciones legales y/o de las bonificaciones extraordinarias y/o de la remuneración vacacional y/ode la Compensación por Tiempo de Servicios - CTS que le pudiese corresponder percibir al <b>TRABAJADOR</b> respectivamente,	el	valor	total	de	los bienes perdidos, robados y/o extraviados. El <b>TRABAJADOR</b> desde ya manifiesta su conformidad a la retención que <span t-field="o.company_id.company_abbr"/> pueda efectuar en el supuesto que ocurra lo indicado anteriormente, siendo señal de dicha conformidad la firma puesta en el presente contrato.</p>
+
+                            <p class="under"><b>TERCERO: MODALIDAD DE CONTRATACIÓN TEMPORAL</b></p>
+                            <p>3.1  Queda expresamente convenido que el presente contrato es de naturaleza temporal en la modalidad de inicio de actividad por implementación en nuestra línea de promoción y comercialización el Proyecto Agencias Masivas, figura contemplada en el artículo 57º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.</p>
+
+                            <p class="under"><b>CUARTO: VIGENCIA DEL CONTRATO</b></p>     
+                            <p>El plazo de duración del presente contrato es de<span t-esc="o.month_contract + o.year_contract * 12"/> meses y <span t-field="o.day_contract"/> días, contados a partir del<span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/> hasta el <span t-esc="o.date_end.day"/> de <span t-field="o.month_end_word"/> del <span t-esc="o.date_end.year"/>, fecha en que concluye indefectiblemente, pudiendo ser renovado por acuerdo mutuo entre las partes, la misma que deberá constar por escrito.</p>
+
+                            <p class="under"><b>QUINTO: JORNADA LABORAL, HORARIO Y LUGAR DE TRABAJO</b></p>     
+                            <p>5.1	La jornada laboral, el horario de trabajo y el día de descanso semanal obligatorio del <b>TRABAJADOR</b> no serán fijos sino, por el contrario, flexibles, esto es que <span t-field="o.company_id.company_abbr"/> implementará un sistema rotativo. </p>
+ 
+                            <p>Este sistema rotativo se hará de acuerdo con las necesidades y en uso de la facultad directriz que <span t-field="o.company_id.company_abbr"/>  que le otorga nuestra legislación laboral, lo que significa que ella podrá determinar y variar la jornada de laboral, el horario de trabajo y le día de descanso semanal obligatorio, pudiendo establecer jornadas de trabajo acumulativas o atípicas, horarios especiales, sin más limitación que las establecidas en la legislación laboral.</p>
+
+                            <p>5.2	El <b>TRABAJADOR</b> declara conocer y aceptar que la jornada de laboral, el horario de trabajo y el día de descanso semanal obligatorio que tendrá será rotativo y que <span t-field="o.company_id.company_abbr"/> tiene la facultad de modificarlos en cualquier momento, bastando para ello que dicha modificación o variación sea comunicada al <b>TRABAJADOR</b> por escrito o por correo electrónico. El <b>TRABAJADOR</b> deberá acatar la disposición dada de manera inmediata.</p>
+
+                            <p>El <b>TRABAJADOR</b> gozará de un tiempo para refrigerio, en cumplimiento de lo que establece la ley. El tiempo de refrigerio no forma parte de la jornada de trabajo y se producirá en el horario que determine <span t-field="o.company_id.company_abbr"/> El tiempo de refrigerio podrá ser modificado por <span t-field="o.company_id.company_abbr"/> de acuerdo con sus necesidades, siempre respetando el límite establecido en la ley.</p>
+
+                            <p>5.3	El <b>TRABAJADOR</b> declara conocer que no está autorizado a realizar trabajo en sobretiempo, a menos que éste haya sido previamente aprobado por <span t-field="o.company_id.company_abbr"/> de la manera como lo indican sus políticas y procedimientos internos, esto es mediante documento escrito.</p>
+
+                            <p>5.4  Asimismo, el <b>TRABAJADOR</b> realizará sus labores diarias básicamente en el local que <span t-field="o.company_id.company_abbr"/> designe dentro de la provincia de <span t-field="o.employee_id.location_id"/>.</p>
+
+                            <p class="under"><b>SEXTO: REMUNERACIÓN, COMISIONES Y VIÁTICOS</b></p>
+
+                            <p>6.1	El <b>TRABAJADOR</b> por el servicio efectivo que preste percibirá una remuneración fija mensual ascendente a S/<span t-field="o.wage"/> (<span t-field="o.salary_word"/>), la misma que será abonada al <b>TRABAJADOR</b> en las mismas oportunidades que a los demás trabajadores de <span t-field="o.company_id.company_abbr"/></p>
+                            
+                            <p>6.2	<span t-field="o.company_id.company_abbr"/> hará entrega al trabajador de la cantidad de S/<span t-field="o.move_sa"/> (<span t-field="o.move_word"/>)por concepto de transporte. La cantidad entregada bajo este concepto se encuentra supeditada a la asistencia del TRABAJADOR al centro de laborales y es otorgada para cubrir el gasto de traslado al centro laboral. Esta cantidad no tiene carácter remunerativo, por lo que no formará parte de la remuneración computable del <b>TRABAJADOR</b> para el cálculo de sus beneficios laborales.</p>
+
+                            <p>6.3  Adicionalmente y solo en el caso que la labor del <b>TRABAJADOR</b> lo amerite, esto es cuando tenga que realizar viajes para el desarrollo de sus labores, <span t-field="o.company_id.company_abbr"/> le hará entrega de una determinada cantidad -está será fijada en el momento- por concepto de viáticos, la cual se calculará en base a las actividades que éste deba realizar. Los viáticos incluirán únicamente los gastos de alimentación, alojamiento y movilidad (combustible). Esta cantidad le será entregada al <b>TRABAJADOR</b>, siempre que el <b>TRABAJADOR</b> haya cumplido con sustentar a <span t-field="o.company_id.company_abbr"/> la utilización de los viáticos que se le hayan entregado anteriormente. La sustentación se realizará mediante la presentación de las facturas o boletas de ventas que demuestren los gastos realizados, documentos que deberán ser emitidos conforme a la legislación tributaria vigente y a nombre de <span t-field="o.company_id.company_abbr"/>. Para este sustento solo se admitirán facturas o boletas emitidas a nombre de <span t-field="o.company_id.company_abbr"/>.</p>
+
+                            <P>El <b>TRABAJADOR</b> deberá presentar a <span t-field="o.company_id.company_abbr"/> la sustentación de los viáticos entregados dentro de los primeros tres (03) días del mes siguiente de entregados dichos viáticos. En caso de que el <b>TRABAJADOR</b> no cumpla con realizar dicho sustento en el plazo indicado o que habiéndolo hecho este presente deficiencias por la presentación de facturas y/o boletas de ventas emitidas a nombre de terceras personas o adulteradas, <span t-field="o.company_id.company_abbr"/> no entregará al <b>TRABAJADOR</b> ninguna otra suma por concepto de viáticos. Esta situación se mantendrá hasta que el <b>TRABAJADOR</b> cumpla con rendir o sustentar adecuadamente los viáticos que le fueron entregados para el desarrollo de sus labores.</P>
+
+                            <P>En caso <span t-field="o.company_id.company_abbr"/> , luego de la revisión de la sustentación de los viáticos realizada por el <b>TRABAJADOR</b> determine que éste tiene aún cantidades por reintegrar a ella, ésta le informará vía correo electrónico de dicho resultado precisándole la cantidad a reintegrar. El <b>TRABAJADOR</b> tiene un plazo de cinco (05) días hábiles contados desde la recepción del correo para reintegrar la cantidad no utilizada. Las cantidades no reintegradas dentro del plazo indicado serán descontadas de la remuneración mensual, remuneración vacacional, gratificaciones, bonificación extraordinaria, comisiones, compensación por tiempo de servicios - CTS, gratificación trunca, vacaciones truncas, utilidades y de cualquier otro ingreso que pueda percibir el <b>TRABAJADOR</b> durante la vigencia de la relación laboral y/o que se le pueda otorgar en su liquidación de beneficios sociales. El <b>TRABAJADOR</b> desde ya expresa su total consentimiento paraque <span t-field="o.company_id.company_abbr"/>  realice los descuentos correspondientes por este concepto de los derechos laborales indicados anteriormente.</P>
+
+                            <P>Las cantidades que el <b>TRABAJADOR</b> reciba por concepto de viáticos no formarán parte de su remuneración computable para los efectos del cálculo de sus beneficios laborales, toda vez que estas sumas entregadas no son de su libre disponibilidad.</P>
+
+                            <P>6.4  Las partes acuerdan que de conformidad con el artículo 19° del Decreto Supremo N° 001-98- TR, modificado por el Decreto Supremo N° 009-2011-TR, <span t-field="o.company_id.company_abbr"/> podrá utilizar su firma digitalizada en las boletas de pago que le corresponden al <b>TRABAJADOR</b>. <span t-field="o.company_id.company_abbr"/> podrá valerse de tecnologías de la información o comunicación tales como intranet, correo electrónico u otras de similar naturaleza para entregar virtualmente las boletas de pago al <b>TRABAJADOR</b>. El <b>TRABAJADOR</b> se obliga a acusar recibo por escrito dentro del día útil siguiente de recibida virtualmente la boleta de pago, sin perjuicio que <span t-field="o.company_id.company_abbr"/> pueda hacer uso de medio distinto, virtual o físico, para acreditar dicha recepción.</P>
+
+                            <p class="under"><b>SÉTIMO: CULMINACIÓN DE LA RELACIÓN LABORAL</b></p>
+                            <P>7.1  Queda entendido que el presente contrato al término del plazo indicado en la cláusula cuarta quedará resuelto automáticamente, sin que sea necesario para ello dar aviso previo, salvo que las partes hayan suscrito un nuevo contrato ampliando el plazo de vigencia de la relación laboral.</P>
+
+                            <p class="under"><b>SÉTIMO: CULMINACIÓN DE LA RELACIÓN LABORAL</b></p>
+
+                            <P>8.1	Asimismo, queda expresamente convenido entre las partes que al presente contrato le son aplicables lo dispuesto en los artículos 10º y 75º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral. En este sentido se acuerda un período de prueba para el <b>TRABAJADOR</b> de tres (03) meses </P>
+
+                            <P>8.2	Si bien el plazo del presente contrato es inferior al periodo de prueba, éste se aplicará hasta que se cumpla el plazo del periodo de prueba establecido de tres (03) meses, en caso de renovación de éste.</P>
+
+                            <p class="under"><b>NOVENO: CONFIDENCIALIDAD</b></p>
+
+                            <P>9.1  El <b>TRABAJADOR</b> se compromete a mantener en secreto toda información que llegue a su conocimiento con relación a los negocios de <span t-field="o.company_id.company_abbr"/>, sus accionistas y/o clientes. Esta obligación subsistirá aún después de terminada la relación laboral y su incumplimiento generará la correspondiente responsabilidad por los daños y perjuicios que pueda causar a la empresa, sin perjuicio de la acción penal que por el delito tipificado en el artículo165º del Código Penal pueda iniciarse en contra del <b>TRABAJADOR</b>.</P>
+
+                            <p class="under"><b>DÉCIMO: RESOLUCIÓN DE CONTRATO POR LAS PARTES</b></p>
+
+                            <P>10.1 Sin perjuicio de lo indicado en la cláusula sétima, <span t-field="o.company_id.company_abbr"/> podrá resolver el presente contrato si el <b>TRABAJADOR</b> se conduce o realiza sus labores en forma negligente sin observar las directivas de sus superiores y/o el Reglamento Interno de <span t-field="o.company_id.company_abbr"/> y/o incurre en cualquiera de las faltas que constituyen causas justas de despido referidas en el T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.</P>
+
+                            <P>10.2 De igual forma el <b>TRABAJADOR</b> en cualquier momento podrá dar término al presente contrato con la sola limitación de presentar su carta de renuncia con una anticipación de treinta (30) días.</P>
+
+                            <p class="under"><b>DECIMO PRIMERO: OPORTUNIDAD DE PAGO DE LIQUIDACIÓN DE BENEFICIOS SOCIALES</b></p>
+
+                            <P>11.1	A la conclusión del presente contrato y en los casos de terminación anticipada <span t-field="o.company_id.company_abbr"/> le abonará al <b>TRABAJADOR</b> sus beneficios sociales de acuerdo con ley.</P>
+
+                            <P>11.2	Si es que las partes no llegaran a suscribir un nuevo contrato de trabajo de naturaleza temporal que importe la renovación del plazo del presente contrato, <span t-field="o.company_id.company_abbr"/> procederá al pago de los correspondientes beneficios sociales del <b>TRABAJADOR</b> pues la no renovación implica el cese de la relación laboral existente entre las partes.</P>
+
+                            <P>11.3	La renovación del plazo de vigencia del presente contrato importa la continuidad de la relación laboral, no existiendo por ende la obligación de <span t-field="o.company_id.company_abbr"/> de abonar suma alguna por concepto de beneficios sociales toda vez que la relación laboral se encuentre vigente</P>
+
+                            <t t-set="day" t-value="o.date_start.day"/>
+                            <t t-set="month" t-value="o.date_start.strftime('%B')"/>
+                            <t t-set="year" t-value="o.date_start.year"/>
+                            <!-- Firma del Gerente y Empleado -->
+                            <t t-call="hr_contrac_format.template_firma"/>
+                            
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- <report id = "report_ayr_coordinador"
+        string = "Contrato Modelo Coordinador"
+        model = "hr.contract"
+        report_type = "qweb-pdf"
+        name = "hr_contrac_format.contract_ayr.report_pdf_template_ayr_coordinador"
+        menu = "False"
+        /> -->
+
+        <record id="report_ayr_coordinador" model="ir.actions.report">
+            <field name="name">Contrato Modelo Coordinador</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.contract_ayr.report_pdf_template_ayr_coordinador</field>
+            <!-- <field name="report_file">hr_contrac_format.report_pdf_template_adm_hybrid</field> -->
+            <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/> -->
+        </record>
+
+        <!-- <record id="report_ayr_coordinador" model="ir.actions.report">
+            <field name="name">Contrato Modelo Coordinador</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.report_pdf_template_ayr_coordinador</field>
+            <field name="file">hr_contrac_format.report_pdf_template_ayr_coordinador</field>
+            <field name="print_report_name">'Contrato Modelo Coordinador'</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="hr.model_hr_contract"/>
+        </record> -->
+
+
+
+
+        
+    </data>
+</odoo>

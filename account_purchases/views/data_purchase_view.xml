@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="data_purchase_form" model="ir.ui.view">
+		<field name="name">data.purchase.form</field>
+		<field name="model">data.purchase</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_form_base"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']/label" position="attributes">
+				<attribute name="string">Registro de compras</attribute>
+			</xpath>
+			<button name="compute_sheet" position="after">
+				<button name="action_generate_sunat_validate" string="Validación Sunat" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+			</button>
+			<field name="company_id" position="after">
+				<field name="sunat_validate_filename" invisible="1"/>
+				<field name="sunat_validate_binary" filename="sunat_validate_filename" readonly="1" force_save="1"/>                            
+			</field>
+			<page name="lines" position="inside">
+				<field name="child_ids" colspan="4" nolabel="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+			</page>
+		</field>
+	</record>
+
+	<record id="data_purchase_tree" model="ir.ui.view">
+		<field name="name">data.purchase.tree</field>
+		<field name="model">data.purchase</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_purchase_line_tree" model="ir.ui.view">
+		<field name="name">data.purchase.line.tree</field>
+		<field name="model">data.purchase.line</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="entry"/>
+				<field name="invoice_date"/>
+				<field name="num_doc"/>
+				<field name="base_imp"/>
+				<field name="igv"/>
+				<field name="inafecto"/>
+				<field name="total_amount"/>
+				<field name="tc_sunat"/>
+				<field name="state_ple"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_purchase_line_form" model="ir.ui.view">
+		<field name="name">data.purchase.line.form</field>
+		<field name="model">data.purchase.line</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_line_form_base"/>
+		<field name="arch" type="xml">
+			<field name="inafecto" position="after">
+				<field name="others"/>
+			</field>
+			<field name="company_id" position="before">
+				<field name="parent_id"/>
+			</field>
+			<field name="company_id" position="after">
+				<field name="type_purchase_ple"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="action_data_purchase" model="ir.actions.act_window">
+		<field name="name">Registro de compras 8.1</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">data.purchase</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_sunat_purchase81" 
+		name="8.1 Registro de compras" 
+		parent="menu_sunat_purchase" 
+		sequence="101"
+		groups="account.group_account_manager" 
+		action="action_data_purchase"/>
+</odoo>

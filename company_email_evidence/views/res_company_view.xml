@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_inherit_email_evidence" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.email.evidence</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="email_evidence_page" string="Correos de Evidencia">
+                    <group string="Correos de Evidencia" name="email_evidence_group">
+                        <field name="partner_ids">
+                            <tree string="Correos Adicionales" editable="top">
+                                <field name="name" readonly="1"/>
+                                <field name="email"  />
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Templates Afectados" name="template_specific_group">
+                        <field name="is_all_template"/>
+                        <field name="template_ids" invisible="is_all_template == True">
+                            <tree string="Templates" editable="top">
+                                <field name="name" readonly="1"/>
+                                <field name="model"  optional="hide" readonly="1"/>
+                                <field name="email_to"  />
+                                <field name="partner_to"  optional="hide" />
+                                <field name="email_cc" />
+                            </tree>
+                        </field>
+                    </group>
+                    <button string="Aplicar Cambios" name="apply_changes_for_templates" type="object" class="oe_highlight"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

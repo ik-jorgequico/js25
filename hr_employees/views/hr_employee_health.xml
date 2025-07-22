@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_employee_health_tree_view" model="ir.ui.view">
+        <field name="name">hr.employee.health.tree.view</field>
+        <field name="model">hr.employee.health</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" column_invisible="1" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="regimen_id" />
+                <field name="regimen_name" column_invisible="1" />
+                <field name="insurers" column_invisible="[('regimen_name', '!=', 'EPS')]" required="regimen_name == 'EPS'" />
+            </tree>
+        </field>
+    </record>
+</odoo>

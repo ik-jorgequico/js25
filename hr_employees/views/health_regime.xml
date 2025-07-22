@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="health_regime_tree_view" model="ir.ui.view">
+        <field name="name">health.regime.tree.view</field>
+        <field name="model">health.regime</field>
+        <field name="arch" type="xml">
+            <tree string="Régime de Aseguramiento de Salud">
+                <field name="code" />
+                <field name="health_description" />
+                <field name="name" />
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_health_regime" model="ir.actions.act_window">
+        <field name="name">Régime de Salud</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">health.regime</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+        id="menu_action_health_regime"
+        action="action_health_regime"
+        name="Régime de Aseguramiento de Salud"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="145" />
+
+</odoo>

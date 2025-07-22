@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="account_purchases_form_base" model="ir.ui.view">
+		<field name="name">account.purchases.form.base</field>
+		<field name="model">account.purchases</field>
+		<field name="arch" type="xml">
+			<form string="Registro">
+				<header>
+					<button name="compute_sheet" string="Recargar" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+					<button name="action_generate_xls" string="Generar Excel" type="object" class="oe_highlight" invisible="state != 'draft'"/> 
+					<button name="action_generate_ple" string="Descargar PLE" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+					<button name="action_confirm" string="Confirmar" confirm="Una vez que confirmes el informe, ya no podrá volver al estado 'borrador'. ¿Estás seguro de que deseas confirmarlo?" type="object" invisible="state != 'draft'"/>
+					<button name="action_draft" string="Reestablecer a borrador" type="object" invisible="state != 'done'"/>
+					<field name="state" widget="statusbar"/>
+				</header>
+				<sheet>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" string="Registro"/>
+						<h2><field name="name" readonly="1" force_save="1"/></h2>
+					</div>
+					<group>
+						<group>
+							<field name="month"/>
+							<field name="indicator_o"/>
+							<field name="indicator_m"/>
+							<field name="xls_filename" invisible="1"/>
+							<field name="xls_binary" filename="xls_filename" readonly="1" force_save="1"/>
+							<field name="ple_filename" invisible="1"/>
+							<field name="ple_binary" filename="ple_filename" readonly="1" force_save="1"/>
+						</group>
+						<group>
+							<field name="year"/>
+							<field name="indicator_c"/>
+							<field name="indicator_g"/>
+							<field name="company_id"/>
+						</group>
+					</group>
+					<notebook>
+                        <page name="lines" string="Registros">
+                        </page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="account_purchases_line_form_base" model="ir.ui.view">
+		<field name="name">account.purchases.line.form.base</field>
+		<field name="model">account.purchases.line</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="entry"/>
+						<field name="base_imp"/>
+						<field name="percent_igv"/>
+						<field name="igv"/>
+						<field name="inafecto"/>
+						<field name="total_amount"/>
+						<field name="total_real"/>
+						<field name="num_det"/>
+						<field name="currency_line"/>
+					</group>
+					<group>
+						<field name="company_id"/>
+						<field name="op_nodom"/>
+					</group>
+					<group>
+						<field name="serie_cpe" readonly="1"/>
+						<field name="num_cpe" readonly="1"/>
+						<field name="type_cpe" readonly="1"/>
+						<field name="type_doc" readonly="1"/>
+						<field name="num_doc"/>
+						<field name="period_ple"/>
+						<field name="correlativo_ple"/>
+						<field name="state_ple"/>
+						<field name="cuo_sunat"/>
+						<field name="tc_sunat"/>
+					</group>
+					<group>
+						<field name="periodo_sunat"/>
+						<field name="account_date"/>
+						<field name="invoice_date"/>
+						<field name="date_to"/>
+						<field name="date_from"/>
+						<field name="date_due"/>
+						<field name="date_det"/>
+						<field name="dua_year"/>
+					</group>
+                    <group>
+						<field name="date_reversed"/>
+						<field name="tipcomp_reversed"/>
+						<field name="serie_reversed"/>
+						<field name="num_reversed"/>
+                    </group>
+				</group>
+			</form>
+		</field>
+	</record>
+</odoo>

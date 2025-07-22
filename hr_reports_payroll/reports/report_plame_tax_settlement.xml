@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_plame_tax_settlement">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.internal_layout" > -->
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.basic_layout">
+					<div class="page">
+						<style>
+
+							.table_basic {
+							width:100%;
+							border-collapse: collapse;
+							font-size: 9px;
+							vertical-align: center;
+							}
+							.table_total {
+							width:100%;
+							font-size: 9px;
+							vertical-align: center;
+							}
+							.row-head {
+							text-align: center;
+							}
+							.row-head td{
+							border: 1px solid black;
+							border-collapse: collapse;
+							}
+							
+							.row-title {
+							text-align: center;
+							min-height: 15px;
+							font-weight: bold;
+							background-color: #BFBFC0;
+							}
+							.row-title td{
+							border: 1px solid black;
+							border-collapse: collapse;
+							}
+							.row-data {
+							text-align: right;
+							height:19px;
+							}
+							.total-data {
+							text-align: right;
+							height:19px;
+							}
+							.total-sunat-data {
+							text-align: right;
+							height:19px;
+							background-color: #BFBFC0;
+							}
+							.total-final-data {
+							text-align: right;
+							height:19px;
+							background-color: #BFBFC0;
+							border: 1px solid black;
+							}
+							.col-data {
+							text-align: left;
+							}
+							.row-data td, th{
+							border: 1px solid black;
+							border-collapse: collapse;
+							}
+							.b-spaces{
+							color: white;
+							}
+							td, th{
+							padding: 4px;
+							vertical-align:middle;
+							font-size :15px;
+							}
+							h5{
+							font-family:LatoOpen Sans;
+							}
+
+						</style>
+						<div class="container">
+							<h5>
+								<span t-esc="o.company_id.name" />
+							</h5>
+
+							<h5> RUC: <span t-field="o.company_id.vat" />
+							</h5>
+
+							<h5>
+								LIQUIDACION DE TRIBUTOS
+							</h5>
+
+							<h5> PERIODO TRABAJADO: <span t-esc="o.date_period_report" />
+							</h5>
+							<br />
+							<br />
+
+							<table class="table_basic">
+
+								<tr class="row-title">
+									<td colspan="2" rowspan="2">
+										 <strong>CONCEPTOS</strong>
+									</td>
+									<span
+										t-foreach="['ONP','ESSALUD','5TA CATEGORIA','4TA CATEGORIA']"
+										t-as="concept"
+									>
+										<td colspan="2">
+											<strong>
+												<span t-esc="concept" />
+											</strong>
+										</td>
+									</span>
+								</tr>
+								<tr class="row-title">
+									<!-- <td colspan="2">
+										 <![CDATA[&nbsp;]]> 
+									</td> -->
+									<span
+										t-foreach="['ONP','ESSALUD','5TA CATEGORIA','4TA CATEGORIA']"
+										t-as="concept"
+									>
+										<td colspan="1">
+											<strong>
+												B.I.
+											</strong>
+										</td>
+										<td colspan="1">
+											<strong>
+												TRIBUTO
+											</strong>
+										</td>
+									</span>
+								</tr>
+								<span
+									t-foreach="['PLANILLA DE REMUNERACIONES', 'PLANILLA DE LIQUIDACIONES', 'SUB-TOTAL', 'CREDITO E.P.S.', 'DEVOLUCION 5TA DEL MES']"
+									t-as="group"
+								>
+									<tr class="row-data">
+										<td class="col-data" colspan="2">
+											<strong>
+												<span t-esc="group" />
+											</strong>
+										</td>
+										<span
+											t-foreach="['ONP','ESSALUD','5TA CATEGORIA','4TA CATEGORIA']"
+											t-as="concept"
+										>
+											<span
+												t-foreach="o.concepts_ids.filtered(lambda x: x.group==group and x.concept==concept )"
+												t-as="line"
+											>
+												<span
+													t-if="line.label == 'B.I.'"
+												>
+													<td colspan="1">
+														<span t-esc="line.amount"
+															t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+													</td>
+												</span>
+
+												<span
+													t-if=" line.label == 'TRIBUTO'"
+												>
+													<td colspan="1">
+														<span t-esc="line.amount"
+															t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+													</td>
+												</span>
+											</span>
+										</span>
+									</tr>
+								</span>
+								<tr>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+
+								</tr>
+								<span
+									t-foreach="['TOTAL']"
+									t-as="group"
+								>
+									<tr>
+										<td colspan="2">
+											<strong>
+												<span t-esc="group" />
+											</strong>
+										</td>
+										<span
+											t-foreach="['ONP','ESSALUD','5TA CATEGORIA','4TA CATEGORIA']"
+											t-as="concept"
+										>
+											<span
+												t-foreach="o.concepts_ids.filtered(lambda x: x.group==group and x.concept==concept )"
+												t-as="line"
+											>
+												<span
+													t-if="line.label == 'B.I.'"
+												>
+													<td class="total-data" colspan="1">
+														<span t-esc="line.amount"
+															t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+													</td>
+												</span>
+
+												<span
+													t-if=" line.label == 'TRIBUTO'"
+												>
+													<td class="total-data" colspan="1">
+														<span t-esc="line.amount"
+															t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+													</td>
+												</span>
+											</span>
+										</span>
+									</tr>
+								</span>
+
+								<tr>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+
+								</tr>
+								<span
+									t-foreach="['TOTAL IMPUESTOS A PAGAR SUNAT']"
+									t-as="group"
+								>
+									<tr>
+										<td colspan="2">
+											<strong>
+												<span t-esc="group" />
+											</strong>
+										</td>
+										<span
+											t-foreach="['ONP','ESSALUD','5TA CATEGORIA','4TA CATEGORIA']"
+											t-as="concept"
+										>
+											<span
+												t-foreach="o.concepts_ids.filtered(lambda x: x.group==group and x.concept==concept )"
+												t-as="line"
+											>
+												<span
+													t-if="line.label == 'B.I.'"
+												>
+													<td colspan="1">
+														<![CDATA[&nbsp;]]> 
+													</td>
+												</span>
+
+												<span
+													t-if="line.label == 'TRIBUTO'"
+												>
+													<td colspan="1" class="total-sunat-data">
+														<span t-esc="line.amount"
+															t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+													</td>
+												</span>
+											</span>
+										</span>
+									</tr>
+								</span>
+								<tr>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+									<td colspan="2"> <![CDATA[&nbsp;]]> </td>
+
+								</tr>
+
+								<span
+									t-foreach="['TOTAL A PAGAR']"
+									t-as="group"
+								>
+									<tr>
+										<td colspan="2">
+											<strong>
+												<span t-esc="group" />
+											</strong>
+										</td>
+										<span
+											t-foreach="o.concepts_ids.filtered(lambda x: x.group==group  )"
+											t-as="record"
+										>
+ 											<td colspan="2" class="total-final-data">
+												<span t-esc="record.amount"
+													t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+											</td>
+ 
+										</span>
+									</tr>
+								</span>
+
+							</table>
+						</div>
+
+						<div class="footer">
+							<div  style="border-top: 1px solid black;">
+									<span t-raw="o.datetime_now"/>
+							</div>
+						</div> 
+
+					</div>
+				</t>
+			</t>
+		</t>
+
+	</template>
+</odoo>

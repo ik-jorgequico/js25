@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_sire_sales_form" model="ir.ui.view">
+		<field name="name">account.sire.sales.form</field>
+		<field name="model">account.sire.sales</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_sire.account_sire_form_base"/>
+		<field name="arch" type="xml">
+			<field name="vendor_name" position="after">
+				<field name="expo"/>
+			</field>
+			<field name="base_dg" position="after">
+				<field name="desc_base_dg"/>
+			</field>
+			<field name="igv_dg" position="after">
+				<field name="desc_igv_dg"/>
+				<field name="exonerado"/>
+			</field>
+			<field name="isc" position="after">
+				<field name="base_ivap"/>
+				<field name="ivap"/>
+			</field>
+			<field name="est_comp" position="after">
+				<field name="fob_embarcado" optional="hide"/>
+				<field name="op_gratuita" optional="hide"/>
+				<field name="operation_sales_type" optional="hide"/>
+				<field name="dam_cp" optional="hide"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="account_sire_sales_tree" model="ir.ui.view">
+		<field name="name">account.sire.sales.tree</field>
+		<field name="model">account.sire.sales</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_sire.account_sire_tree_base"/>
+		<field name="arch" type="xml">
+			<field name="vendor_name" position="after">
+				<field name="expo"/>
+			</field>
+			<field name="base_dg" position="after">
+				<field name="desc_base_dg"/>
+			</field>
+			<field name="igv_dg" position="after">
+				<field name="desc_igv_dg"/>
+				<field name="exonerado"/>
+			</field>
+			<field name="isc" position="after">
+				<field name="base_ivap"/>
+				<field name="ivap"/>
+			</field>
+			<field name="est_comp" position="after">
+				<field name="fob_embarcado" optional="hide"/>
+				<field name="op_gratuita" optional="hide"/>
+				<field name="operation_sales_type" optional="hide"/>
+				<field name="dam_cp" optional="hide"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="account_sire_sales_filter" model="ir.ui.view">
+		<field name="name">account.sire.sales.filter</field>
+		<field name="model">account.sire.sales</field>
+		<field name="arch" type="xml">
+			<search string="Validación Sire">
+				<group expand="1" string="Group By">
+					<filter string="Validación" name="sire_check" context="{'group_by':'sire_check'}"/>
+				</group>
+			</search>            
+		</field>
+	</record>
+
+	<record id="action_sales_sire" model="ir.actions.act_window">
+		<field name="name">Sire Ventas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.sire.sales</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="account_sire.account_sire_sales_filter"/>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+			</p>
+		</field>
+	</record>
+</odoo>

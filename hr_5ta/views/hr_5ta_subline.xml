@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="hr_cts_subline_tree_view" model="ir.ui.view" >
+        <field name="name">hr.5ta.subline.tree.view</field >
+        <field name="model">hr.5ta.subline</field>
+        
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" />
+                <field name="anio" />
+                <field name="mes" />
+                <field name="retention" />
+                <field name="line_5ta" column_invisible="1"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_5ta_subline_form_view" model="ir.ui.view" >
+        <field name="name">hr.5ta.subline.form.view</field >
+        <field name="model">hr.5ta.subline</field>
+        
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="sequence" />
+                    <field name="anio" />
+                    <field name="mes" />
+                    <field name="retention" />
+                    <field name="line_5ta" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_5ta_subline" model="ir.actions.act_window">
+        <field name="name">5TA SUBLINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.5ta.subline</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

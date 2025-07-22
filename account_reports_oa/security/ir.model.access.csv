@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_data_mov_year,access.data.mov.year,model_data_mov_year,account.group_account_user,1,1,1,1
+access_data_mov_year_line,access.data.mov.year.line,model_data_mov_year_line,account.group_account_user,1,1,1,1
+access_res_uit,access.res.uit,model_res_uit,account.group_account_user,1,1,1,1

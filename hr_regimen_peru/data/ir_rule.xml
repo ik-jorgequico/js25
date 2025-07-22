@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- ___________________NOMINAS________________________ -->
+<!-- ___________________Nominas________________E_______ -->
+<!-- ___________________Prestamos______________E_______ -->
+<!-- ___________________Beneficio Social_______________ -->
+
+    <record model="ir.rule" id="hr_cts_rules">
+        <field name="name">CTS multi-company</field>
+        <field name="model_id" ref="hr_cts.model_hr_cts"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_vacation_rules">
+        <field name="name">vacation multi-company</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation_calculate"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_lbs_rules">
+        <field name="name">LBS multi-company</field>
+        <field name="model_id" ref="hr_lbs.model_hr_lbs"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_utilities_rules">
+        <field name="name">Utiliades multi-company</field>
+        <field name="model_id" ref="hr_utilities.model_hr_utilities"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_grati_rules">
+        <field name="name">Gratificacion multi-company</field>
+        <field name="model_id" ref="hr_grati.model_hr_grati"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_5ta_rules">
+        <field name="name">5ta multi-company</field>
+        <field name="model_id" ref="hr_5ta.model_hr_5ta"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+<!-- ___________________Provisiones ___________________ -->
+    <record model="ir.rule" id="hr_prov_cts_rules">
+        <field name="name">CTS multi-company</field>
+        <field name="model_id" ref="hr_report_excel.model_hr_prov_cts"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_prov_grati_rules">
+        <field name="name">Gratificacion prov multi-company</field>
+        <field name="model_id" ref="hr_report_excel.model_hr_prov_grati"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_prov_vaca_rules">
+        <field name="name">Vacaciones prov multi-company</field>
+        <field name="model_id" ref="hr_report_excel.model_hr_prov_vaca"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+     <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+<!-- ___________________Informes_______________╬_______ -->
+<!-- ___________________Reportes_______________________ -->
+
+
+
+    <record model="ir.rule" id="hr_reports_payroll_rules">
+        <field name="name">payslip_interface prov multi-company</field>
+        <field name="model_id" ref="hr_reports_payroll.model_payslip_interface"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_model_plame_files_rules">
+        <field name="name">model_plame_files prov multi-company</field>
+        <field name="model_id" ref="hr_reports_payroll.model_plame_files"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_annualized_interface_rules">
+        <field name="name">model_plame_files prov multi-company</field>
+        <field name="model_id" ref="hr_reports_payroll.model_annualized_interface"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_model_afp_interface_rules">
+        <field name="name">model_afp_interface prov multi-company</field>
+        <field name="model_id" ref="hr_reports_payroll.model_afp_interface"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+<!-- ___________________Configuracion__________╬_______ -->
+
+    <record model="ir.rule" id="hr_model_payroll_structure_type_rules">
+        <field name="name">Tipos de estruturas multi-company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payroll_structure_type"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_payroll_structure_multi_company_rule">
+        <field name="name">Payroll Structure Multi-Company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payroll_structure"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_salary_rule_multi_company_rule">
+        <field name="name">Salary Rule Multi-Company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_salary_rule"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+    <record model="ir.rule" id="hr_model_rule_parameter_rules">
+        <field name="name">Parametros de regla multi-company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_rule_parameter"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_salary_rule_category_multi_company_rule">
+        <field name="name">Salary Rule Category Multi-Company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_salary_rule_category"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+<!-- Otros Input -->
+    <record model="ir.rule" id="hr_paylip_input_type_rule">
+        <field name="name">Otros input Rule Category Multi-Company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payslip_input_type"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_model_resource_calendar_rules">
+        <field name="name">model_resource_calendar prov multi-company</field>
+        <field name="model_id" ref="hr_payroll.model_resource_calendar"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="hr_model_peru_employee_regime">
+        <field name="name">RLP prov multi-company</field>
+        <field name="model_id" ref="model_peru_employee_regime"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+
+    <!-- <record model="ir.rule" id="model_hr_payroll_structure_list">
+        <field name="name">structure_list multi-company</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payroll_structure_list"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+     <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record> -->
+
+
+
+<!-- ___________________AUSENCIAS______________________ -->
+
+    <record model="ir.rule" id="hr_vaca_purchased_rules">
+        <field name="name">purchased vacaciones prov multi-company</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation_purchased"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="ausencias_record_vaca_rules">
+        <field name="name">Ausencias record vacacional multi-company</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="report_record_vaca_rules">
+        <field name="name">Ausencias reporte vacacional multi-company</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation_report"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="ir.rule" id="leave_accrual_plan_rules">
+        <field name="name">Ausencias reporte vacacional multi-company</field>
+        <field name="model_id" ref="hr_holidays.model_hr_leave_accrual_plan"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+</odoo>

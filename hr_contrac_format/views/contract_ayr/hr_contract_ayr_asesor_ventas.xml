@@ -1,0 +1,120 @@
+<odoo>
+    <data>
+        <!-- <report id = "report_ayr_asesor_ventas"
+        string = "Contrato Modelo asesor de ventas"
+        model = "hr.contract"
+        report_type = "qweb-pdf"
+        name = "hr_contrac_format.report_pdf_template_ayr_asesor_ventas"
+        menu = "False"
+        /> -->
+
+        <record id="report_ayr_asesor_ventas" model="ir.actions.report">
+            <field name="name">Contrato Modelo asesor de ventas</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.report_pdf_template_ayr_asesor_ventas</field>
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_pdf_template_ayr_asesor_ventas">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <!-- Estilos del Contrato -->
+                        <t t-call="hr_contrac_format.template_style_contrato"/>
+
+                        <div class="page">
+                            <h5 style="text-align: center;" class="under">CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR INICIO O INCREMENTO DE ACTIVIDAD PRODUCTIVA A &amp; R OUTSOURCING Y GESTION E.I.R.L</h5>
+
+                            <p>Conste por el presente documento el <b>Contrato de Trabajo de Naturaleza Temporal por Inicio o Incremento de Actividad Productiva </b> que celebran de una parte, la empresa <b><span t-field="o.company_id.name"/></b> con RUC Nro. <b><span t-field="o.company_id.vat"/></b>, con domicilio en <b><span t-field="o.company_id.street"/></b>, distrito de <b><span t-field="o.company_id.city"/></b> , Provincia y Departamento de <b><span t-field="o.company_id.state_id"/></b>, debidamente representada por su Gerente Titular señor<b><span t-field="o.company_id.gerente_name"/></b>,identificado con <b><span t-field="o.company_id.gerente_doc_type"/></b> Nro. <b><span t-field="o.company_id.gerente_doc"/></b>, según poderes inscritos en la Partida Electrónica Nro.<b><span t-field="o.company_id.gerente_partida_electroc"/></b>  del Registro de Personas Jurídicas de la Oficina Registral de Lima, mencionar adicionalmente que el régimen a pertenecer corresponde a la Microempresa con Registro REMYPE N° 0002141463-2023; a quien en adelante se le denominará <b>A&amp;R</b>; y de la otra parte el señor(a)(ita) <b><span t-field="o.employee_id.name"/></b> identificado con <span t-field="o.employee_id.l10n_latam_identification_type_id.name"/> Nro. <span t-field="o.employee_id.identification_id"/>, con domicilio en <span t-field="o.employee_id.address_home_id.street"/>, Provincia y Departamento de <span t-field="o.employee_id.address_home_id.city_id.name"/>,correo <span t-field="o.employee_id.address_home_id.email"/> y Número de telefónico<span t-field="o.employee_id.address_home_id.mobile"/>en adelante el <b>EL TRABAJADOR</b>, en los terminos y condiciones siguientes:</p>
+
+                            <p><b class="under">PRIMERO</b> En tal sentido,<b>A&amp;R</b> es una empresa que se dedica a la prestación de servicios de preventa, postventa y cobranza de productos, asesoría, consultoría y servicios de outsourcing en administración, finanzas, contabilidad y recursos humanos, servicios que son brindados en forma directa.</p>
+
+                            <p><b>A&amp;R</b>, va a desarrollar en forma temporal y exclusiva un nuevo Proyecto, por el cual incorporará a las actividades que realiza una nueva línea de comercialización de telefonia fija. En tal sentido, en vista que esta implementación es novedosa requerimos de la contratación temporal de personal porque desconocemos como responderá el mercado a la incorporación de esta nueva línea de comercialización, pues es la primera vez que se lanza al mercado dicho proyecto, constituyendo esto un riesgo.</p>
+                            
+                            <p><b>EL TRABAJADOR</b>deja constancia de haber sido informado, conocer, entender y aceptar que la <u>causa objetiva</u> en la que <b>A&amp;R</b> justifica su contratación temporal es porque recién estamos implementando dentro de nuestra línea de comercialización el Proyecto, constituyendo esta implementación algo nuevo dentro de nuestras actividades comerciales.</p>
+
+                            <p>En tal sentido, <b>A&amp;R</b> requiere contratar en forma temporal los servicios de una persona que cubra el cargo de <u> <span t-field="o.job_id.name"/></u> , cargo que será ejercido bajo supervisión del área <b>COMERCIAL</b>, encontrándose debidamente sustenta y detallada la <u>causa objetiva</u> que justifica la contratación temporal del <b>EL TRABAJADOR</b>.</p>
+        
+                            <p><b>EL TRABAJADOR</b>es una persona preparada para el puesto indicado y goza de la experiencia suficiente y que se requiere para desarrollar las funciones y/o obligaciones que dicho puesto demandan.</p>
+
+                            <p><b>A&amp;R</b>, <b>EL TRABAJADOR</b> acuerdan que la modalidad de trabajo será presencial y en campo.</p>
+
+                            <p><b class="under">SEGUNDO:</b> Atendiendo a lo dispuesto en la cláusula primera, <b>A&amp;R</b> al amparo de las normas del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral, contrata los servicios de <b>EL TRABAJADOR</b> para que desempeñe las labores propias y complementarias del puesto referido en la cláusula precedente. </p>
+                            
+                            <p>Sin perjuicio de lo indicado anteriormente serán también obligaciones del <b>TRABAJADOR</b> lo siguiente:</p>
+                            <ol type="a">
+                                <li>Gestionar carteras de clientes asignada, clientes propios y desarrollo de nuevos clientes.</li>
+                                <li>Realizar contacto presencialmente con los clientes identificados con la finalidad de hacer un levantamiento de información y evaluación de este y cierre de ventas. </li>
+                                <li>Trabajar en una propuesta comercial según el requerimiento y necesidad del cliente con una cartera de productos estacionales en venta y brindando la oferta Comercial actualizada.</li>
+                                <li>Concretar la venta de forma física con los procesos exigidos por la empresa. </li>
+                                <li>Dar reporte constante al superior inmediato del avance de los proyectos de ventas y ventas</li>
+                                <li>Asistir a las reuniones solicitadas por la jefatura/gerencia.</li>
+                                <li>Apoyar en otras tareas asignadas por el jefe inmediato</li>
+                            </ol>
+
+                            <p>El incumplimiento de cualquiera de las obligaciones indicadas anteriormente constituye una falta grave que puede acarrear el término de la relación laboral. </p>
+
+                            <p><b class="under"> TERCERO:</b>Queda expresamente convenido que el presente contrato es de naturaleza temporal en la modalidad de inicio de actividad en nuestra línea de promoción y comercialización el Proyecto Canal Fijas, figura contemplada en el artículo 57º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.</p>
+
+                            <p><b class="under"> CUARTO:</b>El plazo de duración del presente contrato es de <span t-esc="o.month_contract + o.year_contract * 12"/> meses y <span t-field="o.day_contract"/> días, contados a partir del<span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/> hasta el <span t-esc="o.date_end.day"/> de <span t-field="o.month_end_word"/> del <span t-esc="o.date_end.year"/>, fecha en que concluye indefectiblemente, pudiendo ser renovado por acuerdo mutuo entre las partes, la misma que deberá constar por escrito.</p>
+
+                            <p><b class="under"> QUINTO:</b><b>A&amp;R</b> se compromete a fijar como horarios de trabajo los usuales para la clase de trabajo que se contrata, sin exceder el máximo legal de 48 horas a la semana, en turnos fijos y/o rotativos, según lo requieran los servicios para los que se contrata a EL TRABAJADOR. </p>
+
+                            <p><b>A&amp;R</b> tiene la facultad de modificarlos en cualquier momento, bastando para ello que dicha modificación o variación sea comunicada al <b>TRABAJADOR</b> por escrito o por correo electrónico. El <b>TRABAJADOR</b> deberá acatar la disposición dada de manera inmediata.</p>
+
+                            <p>El <b>TRABAJADOR</b> gozará de un tiempo para refrigerio, en cumplimiento de lo que establece la ley. El tiempo de refrigerio no forma parte de la jornada de trabajo y se producirá en el horario que determine <b>A&amp;R</b> El tiempo de refrigerio podrá ser modificado por <b>A&amp;R</b> de acuerdo con sus necesidades, siempre respetando el límite establecido en la ley.</p>
+
+                            <p><b>TRABAJADOR</b> declara conocer que no está autorizado a realizar trabajo en sobretiempo, a menos que éste haya sido previamente aprobado por <b>A&amp;R</b> de la manera como lo indican sus políticas y procedimientos internos, esto es mediante documento escrito.</p>
+
+                            <p>Asimismo, el <b>TRABAJADOR</b> realizará sus labores diarias básicamente en el local que <b>A&amp;R</b> designe dentro de la region de ______LOCALIDAD_________.</p>
+
+                            <p><b class="under">SEXTO:</b> El <b>TRABAJADOR</b> por el servicio efectivo que preste percibirá una remuneración fija mensual ascendente a S/<span t-field="o.wage"/> (<span t-field="o.salary_word"/>), la que le será abonada en las mismas oportunidades que a los demás trabajadores de<b>A&amp;R</b></p>.
+
+                            <p><b>A&amp;R</b> hará entrega al trabajador de la cantidad de S/<span t-field="o.move_sa"/> (<span t-field="o.move_word"/>)por concepto de movilidad. La cantidad entregada bajo este concepto se encuentra supeditada a la asistencia del TRABAJADOR al centro de laborales y es otorgada para cubrir el gasto de traslado al centro laboral. Esta cantidad no tiene carácter remunerativo, por lo que no formará parte de la remuneración computable del <b>TRABAJADOR</b> para el cálculo de sus beneficios laborales.</p>
+                            
+                            <p><b class="under">SÉTIMO:</b> Queda entendido que el presente contrato al término del plazo indicado en la cláusula cuarta quedará resuelto automáticamente, sin que sea necesario para ello dar aviso previo, salvo que las partes hayan suscrito un nuevo contrato ampliando el plazo de vigencia de la relación laboral. </p>
+
+                            <p><b class="under">OCTAVO:</b> Asimismo, queda expresamente convenido entre las partes que al presente contrato le son aplicables lo dispuesto en los artículos 10º y 75º del T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.  En este sentido se acuerda un período de prueba para <b>EL TRABAJADOR</b> de tres (03) meses. </p>
+                            
+                            <p><b class="under">NOVENO:</b> Sin perjuicio de lo indicado en la cláusula sétima, <b>A&amp;R</b></p> podrá resolver el presente contrato si <b>EL TRABAJADOR</b> se conduce o realiza sus labores en forma negligente sin observar las directivas de sus superiores y/o el Reglamento Interno de <b>A&amp;R</b> y/o incurre en cualquiera de las faltas que constituyen causas justas de despido referidas en el T.U.O. del Decreto Legislativo 728 - Ley de Productividad y Competitividad Laboral.  De igual forma <b>EL TRABAJADOR</b> en cualquier momento podrá dar término al presente contrato con la sola limitación de presentar su carta de renuncia con una anticipación de treinta (30) días.
+
+                            <p><b class="under">DECIMO:</b> A la conclusión del presente contrato y en los casos de terminación anticipada <b>A&amp;R</b> le abonará a <b>EL TRABAJADOR</b> sus beneficios sociales de acuerdo con ley.</p>
+
+                            <p>Si es que las partes no llegaran a suscribir un nuevo contrato de trabajo de naturaleza temporal que importe la renovación del plazo del presente contrato, <b>A&amp;R</b> procederá al pago de los correspondientes beneficios sociales de <b>EL TRABAJADOR</b> pues la no renovación implica el cese de la relación laboral existente entre las partes.</p>
+
+                            <p><b class="under">DECIMO PRIMERO </b>: <b>EL TRABAJADOR</b> se compromete a no brindar un servicio de forma directa a ningún cliente de <b>A&amp;R</b> que tenga a la fecha de la firma del presente contrato y a los que pudiera tener a lo largo de su existencia como persona jurídica. Asimismo, no podrá celebrar contratos de asesoría, tercerización o estudio respecto a todos los productos que <b>A&amp;R</b> ofrece y afines, así no exista el vínculo laboral.</p>
+
+                            <p>Esta cláusula se extiende hasta 06 meses de finalizado el vínculo laboral con <b>EL TRABAJADOR</b>.</p>
+                            
+                            <p><b class="under">DECIMO SEGUNDO</b>: podrá impartir órdenes o directivas observando los criterios de razonabilidad, proporcionalidad, claridad, transparencia y buena fe, las cuales deben ser acatadas por <b>EL TRABAJADOR</b>, quien acepta realizar la labor detallada y declara conocer el horario y Reglamento Interno de Trabajo.</p>
+                            
+                            <p>En el desempeño de su cargo <b>EL TRABAJADOR</b> cumplirá con las obligaciones que a continuación se detallan, sin que éstas tengan carácter limitativo:</p>
+                            
+                            <ol type="a">
+                                <li>a  Desarrollará todas las labores, sin limitación alguna, inherentes al cargo confiado, así como aquéllas que le pudiera impartir <b>A&amp;R</b>.</li>
+                                <li>b  <b>A&amp;R</b> se reserva la reubicación de <b>EL TRABAJADOR</b> dentro de los límites de ley.</li>
+                                <li>c  Observará y cumplirá las órdenes y directivas que le sean impartidas por sus superiores y por los representantes o ejecutivos competentes de <b>A&amp;R</b>.</li>
+                            </ol>
+                            
+                            <p><b class="under">DECIMO TERCERO</b>:En este acto <b>EL TRABAJADOR</b> autoriza en forma expresa el envío a su correo personal de la documentación laboral mencionada en el siguiente apartado. Para estos efectos <b>EL TRABAJADOR</b> señala que su dirección de correo personal es: <span t-field="o.employee_id.address_home_id.email"/></p>
+
+                            <p><b class="under">DECIMO CUARTO</b>: <b>EL TRABAJADOR</b> consiente expresamente que la documentación derivada de la relación laboral sea confeccionada procesada, firmada y remitida de manera electrónica a la casilla indicada en la cláusula anterior. Asimismo, el <b>EL TRABAJADOR</b> autoriza a la Empresa para que envíe al correo antes indicado toda otra información corporativa como comunicaciones internas, invitaciones de capacitaciones, concursos, campañas e Lear Ning etc.</p>
+
+                            <p>Todas, las notificaciones por cambios de labores, reubicaciones, amonestaciones, llamadas de atención, renuncia y despido, o aquellas que resulten necesarias como parte de la situación anómala laboral tanto administrativas como operacionales, será mediante: WhatsApp, correo email, u otro medio de comunicación análogo o electrónico, y que esté al alcance de EL <b>EL TRABAJADOR</b>, la sola verificación del mensaje se considerara como NOTIFICADO. </p>
+                            
+                            <p><b class="under">DECIMO QUINTO: </b>:EL <b>EL TRABAJADOR</b> renuncia expresamente a su jurisdicción, sometiéndose a la jurisdicción de Lima para resolver cualquier asunto conflictivo del presente contrato y que se vaya a resolver en vía judicial.</p>
+
+                            <t t-set="day" t-value="o.date_start.day"/>
+                            <t t-set="month" t-value="o.date_start.strftime('%B')"/>
+                            <t t-set="year" t-value="o.date_start.year"/>
+                            <!-- Firma del Gerente y Empleado -->
+                            <t t-call="hr_contrac_format.template_firma"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

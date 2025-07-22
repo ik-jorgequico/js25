@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">        
+        <record id="cron_update_sunat_files" model="ir.cron">
+            <field name="name">Actualizar archivos AgentRet y BueCont SUNAT</field>
+            <field name="model_id" ref="model_file_downloader"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type" >months</field>
+            <field name="active" eval="True"/>
+            <field name="code">model.update_files()</field>
+        </record>
+	</data>
+</odoo>

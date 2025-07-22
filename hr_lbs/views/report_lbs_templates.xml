@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_lbs">
+        <t t-call="web.external_layout" t-lang="o.employee_id.company_id.partner_id.lang">
+            <style>
+		table,div,t,tbody, th, td,tr , .table, .table-bordered, .o_container {
+                    border: none !important;
+                    border-collapse: collapse;
+                }
+        
+                .o_container {
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+                td {
+                width: 25%;
+                }
+                td {
+                width: 25%;
+                }
+            </style>
+
+            <div class="header">
+
+                <img style="width: 180px" t-if="o.employee_id.company_id.logo" t-att-src="image_data_uri(o.employee_id.company_id.logo)" alt="Company Logo" class="float-left" />
+                <div >
+                  <div style="font-size:14px;text-align:right; color: #4B4B4B" >
+                    <div>
+                      <br/>
+
+                      <strong t-field="o.employee_id.company_id.partner_id.name" />
+                      <span t-field="o.employee_id.company_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}" />
+                      <span t-field="o.employee_id.company_id.partner_id.website" />
+                    </div>
+                    
+                  </div>
+
+                </div>
+               <hr/>  
+
+            </div>
+
+            <div class="page">
+              
+                <div class="container-fluid fst-normal fs-3 small">
+                    <h4 class="text-center">LIQUIDACIÓN DE BENEFICIOS SOCIALES</h4>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <h5>Datos Generales</h5>
+                </div>
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-7 ">
+                            <table name="general_information" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>Código:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.ref_emp"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Nombre:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.employee_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Cargo:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.employee_id.job_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Motivo de Cese:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.reason_low"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Tiempo de Servicio:</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.time_service"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-5 ">
+                            <table name="general_information_2" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                                                        <tr>
+                                        <td>
+                                            <strong>F. Ingreso:</strong>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-field="o.first_contract_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>F. Cese:</strong>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-field="o.last_contract_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <strong>Sueldo Basico:</strong>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <!--<span t-field="o.salary" />-->
+                                            <span t-esc="o.salary" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Asignación Familiar:</strong>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <!--<span t-field="o.family_asig"/>-->
+                                            <span t-esc="o.family_asig" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&amp;nbsp;
+                                        </td>
+                                        <td>&amp;nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <!-- VACACIONES VENCIDAS-->
+                <t t-set="amount_vac_vencidas" t-value="0"/>
+                <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation=='Vacaciones Vencidas')" t-as="vac">
+                    <t t-set="amount_vac_vencidas" t-value="amount_vac_vencidas+vac.amount"/>
+                </span>
+
+                <!-- VACACIONES PENDIENTES-->
+                <t t-set="amount_vac_pending" t-value="0"/>
+                <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation=='Vacaciones Pendientes')" t-as="vac">
+                    <t t-set="amount_vac_pending" t-value="amount_vac_pending+vac.amount"/>
+
+                </span>
+
+                <!-- VACACIONES TRUNCAS-->
+                <t t-set="amount_vac_truncas" t-value="0"/>
+                <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation=='Vacaciones Truncas')" t-as="vac">
+                    <t t-set="amount_vac_truncas" t-value="amount_vac_truncas+vac.amount"/>
+                </span>
+
+                <div class="container-fluid fst-normal fs-3 small">
+                    <div class="row">
+                        <div class="col-12 ">
+
+                            <table name="vacation_vencidas" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="amount_vac_vencidas &gt; 0">
+                                        <td colspan="2"><strong>VACACIONES VENCIDAS</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="amount_vac_vencidas" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation == 'Vacaciones Vencidas')" t-as="vac">
+                                        <tr t-if="amount_vac_vencidas &gt; 0">
+                                            <td>Periodo: <span t-esc="vac.period_year"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                        <tr t-if="amount_vac_vencidas &gt; 0">
+                                            <td>Base: <span t-esc="vac.base_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                            <td>Dias: <span t-esc="vac.number_days"/>/30</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                    </span>
+                                </tbody>
+                            </table>
+                            <table name="vacation_pending" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: none;">
+                                <tbody>
+                                    <tr t-if="amount_vac_pending &gt; 0">
+                                        <td colspan="2"><strong>VACACIONES DEVENGADAS</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="amount_vac_pending" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation == 'Vacaciones Pendientes')" t-as="vac">
+                                        <tr t-if="amount_vac_pending &gt; 0">
+                                            <td>Periodo: <span t-esc="vac.period_year"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                        <tr t-if="amount_vac_pending &gt; 0">
+                                            <td>Base: <span t-esc="vac.base_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                            <td>Dias: <span t-esc="vac.number_days"/>/30</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                    </span>
+
+                                </tbody>
+                            </table>
+
+                            <table name="vacation_trunca" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="amount_vac_truncas &gt; 0">
+                                        <td colspan="2"><strong>VACACIONES TRUNCAS</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span  t-esc="amount_vac_truncas" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <span t-foreach="o.vaca.filtered(lambda x: x.type_vacation == 'Vacaciones Truncas')" t-as="vac">
+                                        <tr t-if="amount_vac_truncas &gt; 0">
+                                            <td>Periodo: <span t-esc="vac.period_year"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                        <tr t-if="amount_vac_truncas &gt; 0">
+                                            <td>Base: <span t-esc="vac.base_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                            <td>Dias: <span t-esc="vac.number_days"/>/30</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                        </tr>
+                                    </span>
+                                </tbody>
+                            </table>
+
+
+                            <table name="compensacion_tiempo_servicio" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="o.cts_amount &gt; 0">
+                                        <td colspan="2"><strong>COMPENSACIÓN POR TIEMPO DE SERVICIOS</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span  t-esc="o.cts_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.cts_amount &gt; 0">
+                                        <td>Base: <span t-esc="o.cts_base_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                        <td>Dias: <span t-esc="o.cts_days"/>
+                                        </td>
+                                        <td>&amp;nbsp;</td>
+                                        <td>&amp;nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table name="gratification" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="o.grati_amount &gt; 0">
+                                        <td colspan="2"><strong>GRATIFICACIÓN TRUNCA</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="o.grati_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <span t-foreach="o.grati" t-as="grat">
+                                        <tr t-if="o.grati_amount &gt; 0">
+                                            <td>
+                                                <span t-esc="grat.base_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                            <td>Dias: <span t-esc="grat.number_days"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+
+                                        </tr>
+                                    </span>
+                                    <tr t-if="o.boni_extra_grati_amount &gt; 0">
+                                        <td colspan="2"><strong>BONIFICACIÓN EXTRAORDINARIA</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="o.boni_extra_grati_amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table name="quinta_devolucion" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="o.quinta_devolucion &gt; 0">
+                                        <td colspan="2"><strong>QUINTA DEVOLUCION</strong></td>
+
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="o.quinta_devolucion" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table name="remuneracion" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <span t-foreach="o.incomes" t-as="income">
+                                        <tr t-if="income.total &gt; 0">
+                                            <td>
+                                                <span t-esc="income.name"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td style="text-align: right;">
+                                                <span  t-esc="income.total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </span>
+                                    <span t-foreach="o.bons" t-as="bon">
+                                        <tr t-if="bon.amount &gt; 0">
+                                            <td>
+                                                <span t-esc="bon.input_type_id.name"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td>&amp;nbsp;</td>
+                                            <td style="text-align: right;">
+                                                <span t-esc="bon.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </span>
+                                    <tr t-if="o.income_net &gt; 0" style="text-align: right;">
+
+                                        <td style="text-align: right;" colspan="6" ><span>__________________</span></td>
+                                    </tr>
+                                    <tr t-if="o.income_net &gt; 0">
+                                        <td colspan="2">
+                                            <strong>TOTAL INGRESOS X LIQUIDACION</strong>
+                                        </td>
+                                        <td>&amp;nbsp;</td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="o.income_net" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table name="deductions" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr t-if="o.ded_net &gt; 0">
+                                        <td colspan="2"><strong> DEDUCCIONES (Base: <span t-esc="o.bruto" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>)
+                                                          </strong></td>
+                                        <td>&amp;nbsp;</td><td>&amp;nbsp;</td>
+                                    </tr>
+                                    <span t-foreach="o.deductions" t-as="deduction">
+                                        <tr t-if="deduction.amount_lbs &gt; 0">
+                                            <td>
+                                                <span t-esc="deduction.name"/>
+                                            </td>
+                                            <td>&amp;nbsp;</td>
+                                            <td style="text-align: right;">
+                                                <span  t-esc="deduction.amount_lbs" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </span>
+                                    <tr t-if="o.ded_net &gt; 0"  style="text-align: right;">
+                                        <td style="width: 50%;">&amp;nbsp;</td>
+                                        <td style="width: 25%;">&amp;nbsp;</td>
+                                        <td style="width: 25%; text-align: right;" >__________________</td>
+                                    </tr>
+                                    <tr t-if="o.ded_net &gt; 0">
+                                        <td style="width: 50%;">
+                                            <strong>TOTAL DESCUENTO DE LIQUIDACIÓN</strong>
+                                        </td>
+                                        <td style="width: 25%;">&amp;nbsp;</td>
+                                        <td style="width: 25%; text-align: right;">
+                                            <span  t-esc="o.ded_net" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table name="neto" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td>&amp;nbsp;</td>
+                                        <td style="width: 50%; text-align: right;"><strong>NETO A PAGAR</strong></td>
+                                        <td>&amp;nbsp;</td>
+                                        <td  style="width: 50%; text-align: right;">
+                                            <span t-esc="o.net" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <br/>
+
+                <div class="container-fluid fst-normal fs-3 small">
+                    <!-- <h5 class="text-center">NETO A PAGAR </h5> -->
+                    <div class="text-justify"> Recibí de <span t-field="o.parent_id.company_id.name"/>
+                        la cantidad de <span t-esc="o.net" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                        (<span t-esc="o.net_words"/>) declarando a mérito de este pago que
+                        apruebo la liquidación que antecede por encontrarla conforme y que nada
+                        tengo que reclamarle a la empresa por este concepto. </div>
+        </div>
+        <div class="container-fluid fst-normal fs-3 small">
+            <br/>
+            <span t-esc="o.last_contract_date_words"/>
+            <br/>
+            <br/>
+        </div>
+
+        <div class="container-fluid fst-normal fs-3 small">
+
+            <h6>APORTES EMPLEADOS</h6>
+            <table name="aportations" style="width: 100%; padding: 0.3rem; margin-bottom: 1rem; border: 0;">
+                <tbody>
+                    <span t-foreach="o.aportations" t-as="aport">
+                        <tr t-if="aport.amount_lbs &gt; 0">
+                            <td>
+                                <span t-esc="aport.name"/>
+                            </td>
+                            <td>&amp;nbsp;</td>
+                            <td>
+                                <span t-esc="aport.amount_lbs" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.parent_id.company_id.currency_id}"/>
+                            </td>
+                            <td>&amp;nbsp;</td>
+                        </tr>
+                    </span>
+                </tbody>
+            </table>
+        </div>
+
+
+            <table style="width: 100%; border-collapse: collapse;" class="table table-sm table-borderless">
+            <tr class="text-center">
+                <!-- Primera columna -->
+                <th style="vertical-align: bottom; padding: 0 24px;">
+                    <!-- <img style="width: 180px" class="signature" t-if="o.employee_id.company_id.gerente_firma" t-att-src="image_data_uri(o.employee_id.company_id.gerente_firma)" alt="Firma gerente"/> -->
+                    <hr/>
+                    <span t-field="o.employee_id.company_id.gerente_name" style="text-transform: uppercase; font-weight: normal;"></span>
+                    <br><p>GERENTE GENERAL</p></br>
+                </th>
+        
+                <!-- Segunda columna -->
+                <th style="vertical-align: bottom; padding: 0 24px;">
+                    <hr/>
+                    <span t-field="o.employee_id.name" style="text-transform: uppercase; font-weight: normal;"></span>
+                    <br><p>FIRMA DEL TRABAJADOR</p></br>
+                </th>
+            </tr>
+        </table>
+        </div>
+    <!-- </div> -->
+            
+        </t>
+    </template>
+
+    <template id="report_lbs_lang">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="o" t-value="o.with_context(lang=o.employee_id.sudo().address_home_id.lang or o.env.lang)" />
+                <t t-call="hr_lbs.report_lbs" t-lang="o.env.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

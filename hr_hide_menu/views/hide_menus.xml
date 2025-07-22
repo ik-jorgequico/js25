@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_payroll.menu_action_hr_salary_rule_form" model="ir.ui.menu">
+            <field name="name">Groups Menu - Rule</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+        <record id="hr_payroll.menu_action_hr_salary_rule_parameter" model="ir.ui.menu">
+            <field name="name">Groups Menu - Parametros de regla</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+        <record id="hr_payroll.menu_hr_payroll_structure_view" model="ir.ui.menu">
+            <field name="name">Groups Menu - Estructuras</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+        <record id="hr_payroll.menu_hr_payslip_entry_type_view" model="ir.ui.menu">
+            <field name="name">Groups Menu - Otros tipos de entrada</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+        <record id="hr_work_entry_contract_enterprise.menu_resource_calendar_view" model="ir.ui.menu">
+            <field name="name">Groups Menu - Tiempos entrada de trabajo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+        <record id="hr_payroll.menu_hr_payroll_global_settings" model="ir.ui.menu">
+            <field name="name">Groups Menu - Nomina Ajustes</field>
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,991 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_pe_edi_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-14 19:51+0000\n"
+"PO-Revision-Date: 2024-11-14 19:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_pe_edi_picking
+#: model:ir.actions.report,print_report_name:l10n_pe_edi_picking.picking_report
+msgid "'Electronic Guide - %s.pdf' % (object.l10n_pe_edi_picking_name or '')"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid ", visit"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">\n"
+"                                <b>Address</b>\n"
+"                            </span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid ""
+"<span class=\"o_stat_text\">Convert to</span>\n"
+"                        <span class=\"o_stat_text\">Electronic</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "<span class=\"o_stat_text\">EDI Request</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<span>CODE</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<span>DESCRIPTION</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<span>QTY</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<span>UOM</span>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<strong>ADDRESSEE</strong>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<strong>DATA OF THE STARTING POINT AND ARRIVAL POINT</strong>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<strong>DOCUMENT RELATED</strong>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<strong>OBSERVATIONS</strong>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "<strong>TRANSPORTATION DATA</strong>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "ARRIVAL POINT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_sunat_accepted
+msgid "Accepted by SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Activate electronic guide remission"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_stock_canceled_edi_picking_form
+msgid "Are you sure to mark the order as <strong>Canceled in SUNAT</strong>?"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_id
+msgid "Arrival Point"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_country_id
+msgid "Arrival Point Country"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Arrival Point Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_district_id
+msgid "Arrival Point District"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_province_id
+msgid "Arrival Point Province"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_state_id
+msgid "Arrival Point State"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_street
+msgid "Arrival Point Street"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_arrival_point_ubigeo
+msgid "Arrival Point Ubigeo"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__l10n_pe_edi_invoice_number__type__03
+msgid "BILL OF SALE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__4
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_driver_document_type__4
+msgid "CARNET DE EXTRANJERIA"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "CARRIER"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__l10n_pe_edi_invoice_number__type__31
+msgid "CARRIER REFERRAL GUIDE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__a
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_driver_document_type__a
+msgid "CEDULA DIPLOMATICA DE IDENTIDAD"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_stock_canceled_edi_picking_form
+msgid "Cancel"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Canceled in SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__canceled_edi_picking_in_sunat
+msgid "Canceled edi picking in SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_id
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Carrier"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Carrier Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_doc_number
+msgid "Carrier Document Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_document_type
+msgid "Carrier Document Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_name
+msgid "Carrier Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "Carrier doesn't have document number or document type assigned"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Check Status in SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__partner_id
+msgid "Client"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_catalog_18_code
+msgid "Code 18"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_catalog_20_code
+msgid "Code 20"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_commercial_document_type
+msgid "Commercial Document Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_commercial_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Complete Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Configuration"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_stock_canceled_edi_picking_form
+msgid "Confirm"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_stock_canceled_edi_picking_form
+msgid "Confirmation"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Country"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__create_uid
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__create_date
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.tree_picking_not_sent
+msgid "Customer"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "DATE START OF TRANSFER"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "DENOMINATION:"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__1
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_driver_document_type__1
+msgid "DNI"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "DRIVER"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Default Auto Arrival Point"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Default Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Default data for E-Picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__display_name
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "District"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Document Related"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_id
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Driver"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_complete_name
+msgid "Driver Complete Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Driver Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_doc_number
+msgid "Driver Document Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_document_type
+msgid "Driver Document Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_last_name
+msgid "Driver Last Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_license_number
+msgid "Driver License Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_name
+msgid "Driver Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "Driver doesn't  have document number or document type assigned"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "E-Picking Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_name
+msgid "E-Picking Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking_type__l10n_pe_edi_picking_sequence_id
+msgid "E-Picking Sequence"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "EDI Request"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "EMISSION DATE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_type_form
+msgid "Elecronic picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_canceled_edi_picking.py:0
+#, python-format
+msgid "Electronic Guide marked as <b>Canceled in SUNAT</b> by <b>{}</b>"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "Electronic Guide sequence not registered."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.actions.report,name:l10n_pe_edi_picking.picking_report
+msgid "Electronic Remission Guide"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_enable_epicking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking_type__l10n_pe_edi_enable_epicking
+msgid "Enable E-picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__id
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__l10n_pe_edi_invoice_number__type__01
+msgid "INVOICE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_commercial_document_number
+msgid "Identification Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,help:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_commercial_document_number
+msgid "Identification Number for selected type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__invoice_id
+msgid "Invoice"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__number
+msgid "Invoice Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__series
+msgid "Invoice Serial"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_l10n_pe_edi_invoice_number
+msgid "Invoice numbers"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_partner__l10n_pe_edi_picking_is_carrier
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_users__l10n_pe_edi_picking_is_carrier
+msgid "Is Carrier?"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_partner__l10n_pe_edi_picking_is_driver
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_users__l10n_pe_edi_picking_is_driver
+msgid "Is Driver?"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_type_is_epicking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking_type__l10n_pe_edi_is_epicking
+msgid "Is E-picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_is_electronic
+msgid "Is Electronic"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_gross_weight_uom__kgm
+#, python-format
+msgid "Kilograms"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_is_epicking
+msgid "L10N Pe Edi Is Epicking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_doc_type
+msgid "L10N Pe Edi Picking Carrier Doc Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_driver_doc_type
+msgid "L10N Pe Edi Picking Driver Doc Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_number
+msgid "L10N Pe Edi Picking Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_serie
+msgid "L10N Pe Edi Picking Serie"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "LICENSE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "LOT: "
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Last Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__write_uid
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__write_date
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_canceled_edi_picking__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_partner__l10n_pe_edi_picking_license_number
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_users__l10n_pe_edi_picking_license_number
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "License Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_partner__l10n_pe_edi_picking_license_plate
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_users__l10n_pe_edi_picking_license_plate
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_carrier_license_plate
+msgid "License Plate"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "License Plate is not valid."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Locations"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "MODE OF TRANSPORTATION"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "MOTION FOR TRANSFER"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#: model:ir.actions.server,name:l10n_pe_edi_picking.model_stock_action_canceled_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_stock_canceled_edi_picking
+#, python-format
+msgid "Mark as Canceled in SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__0
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_driver_document_type__0
+msgid "NO DOMICILIADO, SIN RUC (EXPORTACION)"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "NUBEFACT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "NUMBER OF PACKAGES"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Number"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_number_packages
+msgid "Number Of Packages"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Operation Types"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Other Info"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__7
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_driver_document_type__7
+msgid "PASAPORTE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.tree_picking_not_sent
+msgid "PSE/OSE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_request_id
+msgid "PSE/OSE request"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Peruvian Electronic Picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__picking_id
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.tree_picking_not_sent
+msgid "Picking"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_invoice_number_ids
+msgid "Picking numbers"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "Printed representation of the"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Province"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_carrier_document_type__6
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_commercial_document_type__6
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "RUC"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_catalog_20_id
+msgid "Reason for transfer"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_catalog_20_others
+msgid "Reason for transfer - others"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking_type__l10n_pe_edi_request_document_type_id
+msgid "Request Document Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_response
+msgid "Response"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__l10n_pe_edi_invoice_number__type__09
+msgid "SENDER REFERRAL GUIDE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "SENDER REMISSION GUIDE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "STARTING POINT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.tree_picking_not_sent
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__sale_order_name
+msgid "Sale Order Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Send to SUNAT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_ose_accepted
+msgid "Sent to PSE/OSE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_shop_id
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking_type__l10n_pe_edi_shop_id
+msgid "Shop"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,help:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__number
+msgid "Sintaxt number 1, 10, 100"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,help:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__series
+msgid "Sintaxt serial FXXX or BXXX"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Split Name"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_start_transport_date
+msgid "Start Transport Date"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_id
+msgid "Starting Point"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_country_id
+msgid "Starting Point Country"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Starting Point Data"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_district_id
+msgid "Starting Point District"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_province_id
+msgid "Starting Point Province"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_state_id
+msgid "Starting Point State"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_street
+msgid "Starting Point Street"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_starting_point_ubigeo
+msgid "Starting Point Ubigeo"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "State"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Street"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "TOTAL GROSS WEIGHT"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "The Picking is not a Electronic Document"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "The document must be in a 'done' state to convert it to electronic."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid "The picking type must have electronic guides enabled."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#, python-format
+msgid ""
+"The type of document or customer document number has not been registered."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#. odoo-python
+#: code:addons/l10n_pe_edi_picking/models/stock_picking.py:0
+#: model:ir.model.fields.selection,name:l10n_pe_edi_picking.selection__stock_picking__l10n_pe_edi_picking_gross_weight_uom__tne
+#, python-format
+msgid "Tons"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_total_gross_weight
+msgid "Total Gross Weight"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model,name:l10n_pe_edi_picking.model_stock_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Transfer"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Transport"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_catalog_18_id
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.res_config_settings_view_form_stock
+msgid "Transport Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_l10n_pe_edi_invoice_number__type
+msgid "Type"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.view_picking_form
+msgid "Ubigeo"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_gross_weight_uom
+msgid "UoM Gross Weight"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_company__l10n_pe_edi_picking_partner_for_carrier_driver
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_config_settings__l10n_pe_edi_picking_partner_for_carrier_driver
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_partner_for_carrier_driver
+msgid "Use partners for Carrier and Driver"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_company__l10n_pe_edi_picking_partner_for_starting_arrival_point
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_res_config_settings__l10n_pe_edi_picking_partner_for_starting_arrival_point
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_partner_for_starting_arrival_point
+msgid "Use partners for Starting and Arrival Point"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "VEHICLE"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,help:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_total_gross_weight
+msgid "Weight in Kg."
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model:ir.model.fields,field_description:l10n_pe_edi_picking.field_stock_picking__l10n_pe_edi_picking_company_partner_id
+msgid "company partner id"
+msgstr ""
+
+#. module: l10n_pe_edi_picking
+#: model_terms:ir.ui.view,arch_db:l10n_pe_edi_picking.report_epicking_document
+msgid "electronic"
+msgstr ""

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="rule_he_25" model="hr.salary.rule">
+            <field name="name">Horas Extra 25%</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="code">HE_25</field>
+            <field name="struct_id" ref="hr_payslips.str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">4</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_HE_25.amount if inputs.I_HE_25 else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_HE_25.amount if inputs.I_HE_25 else 0</field>
+            <field name="have_5ta" eval="False" />
+            <field name="have_5ta_direct" eval="False" />
+            <field name="have_5ta_grati" eval="True" />
+            <field name="have_cts" eval="False" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_utilities" eval="True" />
+            <field name="have_holiday" eval="True" />
+
+            <field name="plame_id" eval="105" />
+
+        </record>
+
+       
+
+        <record id="rule_he_35" model="hr.salary.rule">
+            <field name="name">Horas Extra 35%</field>
+            <field name="category_id" ref="hr_payroll.BASIC" />
+            <field name="code">HE_35</field>
+            <field name="struct_id" ref="hr_payslips.str_men_rg" />
+            <field name="is_affected" eval="True" />
+            <field name="active" eval="True" />
+            <field name="appears_on_payslip" eval="True" />
+            <field name="sequence">5</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.I_HE_35.amount if inputs.I_HE_35 else 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.I_HE_35.amount if inputs.I_HE_35 else 0</field>
+
+            <field name="have_5ta" eval="False" />
+            <field name="have_5ta_direct" eval="False" />
+            <field name="have_5ta_grati" eval="True" />
+            <field name="have_cts" eval="False" />
+            <field name="have_gratification" eval="True" />
+            <field name="have_utilities" eval="True" />
+            <field name="have_holiday" eval="True" />
+
+            <field name="plame_id" eval="106" />
+
+        </record>
+
+        <record id="input_i_he_35" model="hr.payslip.input.type">
+            <field name="name">Horas Extra 35%</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_HE_35</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('hr_payslips.str_men_rg'))]" />
+        </record>
+
+         <record id="input_i_he_25" model="hr.payslip.input.type">
+            <field name="name">Horas Extra 25 %</field>
+            <field name="country_id" eval="173" />
+            <field name="code">I_HE_25</field>
+            <field name="is_affected" eval="True" />
+            <field name="struct_ids" eval="[(4, ref('hr_payslips.str_men_rg'))]" />
+        </record>
+
+        <record model="ir.rule" id="rrhh_he_rules">
+            <field name="name">Horas Extras multi-company</field>
+            <field name="model_id" ref="model_hr_he"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+
+
+</odoo>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_entry_form">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.internal_layout" > -->
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.basic_layout">
+						<div class="page">
+						<style>
+
+							.table_basic {
+								width:100%;
+								border: 1px solid black;
+								border-collapse: collapse;
+								font-size: 9px;
+								vertical-align: center;
+							}
+							.row-head {
+								text-align: center;
+							}
+							.row-head td{
+								border: 1px solid black;
+								border-collapse: collapse;
+							}
+							.row-separator {
+								text-align: left;
+								background-color:#0C3378;
+								color: white;
+								font-weight: bold;
+								height:20px;
+							}
+							.row-title {
+								text-align: center;
+								min-height: 15px;
+								font-weight: bold;
+							}
+							.row-title td{
+								border: 1px solid black;
+								border-collapse: collapse;
+							}
+							.row-data {
+								text-align: center;
+								height:19px;
+							}
+							.row-data td, th{
+								border: 1px solid black;
+								border-collapse: collapse;
+							}
+							.b-spaces{
+								color: white;
+							}
+							td, th{
+								padding: 4px;
+								vertical-align:middle;
+							}
+
+						</style>
+							<div class="container">
+								<br/>
+
+								<table class="table_basic">
+									<tr class="row-head">
+										<td colspan="2"> 
+											<!-- <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)" style="width:50%;height:60px;"/>	 -->
+											<img class="logo" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width: 50%; height: auto;"/>
+										</td>
+										<td colspan="4"><strong style="font-size:15px">FICHA DE INCORPORACION DE PERSONAL</strong></td>
+										<td colspan="2"><img class="logo" t-if="o.image_1920" t-att-src="image_data_uri(o.image_1920)" style="width: 40%; height: auto;"/></td>
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">DATOS PERSONALES</td>
+									</tr>
+									<tr class="row-title">
+										<td colspan="2">APELLIDO PATERNO</td>										
+										<td colspan="3">APELLIDO MATERNO</td>
+										<td colspan="3">NOMBRES</td>
+									</tr>
+									<tr class="row-data">
+										<td colspan="2"><t t-esc="o.first_last_name"/></td>										
+										<td colspan="3"><t t-esc="o.second_last_name"/></td>
+										<td colspan="3"><t t-esc="o.first_name"/> <t t-esc="o.second_name"/></td>
+									</tr>
+									<tr class="row-title">
+										<td colspan="4">DOCUMENTO DE IDENTIDAD</td>										
+										<td colspan="4">N° DOCUMENTO DE IDENTIDAD</td>
+									</tr>
+									<tr class="row-data">
+										<td colspan="4"><t t-esc="o.l10n_latam_identification_type_id.name"/></td>										
+										<td colspan="4"><t t-esc="o.identification_id"/></td>
+									</tr>
+									<tr class="row-data">
+										<td colspan="2"><strong>FECHA DE NACIMIENTO</strong></td>										
+										<!-- <td colspan="2"><t t-esc="o.birthday.strftime('%d/%B/%Y')"/></td> -->
+										<td colspan="2"><t t-if="o.birthday">
+											<span t-esc="o.birthday.strftime('%d/%m/%Y')"/>
+											</t></td>
+										<td colspan="2"><strong>LUGAR DE NACIMIENTO/NACIONALIDAD</strong></td>										
+										<td colspan="2"><t t-esc="o.country_id.name"/></td>
+									</tr>
+									<tr class="row-data" style="text-align: left;">
+										<td colspan="2"><strong>EDAD: </strong></td>										
+										<td colspan="2"><strong>SEXO: </strong> 
+											<t t-if="o.gender == 'female'">Femenino</t>
+											<t t-if="o.gender == 'male'">Masculino</t>
+											<t t-if="o.gender == 'other'">Otro</t>
+										</td>
+										<td colspan="2"><strong>ESTADO CIVIL: </strong> 
+											<t t-if="o.marital == 'single'">Soltero(a)</t>
+											<t t-if="o.marital == 'married'">Casado(a)</t>
+											<t t-if="o.marital == 'cohabitant'">Cohabitante legal</t>
+											<t t-if="o.marital == 'widower'">Viudo(a)</t>
+											<t t-if="o.marital == 'divorced'">Divorciado(a)</t>
+										</td>	
+										<td colspan="2"><strong>N° HIJOS: </strong></td>		
+									</tr>
+									<tr class="row-data">
+										<td colspan="1"><strong>CELULAR  </strong></td>			
+										<td colspan="1"><t t-esc="o.mobile_phone"/></td>								
+										<td colspan="1"><strong>TELEFONO FIJO  </strong></td>
+										<td colspan="1"><t t-esc="o.work_phone"/></td>
+										<td colspan="4"><strong>CORREO ELECTRONICO : </strong><t t-esc="o.private_email"/></td>											
+									</tr>
+									<tr class="row-data">
+										<td colspan="1"><strong>DOMICILIO</strong></td>										
+										<td colspan="4"/>
+										<td colspan="1"><strong>DISTRITO</strong></td>
+										<td colspan="2"/>										
+									</tr>
+									<tr class="row-data">
+										<td colspan="1"><strong>PROVINCIA</strong></td>										
+										<td colspan="1"/>
+										<td colspan="1"><strong>DPTO</strong></td>
+										<td colspan="2"/>	
+										<td colspan="1"><strong>REFERENCIA</strong></td>
+										<td colspan="2"/>										
+									</tr>
+									<tr class="row-data">
+										<th rowspan="6" colspan="1"><strong>SISTEMA PENSIONARIO</strong></th>										
+										<td colspan="1"><strong>ONP     ( <t t-if="o.pension_system_id.name == 'ONP'">X</t><t t-if="o.pension_system_id.name != 'ONP'"><strong class="b-spaces">F</strong></t> )</strong></td>
+										<th rowspan="6" colspan="1"><strong>DEPOSITO DE HABERES</strong></th>
+										<th rowspan="5" colspan="2"><strong>¿DESEA QUE SE LE APERTURE UNA CTA. SUELDO EN EL BANCO SCOTIABANK?</strong></th>	
+										<th rowspan="6" colspan="1"><strong>SI SU RESPUESTA ES NO, INDIQUE UNA CTA. BANCARIA PERSONAL PARA EL DEPOSITO</strong></th>
+										<td colspan="2"><strong>BANCO</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>AFP     ( <t t-if="o.pension_system_id.name != 'ONP'">X</t><t t-if="o.pension_system_id.name == 'ONP'"><strong class="b-spaces">F</strong></t> )</strong></td>
+										<td colspan="2"/>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>NOMBRE AFP</strong></td>
+										<td colspan="2"><strong>N° CTA.</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong><t t-esc="o.pension_system_id.name"/></strong></td>
+										<td colspan="2"><strong class="b-spaces">FFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>N° CUSPP</strong></td>
+										<td colspan="2"><strong>N° CCI</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong><t t-esc="o.cod_cuspp"/></strong></td>
+										<td colspan="2"><strong>SI (<strong class="b-spaces">FF</strong>) -  NO (<strong class="b-spaces">FF</strong>)</strong></td>									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">EXPERIENCIA LABORAL (Mencione sus tres ultimos empleos)</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong>EMPRESA</strong></td>
+										<td colspan="2"><strong>CARGO</strong></td>
+										<td colspan="1"><strong>PERIODO</strong></td>
+										<td colspan="1"><strong>MOTIVO CESE</strong></td>
+										<td colspan="2"><strong>TELEF. EMPRESA</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">DATOS ACADEMICOS</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong>INSTITUCION EDUCATIVA</strong></td>
+										<td colspan="2"><strong>GRADO ALCANZADO</strong></td>
+										<td colspan="2"><strong>PROFESION</strong></td>										
+										<td colspan="2"><strong>AÑO DE INICIO Y FIN</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>			
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>			
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFF</strong></td>			
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">OTROS ESTUDIOS</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="6"><strong>PROGRAMAS INFORMATICOS</strong></td>								
+										<td colspan="2"><strong>IDIOMA</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFF</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFF</strong></td>			
+										<td colspan="2"><strong class="b-spaces">FFFFFFFFFFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">		
+										<td colspan="1"><strong>NIVEL</strong></td>							
+										<td colspan="1"><strong class="b-spaces">FFFFFFF</strong></td>
+										<td colspan="1"><strong>NIVEL</strong></td>	
+										<td colspan="1"><strong class="b-spaces">FFFFFFF</strong></td>
+										<td colspan="1"><strong>NIVEL</strong></td>	
+										<td colspan="1"><strong class="b-spaces">FFFFFFF</strong></td>
+										<td colspan="1"><strong>NIVEL</strong></td>	
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>									
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">COMPOSICION FAMILIAR</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>PARENTESCO</strong></td>
+										<td colspan="3"><strong>APELLIDOS Y NOMBRES</strong></td>
+										<td colspan="1"><strong>FECHA DE NACIMIENTO</strong></td>										
+										<td colspan="1"><strong>EDAD</strong></td>	
+										<td colspan="2"><strong>OCUPACION</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="3"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>			
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>	
+										<td colspan="2"><strong class="b-spaces">FFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="3"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>			
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>	
+										<td colspan="2"><strong class="b-spaces">FFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="3"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>			
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>	
+										<td colspan="2"><strong class="b-spaces">FFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="3"><strong class="b-spaces">FFFFFFFF</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>			
+										<td colspan="1"><strong class="b-spaces">FFFFFFFF</strong></td>	
+										<td colspan="2"><strong class="b-spaces">FFFFFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">ESTADO DE SALUD ¿SU SALUD ES OPTIMA PARA DESEMPEÑARSE EN EL PUESTO DE TRABAJO? SI  (<strong class="b-spaces" style="color: #0C3378;">FF</strong>)   NO (<strong class="b-spaces" style="color: #0C3378;">FF</strong>)</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>TIPO DE SANGRE</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>
+										<td colspan="1"><strong>ALERGIAS</strong></td>										
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>	
+										<td colspan="1"><strong>PROBLEMAS CARDIACOS</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong>OTROS ASPECTOS DE SALUD DE DEBA INDICAR</strong></td>
+										<td colspan="6"><strong class="b-spaces">FFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">CONTACTO DE EMERGENCIA</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>NOMBRE DEL CONTACTO 1</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>
+										<td colspan="1"><strong>PARENTESCO</strong></td>										
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>	
+										<td colspan="1"><strong>TELEFONO DE CONTACTO</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFF</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="1"><strong>NOMBRE DEL CONTACTO 2</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>
+										<td colspan="1"><strong>PARENTESCO</strong></td>										
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>	
+										<td colspan="1"><strong>TELEFONO DE CONTACTO</strong></td>
+										<td colspan="1"><strong class="b-spaces">FFFFF</strong></td>										
+									</tr>
+									<tr class="row-separator">
+										<td colspan="8">DATOS DEL PROCESO DE INCORPORACIÓN (Sera llenado por RRHH)</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong>CECO</strong></td>
+										<td colspan="2"><strong>UNIDAD DE NEGOCIO</strong></td>
+										<td colspan="2"><strong>TIPO DE CONTRATO</strong></td>										
+										<td colspan="1"><strong>FECHA DE INICIO</strong></td>	
+										<td colspan="1"><strong>FECHA DE FIN</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="2"><strong><t t-esc="o.cod_coste_center.name"/></strong></td>
+										<td colspan="2"><strong><t t-esc="o.location_id.name"/></strong></td>
+										<td colspan="2"><strong><t t-esc="o.contract_id.contract_type_id.name"/></strong></td>										
+										<td colspan="1"><strong><t t-if="o.contract_id.date_start">
+											<span t-esc="o.contract_id.date_start.strftime('%d/%m/%Y')"/>
+											</t></strong></td>	
+										<td colspan="1"><strong><t t-if="o.contract_id.date_end">
+											<span t-esc="o.contract_id.date_end.strftime('%d/%m/%Y')"/>
+											</t></strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="3"><strong>PUESTO</strong></td>
+										<td colspan="3"><strong>AREA</strong></td>
+										<td colspan="1"><strong>REMUNERACION (S/.)</strong></td>										
+										<td colspan="1"><strong>OTROS INGRESOS</strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="3"><strong><t t-esc="o.job_id.name"/></strong></td>
+										<td colspan="3"><strong><t t-esc="o.department_id.name"/></strong></td>
+										<td colspan="1"><strong><t t-esc="o.contract_id.wage"/></strong></td>										
+										<td colspan="1"><strong><t t-esc="o.contract_id.move_sa"/></strong></td>										
+									</tr>
+									<tr class="row-data">									
+										<td colspan="3"><strong>SOLICITADO POR</strong></td>
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>
+										<td colspan="1"><strong>AUTORIZADO POR</strong></td>										
+										<td colspan="2"><strong class="b-spaces">FFFFF</strong></td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="8">Declaro que los datos consignados son verdaderos y pueden ser debidamente acreditados ademas autorizo a la empresa
+											para que en cualquier momento que esta la requiera, pudiendo ser sometido a disposiciones legales y adminsitrativas
+											que la empresa estime necesaria. Asimismo, acepto las condiciones remunerativas del puesto.
+										</td>
+									</tr>
+									<tr class="row-data">									
+										<td colspan="4"><strong>FIRMA DEL COLABORADOR</strong></td>
+										<td colspan="4"><strong>RRHH</strong></td>
+									</tr>
+									<tr class="row-data" style="height:30px;">									
+										<td colspan="4"><strong class="b-spaces">FFFFF</strong></td>
+										<td colspan="4"><strong>V°B°</strong></td>
+									</tr>
+								</table>								
+							</div>
+						</div>
+					</t>
+				</t>
+		</t>
+
+</template>
+</odoo>

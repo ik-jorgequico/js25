@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_cod_coste_employees,hr.cod.coste.employees,model_hr_cod_coste_employees,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_coste_center_employee_wizard,hr.coste.center.employee.wizard,model_hr_coste_center_employee_wizard,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_coste_center_employee_lines_wizard,hr.coste.center.employee.lines.wizard,model_hr_coste_center_employee_lines_wizard,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_table_location,hr.table.location,model_hr_table_location,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_employee_health,hr.employee.health,model_hr_employee_health,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_employee_pension,hr.employee.pension,model_hr_employee_pension,hr_contract.group_hr_contract_manager,1,1,1,1
+access_pension_system,pension.system,model_pension_system,hr_contract.group_hr_contract_manager,1,1,1,1
+access_comis_system_pension,comis.system.pension,model_comis_system_pension,hr_contract.group_hr_contract_manager,1,1,1,1
+access_health_regime,health.regime,model_health_regime,,1,1,1,1
+access_hr_sctr,hr.sctr,model_hr_sctr,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_sctr_employee,hr.sctr.employee,model_hr_sctr_employee,hr_contract.group_hr_contract_manager,1,1,1,1
+
+access_account_analytic_tag,account.analytic.tag,model_account_analytic_tag,,1,1,1,1

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="plame_files_form_view" model="ir.ui.view">
+        <field name="name">plame.files.form.view</field>
+        <field name="model">plame.files</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="generate_files" class="oe_highlight"
+                        string="Generar Archivos Plame" type="object" />
+                    <button name="generate_files_liq_taxes" class="oe_highlight"
+                        string="Generar Liq de Impuestos" type="object" />
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group>
+                        <field name="payslip_run_id" />
+                        <field name="date_from" force_save="1" readonly="1" />
+                        <field name="date_to" force_save="1" readonly="1" />
+                        <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" invisible="1"/>
+
+                    </group>
+                </sheet>
+                <sheet>
+                    <group>
+                        <group string="Archivos Plame">
+                            <field name="rem_filename" invisible="1" />
+                            <field name="rem_binary" filename="rem_filename" readonly="1" />
+                            <field name="jor_filename" invisible="1" />
+                            <field name="jor_binary" filename="jor_filename" readonly="1" />
+                            <field name="snl_filename" invisible="1" />
+                            <field name="snl_binary" filename="snl_filename" readonly="1" />
+                            <field name="for_filename" invisible="1" />
+                            <field name="for_binary" filename="for_filename" readonly="1" />
+                        </group>
+                        <group string="Liquidacion de Impuestos">
+                            <field name="report_filename_tax_settlement" invisible="1" />
+                            <field name="report_binary_tax_settlement"
+                                filename="report_filename_tax_settlement" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="plame_files_view_tree" model="ir.ui.view">
+        <field name="name">plame.files.view.tree</field>
+        <field name="model">plame.files</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="payslip_run_id" />
+                <field name="date_from" force_save="1" readonly="1" />
+                <field name="date_to" force_save="1" readonly="1" />
+                <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_plame_files" model="ir.actions.act_window">
+        <field name="name">Reportes Plame</field>
+        <field name="res_model">plame.files</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Tablas Paramétricas"
+        id="menu_hr_table_params"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="1000" />
+
+    <menuitem id="menu_hr_localization_hr_plame"
+        name="PLAME"
+        parent="menu_hr_table_params"
+    />
+
+    <menuitem id="menu_hr_reports_pdf_plame"
+        name="Reportes Plame"
+        parent="menu_hr_reports_pdf"
+        action="action_plame_files"
+    />
+
+</odoo>

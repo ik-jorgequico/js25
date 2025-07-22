@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_basic_salary,basic.salary,model_basic_salary,hr_contract.group_hr_contract_manager,1,1,1,1
+access_holidays,holidays,model_holidays,hr_contract.group_hr_contract_manager,1,1,1,1
+access_sundays,sundays,model_sundays,hr_contract.group_hr_contract_manager,1,1,1,1
+access_sundays_generator,sundays.generator,model_sundays_generator,hr_contract.group_hr_contract_manager,1,1,1,1

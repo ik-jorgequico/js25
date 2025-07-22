@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_prov_cts,hr.cts,model_hr_prov_cts,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_cts_line,hr.cts.line,model_hr_prov_cts_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_cts_subline,hr.cts.subline,model_hr_prov_cts_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+
+access_hr_prov_grati,hr.grati,model_hr_prov_grati,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_grati_line,hr.grati.line,model_hr_prov_grati_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_grati_subline,hr.grati.subline,model_hr_prov_grati_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+
+access_hr_prov_vaca,hr.vaca,model_hr_prov_vaca,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_vaca_line,hr.vaca.line,model_hr_prov_vaca_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_prov_vaca_subline,hr.vaca.subline,model_hr_prov_vaca_subline,hr_contract.group_hr_contract_manager,1,1,1,1
+

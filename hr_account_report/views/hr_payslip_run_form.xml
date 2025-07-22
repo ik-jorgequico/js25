@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_payslip_run_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.inherit</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button string="Genera Asiento XLSX" name="compute_data" type="object"/>
+            </xpath>
+
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="xls_filename" invisible="1" />
+				<field name="xls_binary" filename="xls_filename" readonly="1" />
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_payslip_rule_account_form_inherit" model="ir.ui.view">
+        <field name="name">hr_payslip_rule_account_form_inherit</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='accounting']/group/field[@name='analytic_account_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='accounting']/group/field[@name='not_computed_in_net']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_prov_cts_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr_prov_cts_form_view_inherit</field>
+        <field name="model">hr.prov.cts</field>
+        <field name="inherit_id" ref="hr_report_excel.hr_prov_cts_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button string="Genera Asiento XLSX" name="compute_data" type="object" invisible="state != 'done'"/>
+            </xpath>
+
+            <xpath expr="//field[@name='anio']" position="after">
+                <field name="xls_filename_entry" invisible="1" />
+                <field name="xls_binary_entry" filename="xls_filename_entry" readonly="1" />
+            </xpath>
+
+            <xpath expr="//page" position="after">
+                <page name="entrys" string="Contabilidad">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="account_debit"/>
+                            </group>
+                            <group>
+                                <field name="account_credit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_prov_vaca_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr_prov_vaca_form_view_inherit</field>
+        <field name="model">hr.prov.vaca</field>
+        <field name="inherit_id" ref="hr_report_excel.hr_prov_vaca_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button string="Genera Asiento XLSX" name="compute_data" type="object" invisible="state != 'done'"/>
+            </xpath>
+
+            <xpath expr="//field[@name='anio']" position="after">
+                <field name="xls_filename_entry" invisible="1" />
+                <field name="xls_binary_entry" filename="xls_filename_entry" readonly="1" />
+            </xpath>
+            
+            <xpath expr="//page" position="after">
+                <page name="entrys" string="Contabilidad">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="account_debit"/>
+                            </group>
+                            <group>
+                                <field name="account_credit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_prov_grati_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr_prov_grati_form_view_inherit</field>
+        <field name="model">hr.prov.grati</field>
+        <field name="inherit_id" ref="hr_report_excel.hr_prov_grati_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button string="Genera Asiento XLSX" name="compute_data" type="object" invisible="state != 'done'"/>
+            </xpath>
+
+            <xpath expr="//field[@name='anio']" position="after">
+                <field name="xls_filename_entry" invisible="1" />
+                <field name="xls_binary_entry" filename="xls_filename_entry" readonly="1" />
+            </xpath>
+            
+            <xpath expr="//page" position="after">
+                <page name="entrys" string="Contabilidad">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="account_debit"/>
+                            </group>
+                            <group>
+                                <field name="account_credit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

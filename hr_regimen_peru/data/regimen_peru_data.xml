@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Adding a salary rule for loan-->
+    <data noupdate="1">
+
+        <record id="regimen_general" model="peru.employee.regime">
+            <field name="structure_type_id" ref="hr_payslips.type_str_rg" />
+            <field name="name">Régimen General</field>
+            <field name="abbr">RG</field>
+        </record>
+
+        <record id="regimen_micro" model="peru.employee.regime">
+            <field name="structure_type_id" ref="hr_payslips.type_str_rg" />
+            <field name="name">Régimen Micro</field>
+            <field name="abbr">RM</field>
+        </record>
+
+        <record id="regimen_pequena" model="peru.employee.regime">
+            <field name="structure_type_id" ref="hr_payslips.type_str_rg" />
+            <field name="name">Régimen Pequeña</field>
+            <field name="abbr">RP</field>
+        </record> 
+
+    </data>
+</odoo>

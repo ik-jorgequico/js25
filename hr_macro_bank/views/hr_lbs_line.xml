@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_inherit_hr_lbs_line_macro_form" model="ir.ui.view">
+        <field name="name">hr.lbs.line.form.inherit</field>
+        <field name="model">hr.lbs.line</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_lbs.hr_lbs_line_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='compute_sheet_import']" position="after">
+                <button name="action_dowload_report_macro_lbs" string="Generar Macro" type="object" class="btn-primary"/>
+            </xpath>
+
+            <xpath expr="//field[@name='family_asig']" position="after">
+                <field name="xls_filename_macro" invisible="1"/>
+                <field name="xls_binary_macro" filename="xls_filename_macro" readonly="1"/>
+                <field name="payday"/>
+            </xpath>
+            
+
+        </field>
+    </record>
+
+</odoo>

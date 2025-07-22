@@ -1,0 +1,138 @@
+<odoo>
+    <data>
+        <!-- <report id = "report_renovation_report"
+        string = "RENOVACION AL CONTRATO DE TRABAJO"
+        model = "hr.contract"
+        report_type = "qweb-pdf"
+        name = "hr_contrac_format.report_pdf_template_renovation_report"
+        menu = "False"
+        /> -->
+
+        <record id="report_renovation_report" model="ir.actions.report">
+            <field name="name">RENOVACION AL CONTRATO DE TRABAJO</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.report_pdf_template_renovation_report</field>
+            <!-- <field name="report_file">hr_contrac_format.report_pdf_template_adm_hybrid</field> -->
+            <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/> -->
+        </record>
+
+        <template id="report_pdf_template_renovation_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <style>
+                            .page{
+                                font-size: 11pt;
+                                text-align: justify;
+                                }
+
+                            .without {
+                                border-top: 0px;
+                                border-right: 0px;
+                                border-bottom: 0px;
+                                border-left: 0px;
+                            }
+
+                            .under{
+                                text-decoration: underline;
+                            }
+            
+                            .with {
+                                border-bottom: 1px solid black;
+                            }
+
+                            tr,td,th,hr {
+                                border: none;
+                                padding: 0px;
+                                margin: 0px;    
+                            }
+                        </style>
+
+
+                        <div class="page">
+
+                            <h5 style ="text-align: center">RENOVACION AL CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR NECESIDADES DEL MERCADO
+                            </h5>
+                            <p>Conste por el presente documento la renovación del Contrato de Trabajo de Naturaleza Temporal por Necesidades del Mercado que celebran de una parte, la empresa <span t-field="o.company_id.name" />, con R.U.C. N° 20429055696, con domicilio en Av. Emilio Cavenecia 151 oficina 501, Distrito de Miraflores, debidamente representada por su Gerente General señor Jorge Eduardo Reátegui Gómez Sánchez, identificado con D.N.I. N° 10219003, según poderes inscritos en la partida electrónica N° 11104980 del Registro de Personas Jurídicas de la Oficina Registral de Lima; en adelante <b>J.S. MARKET</b>; y de la otra parte el señor(a) <span t-field="o.employee_id.name"/>, identificada con <span t-field="o.employee_id.l10n_latam_identification_type_id.name"/> Nro. <span t-field="o.employee_id.identification_id"/>, en adelante el <b>TRABAJADOR</b>, en los términos y condiciones siguientes:
+                            </p>
+
+                            <p><b class="under">PRIMERO: ANTECEDENTES</b>
+                            </p>
+
+                            <p>1.1	Con fecha <span t-esc="o.employee_id.first_contract_date.day"/> de <span t-esc="o.employee_id.first_contract_date.strftime('%m')          .replace('01','Enero')          .replace('02','Febrero')          .replace('03','Marzo')          .replace('04','Abril')          .replace('05','Mayo')          .replace('06','Junio')          .replace('07','Julio')          .replace('08','Agosto')          .replace('09','Septiembre')          .replace('10','Octubre')          .replace('11','Noviembre')          .replace('12','Diciembre')"/> del <span t-esc="o.employee_id.first_contract_date.year"/> <b>J.S. MARKET</b> y <b>EL TRABAJADOR</b> celebramos un contrato de trabajo de naturaleza temporal por necesidad de mercado con vigencia al <span t-esc="o.previous_contract.date_end.day"/> de <span t-field="o.previous_contract.month_end_word"/> del <span t-esc="o.previous_contract.date_end.year"/>, en virtud del cual el <b>TRABAJADOR</b> ocupaba el cargo de <b><span t-field="o.job_id.name"/></b>.
+                            </p>
+
+                            <p>1.2	A la fecha, los motivos que originaron la contratación temporal del <b>TRABAJADOR</b> subsisten, por lo que es necesario que el <b>TRABAJADOR</b> continúe desarrollando sus labores para <b>J.S. MARKET</b> bajo la citada modalidad.
+                            </p>
+
+                            <p><b  class="under">SEGUNDO: OBJETO DE LA ADENDA</b>
+                            </p>
+
+                            <p>2.1 Mediante la presente adenda <b>J.S. MARKET</b> y el <b>TRABAJADOR</b> acuerdan prorrogar el plazo de vigencia del citado contrato de trabajo de naturaleza temporal por <span t-esc="o.month_contract + o.year_contract * 12"/> meses y <span t-field="o.day_contract"/> días más, el cual comienza a correr desde el  <span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/> hasta el <span t-esc="o.date_end.day"/> de <span t-field="o.month_end_word"/> del <span t-esc="o.date_end.year"/>, fecha en la que vence, pudiendo renovarse nuevamente previo acuerdo por escrito entre las partes.
+                            </p>
+
+                            <p><b class="under">TERCERO: INALTERABILIDAD DEL CONTRATO PRIMIGENIO</b>
+                            </p>
+
+                            <p>3.1 Ambas partes ratifican la vigencia de todas las demás cláusulas del contrato de trabajo de naturaleza temporal primigenio y las cláusulas añadidas, en tanto no se contraponga a lo expresado en la presente renovación.
+                            </p>
+
+                            <p><b class="under">CUARTO: MANIFESTACIÓN DE LAS PARTES</b>
+                            </p>
+
+                            <p>4.1 Las partes manifiestan que, debido a la situación excepcional, producto de la emergencia nacional ocasionada por la pandemia generada por el COVID 19, la validez del presente acuerdo se consolida mediante el envío de la copia debidamente firmada, por medio electrónico, y que esta forma de ratificar los acuerdos se mantendrá, en tanto se continúe la relación laboral.
+                            </p>
+
+                            <p>En fe de lo cual las partes suscriben el presente documento el <span t-esc="o.previous_contract.date_end.day"/> de <span t-field="o.previous_contract.month_end_word"/> del <span t-esc="o.previous_contract.date_end.year"/>.
+                            </p>
+
+                            
+
+                            <br/>
+                        
+                            <table width= "100%" style="border-collapse: separate;">
+
+                                <tr style="text-align: center; " >
+                                    <td width= "6%"></td>
+                                    <td width= "41%">
+                                        <img class="signature" t-if="o.employee_id.company_id.gerente_firma" t-att-src="image_data_uri(o.employee_id.company_id.gerente_firma)" alt="Firma gerente" />
+                                        <hr style="border:none;"/>                                    </td>
+                                    <td width= "6%"></td>
+                                    <td width= "41%"></td>
+                                    <td width= "6%"></td>
+                                </tr>
+
+                                <tr style="text-align: center; font-size: 10pt;" >
+                                    <td></td>
+                                    <td style ="border-top: 1px solid; height: 30px; "><span style="font-size: 9pt;" t-field="o.employee_id.company_id.gerente_name" /></td> 
+                                    <td></td>
+                                    <td style ="border-top: 1px solid;"><span style="font-size: 9pt;" t-field="o.employee_id.name" /></td>
+                                <td></td>
+
+                                </tr>
+
+                                <tr style="text-align: center; ">
+                                    <td></td>
+                                    <td><span style="font-size: 9pt;">GERENTE GENERAL</span></td>
+                                    <td></td>
+                                    <td><span style="font-size: 9pt;" t-field="o.employee_id.l10n_latam_identification_type_id.name"/> 
+                                        <span style="font-size: 9pt;">Nro.</span> 
+                                    <span style="font-size: 9pt;" t-field="o.employee_id.identification_id"/></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

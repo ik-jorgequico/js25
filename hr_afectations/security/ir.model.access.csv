@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_leave_subtype,hr.leave.subtype,model_hr_leave_subtype,,1,1,1,1
+access_hr_leave,hr.leave,model_hr_leave,,1,1,1,1
+access_hr_leave_accrual_plan,hr.leave.accrual.plan,model_hr_leave_accrual_plan,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_leave_import,hr.leave.import,model_hr_leave_import,,1,1,1,1
+access_hr_leave_type,hr.leave.type,model_hr_leave_type,,1,1,1,1

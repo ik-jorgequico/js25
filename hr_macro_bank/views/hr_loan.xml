@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_inherit_hr_loan_macro_form" model="ir.ui.view">
+        <field name="name">hr.loan_macro.form.inherit</field>
+        <field name="model">hr.loan</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="ent_ohrms_loan.hr_loan_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                    <button name="action_dowload_report_macro_loan" string="Generar Macro" type="object" class="btn-primary"/>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="xls_filename_macro" invisible="1"/>
+                <field name="xls_binary_macro" filename="xls_filename_macro" readonly="1"/>
+            </xpath>
+            
+
+        </field>
+    </record>
+
+</odoo>

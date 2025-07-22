@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_utilities_form_view" model="ir.ui.view">
+        <field name="name">hr.utilities.form.view</field>
+        <field name="model">hr.utilities</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_sheet" string="Calcular" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_utilities" class="oe_stat_button"
+                                icon="fa-book" type="object"
+                                invisible = "child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                <field name="child_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Utilidades</span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1><field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group colspan="2">
+                        <group>
+                            <!-- Campos básicos -->
+                            <field name="regimen_id" readonly="1" options="{'no_open': true}"/>
+                            <field name="anio" />
+                            <field name="date_pay" />
+                            <!-- Período de tiempo -->
+                            <div>
+                                <span class="oe_inline">(Desde &#160;</span>
+                                <field name="date_from" class="oe_inline" nolabel="1" readonly="1" force_save="1" />
+                                <span class="oe_inline">&#160; - &#160;</span>
+                                <field name="date_to" class="oe_inline" nolabel="1" readonly="1" force_save="1" />
+                                <span class="oe_inline">)</span>
+                            </div>
+                            <field name="amount_client" />
+                            <field name="percent_client" />
+                            <field name="amount_100_utilities" />
+                            
+                        </group>
+                        <group>
+                            <!-- Grupo para Factor de Remuneración -->
+                            <group string="Factor Remuneración">
+                                <field name="bimp_total" />
+                                <field name="amount_50_total" />
+                                <field name="factor_total" digits="[8,8]" />
+                            </group>
+                            
+                            <!-- Grupo para Factor de Días Trabajados -->
+                            <group string="Factor Días Trabajados">
+                                <field name="days_total" />
+                                <field name="amount_50_days_total" />
+                                <field name="factor_days_total" digits="[8,8]" />
+                            </group>
+
+                            <!-- Otros campos al final de la segunda columna -->
+                            <field name="utilities_total" />
+                            <field name="xls_filename" invisible="1" />
+                            <group>
+                                <field name="xls_binary" filename="xls_filename" readonly="1" />
+                                <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" invisible="1"/>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ingresos por Empleados">
+                            <field name="child_ids" colspan="4" nolabel="1" force_save="1" readonly="1">
+                                <tree string="Ingresos por Empleados">
+                                    <field name="first_contract_date" />
+                                    <field name="last_contract_date" />
+                                    <field name="employee_id" />
+                                    <field name="structure_type" widget="badge" decoration-success="structure_type == 'RG'" decoration-info="structure_type == 'RP'" decoration-danger="structure_type == 'RM'"/>
+                                    <field name="days_leave" optional="hide" />
+                                    <field name="days_work" />
+                                    <field name="utilities_days" />
+                                    <field name="bimp_total" />
+                                    <field name="utilities_total" />
+                                    <field name="utilities_total_amount" />
+                                    <field name="rem_bruta_5ta_aux" />
+                                    <field name="rem_net_util" />
+                                    <field name="limit_uit" />
+                                    <field name="person_percent_max" />
+                                    <field name="ir_qdir" />
+                                    <field name="loan"/>
+                                    <field name="t_desc" />
+                                    <field name="utilities_total_amount_neta"/>
+                                    <field name="date_pay"/>
+                                </tree>
+                                <form string="Ingresos por Empleados">
+                                    <group string="Datos Personales">
+                                        <field name="date_from" invisible="1" />
+                                        <field name="date_to" invisible="1" />
+                                        <field name="employee_id" />
+                                        <field name="first_contract_date" />
+                                        <field name="last_contract_date" />
+                                    </group>
+                                    <group string="Calculo Utilidades">
+                                        <group string="Remuneracion">
+                                            <field name="days_leave" />
+                                            <field name="days_work" />
+                                            <field name="utilities_days" />
+                                        </group>
+                                        <group string="Dias trabajados">
+                                            <field name="bimp_total" />
+                                            <field name="utilities_total" />
+                                        </group>
+                                        <group string="Totales">
+                                            <field name="utilities_total_amount" />
+                                            <field name="t_desc" />
+                                            <field name="utilities_total_amount_neta" />
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Ingresos de Conceptos">
+                                            <field name="income_lines">
+                                                <tree string="Ingresos de Conceptos">
+                                                    <field name="name" />
+                                                    <field name="amount" />
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="Descuentos">
+                                            <group string="Descuentos">
+                                                <field name="loan" readonly="0"/>
+                                            </group>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- seccion correo -->
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_utilities_tree_view" model="ir.ui.view">
+        <field name="name">hr.utilities.tree.view</field>
+        <field name="model">hr.utilities</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" column_invisible="1"/>
+                <field name="regimen_id" />
+                <field name="anio" />
+                <field name="date_from" />
+                <field name="date_to" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_utilities" model="ir.actions.act_window">
+        <field name="name">Utilidades</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.utilities</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular_utilities">
+        <field name="name">Generar Reporte Tabular</field>
+        <field name="model_id" ref="hr_utilities.model_hr_utilities" />
+        <field name="binding_model_id" ref="hr_utilities.model_hr_utilities" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_dowload_report_tabular_utilities()
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_action_hr_utilities"
+        action="action_hr_utilities"
+        name="Utilidades"
+        parent="hr_grati.menu_action_beneficio_social"
+        sequence="110" />
+</odoo>

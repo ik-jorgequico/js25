@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.l10n_pe_edi_odoofact</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="l10n_pe_edi_base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr='//div[@id="active_electronic_invoicing"]' position="after">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="retention_nubefact"
+                    invisible="module_l10n_pe_edi_odoofact == False"
+                >
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Retention</span>
+                        <div class="text-muted">Data to configure for retention</div>
+                        <div class="content-group">
+                            <label for="l10n_pe_edi_min_amount_retention" />
+                            <field
+                                name="l10n_pe_edi_min_amount_retention"
+                                class="o_light_label"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="detraction_nubefact"
+                    invisible="module_l10n_pe_edi_odoofact == False"
+                >
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Detraction</span>
+                        <div class="text-muted">Data to configure for detraction</div>
+                        <div class="content-group">
+                            <label for="l10n_pe_edi_min_amount_detraction" />
+                            <field
+                                name="l10n_pe_edi_min_amount_detraction"
+                                class="o_light_label"
+                            />
+                            <label for="l10n_pe_edi_detraction_payment_type_id" />
+                            <field
+                                name="l10n_pe_edi_detraction_payment_type_id"
+                                class="o_light_label"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                            />
+                            <label for="l10n_pe_edi_detraction_bank_account_id" />
+                            <field
+                                name="l10n_pe_edi_company_partner_id"
+                                invisible="1"
+                            />
+                            <field
+                                name="l10n_pe_edi_detraction_bank_account_id"
+                                domain="[('partner_id','=', l10n_pe_edi_company_partner_id), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+                                class="o_light_label"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record> -->
+    <record id="res_config_settings_view_form_account" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account.l10n_pe_edi_base</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='invoicing_settings']" position="after">
+                <block title="Peruvian Electronic Invoicing" name="odoofact_einvoicing_settings">
+                    <setting id="odoofact_einvoicing_pse" help="Select your PSE / OSE provider">
+                        <field name="l10n_pe_edi_send_invoice"/>
+                        <field  invisible="l10n_pe_edi_send_invoice == False"
+                                name="l10n_pe_edi_ose_id"
+                                required="l10n_pe_edi_send_invoice == True"
+                                options="{'no_create': True, 'no_create_edit': True}"
+                            />
+                        <div class="mt8" invisible="l10n_pe_edi_send_invoice == False">
+                            <button
+                                name="%(l10n_pe_edi_base.l10n_pe_edi_shop_action)d"
+                                icon="fa-arrow-right"
+                                type="action"
+                                string="Configure Shops and Tokens"
+                                class="btn-link"                                
+                            />                   
+                        </div>
+                    </setting>
+                    <setting id="odoofact_einvoicing_detraction" string="Detraction" help="Data to configure for detraction">
+                        <div class="text-nowrap fw-bold">
+                            Min Amount for Detraction 
+                            <field name="l10n_pe_edi_min_amount_detraction"/>
+                        </div>
+                        <div class="text-nowrap fw-bold">
+                            Detraction Payment Type 
+                            <field name="l10n_pe_edi_detraction_payment_type_id"/>
+                        </div>
+                        <div class="text-nowrap fw-bold">
+                            National bank Account 
+                            <field name="l10n_pe_edi_company_partner_id" invisible="True"/>
+                            <field
+                                name="l10n_pe_edi_detraction_bank_account_id"
+                                domain="[('partner_id','=', l10n_pe_edi_company_partner_id), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                            />
+                        </div>
+                    </setting>
+                    <setting id="odoofact_einvoicing_active" string="Activation" help="Active your account and configure Odoo following the insructions" invisible="not l10n_pe_edi_send_invoice">
+                        <div class="mt16">
+                            <ul>
+                                <li>
+                                    <a href="https://www.nubefact.com/registro" class="oe-link" target="_blank"> Request an account</a>
+                                </li>
+                                <li>
+                                    <a  href="https://www.operu.pe/r/xPU" class="oe-link" target="_blank">Follow the instructions</a>
+                                </li>
+                            </ul>            
+                        </div>
+                    </setting>
+                    <setting id="odoofact_einvoicing_retenion" string="Retention" help="Data to configure for retention">
+                        <div class="text-nowrap fw-bold">
+                            Min Amount for Retention
+                            <field name="l10n_pe_edi_min_amount_retention"/>
+                        </div>
+                    </setting>
+                    <setting id="odoofact_einvoicing_cron" string="Send e-documents automatically" help="Choose the period to send e-documents" invisible="not l10n_pe_edi_send_invoice">
+                        <div class="text-nowrap fw-bold">
+                            Interval Unit for sending 
+                            <field name="l10n_pe_edi_send_invoice_interval_unit" required="l10n_pe_edi_send_invoice"/>
+                        </div>
+                        <div class="text-nowrap fw-bold">
+                            Next Execution 
+                            <field name="l10n_pe_edi_send_invoice_next_execution_date" required="l10n_pe_edi_send_invoice"/>
+                        </div>
+                    </setting>
+                    <setting id="active_electronic_ticket" string="Activate Electronic Ticket">
+                        <field name="activate_einvoice_ticket" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

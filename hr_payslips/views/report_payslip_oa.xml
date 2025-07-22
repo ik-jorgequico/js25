@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="hr_payroll_report_payslip_lbs_inherit" inherit_id="hr_payroll.report_payslip">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-call="extra_base.peru_rrhh_layout" t-lang="o.company_id.partner_id.lang">
+                <style>
+                    table {
+                        width: 100%;
+                    }
+                    hr {
+                        border: None;
+                        height: 1px;
+                        margin: 5px 0;
+                        background-color: black;
+                        transform: scaleY(0.5);
+                    }
+                    h7 {
+                        font-size: 12px;
+                    }
+                    .page {
+                        font-family: Arial, sans-serif;
+                        font-size: 10px;
+                        height: 100%;
+                        width: 48%;
+                        float: left;
+                        padding: 20px 0;
+                    }
+                    .company_box {
+                        width: 60%;
+                        font-size: 12px;
+                    }
+                    .title_box {
+                        background-color: #efeee7;
+                        border-radius: 10px;
+                        text-align: center;
+                    }
+                    .table_header {
+                        margin-bottom: 25px;
+                    }
+                    .table_header td {
+                        vertical-align: middle;
+                    }
+                    .table_body {
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        margin-bottom: 10px;
+                        padding: 10px;
+                    }
+                    .signature {
+                        width: 180px;
+                        border: none;
+                        border-collapse: collapse;
+                        vertical-align: center;
+                        text-align: center;
+                        padding: 5px;
+                    }
+                    .logo {
+                        height: 80px;
+                        padding: 10px 0;
+                    }
+                    .vertical_line {
+                        border-left: 1px dotted #333;
+                        height: 850px;
+                        float: left;
+                        margin: 0 24px;
+                    }
+                </style>
+                <t t-foreach="[1, 2]" t-as="i">
+                    <div class="page">
+                        <table class="table_header">
+                            <tr>
+                                <td class="company_box">
+                                    <img class="logo" t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)"/>
+                                    <div><strong><t t-esc="o.company_id.partner_id.name"/></strong></div>
+                                    <div><t t-esc="o.company_id.partner_id.street_name"/></div>
+                                    <div>
+                                        <span t-esc="(o.company_id.partner_id.l10n_pe_district.name or '').upper()" />
+                                        -
+                                        <span t-esc="(o.company_id.partner_id.city_id.name or '').upper()" />
+                                        -
+                                        <span t-esc="(o.company_id.partner_id.state_id.name or '').upper()" />
+                                        -
+                                        <span t-esc="(o.company_id.partner_id.country_id.name or '').upper()" />                                        
+                                    </div>
+                                </td>
+
+                                <td class="title_box">
+                                    <h5><strong>BOLETA DE PAGO</strong></h5>
+                                    <h6><strong>RUC: <span t-field="o.company_id.vat"/></strong></h6>
+                                    <h7>
+                                        <span t-field="o.payslip_run_id.date_start" t-options='{"format": "dd/MM/yyyy"}' />
+                                        - 
+                                        <span t-field="o.payslip_run_id.date_end" t-options='{"format": "dd/MM/yyyy"}' />
+                                    </h7>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="WORK100" t-value="0" />
+                        <t t-set="number_of_days" t-value="0" />
+                        <t t-set="number_of_hours" t-value="0" />
+                        <span
+                            t-foreach="o.worked_days_line_ids.filtered(lambda input: input.code == 'WORK100')"
+                            t-as="input_line">
+                            <t t-if="input_line.code == 'WORK100'">
+                                <t t-set="number_of_days" t-value="input_line.number_of_days" />
+                                <t t-set="number_of_hours" t-value="input_line.number_of_hours" />
+                            </t>
+                        </span>
+
+                        <div class="table_body">
+                            <table>
+                                <tr>
+                                    <!--PRIMERA FILA-->
+                                    <td><strong>Apellidos y Nombres:</strong></td>
+                                    <td><span t-field="o.employee_id.name" style="text-transform: uppercase;"/></td>
+                                    <td><strong>D. Trabajados:</strong></td>
+                                    <td><span t-esc="number_of_days"/></td>
+                                </tr>
+                                <tr>
+                                    <!--SEGUNDA FILA-->
+                                    <td><strong><span t-field="o.employee_id.l10n_latam_identification_type_id.name"/>:</strong></td>
+                                    <td><span t-field="o.employee_id.identification_id"/></td>
+                                    <td><strong>H. Trabajadas:</strong></td>
+                                    <td><span t-esc="number_of_hours"/></td>
+                                </tr>
+                                <tr>
+                                    <!--TERCERA FILA-->
+                                    <td><strong><span>Sueldo:</span></strong></td>
+                                    <td><span t-field="o.contract_id.wage" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>
+                                    <td><span><strong>Sistema de Salud:</strong></span></td>
+                                    <td><span t-field="o.employee_id.health_regime_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <!--CUARTA FILA-->
+                                    <td><strong>Fecha de ingreso:</strong></td>
+                                    <td><span t-field="o.employee_id.first_contract_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td><strong><span>Sistema de Pensiones:</span></strong></td>
+                                    <td><span t-field="o.employee_id.pension_system_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <!--QUINTA FILA-->
+                                    <td><strong><span>Régimen Laboral:</span></strong></td>
+                                    <td><span t-field="o.contract_id.peru_employee_regime"/></td>
+                                    <td t-if="o.employee_id.cod_cuspp"><strong><span>CUSPP:</span></strong></td>
+                                    <td><span t-field="o.employee_id.cod_cuspp"/></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <!--SEXTA FILA-->
+                                    <td t-if="o.employee_id.type_work_assistance"><strong>Tipo de Asistencia Laboral:</strong></td>
+                                    <td><span t-if="o.employee_id.type_work_assistance" t-field="o.employee_id.type_work_assistance" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td t-if="o.employee_id.last_contract_date"><strong>Fecha de Cese:</strong></td>
+                                    <td><span t-if="o.employee_id.last_contract_date" t-field="o.employee_id.last_contract_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="table_body">
+                            <table>
+                                <tr>
+                                    <td style="padding-right: 14px;">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>INGRESOS</th>
+                                                    <th class="text-right">IMPORTE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="total_ingress" t-value="0" />
+                                                <span
+                                                    t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.category_id.code in ('BASIC','BASIC_NA') and line.appears_on_payslip)"
+                                                    t-as="line">
+                                                    <tr t-if="line.amount &gt; 0">
+                                                        <td><span t-field="line.name" /></td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-if="line.amount &gt; 0"
+                                                                t-esc="line.amount"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}'/>
+                                                        </td>
+                                                        <t t-set="total_ingress" t-value="total_ingress+line.amount"/>
+                                                    </tr>
+                                                </span>
+                                                <tr>
+                                                    <td><strong>TOTAL INGRESOS </strong></td>
+                                                    <td class="text-right">
+                                                        <strong>
+                                                            <span
+                                                                t-esc="total_ingress"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}'/>
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                    <td style="padding-right: 14px;">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>DESCUENTOS</th>
+                                                    <th class="text-right">IMPORTE</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Inicialización de variables -->
+                                                <t t-set="total_disccount" t-value="0" />
+                                                <t t-set="afp_fondo_amount" t-value="0" />
+                                                <t t-set="afp_seguro_amount" t-value="0" />
+                                                <t t-set="afp_comision_amount" t-value="0" />
+                                                <t t-set="afp_fondo_percentage" t-value="0" />
+                                                <t t-set="afp_seguro_percentage" t-value="0" />
+                                                <t t-set="afp_comision_percentage" t-value="0" />
+                                                <t t-set="employee" t-value="o.employee_id" />
+                                    
+                                                <!-- Obtener comisiones actuales -->
+                                                <t t-set="comis" t-value="employee.pension_system_id.comis_pension_ids.filtered(lambda res: res.date_from &lt;= o.date_from and res.date_to &gt;= o.date_to)" />
+                                                <t t-if="comis">
+                                                    <t t-set="comis_record" t-value="comis[0]" />
+                                                    <!-- Obtener porcentajes -->
+                                                    <t t-set="afp_fondo_percentage" t-value="comis_record.fund" />
+                                                    <t t-set="afp_seguro_percentage" t-value="comis_record.bonus" />
+                                                    <t t-if="employee.pension_mode == 'flujo'">
+                                                        <t t-set="afp_comision_percentage" t-value="comis_record.flow" />
+                                                    </t>
+                                                    <t t-elif="employee.pension_mode == 'mixto'">
+                                                        <t t-set="afp_comision_percentage" t-value="comis_record.balance" />
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-set="afp_comision_percentage" t-value="0" />
+                                                    </t>
+                                                </t>
+                                    
+                                                <!-- Iteración de líneas de deducción -->
+                                                <span
+                                                    t-if="not o.lbs_id or (o.lbs_id and not o.lbs_id.have_lbs_last_day)"
+                                                    t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.category_id.code in ('DED',) and line.appears_on_payslip)"
+                                                    t-as="line">
+                                                    <t t-if="line.amount &lt; 0">
+                                                        <!-- Captura de montos de AFP -->
+                                                        <t t-if="line.name == 'Afp - Fondo'">
+                                                            <t t-set="afp_fondo_amount" t-value="-1 * line.amount" />
+                                                        </t>
+                                                        <t t-elif="line.name == 'Afp - Seguro'">
+                                                            <t t-set="afp_seguro_amount" t-value="-1 * line.amount" />
+                                                        </t>
+                                                        <t t-elif="line.name == 'Afp - Comision'">
+                                                            <t t-set="afp_comision_amount" t-value="-1 * line.amount" />
+                                                        </t>
+                                                        <t t-else="">
+                                                            <!-- Otras deducciones -->
+                                                            <tr>
+                                                                <td><span t-field="line.name" /></td>
+                                                                <td class="text-right">
+                                                                    <span
+                                                                        t-esc="-1 * line.amount"
+                                                                        t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                                </td>
+                                                                <t t-set="total_disccount" t-value="total_disccount + line.amount" />
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </span>
+                                    
+                                                <!-- Mostrar deducciones de AFP con porcentajes -->
+                                                <t t-if="afp_fondo_amount &gt; 0 or afp_seguro_amount &gt; 0 or afp_comision_amount &gt; 0">
+                                                    <tr t-if="afp_fondo_amount &gt; 0">
+                                                        <td>
+                                                            Afp - Fondo <t t-esc="afp_fondo_percentage" />%
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-esc="afp_fondo_amount"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                        </td>
+                                                    </tr>
+                                                    <tr t-if="afp_seguro_amount &gt; 0">
+                                                        <td>
+                                                            Afp - Seguro <t t-esc="afp_seguro_percentage" />%
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-esc="afp_seguro_amount"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                        </td>
+                                                    </tr>
+                                                    <tr t-if="afp_comision_amount &gt; 0">
+                                                        <td>
+                                                            Afp - Comision <t t-esc="afp_comision_percentage" />%
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-esc="afp_comision_amount"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Actualizar total de descuentos -->
+                                                    <t t-set="total_disccount" t-value="total_disccount + (-1 * afp_fondo_amount) + (-1 * afp_seguro_amount) + (-1 * afp_comision_amount)" />
+                                                </t>
+                                    
+                                                <!-- Manejo de otras deducciones si corresponde -->
+                                                <span
+                                                    t-if="o.lbs_id and o.lbs_id.have_lbs_last_day"
+                                                    t-foreach="o.lbs_id.deductions"
+                                                    t-as="line">
+                                                    <tr t-if="line.amount_report &gt; 0">
+                                                        <td><span t-field="line.name" /></td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-esc="line.amount_report"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                        </td>
+                                                        <t t-set="total_disccount" t-value="total_disccount - line.amount_report" />
+                                                    </tr>
+                                                </span>
+                                    
+                                                <!-- Total de descuentos -->
+                                                <tr>
+                                                    <td><strong>TOTAL DESCUENTOS</strong></td>
+                                                    <td class="text-right">
+                                                        <strong>
+                                                            <span
+                                                                t-esc="-1 * total_disccount"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    
+                                    
+                                    <td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">APORTACIONES DEL EMPLEADOR</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="total_apport" t-value="0" />
+                                                <span
+                                                    t-if="not o.lbs_id or (o.lbs_id and not o.lbs_id.have_lbs_last_day)"
+                                                    t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.category_id.code in ('COMP',) and line.appears_on_payslip)"
+                                                    t-as="line">
+                                                    <tr t-if="line.total &gt; 0">
+                                                        <td><span t-field="line.name" /></td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-if="line.total &gt; 1"
+                                                                t-esc="line.total"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}'/>
+                                                        </td>
+                                                        <t t-set="total_apport" t-value="total_apport+line.total" />
+                                                    </tr>
+                                                </span>
+                                                <span
+                                                    t-if="o.lbs_id and o.lbs_id.have_lbs_last_day"
+                                                    t-foreach="o.lbs_id.aportations "
+                                                    t-as="line">
+                                                    <tr t-if="line.amount_report &gt; 0">
+                                                        <td><span t-field="line.name" /></td>
+                                                        <td class="text-right">
+                                                            <span
+                                                                t-if="line.amount_report &gt; 0"
+                                                                t-esc="line.amount_report"
+                                                                t-options='{"widget": "float", "precision": 2}'/>
+                                                        </td>
+                                                        <t t-set="total_apport" t-value="total_apport+line.amount_report" />
+                                                    </tr>
+                                                </span>
+                                                <tr>
+                                                    <td><strong>TOTAL APORTACIONES </strong></td>
+                                                    <td class="text-right">
+                                                        <strong>
+                                                            <span
+                                                                t-esc="total_apport"
+                                                                t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}'
+                                                            ></span>
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="table_body">
+                            <table>
+                                <body>
+                                    <tr>
+                                        <th>Entidad Bancaria:</th>
+                                        <th class="text-right">
+                                            <span t-field="o.employee_id.bank_account_id.bank_id.name" />
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Nro. de Cuenta Bancaria:</th>
+                                        <th class="text-right">
+                                            <span t-field="o.employee_id.bank_account_id.acc_number" />
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>NETO RECIBIDO:</th>
+                                        <th class="text-right">
+                                            <span
+                                            t-esc="total_disccount + total_ingress" 
+                                            t-options='{"widget": "monetary", "precision": 2, "display_currency": o.company_id.currency_id}' />
+                                        </th>
+                                    </tr>
+                                </body>
+                            </table>
+                        </div>
+
+                        <table name="signatures" class="table table-sm table-borderless">
+                            <tbody>
+                                <tr class="text-center">
+                                    <th style="vertical-align: bottom; padding: 0 24px;">
+                                        <!-- <img class="signature" t-if="o.employee_id.company_id.gerente_firma" t-att-src="image_data_uri(o.employee_id.company_id.gerente_firma)" alt="Firma gerente" /> -->
+                                        <hr />
+                                        <span t-field="o.employee_id.company_id.gerente_name" style="text-transform: uppercase; font-weight: normal;"/>
+                                        <br><p>GERENTE GENERAL</p></br>
+                                    </th>
+                                    <th style="vertical-align: bottom; padding: 0 24px;">
+                                        <hr />
+                                        <span t-field="o.employee_id.name" style="text-transform: uppercase; font-weight: normal;"/>
+                                        <br><p>FIRMA DEL TRABAJADOR</p></br>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <t t-if="i == 1">
+                        <div class="vertical_line"></div>
+                    </t>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

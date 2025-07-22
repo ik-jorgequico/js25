@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inherit_hr_job_form" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//group[@name='jobs_ids']" position="before">
+                <b>
+                    <label for="mision" string="Misión del puesto" />
+                </b>
+                <field name="mision" />
+            </xpath> -->
+
+            <xpath expr="//field[@name='cod']" position="after">
+                <group>
+                    <field name="location_id" />
+                    <field name="direct_boss" />
+                </group>
+                <group>
+                    <field name="date_approbation" />
+                    <field name="prepare_by" />
+                    <field name="approve_by" />
+                </group>
+            </xpath>
+
+            <!-- <xpath expr="//page[@name='funciones']" position="after">
+                <page string="Estructura" name="estructura">
+                    <group name="jobs_aspect_ids">
+                        <field name="jobs_aspect_ids" nolabel="1" />
+                    </group>
+
+                    <hr />
+
+                    <group name="context">
+                        <field name="context" />
+                    </group>
+
+                    <hr />
+
+                    <b>
+                        <label for="age_min" string="Edad" />
+                    </b>
+
+                    <group name="jobs_feature">
+                        <group>
+                            <field name="age_indiferent" />
+                        </group>
+                        <group>
+                            <field name="age_min" invisible = "age_indiferent != 'False'"/>
+                        </group>
+                        <group>
+                            <field name="age_max" invisible = "age_indiferent != 'False'" />
+                        </group>
+                    </group>
+
+                    <hr />
+
+                    <group name="gender">
+                        <field name="gender" />
+                    </group>
+
+                    <hr />
+
+                    <group name="degree">
+                        <field name="degree" />
+                        <field name="degree_other" invisible = "degree != '03'"/>
+                    </group>
+
+                    <hr />
+
+                    <group name="desirable_degree">
+                        <field name="desirable_degree" />
+                    </group>
+
+                    <hr />
+
+                    <group name="travel">
+                        <field name="travel" />
+                    </group>
+
+                    <hr />
+
+                    <group name="jobs_experience_ids">
+                        <field name="jobs_experience_ids" nolabel="1" />
+                    </group>
+
+                    <hr />
+
+                    <group name="jobs_technical_ids">
+                        <field name="jobs_technical_ids" nolabel="1" />
+                    </group>
+
+                    <hr />
+
+                    <group name="jobs_functional_ids">
+                        <field name="jobs_functional_ids" nolabel="1" />
+                    </group>
+
+                    <hr />
+
+                    <group name="jobs_skill_ids">
+                        <field name="jobs_skill_ids" nolabel="1" />
+                    </group>
+
+                    <hr />
+
+                    <group name="jobs_benefit_ids">
+                        <field name="jobs_benefit_ids" nolabel="1" />
+                    </group>
+                </page>
+            </xpath> -->
+        </field>
+    </record>
+
+    <record id="hr_job_aspect_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.aspect.tree.view</field>
+        <field name="model">hr.job.aspect</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="aspect" />
+                <field name="measure" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_job_experience_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.experience.tree.view</field>
+        <field name="model">hr.job.experience</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="experience" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_job_technical_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.technical.tree.view</field>
+        <field name="model">hr.job.technical</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="technical" />
+                <field name="measure" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_job_functional_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.functional.tree.view</field>
+        <field name="model">hr.job.functional</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="functional" />
+                <field name="measure" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_job_skill_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.skill.tree.view</field>
+        <field name="model">hr.job.skill</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="skill" />
+                <field name="measure" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_job_benefit_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.benefit.tree.view</field>
+        <field name="model">hr.job.benefit</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" column_invisible="1" />
+                <field name="benefit" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+</odoo>

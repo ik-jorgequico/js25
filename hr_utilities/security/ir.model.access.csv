@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_utilities,hr.utilities,model_hr_utilities,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_utilities_incomes,hr.utilities.incomes,model_hr_utilities_incomes,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_utilities_incomes_lines,hr.utilities.incomes.lines,model_hr_utilities_incomes_lines,hr_contract.group_hr_contract_manager,1,1,1,1
+
+access_bulk_send_utilities_incomes,bulk.send.utilities.incomes,model_bulk_send_utilities_incomes,hr_contract.group_hr_contract_manager,1,0,0,0

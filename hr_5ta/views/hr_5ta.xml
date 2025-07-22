@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_5ta_form_view" model="ir.ui.view" >
+        <field name="name">hr.5ta.form.view</field >
+        <field name="model">hr.5ta</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>    
+                    <button name="compute_sheet" string="Calcular" type="object" class="btn-primary"/>
+                    <button name="action_dowload_report_pdf" string="5TA CATEGORIA PDF" type="object"/>
+                    <button name = "action_submit" type = "object" string = "Entregar" invisible = "state =='draft'" />
+                    <button name = "action_cancel" type = "object" string = "Cancelar" invisible = "state =='draft'"/>
+                    <button name = "action_approve" type = "object" string = "Aprobar" invisible = "state =='verify'" groups = "hr.group_hr_manager"/>
+                    <button name = "action_refuse" type = "object" string = "Rechazar" invisible = "state not in ['draft','verify']" groups = "hr.group_hr_manager"/>
+                    <button name = "action_draft" type="object" string = "Borrador" invisible = "state not in ['approve','cancel','refuse']" />
+                    <field name = "state" widget = "statusbar" statusbar_visible = "draft,verify,approve" />
+                </header>
+                
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_5ta" class="oe_stat_button" icon="fa-book" type="object" invisible ="child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="child_ids_count"/></span>
+                                <span class="o_stat_text">Registros 5TA</span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1><field name="name" force_save="1" readonly="1"/></h1>
+                    <group>
+                        <group>
+                            <label for="month" string="Período"/>
+                            <div class="o_row">
+                                <field name="month" class="ow_inline"/> - <field name="year" class="ow_inline"/>
+                            </div>
+                            <field name="date_5ta" invisible="1" />
+                            <field name="regimen_id" options="{'no_open': true,'no_create':true}"/>
+                        </group>
+                        <group>
+                            <field name="xls_filename" invisible="1"/>
+                            <field name="xls_binary" filename="xls_filename" readonly="1" />
+                            <field name="company_id" readonly="1" options="{'no_open': true}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Registros">
+                            <field name="child_ids" nolabel="1" readonly="1" force_save="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- seccion correo -->
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular_5ta">
+        <field name="name">Generar Reporte Tabular</field>
+        <field name="model_id" ref="hr_5ta.model_hr_5ta"/>
+        <field name="binding_model_id" ref="hr_5ta.model_hr_5ta"/>
+        <field name="state">code</field>
+        <field name="code">
+            <!-- action = records.action_dowload_report_tabular_5ta() -->
+        </field>
+    </record>
+
+    <record id="action_hr_5ta" model="ir.actions.act_window">
+        <field name="name">5ta Categoria</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.5ta</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_hr_5ta"
+        name="5ta categoria"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+        action="action_hr_5ta"
+        sequence="122"
+    />
+</odoo>

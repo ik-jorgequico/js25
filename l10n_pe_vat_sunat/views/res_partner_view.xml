@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">res.partner.view.form.inherit.l10n.pe.vat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <header>
+                    <button string="Actualizar RUC/DNI" type="object" name="onchange_doc_number" context="{'force_update':True}" />
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="ACTIVO,BAJA DE OFICIO" statusbar_colors="{'ACTIVO':'green','BAJA DE OFICIO':'red','BAJA PROVISIONAL':'red','SUSPENSION TEMPORAL':'red'}" />
+                </header>
+            </sheet>
+            
+            <xpath expr="//div[@name='button_box']" position="after">
+                <widget name="web_ribbon" text="Habido" invisible="is_company == False or condition != 'HABIDO' or active == False"/>
+                <widget name="web_ribbon" text="No Habido" bg_color="bg-danger" invisible="is_company == False or condition == 'HABIDO' or condition == False or active == False" />
+            </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="before">
+                <field name="condition" invisible="1" />
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet" position="before">
+                <header>
+                    <button string="Actualizar RUC/DNI" type="object" name="update_document" context="{'force_update': True}" invisible="type != 'contact'" />
+                </header>
+            </xpath>
+
+            <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet//field[@name='name']" position="after">
+                <field name="contact_identification_type"/>
+                <field name="contact_vat"/>
+                <field name="contact_from_date"/>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page name="sunat" string="Sunat">
+                    <separator name="padrones" string="Padrones" />
+                    <div class="d-flex flex-column">
+                        <field class="o_form_label" name="padron_1" />
+                        <field class="o_form_label" name="padron_2" />
+                        <field class="o_form_label" name="padron_3" />
+                    </div>
+                    <group name="information" string="Información Sunat">
+                        <field name="is_agent_retentions" />
+                        <field name="is_good_contributor" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

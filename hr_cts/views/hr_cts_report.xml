@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="action_report_cts" model="ir.actions.report">
+            <field name="name">CTS LINE</field>
+            <field name="model">hr.cts.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_cts.report_cts_lang</field>
+            <field name="report_file">hr_cts.report_cts_lang</field>
+            <field name="print_report_name">'CTS - %s' % (object.employee_id.name)</field>
+            <field name="binding_model_id" ref="model_hr_cts_line"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting -->
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/>
+        </record>
+        
+</odoo>

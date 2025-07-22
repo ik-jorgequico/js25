@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="res_config_settings_view_form_stock" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.epicking</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='production_lot_info']" position="after">
+                <h2>Peruvian Electronic Picking</h2>
+                <block
+                    class="row mt16 o_settings_container"
+                    id="redirect_epicking_settings"
+                >
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="redirect_epicking_settings_options"
+                    >
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <div
+                                class="text-muted"
+                            >Configuration options for the electronic picking</div>
+                            <div class="mt8">
+                                <button
+                                    name="%(l10n_pe_edi_base.l10n_pe_edi_settings_action)d"
+                                    icon="fa-arrow-right"
+                                    type="action"
+                                    string="Redirect to settings"
+                                    class="btn-link"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </block>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="res_config_settings_view_form_stock" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.stock.l10n_pe_edi_base</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='production_lot_info']" position="after">
+                <block title="Peruvian Electronic Picking" name="odoofact_epicking_settings">
+                    <setting id="odoofact_epicking_active" help="Activate electronic guide remission">
+                        <field name="l10n_pe_edi_send_picking"/>
+                        
+                    </setting>
+                    <setting id="odoofact_epicking_config" string="Configuration" invisible="not l10n_pe_edi_send_picking">
+                        <div class="mt16">
+                            <button
+                                name="%(stock.action_picking_type_list)d"
+                                icon="fa-arrow-right"
+                                type="action"
+                                string="Operation Types"
+                                class="btn-link"
+                            />
+                        </div>
+                    </setting>
+                    <setting id="odoofact_epicking_default_data" string="Default Data" help="Default data for E-Picking" invisible="not l10n_pe_edi_send_picking">
+                        <div class="text-nowrap fw-bold">
+                            Transport Type
+                            <field name="l10n_pe_edi_picking_default_catalog_18_id"/>
+                        </div>
+                        <div class="text-nowrap fw-bold">
+                            Carrier
+                            <field name="l10n_pe_edi_picking_default_carrier_id"/>
+                        </div>
+                        <div class="text-nowrap fw-bold">
+                            Driver
+                            <field name="l10n_pe_edi_picking_default_driver_id"/>
+                        </div>
+                    </setting>
+                    <setting id="odoofact_epicking_default_data_arrival" help="Default Auto Arrival Point" invisible="not l10n_pe_edi_send_picking">
+                        <field name="l10n_pe_edi_picking_default_auto_field_arrival_point"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

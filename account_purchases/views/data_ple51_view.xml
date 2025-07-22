@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="data_ple51_form" model="ir.ui.view">
+		<field name="name">data.ple51.form</field>
+		<field name="model">data.ple51</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_form_base"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']/label" position="attributes">
+				<attribute name="string">Libro diario 5.1</attribute>
+			</xpath>
+			<button name="action_generate_xls" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</button>
+			<field name="xls_binary" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</field>
+			<page name="lines" position="inside">
+				<field name="child_ids" colspan="4" nolabel="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+			</page>
+		</field>
+	</record>
+
+	<record id="data_ple51_tree" model="ir.ui.view">
+		<field name="name">data.ple51.tree</field>
+		<field name="model">data.ple51</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_ple51_line_tree" model="ir.ui.view">
+		<field name="name">data.ple51.line.tree</field>
+		<field name="model">data.ple51.line</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="date"/>
+				<field name="entry"/>
+				<field name="chart_code"/>
+				<field name="chart_name"/>
+				<field name="debit"/>
+				<field name="credit"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_ple51_line_form" model="ir.ui.view">
+		<field name="name">data.ple51.line.form</field>
+		<field name="model">data.ple51.line</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="entry"/>
+						<field name="code_book"/>
+						<field name="sequence_book"/>
+						<field name="num_book"/>
+						<field name="chart_code"/>
+						<field name="chart_name"/>
+					</group>
+					<group>
+						<field name="parent_id"/>
+						<field name="company_id"/>
+					</group>
+					<group>
+						<field name="serie_cpe" readonly="1"/>
+						<field name="num_cpe" readonly="1"/>
+						<field name="type_cpe" readonly="1"/>
+						<field name="type_doc" readonly="1"/>
+						<field name="num_doc"/>
+						<field name="period_ple"/>
+						<field name="correlativo_ple"/>
+						<field name="state_ple"/>
+						<field name="cuo_sunat"/>
+					</group>
+					<group>
+						<field name="periodo_sunat"/>
+						<field name="ref"/>
+						<field name="invoice_date"/>
+						<field name="date"/>
+						<field name="date_to"/>
+						<field name="date_from"/>
+						<field name="date_due"/>
+						<field name="currency"/>
+						<field name="debit"/>
+						<field name="credit"/>
+					</group>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_data_ple51" model="ir.actions.act_window">
+		<field name="name">Libro diario 5.1</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">data.ple51</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_sunat_ple51" 
+		name="5.1 Libro diario" 
+		parent="menu_sunat_diary" 
+		sequence="101"
+		groups="account.group_account_manager" 
+		action="action_data_ple51"/>
+</odoo>

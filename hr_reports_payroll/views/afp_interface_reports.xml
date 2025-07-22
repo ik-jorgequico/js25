@@ -1,0 +1,169 @@
+<odoo>
+    <data>
+        <report id = "report_afp_interface"
+        string = "Reporte PDF"
+        model = "afp.interface"
+        report_type = "qweb-pdf"
+        name = "hr_reports_payroll.report_pdf_template"
+        />
+
+        <template id="report_pdf_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <style>
+                            .without {
+                                border-top: 0px;
+                                border-right: 0px;
+                                border-bottom: 0px;
+                                border-left: 0px;
+                            }
+            
+                            .with {
+                                border-bottom: 1px solid black;
+                            }
+                        </style>
+
+                        <div class="page">
+                            <br/>
+                            <p><span t-field="o.company_id.name"/></p>
+                            <h2 style="text-align: center;">VERIFICACIÓN DE PAGOS DE AFP</h2>
+                            <table>
+                                <tr>
+                                    <td width = "200px"><span>Periodo de Cálculo</span></td>
+                                    <td><span t-field="o.periodo"/></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Planilla</span></td>
+                                    <td><span>Planilla de Empleados</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Tipo de Cálculo</span></td>
+                                    <td><span>Remuneraciones</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Moneda</span></td>
+                                    <td><span>Soles</span></td>
+                                </tr>
+
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <table >
+                                <thead>
+                                  <tr>
+                                    <th class="without" width="16%"><b>PLANILLA</b></th>
+                                    <th class="with" width="14%" style ="text-align: center; border-top: 0;" ><b>FONDO AFP</b></th>
+                                    <th class="with" width="14%" style ="text-align: center;"><b>COMISION FLUJO</b></th>
+                                    <th class="with" width="14%" style ="text-align: center;"><b>COMISION MIXTA</b></th>
+                                    <th class="with" width="14%" style ="text-align: center;"><b>PRIMA DE SEGURO</b></th>
+                                    <th class="with" width="14%" style ="text-align: center;"><b>TOTAL RETRIBUCION</b></th>
+                                    <th class="with" width="14%" style ="text-align: center;"><b>NRO. TRABAJADOR</b></th>
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr>
+                                    <td >Planilla de empleados activos</td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_fondo - o.fondo_inactive,2) != 0"><span t-esc="'{0:,.2f}'.format(round(o.sum_fondo - o.fondo_inactive,2))"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_comision - o.comision_inactive,2) != 0"><span t-esc="'{0:,.2f}'.format(round(o.sum_comision - o.comision_inactive,2))"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_comision_saldo - o.comision_saldo_inactive,2) != 0"><span t-esc="'{0:,.2f}'.format(round(o.sum_comision_saldo - o.comision_saldo_inactive,2))"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_prima - o.prima_inactive,2) != 0"><span t-esc="'{0:,.2f}'.format(round(o.sum_prima - o.prima_inactive,2))"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_total - o.total_inactive,2) != 0"><span t-esc="'{0:,.2f}'.format(round(o.sum_total - o.total_inactive,2))"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="round(o.sum_employee - o.employee_inactive,2) != 0"><span t-esc="(round(o.sum_employee - o.employee_inactive))"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td >Planilla de empleados liquidados</td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.fondo_inactive != 0"><span t-field="o.fondo_inactive"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.comision_inactive != 0"><span t-field="o.comision_inactive"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.comision_saldo_inactive != 0"><span t-field="o.comision_saldo_inactive"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.prima_inactive != 0"><span t-field="o.prima_inactive"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.total_inactive != 0"><span t-field="o.total_inactive"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.employee_inactive != 0"><span t-field="o.employee_inactive"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td>TOTAL</td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_fondo != 0"><span t-field="o.sum_fondo"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_comision != 0"><span t-field="o.sum_comision"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_comision_saldo != 0"><span t-field="o.sum_comision_saldo"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_prima != 0"><span t-field="o.sum_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_total != 0"><span t-field="o.sum_total"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_employee != 0"><span t-field="o.sum_employee"/></t></td>
+                                  </tr>
+                                </tbody>
+
+                            </table>
+
+                            <br/>
+                            <br/>
+
+                            <table>
+                                <thead>
+                                  <tr>
+                                    <th class="without"  width="16%"><b>AFP</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>FONDO AFP</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>COMISION FLUJO</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>COMISION MIXTA</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>PRIMA DE SEGURO</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>TOTAL RETRIBUCION</b></th>
+                                    <th class="with"  width="14%" style ="text-align: center;"><b>NRO. TRABAJADOR</b></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>AFP HABITAT</td>
+                                    <td style ="text-align: right;"><t t-if="o.fondo_habitat != 0"><span t-field="o.fondo_habitat"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_habitat != 0"><span t-field="o.comision_habitat"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_saldo_habitat != 0"><span t-field="o.comision_saldo_habitat"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.prima_habitat != 0"><span t-field="o.prima_habitat"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.total_habitat != 0"><span t-field="o.total_habitat"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.employee_habitat != 0"><span t-field="o.employee_habitat"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td>AFP INTEGRA</td>
+                                    <td style ="text-align: right;"><t t-if="o.fondo_integra != 0"><span t-field="o.fondo_integra"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_integra != 0"><span t-field="o.comision_integra"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_saldo_integra != 0"><span t-field="o.comision_saldo_integra"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.prima_integra != 0"><span t-field="o.prima_integra"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.total_integra != 0"><span t-field="o.total_integra"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.employee_integra != 0"><span t-field="o.employee_integra"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td>AFP PRIMA</td>
+                                    <td style ="text-align: right;"><t t-if="o.fondo_prima != 0"><span t-field="o.fondo_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_prima != 0"><span t-field="o.comision_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.comision_saldo_profuturo != 0"><span t-field="o.comision_saldo_profuturo"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.prima_prima != 0"><span t-field="o.prima_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.total_prima != 0"><span t-field="o.total_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.employee_prima != 0"><span t-field="o.employee_prima"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td>AFP PROFUTURO</td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.fondo_profuturo != 0"><span t-field="o.fondo_profuturo"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.comision_profuturo != 0"><span t-field="o.comision_profuturo"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.comision_saldo_integra != 0"><span t-field="o.comision_saldo_integra"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.prima_profuturo != 0"><span t-field="o.prima_profuturo"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.total_profuturo != 0"><span t-field="o.total_profuturo"/></t></td>
+                                    <td class="with" style ="text-align: right;"><t t-if="o.employee_profuturo != 0"><span t-field="o.employee_profuturo"/></t></td>
+                                  </tr>
+                                  <tr>
+                                    <td>TOTAL</td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_fondo != 0"><span t-field="o.sum_fondo"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_comision != 0"><span t-field="o.sum_comision"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_comision_saldo != 0"><span t-field="o.sum_comision_saldo"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_prima != 0"><span t-field="o.sum_prima"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_total != 0"><span t-field="o.sum_total"/></t></td>
+                                    <td style ="text-align: right;"><t t-if="o.sum_employee != 0"><span t-field="o.sum_employee"/></t></td>
+                                  </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

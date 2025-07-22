@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inherit_employee_form_hide" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.hide</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='km_home_work']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group[separator[@name='has_work_permit']]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='public']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='hr_settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group[@name='emergency']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='ssnid']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='is_non_resident']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+
+            <xpath expr="//div[@name='div_km_home_work']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//label[@for='km_home_work']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="generate_file" string="GENERAR REPORTES PDF" type="object" />
+                <button name="send_file" string="ENVIAR REPORTES PDF" type="object" />
+            </xpath>
+            
+            <xpath expr="//field[@name='study_school']" position="after">
+                <field name="year_certificate" />
+            </xpath>
+
+
+            <xpath expr="//field[@name='private_phone']" position="after">
+                <field name="cell_phone_private" readonly="1" required="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='birthday']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            
+            <xpath expr="//field[@name='private_email']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//page[@name='personal_information']/group/group[5]" position="replace">
+            </xpath> -->
+
+            <xpath expr="//field[@name='country_of_birth']" position="after">
+                <field name="age" />
+            </xpath>
+
+            <!-- Para el notebook de emergencia -->
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page name="emergency" string="Emergencia" groups="hr.group_hr_user">
+                    <group string="Dato para emergencia">
+                        <field name="emergency_contact"/>
+                        <field name="emergency_phone" class="o_force_ltr"/>
+                        <field name="relationship" />
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//page[@name='personal_information']" position="before">
+                <page name="rrhh_configuration" string="Configuración de RRHH" groups="hr.group_hr_user">
+                    <group name="rrhh_config">
+                        <div id="o_work_employee_main">
+                            <group string='Estado' name="estado">
+                                <field name="employee_type" />
+                                <field name="first_contract_date" readonly="1"/>
+                                <field name="last_contract_date" readonly="1"/>
+                            </group>
+
+                            <group string='Nómina' name="nomina">
+                                <field name="contract_id" invisible="1" />
+                                <field name="job_id" invisible="1" />
+                                <field name="registration_number" invisible="1" />
+                                <field name="type_work_assistance" />
+                            </group>
+                        </div>
+                        <!-- <group>
+                            <div id="o_employee_right">
+                                <h4 class="o_org_chart_title mb16 mt0">Organization Chart</h4>
+                                <field name="child_ids" widget="hr_org_chart" readonly="1" />
+                            </div>
+                        </group> -->
+                        <group>
+                            <h4 class="o_org_chart_title mb16 mt0">Organization Chart</h4>
+                            <div colspan="4" style="width: 100%; padding: 0;">
+                                    <div id="o_employee_right" class="oe_clear col-lg-4 px-0 ps-lg-2">
+                                        <field name="child_ids" class="position-relative" widget="hr_org_chart" readonly="1" nolabel="1" style="width: 100%; min-height: 500px;"/>
+                                    </div>
+                            </div>
+                        </group>
+
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page name="formatos " string="Formatos de ingreso" groups="hr.group_hr_user">
+                    <group string="Reportes" name="files_employee">
+                        <group>
+                            <field name="ficha_filename" invisible="1" />
+                            <field name="ficha_record" filename="ficha_filename" readonly="1" />
+
+                            <field name="dec_domi_filename" invisible="1" />
+                            <field name="dec_domi_record" filename="dec_domi_filename" readonly="1" />
+
+                            <field name="cargo_filename" invisible="1" />
+                            <field name="cargo_record" filename="cargo_filename" readonly="1" />
+                        </group>    
+                        <group>
+                            <field name="dec_5ta_filename" invisible="1" />
+                            <field name="dec_5ta_record" filename="dec_5ta_filename" readonly="1" />
+
+                            <field name="entrega_filename" invisible="1" />
+                            <field name="entrega_record" filename="entrega_filename" readonly="1" />
+
+                            <field name="ficha_file" invisible="1" />
+                            <field name="dec_domi_file" invisible="1" />
+                            <field name="cargo_file" invisible="1" />
+                            <field name="dec_5ta_file" invisible="1" />
+                            <field name="entrega_file" invisible="1" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='work_email']" position="replace">
+                <field name="work_email" invisible="1" />
+            </xpath> 
+
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('share', '=', True)]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="l10n_latam_identification_type_id" required="1"/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <h1>
+                        <field name="first_name" placeholder="Primer Nombre" />
+                    </h1>
+                    <h1>
+                        <field name="second_name" placeholder="Segundo Nombre" />
+                    </h1>
+                    <h1>
+                        <field name="first_last_name" placeholder="Primer Apellido" />
+                    </h1>
+                    <h1>
+                        <field name="second_last_name" placeholder="Segundo Apellido" />
+                    </h1>
+                </div>
+            </xpath>
+
+            <field name="mobile_phone" position="before">
+                <field name="name" string="Nombre Completo" force_save="1" readonly="1"/>
+            </field>
+
+            <xpath expr="//field[@name='department_id']" position="before">
+                <!-- <field name="job_id" /> -->
+                <field name="location_id" />
+            </xpath>
+
+            <xpath expr="//page[@name='hr_settings']" position="after" invisible="1">
+                <page name="info_rrhh" string="Información RH">
+                    <group string="Código Empleado">
+                        <field name="cod_ref" />
+                    </group>
+                    <group string="5ta categoria">
+                        <group>
+                            <field name="salary_amount" />
+                            <field name="amount_5ta" />
+                        </group>
+                        <group>
+                            <field name="reception_date" />
+                            <field name="last_company" />
+                        </group>
+                    </group>
+                </page>
+                <page name="health_regime" string="Datos de Seguridad Social" groups="hr.group_hr_user">
+                    <group>
+                        <group string="Regimen de Salud" name="regime_health">
+                            <group>
+                                <field name="health_regime_id" required="1" />
+                                <field name="year_essalud" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Régimen de Pensiones" name="regime_pension">
+                            <group>
+                                <field name="pension_mode" readonly="1"/>
+                                <field name="pension_system_id" required="1" readonly="1" options="{'no_create': True,'no_open': True}"/>
+                                <field name="cod_cuspp" readonly="1"/>
+                                <field name="year_afp" invisible="1"/>
+                            </group>
+                        </group>
+                    </group>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <field name="child_ids_health" nolabel="1" />
+                            </div>
+                            <div class="col-6">
+                                <field name="child_ids_pension" nolabel="1" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container float-left">
+                        <div class="row">
+                            <div class="col-6">
+                                <group string="SCTR">
+                                    <field name="sctr_id"/>
+                                </group>
+                                <field name="child_ids_sctr_employee"/>
+                            </div>
+                        </div>
+                    </div>
+                </page>
+
+                <page name="account_bank" string="Cuenta Bancaria">
+                    <group>    
+                        <!-- <field name="acc_holder_name"/> -->
+                        <field name="bank_account_id"/>
+                        <field name="bank_cts_id"/>
+                    </group> 
+                </page>
+
+                <page name="account_bank" string="Ce. Co.">
+                    <group>
+                        <group>
+                            <field name="is_passed" required="1" invisible="1" />
+                            <field name="cod_coste_center" required="1" options="{'no_create': True,'no_open': True}"/>
+                        </group>
+
+                        <field name="cod_coste_center_account" colspan="4" nolabel="1" required="1">
+                            <tree string="Centro de Costo" editable="bottom">
+                                <field name="cod_coste_center" column_invisible="1" />
+                                <field name="date_from" required="1" />
+                                <field name="date_to" />
+                                <field name="account_analytic_account_id" required="1" domain="[('plan_id','=',cod_coste_center)]" options="{'no_create': True,'no_open': True}"/>
+                                <!-- domain="[('plan_id','=',cod_coste_center)] " -->
+                                <field name="is_active" required="1" />
+                                <field name="percent" required="1" />
+                            </tree>
+                            <form string="Centro de Costo">
+                                <group col="4">
+                                    <field name="date_from" required="1" />
+                                    <field name="date_to" />
+                                    <field name="account_analytic_account_id" required="1" options="{'no_create': True,'no_open': True}"/>
+                                    <field name="is_active" required="1" />
+                                    <field name="percent" required="1" />
+                                </group>
+                            </form>
+                        </field>
+                        <group>
+                            <field name="cod_coste_center_account_total" class="oe_subtotal_footer_separator" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_sctr_employee_tree_view" model="ir.ui.view">
+        <field name="name">hr.sctr.employee.tree.view</field>
+        <field name="model">hr.sctr.employee</field>
+        <field name="arch" type="xml">
+            <tree string="SCTR Empleado" editable="bottom">
+                <field name="parent_id" invisible="1" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="employee_sctr_id" />
+                <field name="sctr_salud" />
+                <field name="sctr_pension" />
+                <field name="cod_active" />
+            </tree>
+        </field>
+    </record>
+</odoo>

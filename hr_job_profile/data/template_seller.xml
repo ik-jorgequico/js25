@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Adding a salary rule for loan-->
+	<data noupdate="1">
+
+        <record id = "ir_template_contract_format_seller" model = "mail.template">
+
+            <field name = "name">Template para Contrato de nuevo trabajador - VENDEDOR, REPARTIDO Y COBRADOR</field>
+            <field name = "model_id" ref = "model_hr_contract" />
+            <field name = "subject">Contrato de nuevo trabajador</field>
+            <field name = "email_from">{{object.company_id.email or '' }}</field>
+            <field name = "email_to">{{object.employee_id.private_email or ''}}</field>
+            <field name="report_template_ids" eval="[(4,ref('hr_contrac_format.report_operative_seller_report'))]"/>
+            <!-- <field name = "report_name">{{object.pdf_filename or ''}}</field> -->
+            <field name = "body_html" type = "html">
+            
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tbody>
+
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                                    <tbody>
+                                        
+                                        
+
+                                        <tr>
+                                            <td align="center" style="min-width: 590px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: white; padding: 0; border-collapse:separate;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <span style="font-size: 10px;"></span><br/>
+                                                                <span style="font-size: 20px; font-weight: bold;">Contrato de nuevo trabajador</span>
+                                                            </td>
+                                                            <!-- <td valign="middle" align="right">
+                                                                <img src="../web/image?model=res.company&amp;id=1&amp;field=logo" id = "logo" style="padding: 0px; margin: 0px; height: 48px;"/>
+                                                                <img src='company_id.logo' style="padding: 0px; margin: 0px; height: 48px;"/>
+                                                                <img class="img-fluid" style="height: 48px;" src="/hr_contrac_format/static/src/img/logo.png"/>
+
+                                                            </td> -->
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="text-align:center;">
+                                                                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;" contenteditable="false"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        
+
+                                        <tr>
+                                            <td style="min-width: 590px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top" style="font-size: 13px;">
+                                                                <div>
+                                                                    Estimado Sr(a). <span t-esc="object.employee_id.name"/>,<br/><br/>
+
+                                                                    Esperamos se encuentre muy bien, le hacemos el envío de su contrato.<br/><br/>                                                                    
+                                                                    
+
+                                                                    <br/><br/>
+
+                                                                    Quedamos atentos a cualquier duda o comentario.<br/><br/>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+                                                <b><span t-esc="object.company_id.name"/></b><br/>
+                                                <!-- <div style="color: #999999;">
+                                                    <t style="text-decoration:none; color: #999999;" ><span t-esc="object.company_id.phone"/></t>
+                                                    <t data-oe-t-inline="true">
+                                                        | <a href="#" style="text-decoration:none; color: #999999;"><span t-esc="object.company_id.email"/></a>
+                                                    </t>
+                                                    <t data-oe-t-inline="true">
+                                                        | <a href="#" style="text-decoration:none; color: #999999;"><span t-esc="object.company_id.website"/></a>
+                                                    </t>
+                                                </div> -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+
+
+                        <tr><td align="center" style="min-width: 590px;">
+                            Con tecnología de <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=email" style="color: #875A7B;">Odoo</a>
+                        </td></tr>
+                    </tbody>
+                </table>
+
+            </field>
+
+        </record>
+	</data>
+</odoo>

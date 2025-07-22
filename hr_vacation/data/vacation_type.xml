@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+
+        <!-- S.P. SANCIÓN DISCIPLINARIA -->
+        <record id="type_01" model="hr.leave.type">
+            <field name="name">S.P. SANCIÓN DISCIPLINARIA</field>
+            <field name="leave_validation_type">no_validation</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">01</field>
+        </record>
+
+        <!-- S.P. PERMISO, LICENCIA U OTROS MOTIVOS SIN GOCE DE HABER -->
+        <record id="type_05" model="hr.leave.type">
+            <field name="name">S.P. PERMISO, LICENCIA U OTROS MOTIVOS SIN GOCE DE HABER</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">05</field>
+        </record>
+
+        <!-- S.P. FALTA NO JUSTIFICADA -->
+        <record id="type_07" model="hr.leave.type">
+            <field name="name">S.P. FALTA NO JUSTIFICADA</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">07</field>
+        </record>
+
+        <!-- S.P. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL -->
+        <record id="type_09" model="hr.leave.type">
+            <field name="name">S.P. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_utilities" eval="True" />
+            <field name="have_holiday" eval="True" />
+            <field name="code">09</field>
+        </record>
+
+        <!-- S.I. ENFERMEDAD O ACCIDENTE (PRIMEROS VEINTE DÍAS) -->
+        <record id="type_16" model="hr.leave.type">
+            <field name="name">S.I. ENFERMEDAD O ACCIDENTE (PRIMEROS VEINTE DÍAS)</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_gratification" eval="True" />
+            <field name="have_cts" eval="True" />
+            <field name="have_holiday" eval="True" />
+            <field name="code">16</field>
+        </record>
+
+        <!-- S.I. INCAPACIDAD TEMPORAL (INVALIDEZ, ENFERMEDAD Y ACCIDENTES) -->
+        <record id="type_21" model="hr.leave.type">
+            <field name="name">S.I. INCAPACIDAD TEMPORAL (INVALIDEZ, ENFERMEDAD Y ACCIDENTES)</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_gratification" eval="True"/>
+            <field name="have_cts" eval="True"/>
+            <field name="have_holiday" eval="True"/>
+            <field name="code">21</field>
+        </record>
+
+        <!-- S.I. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL -->
+        <record id="type_22" model="hr.leave.type">
+            <field name="name">S.I. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_utilities" eval="True"/>
+            <field name="code">22</field>
+        </record>
+
+        <!-- S.I. DESCANSO VACACIONAL -->
+        <record id="type_23" model="hr.leave.type">
+            <field name="name">S.I. DESCANSO VACACIONAL</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_gratification" eval="True"/>
+            <field name="have_cts" eval="True"/>
+            <field name="have_holiday" eval="True"/>
+            <field name="code">23</field>
+        </record>
+
+        <!-- S.I. PERMISO Y LICENCIA PARA EL DESEMPEÑO DE CARGOS SINDICALES -->
+        <record id="type_25" model="hr.leave.type">
+            <field name="name">S.I. PERMISO Y LICENCIA PARA EL DESEMPEÑO DE CARGOS SINDICALES</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">25</field>
+        </record>
+
+        <!-- S.I. LICENCIA U OTROS MOTIVOS CON GOCE DE HABER -->
+        <record id="type_26" model="hr.leave.type">
+            <field name="name">S.I. LICENCIA U OTROS MOTIVOS CON GOCE DE HABER</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">26</field>
+        </record>
+
+        <!-- S.I. DÍAS LICENCIA POR PATERNIDAD -->
+        <record id="type_28" model="hr.leave.type">
+            <field name="name">S.I. DÍAS LICENCIA POR PATERNIDAD</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="have_gratification" eval="True"/>
+            <field name="have_cts" eval="True"/>
+            <field name="have_holiday" eval="True"/>
+            <field name="code">28</field>
+        </record>
+
+        <!-- S.I. DIAS LICENCIA POR ADOPCIÓN -->
+        <record id="type_29" model="hr.leave.type">
+            <field name="name">S.I. DIAS LICENCIA POR ADOPCIÓN</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">29</field>
+        </record>
+
+        <!-- S.I.ENFERMEDAD GRAVE O TERMINAL O ACCIDENTE GRAVE DE FAMILIARES DIRECTOS -->
+        <record id="type_35" model="hr.leave.type">
+            <field name="name">S.I.ENFERMEDAD GRAVE O TERMINAL O ACCIDENTE GRAVE DE FAMILIARES DIRECTOS</field>
+            <field name="leave_validation_type">hr</field>
+            <!-- <field name="responsible_id" ref="base.user_admin"/> -->
+            <field name="request_unit">day</field>
+            <field name="requires_allocation">yes</field>
+            <field name="employee_requests">no</field>
+            <field name="allocation_validation_type">officer</field>
+            <field name="code">35</field>
+        </record>
+    </data>
+</odoo>
+

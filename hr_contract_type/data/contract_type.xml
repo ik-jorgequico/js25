@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Adding a salary rule for loan-->
+	<data noupdate="1">
+
+        <record id = "input_01_type" model = "hr.contract.type">
+            <field name = "cod">01</field>
+            <field name = "name">A PLAZO INDETERMINADO - D.LEG. 728</field>
+            <field name = "description">A PLAZO INDET - D.LEG. 728</field>
+        </record>
+        <record id = "input_02_type" model = "hr.contract.type">
+            <field name = "cod">02</field>
+            <field name = "name">A TIEMPO PARCIAL</field>
+            <field name = "description">A TIEMPO PARCIAL</field>
+        </record>
+        <record id = "input_03_type" model = "hr.contract.type">
+            <field name = "cod">03</field>
+            <field name = "name">POR INICIO O INCREMENTO DE ACTIVIDAD</field>
+            <field name = "description">POR INICIO O INCREM DE ACTIV</field>
+        </record>
+        <record id = "input_04_type" model = "hr.contract.type">
+            <field name = "cod">04</field>
+            <field name = "name">POR NECESIDADES DEL MERCADO</field>
+            <field name = "description">POR NECES DEL MERCADO</field>
+        </record>
+        <record id = "input_05_type" model = "hr.contract.type">
+            <field name = "cod">05</field>
+            <field name = "name">POR RECONVERSIÓN EMPRESARIAL</field>
+            <field name = "description">POR RECONV EMPRESARIAL</field>
+        </record>
+        <record id = "input_06_type" model = "hr.contract.type">
+            <field name = "cod">06</field>
+            <field name = "name">OCASIONAL</field>
+            <field name = "description">OCASIONAL</field>
+        </record>
+        <record id = "input_07_type" model = "hr.contract.type">
+            <field name = "cod">07</field>
+            <field name = "name">DE SUPLENCIA</field>
+            <field name = "description">DE SUPLENCIA</field>
+        </record>
+        <record id = "input_08_type" model = "hr.contract.type">
+            <field name = "cod">08</field>
+            <field name = "name">DE EMERGENCIA</field>
+            <field name = "description">DE EMERGENCIA</field>
+        </record>
+        <record id = "input_09_type" model = "hr.contract.type">
+            <field name = "cod">09</field>
+            <field name = "name">PARA OBRA DETERMINADA O SERVICIO ESPECÍFICO</field>
+            <field name = "description">OBRA DETERM O SERV ESPEC</field>
+        </record>
+        <record id = "input_10_type" model = "hr.contract.type">
+            <field name = "cod">10</field>
+            <field name = "name">INTERMITENTE</field>
+            <field name = "description">INTERMITENTE</field>
+        </record>
+        <record id = "input_11_type" model = "hr.contract.type">
+            <field name = "cod">11</field>
+            <field name = "name">DE TEMPORADA</field>
+            <field name = "description">DE TEMPORADA</field>
+        </record>
+        <record id = "input_12_type" model = "hr.contract.type">
+            <field name = "cod">12</field>
+            <field name = "name">DE EXPORTACIÓN NO TRADICIONAL D.LEY 22342</field>
+            <field name = "description">DE EXPORT. NO TRADIC.</field>
+        </record>
+        <record id = "input_13_type" model = "hr.contract.type">
+            <field name = "cod">13</field>
+            <field name = "name">DE EXTRANJERO - D.LEG.689</field>
+            <field name = "description">DE EXTRANJERO - D.LEG. 689</field>
+        </record>
+        <record id = "input_14_type" model = "hr.contract.type">
+            <field name = "cod">14</field>
+            <field name = "name">ADMINISTRATIVO DE SERVICIOS - D.LEG 1057</field>
+            <field name = "description">CAS  - D.LEG 1057</field>
+        </record>
+        <record id = "input_15_type" model = "hr.contract.type">
+            <field name = "cod">15</field>
+            <field name = "name">NOMBRADO - D.LEG. N.° 276</field>
+            <field name = "description">NOMBRADO - D.LEG. N.° 276</field>
+        </record>
+        <record id = "input_16_type" model = "hr.contract.type">
+            <field name = "cod">16</field>
+            <field name = "name">SERV. PERS - REGÍM. DE CARRERA</field>
+            <field name = "description">SERV. PERS - REGÍM. DE CARRERA</field>
+        </record>
+        <record id = "input_17_type" model = "hr.contract.type">
+            <field name = "cod">17</field>
+            <field name = "name">GERENTE PÚBLICO - D.LEG. 1024</field>
+            <field name = "description">GERENTE PÚBLICO - DL 1024</field>
+        </record>
+        <record id = "input_18_type" model = "hr.contract.type">
+            <field name = "cod">18</field>
+            <field name = "name">A DOMICILIO</field>
+            <field name = "description">A DOMICILIO</field>
+        </record>
+        <record id = "input_19_type" model = "hr.contract.type">
+            <field name = "cod">19</field>
+            <field name = "name">FUTBOLISTAS PROFESIONALES</field>
+            <field name = "description">FUTBOLISTAS PROFESIONALES</field>
+        </record>
+        <record id = "input_20_type" model = "hr.contract.type">
+            <field name = "cod">20</field>
+            <field name = "name">AGRARIO - LEY 27360</field>
+            <field name = "description">AGRARIO - LEY 27360</field>
+        </record>
+        <record id = "input_21_type" model = "hr.contract.type">
+            <field name = "cod">21</field>
+            <field name = "name">MIGRANTE ANDINO DECISIÓN 545</field>
+            <field name = "description">MIGRANTE ANDINO</field>
+        </record>
+        <record id = "input_22_type" model = "hr.contract.type">
+            <field name = "cod">22</field>
+            <field name = "name">A PLAZO INDETERMINADO - LEY 30057</field>
+            <field name = "description">A PLAZO INDETERMINADO - LEY 30057</field>
+        </record>
+        <record id = "input_23_type" model = "hr.contract.type">
+            <field name = "cod">23</field>
+            <field name = "name">A PLAZO FIJO - LEY 30057</field>
+            <field name = "description">A PLAZO FIJO - LEY 30057</field>
+        </record>
+        <record id = "input_24_type" model = "hr.contract.type">
+            <field name = "cod">24</field>
+            <field name = "name">NOMBRADO - CARRERAS ESPECIALES DEL SECTOR PÚBLICO</field>
+            <field name = "description">NOMBRADO CARRERAS ESPECIALES</field>
+        </record>
+        <record id = "input_25_type" model = "hr.contract.type">
+            <field name = "cod">25</field>
+            <field name = "name">CONTRATADO - CARRERAS ESPECIALES DEL SECTOR PÚBLICO </field>
+            <field name = "description">CONTRATADO CARRERAS ESPECIALES</field>
+        </record>
+        <record id = "input_26_type" model = "hr.contract.type">
+            <field name = "cod">26</field>
+            <field name = "name">OTROS NO PREVISTOS</field>
+            <field name = "description">OTROS NO PREVISTOS</field>
+        </record>
+        <record id = "input_27_type" model = "hr.contract.type">
+            <field name = "cod">27</field>
+            <field name = "name">CONVENIO DE PRACT PRE PROF</field>
+            <field name = "description">CONVENIO DE PRACTICAS PRE PROFESIONALES</field>
+        </record>
+        <record id = "input_28_type" model = "hr.contract.type">
+            <field name = "cod">28</field>
+            <field name = "name">RENOVACION AL CONTRATO</field>
+            <field name = "description">RENOVACION AL CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR NECESIDADES DEL MERCADO</field>
+        </record>
+
+       
+	</data>
+</odoo>

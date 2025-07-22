@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_canal,account_canal,model_account_canal,,1,1,1,1
+access_account_zonal,account_zonal,model_account_zonal,,1,1,1,1
+access_expense_type,expense_type,model_expense_type,,1,1,1,1
+access_expense_concept,expense_concept,model_expense_concept,,1,1,1,1
+access_account_pendings,account.pendings,model_account_pendings,,1,1,1,1
+access_account_payment_mass_aprobar,account.payment.mass,model_account_payment_mass,,1,1,1,1
+access_account_payment_mass_line,account.payment.mass.line,model_account_payment_mass_line,,1,1,1,1
+access_account_payment_mass_aprobar_inicial,account.payment.mass.aprobar.inicial,model_account_payment_mass_inicial,,1,1,1,1
+access_account_payment_mass_aprobar_final,account.payment.mass.aprobar.final,model_account_payment_mass_final,,1,1,1,1
+access_account_payment_mass_crear,account.payment.mass,model_account_payment_mass,,1,1,1,1
+access_account_payment_mass_line_crear,account.payment.mass.crear.line,model_account_payment_mass_line,,1,1,1,1
+access_account_payment_mass_inicial,account.payment.mass_inicial,model_account_payment_mass_inicial,,1,1,1,1
+access_account_payment_mass_final,account.payment.mass.final,model_account_payment_mass_final,,1,1,1,1
+access_acc_detrac_mass,access.acc.detrac.mass,model_acc_detrac_mass,,1,1,1,1
+access_acc_detrac_mass_line,access.acc.detrac.mass.line,model_acc_detrac_mass_line,,1,1,1,1

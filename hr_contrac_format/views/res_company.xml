@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_2_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page name="firma" string="Firmas">
+
+                    <group string="Gerente" name="files_employee">
+                        <group>
+                            <field name="gerente_name"/>
+                            <field name="gerente_job"/>
+                            <field name="gerente_doc_type"/>
+                            <field name="gerente_doc"/>
+                            
+                        </group>
+                        <group>
+                            <field name="company_abbr"/>
+                            <field name="gerente_partida_electroc"/>
+                            <field name="gerente_firma" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                </page>
+                
+            </xpath>
+        </field>
+    </record>
+</odoo>

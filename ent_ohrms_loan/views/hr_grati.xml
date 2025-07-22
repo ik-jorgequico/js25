@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_grati_line_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr.grati.line.form.view.inherit</field>
+        <field name="model">hr.grati.line</field>
+        <field name="inherit_id" ref="hr_grati.hr_grati_line_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='variables']" position="after">
+                <page string="Descuentos">
+                         <group string="Descuentos">
+                            <field name="loan_amount" force_save="1" readonly="1"/>
+                        </group>
+                    </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

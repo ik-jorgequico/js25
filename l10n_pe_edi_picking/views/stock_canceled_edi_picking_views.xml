@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_canceled_edi_picking_form" model="ir.ui.view">
+        <field name="name">stock.canceled.edi.picking.form</field>
+        <field name="model">stock.canceled.edi.picking</field>
+        <field name="arch" type="xml">
+            <form string="Confirmation">
+                <p>Are you sure to mark the order as <strong>Canceled in SUNAT</strong>?</p>
+                <footer>
+                    <button string="Confirm" type="object" name="action_canceled_edi_picking" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="data_ple53_form" model="ir.ui.view">
+		<field name="name">data.ple53.form</field>
+		<field name="model">data.ple53</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_form_base"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']/label" position="attributes">
+				<attribute name="string">Libro diario - Plan contable</attribute>
+			</xpath>
+			<button name="action_generate_xls" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</button>
+			<field name="xls_binary" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</field>
+			<page name="lines" position="inside">
+				<field name="child_ids" colspan="4" nolabel="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+			</page>
+		</field>
+	</record>
+
+	<record id="data_ple53_tree" model="ir.ui.view">
+		<field name="name">data.ple53.tree</field>
+		<field name="model">data.ple53</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_ple53_line_tree" model="ir.ui.view">
+		<field name="name">data.ple53.line.tree</field>
+		<field name="model">data.ple53.line</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="period_ple"/>
+				<field name="chart_code"/>
+				<field name="chart_name"/>
+				<field name="chart_type"/>                                
+				<field name="state_ple"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_ple53_line_form" model="ir.ui.view">
+		<field name="name">data.ple53.line.form</field>
+		<field name="model">data.ple53.line</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="periodo_sunat"/>
+						<field name="period_ple"/>
+						<field name="chart_code"/>
+						<field name="chart_name"/>
+						<field name="chart_type"/>
+					</group>
+					<group>
+						<field name="parent_id"/>
+						<field name="company_id"/>
+					</group>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_data_ple53" model="ir.actions.act_window">
+		<field name="name">Libro diario 5.3</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">data.ple53</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_sunat_ple53" 
+		name="5.3 Plan contable" 
+		parent="menu_sunat_diary" 
+		sequence="102"
+		groups="account.group_account_manager" 
+		action="action_data_ple53"/>
+</odoo>

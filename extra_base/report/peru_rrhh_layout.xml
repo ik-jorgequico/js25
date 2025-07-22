@@ -1,0 +1,10 @@
+<odoo>
+    <template id="peru_rrhh_layout">
+        <t t-set="o" t-value="o.with_context(lang=lang)" />
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-set="company" t-value="company_id" />
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0" />
+        </div>
+    </template>
+</odoo>

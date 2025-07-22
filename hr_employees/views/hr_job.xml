@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_view_hr_job_form_inherit" model="ir.ui.view">
+        <field name="name">hr.view.hr.job.form.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Sales Manager" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="cod" />
+                    </group>
+                    <notebook>
+                        <page name="description" string="Descripción">
+                            <field name="state" invisible="1"/>
+                            <field name="description" options="{'collaborative': true}" invisible = "state != 'recruit'"/>
+                            
+                            <!-- attrs="{'invisible': [('state', '!=', 'recruit')]}"  -->
+                        </page>
+                        <page name="recruitment" string="Recruitment">
+                            <group>
+                                <group name="recruitment">
+                                    <field name="company_id" options="{'no_create': True,'no_open': True}" groups="base.group_multi_company" />
+                                    <field name="department_id" />
+                                </group>
+
+                                <group>
+                                    <field name="no_of_recruitment" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page name="job_relationship" string="Relación de Trabajo">
+                            <group>
+                                <group name="job_relationship" string="Relación de Trabajo">
+                                    <field name="parent_id" />
+                                    <field name="child_ids" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_view_hr_job_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.view.hr.job.tree.inherit</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_tree" />
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="cod" />
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

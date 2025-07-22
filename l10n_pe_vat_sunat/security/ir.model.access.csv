@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_agent_retention,resolution.agent.retention,model_agent_retention,base.group_user,1,0,0,0
+access_good_contributor,resolution.good.contributor,model_good_contributor,base.group_user,1,0,0,0
+access_file_downloader,resolution.file.downloader,model_file_downloader,base.group_user,1,0,0,0

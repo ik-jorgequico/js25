@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_grati,hr.grati,model_hr_grati,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_grati_line,hr.grati.line,model_hr_grati_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_grati_subline,hr.grati.subline,model_hr_grati_subline,hr_contract.group_hr_contract_manager,1,1,1,1

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_5ta_line_form_view" model="ir.ui.view" >
+        <field name="name">hr.5ta.line.form.view</field >
+        <field name="model">hr.5ta.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_5ta" /> 
+
+                            <field name="name" invisible="1"/>
+                            <field name="employee_id" />
+                            <field name="structure_type_abbr" />
+                            
+                            <field name="identification_id" />
+                            <field name="first_day_contract" />
+                            <field name="last_day_contract" />
+
+                            <field name="salary" />
+                            <field name="family_asig" />
+                        </group>
+
+
+                        <group>
+                            <field name="grati_projection" />
+                            <field name="salary_projection" />
+
+                            <field name="rap" />
+                            <field name="base_5ta" />
+                            <field name="data_5ta" />
+
+                            <field name="data_5ta_mensual" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="xls_filename_line" invisible="1"/>
+                        <field name="xls_binary_line" filename="xls_filename_line" readonly="1"/>
+                    </group>   
+
+                </sheet> 
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_5ta_line_tree_view" model="ir.ui.view" >
+        <field name="name">hr.5ta.line.tree.view</field >
+        <field name="model">hr.5ta.line</field>
+        
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf"
+                        string="5TA PDF"
+                        type="object"
+                    />
+                </header> -->
+
+                    <field name="date_5ta" /> 
+
+                    <field name="name" column_invisible="1"/>
+                    <field name="parent_id" column_invisible="1"/>
+
+                    <field name="employee_id" />
+                    <field name="identification_id" />
+                    <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/>
+
+                    <field name="first_day_contract" />
+                    <field name="last_day_contract" />
+
+                    <field name="salary_amount" />
+                    <field name="salary_amount_5ta" />
+
+                    <field name="last_month_salary" />
+
+                    <field name="salary_projection" />
+                    <field name="grati_projection" />
+
+                    <field name="rap" />
+                    <field name="base_5ta" />
+                    <field name="data_5ta" />
+
+                    <field name="lbs" />
+                    
+                    <field name="person_percent_max" />
+                    <field name="data_5ta_mensual"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_5ta_line" model="ir.actions.act_window">
+        <field name="name">5ta CATEGORIA LINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.5ta.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+
+</odoo>

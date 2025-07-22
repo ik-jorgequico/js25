@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_payroll_view_hr_payslip_by_employees_inherit" model="ir.ui.view">
+        <field name="name">hr.payroll.view.hr.payslip.by.employees.inherit</field>
+        <field name="model">hr.payslip.employees</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees"/>
+        
+        <field name="arch" type="xml">
+
+            <xpath expr="//form" position="replace">
+                <form string="Payslips by Employees">
+                <span nolabel="1" colspan="2">Este asistente generará recibos de nómina para todos 
+                                    los empleados seleccionados en función de las fechas 
+                                    especificadas en Payslips Run.
+                </span>
+                <field name="structure_type_id" nolabel="1" invisible="1"/>
+                <field name="structure_id" nolabel="1" domain="[('type_id','=',structure_type_id),]" required="0" invisible="1"/>
+
+                <separator string="EMPLEADOS PARA LA NOMINA"/>
+                <field name="employee_ids" nolabel="1">
+                    <tree>
+                        <field name="name"/>
+                        <field name="private_email"/>
+                        <field name="department_id"/>
+                    </tree>
+                </field>
+                    <footer>
+                        <button string="Generar" name="compute_sheet" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>           
+            </xpath>
+            
+        </field>
+    </record>
+
+
+    <!-- <record id="hr_payslip_run_form_credit_note" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.credit.note</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit_note']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record> -->
+
+    <!-- <record id="hr_payslip_run_tree_credit_note" model="ir.ui.view">
+        <field name="name">hr.payslip.run.tree.credit.note</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit_note']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

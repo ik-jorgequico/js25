@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_job_aspect,hr.job.aspect,model_hr_job_aspect,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_job_benefit,hr.job.benefit,model_hr_job_benefit,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_job_skill,hr.job.skill,model_hr_job_skill,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_job_experience,hr.job.experience,model_hr_job_experience,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_job_technical,hr.job.technical,model_hr_job_technical,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_job_functional,hr.job.functional,model_hr_job_functional,hr_contract.group_hr_contract_manager,1,1,1,1
+
+
+

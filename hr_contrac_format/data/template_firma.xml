@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <template id="template_firma">
+            <table width="100%">
+                <!-- Fila de imagen -->
+                <tr class="text-center">
+                    <td>
+                        <!-- <img class="img-fluid" width="200px" t-att-src="'data:image/png;base64,%s' % to_text(o.employee_id.company_id.gerente_firma)"/> -->
+                    </td>
+                    <td></td>
+                </tr>
+                <!-- Fila de línea horizontal -->
+                <tr>
+                    <td><hr class="hr-line"/></td>
+                    <td><hr class="hr-line"/></td>
+                </tr>
+                <!-- Fila de nombres -->
+                <tr class="table-cell">
+                    <td><span class="font-small" t-field="o.employee_id.company_id.gerente_name"/></td>
+                    <td><span class="font-small" t-field="o.employee_id.name"/></td>
+                </tr>
+                <!--Puesto del Gerente de la compania -->
+                <tr class="table-cell">
+                    <td><span class="font-small" t-field="o.employee_id.company_id.gerente_job"/></td>
+                    <td>
+                        <span class="font-small">Nro.</span>
+                        <span class="font-small" t-field="o.employee_id.l10n_latam_identification_type_id.name"/>
+                        <span class="font-small" t-field="o.employee_id.identification_id"/>
+                    </td>
+                </tr>
+                <!--Puesto del Numero ID del Gerente del la compania -->
+                <tr class="table-cell">
+                    <td>
+                        <span class="font-small">Nro.</span>
+                        <span class="font-small" t-field="o.employee_id.company_id.gerente_doc_type"/>
+                        <span class="font-small" t-field="o.employee_id.company_id.gerente_doc"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </template>
+    </data>
+</odoo>

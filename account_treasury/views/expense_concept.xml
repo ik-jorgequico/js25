@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_expense_concept_tree" model="ir.ui.view">
+            <field name="name">expense.concept.tree</field>
+            <field name="model">expense.concept</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Expense Concept">
+                    <field name="name"/>
+                    <field name="expense_type" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_expense_concept" model="ir.actions.act_window">
+            <field name="name">Conceptos de Gasto</field>
+            <field name="res_model">expense.concept</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id"></field>
+            <field name="search_view_id"/>
+        </record>
+
+        <menuitem id="menu_expense_concept" name="Conceptos de Gasto" action="action_expense_concept" parent="account.account_account_menu" sequence="5"/>
+    </data>
+</odoo>

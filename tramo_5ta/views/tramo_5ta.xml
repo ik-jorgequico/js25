@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tramo_5ta_tree_view" model="ir.ui.view" >
+        <field name="name">tramo.5ta.tree.view</field >
+        <field name="model">tramo.5ta</field>
+        <field name="arch" type="xml">
+            <tree string = "Tramo de 5ta categoria" >
+                <field name="code" />
+                <field name="name" />
+                <field name="uit_from" />
+                <field name="uit_to" />
+                <field name="percentage" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_tramo_5ta" model="ir.actions.act_window">
+        <field name="name">Tramo 5ta Categoria</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tramo.5ta</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_hr_5ta_category"
+        name="5ta Categoria"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+        sequence="90"
+        groups="hr_payroll.group_hr_payroll_user"
+    />
+    <menuitem
+        id="menu_action_hr_salary_rule_form"
+        action="tramo_5ta.action_tramo_5ta"
+        name="Tramo 5ta Categoria"
+        parent="menu_hr_5ta_category"
+        sequence="30"/>
+
+</odoo>

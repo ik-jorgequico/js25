@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>    
+    <record id="hr_new_company_view_form" model="ir.ui.view">
+        <field name="name">hr.new.company.view.form</field>
+        <field name="model">hr.default.data</field>
+
+        <field name="arch" type="xml">
+            <form string="Importar Configuracion">
+
+            <header>
+                <button name="action_default_data" string="Importar Config" type="object" class="btn-primary" />
+            </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="origin_id"/>
+                        <field name="company_id"/>
+                    </group>
+                </sheet>
+                <!-- seccion correo -->
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_default_data" model="ir.actions.act_window">
+        <field name="name">Importar Configuracion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.default.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+     <menuitem
+        id="menu_admin"
+        name="Administrar"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+        sequence="900" />
+
+    <menuitem
+        id="menu_action_default_data"
+        action="action_default_data"
+        name="Importar Config"
+        parent="menu_admin"
+        sequence="100" />    
+
+</odoo>

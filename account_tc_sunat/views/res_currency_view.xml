@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_currency_form_inherit_oa" model="ir.ui.view">
+		<field name="name">view_currency_form_inherit_oa</field>
+		<field name="model">res.currency</field>
+		<field name="inherit_id" ref="base.view_currency_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='is_current_company_currency']" position="before">
+				<header>
+					<button name="update_currency" string="Actualizar TC" type="object" class="oe_highlight"/>
+				</header>
+			</xpath>
+
+			<xpath expr="//page[@name='rates']" position="after">
+				<!-- <notebook class="o_rage_update"> -->
+					<page string="Actualizar Rango" name="rage_update">
+						<group>
+							<group>
+								<group>
+									<field name="date_from"/>
+									<field name="date_to" />
+								</group>
+							</group>
+							<group>
+								<group>
+									<button name="update_currency_range" string="Actualizar Rango" type="object" class="oe_highlight"/>
+								</group>
+							</group>
+						</group>
+					</page>
+				<!-- </notebook> -->
+			</xpath>
+
+		</field>
+	</record>
+</odoo>

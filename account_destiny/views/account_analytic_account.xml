@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+ <record id="view_account_analytic_account_form_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="have_destiny"/>
+                <field name="destiny_journal_id" invisible="not have_destiny" required="have_destiny" domain="[('company_id','=',company_id)]"/>
+                <field name="account_expense_id" invisible="not have_destiny" required="have_destiny" domain="[('company_id','=',company_id)]"/>
+                <field name="account_charge_id" invisible="not have_destiny" required="have_destiny" domain="[('company_id','=',company_id)]"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

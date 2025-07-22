@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_account_regularization_form" model="ir.ui.view">
+			<field name="name">account.regularizations.form</field>
+			<field name="model">account.regularizations</field>
+			<field name="arch" type="xml">
+				<form string="Regularizacion Contable" duplicate="0">
+					<header>
+						<button name="compute_sheet" string = "Publicar" invisible="state != 'import'" class="btn btn btn-primary mr-1" type="object" />
+						<field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,done" />
+					</header>
+					<sheet>
+						<h2 class="mt0" >
+							<field name="name" readonly="1" force_save="1"/>
+						</h2>
+
+						<group>
+							<group>
+								<field name="date" required = "True" readonly="state == 'done'" />
+								<field name="journal_id" options="{'no_create': True, 'no_edit': True}" required="True" readonly="state == 'done'"/>
+								<field name="entry_id" readonly="state == 'done'" invisible="state != 'done'"  options="{'no_create': True, 'no_edit': True}"/>
+							</group>
+							<group>
+								<field name="company_id" invisible="1" options="{'no_create': True, 'no_edit': True}"/>
+								<field name="currency_id" required="True" options="{'no_create': True, 'no_edit': True}" readonly="state == 'done'"/>
+								<field name="glosa_sunat" readonly="state == 'done'"/>
+							</group>
+
+							<br/>
+						</group>
+						<notebook>
+							<page string="Apuntes" invisible="state == 'draft'">
+								<field name="child_ids" readonly="state == 'done'" >
+									<tree editable="bottom" create="1" edit="1">
+										<field name="aml_id" readonly="1" force_save="1" optional="hide"/>
+										<field name="account_id" />
+										<field name="partner_id" />
+										<field name="name" />
+										<field name="currency_id" />
+										<field name="amount_currency" />
+										<field
+											name="analytic_distribution"
+											widget="analytic_distribution"
+											readonly="aml_id != False"
+											options="{'business_domain': 'account_regularizations'}"
+										/>
+										<field name="debit" sum = "Debe"/>
+										<field name="credit" sum = "Haber"/>
+										<field name="company_id" optional="hide"/>
+										<field name="amount_residual" column_invisible="1"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Seleccionable">
+								<field name="account_move_line" nolabel="1" domain="[('parent_state','=','posted'), ('reconciled','=',False), ('account_id.reconcile','=', True), ('full_reconcile_id','=', None)]" readonly="state == 'done'">
+									<tree>
+										<field name="account_id"/>
+										<field name="partner_id"/>
+										<field name="name"/>
+										<field name="analytic_distribution"/>
+										<field name="amount_currency"/>
+										<field name="currency_id"/> 
+										<field name="debit" sum = "Debe"/>
+										<field name="credit" sum = "Haber"/>
+										<field name="amount_residual"/>
+										<field name="date_maturity"/>
+									</tree>
+								</field>
+
+								<button 
+									name = "compute_sheet_select"
+									string = "Importar"
+									class = "btn-primary"
+									type="object"
+								/>
+
+							</page>
+						</notebook>
+					</sheet>
+					<div class = "oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="activity_ids" widget="mail_activity"/>
+						<field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_account_regularization_tree" model="ir.ui.view">
+			<field name="name">account.regularizations.tree</field>
+			<field name="model">account.regularizations</field>
+			<field name="arch" type="xml">
+				<tree string="Regularizacion Contable">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="entry_id"/>
+					<field name="state"/>
+					<field name="company_id" optional="hide" on_change="1" readonly="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_account_regularization" model="ir.actions.act_window">
+			<field name="name">Regularizacion Contable</field>
+			<field name="res_model">account.regularizations</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+				Click to start a new Regularization Account.
+				</p>
+			</field>
+		</record>
+
+	<menuitem id="menu_regularizations" 
+		name="Regularizacion Contable" 
+		action="action_account_regularization" 
+		parent="account.menu_finance_entries" 
+		sequence="100"/>
+
+	</data>
+
+</odoo>

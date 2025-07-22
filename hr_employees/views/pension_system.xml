@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pension_system_tree_view" model="ir.ui.view" >
+        <field name="name">pension.system.tree.view</field >
+        <field name="model">pension.system</field>
+        
+        <field name="arch" type="xml">
+            <tree string = "Sistema de Pensión">
+                <field name="code"/>
+                <field name="pension_system"/>
+                <field name="name"/>
+                <field name="private_sector"/>
+                <field name="public_sector"/>
+                <field name="cuspp"/>
+                <field name="other_entities"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pension_systems" model="ir.actions.act_window">
+        <field name="name">Sistema de Pensión</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pension.system</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+
+    <menuitem
+        id="menu_action_pension_systems"
+        action="action_pension_systems"
+        name="Sistema de Pensión"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="150"/>
+</odoo>

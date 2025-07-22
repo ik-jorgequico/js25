@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <report
+        id="report_dec_street"
+        model="hr.employee"
+        string="Declaracion Jurada de Domicilio"
+        report_type="qweb-pdf"
+        name="hr_employees.report_dec_streets"
+        file="hr_employees.report_dec_streets"
+        menu="False"
+    /> -->
+
+    <record id="report_dec_street" model="ir.actions.report">
+        <field name="name">Declaracion Jurada de Domicilio</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_employees.report_dec_streets</field>
+        <field name="report_file">hr_employees.report_dec_streets</field>
+        <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <!-- Erase fields to avoid double PDF posting
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/> -->
+    </record>
+
+    <!-- <report
+        id="report_dec_no_5tas"
+        model="hr.employee"
+        string="Declaracion Jurada 5ta"
+        report_type="qweb-pdf"
+        name="hr_employees.report_dec_no_5ta"
+        file="hr_employees.report_dec_no_5ta"
+        menu="False"
+    /> -->
+
+    <record id="report_dec_no_5tas" model="ir.actions.report">
+        <field name="name">Declaracion Jurada 5ta</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_employees.report_dec_no_5ta</field>
+        <field name="report_file">hr_employees.report_dec_no_5ta</field>
+        <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <field name="attachment">'Declaracion Jurada 5ta.pdf'</field>
+        <field name="attachment_use">True</field>
+        <!-- Erase fields to avoid double PDF posting
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/> -->
+    </record>
+
+    <!-- <report
+        id="report_cargo_rits"
+        model="hr.employee"
+        string="Cargo RIT"
+        report_type="qweb-pdf"
+        name="hr_employees.report_cargo_rit"
+        file="hr_employees.report_cargo_rit"
+        menu="False"
+    /> -->
+
+    <record id="report_cargo_rits" model="ir.actions.report">
+        <field name="name">Cargo RIT</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_employees.report_cargo_rit</field>
+        <field name="report_file">hr_employees.report_cargo_rit</field>
+        <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <!-- Erase fields to avoid double PDF posting
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/> -->
+    </record>
+
+    <!-- <report
+        id="report_cargo_rissts"
+        model="hr.employee"
+        string="Constancia Entrega RISST"
+        report_type="qweb-pdf"
+        name="hr_employees.report_cargo_risst"
+        file="hr_employees.report_cargo_risst"
+        menu="False"
+    /> -->
+
+    <record id="report_cargo_rissts" model="ir.actions.report">
+        <field name="name">Constancia Entrega RISST</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_employees.report_cargo_risst</field>
+        <field name="report_file">hr_employees.report_cargo_risst</field>
+        <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <!-- Erase fields to avoid double PDF posting
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/> -->
+    </record>
+
+    <!-- <report
+        id="report_entry_forms"
+        model="hr.employee"
+        string="Ficha Incorporacion Personal"
+        report_type="qweb-pdf"
+        name="hr_employees.report_entry_form"
+        file="hr_employees.report_entry_form"
+        menu="False"
+    /> -->
+
+    <record id="report_entry_forms" model="ir.actions.report">
+        <field name="name">Ficha Incorporacion Personal</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_employees.report_entry_form</field>
+        <field name="report_file">hr_employees.report_entry_form</field>
+        <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+        <!-- Erase fields to avoid double PDF posting
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="False"/> -->
+    </record>
+
+</odoo>

@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Nóminas',
+    'version': '1.0',
+    'author': 'SystemOuts',
+    'website': '',
+    'category': 'Localization PE/HR',
+    'description': """
+        Se agrega operacioens de nómina.
+    """,
+    'depends': [
+        'base',
+        'hr',
+        'hr_employees',
+        'hr_payroll',
+        'hr_afectations',
+        'hr_payroll_account',
+        'hr_reports_payroll',
+        'account_accountant',
+        'hr_work_entry_contract_enterprise',
+    ],
+    'data': [
+        'views/hr_payroll_menu.xml',
+        'views/hr_payslip_views.xml',
+        'views/hr_payslip_employees.xml',           
+        'views/hr_payroll_structure_type_views.xml',
+        'views/hr_payroll_account_views.xml',          
+        'views/hr_payroll_structure_views.xml',        
+        'views/hr_payslip_run_views.xml',        
+        'views/report_payslip_oa.xml',        
+        'views/hr_salary_rule.xml',     
+        'views/hr_payslip_input_type.xml',
+        'views/hr_salary_rule_category.xml',
+        # 'data/work_entry_type.xml',
+        'data/paper_format_payslips.xml',
+        'data/salary_rule_payslips.xml',
+    ],
+    'license': 'OPL-1',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<odoo>
+    <record id="form_bulk_send_utilities_incomes" model="ir.ui.view">
+        <field name="name">form.bulk.send.utilities.incomes</field>
+        <field name="model">bulk.send.utilities.incomes</field>
+        <field name="arch" type="xml">
+            <form string="Send Utilities in Email">
+                <p>Click on below Send button to send Utilities to the Employees</p>
+                <footer>
+                    <!-- <button name="send_utilities_in_email" type="object" string="Send" class="oe_highlight"/> -->
+                    <button string="Close Window" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- <act_window
+        id="action_send_utilities_in_email"
+        name="Send Payslip(s) in Email"
+        res_model="bulk.send.utilities.incomes"
+        binding_model="hr.utilities.incomes"
+        view_mode="form"
+        target="new"
+        /> -->
+</odoo>

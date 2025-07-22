@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_move_form_inherit_for_new_fields" model="ir.ui.view">
+		<field name="name">view.move.form.inherit.for.new.fields</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+
+			<label for="ref" position="before">
+				<field name="seriecomp_sunat" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')" readonly="state == 'posted'"/>
+				<field name="numcomp_sunat" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')" readonly="state == 'posted'"/>
+			</label>
+
+			<field name="invoice_incoterm_id" position="before">
+				<field name="state_ple" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')" readonly="state == 'posted'"/>
+				<field name="state_ple_sale" invisible="move_type not in ('out_invoice', 'out_refund', 'out_receipt')" readonly="state == 'posted'"/>
+			</field>
+
+			<xpath expr="//group[@id='header_right_group']/div[@name='journal_div']" position="after">
+				<field name="op_nodom" readonly="1" force_save="1" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')"/>
+				<field name="detraction_type_id" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt') or op_nodom == True" readonly="state == 'posted'" options="{'no_create': True,'no_open': True}"/>
+				<field name="entry_id" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt') or detraction_type_id == False or state != 'posted'" readonly="state == 'posted'" options="{'no_create': True}"/>
+				<field name="glosa_sunat" invisible="move_type in ('out_invoice', 'out_refund', 'out_receipt')" readonly="state == 'posted'"/>
+				<field name="convenio_nodom" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt') or op_nodom == False" readonly="state == 'posted'" required="op_nodom == True" options="{'no_create': True, 'no_open': True}"/>
+				<field name="type_profit_nodom" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt') or op_nodom == False" readonly="state == 'posted'" required="op_nodom == True" options="{'no_create': True,'no_open': True}"/>
+			</xpath>
+
+			<xpath expr="//page[@id='aml_tab']//field[@name='line_ids']//tree" position="inside">
+				<field name="sequence_ple" optional="hide"/>
+			</xpath>
+<!-- 
+			<xpath expr="//group[@id='header_right_group']" position="inside"> 
+				<field name="l10n_pe_edi_retention_type_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+			</xpath> -->
+
+			<xpath expr="//field[@name='ref']" position="attributes">
+				<attribute name="readonly">state != 'draft'</attribute>
+			</xpath>
+<!-- 
+			<field name="partner_bank_id" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</field> -->
+
+			<xpath expr="//field[@name='partner_bank_id']" position="replace"/>
+			<xpath expr="//field[@name='glosa_sunat']" position="after">
+				<field name="partner_bank_id" context="{'default_partner_id': bank_partner_id, 'display_account_trust': True}" 
+					domain="[('partner_id', '=', bank_partner_id)]" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')" readonly="state != 'draft'"/>
+			</xpath>
+
+			<xpath expr="//group[@name='accounting_info_group']" position="after">
+				<group name="move_origin_data" string="Datos de Asiento de origen" invisible="move_type not in ('in_refund')">
+						<field name="reversal_type" />
+						<field name="l10n_pe_edi_reversal_serie" />
+						<field name="l10n_pe_edi_reversal_number" />
+						<field name="l10n_pe_edi_reversal_date" />
+				</group>
+			</xpath>
+
+
+
+			<page id="other_tab" position="after">
+				<page id="det" string="Detracciones" invisible="detraction_type_id == False">
+					<group string="Info Detracciones">
+						<field name="num_det" />
+						<field name="date_det" />
+						<field name="percent_det" readonly="1" force_save="1"/>
+						<field name="total_det" readonly="state == 'posted'"/>
+					</group>
+				</page>
+			</page>
+		</field>
+	</record>
+
+	<record id="view_move_form_inherit_odoofact" model="ir.ui.view">
+		<field name="name">view_move_form_inherit_odoofact</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="l10n_pe_edi_odoofact.view_move_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='l10n_latam_document_type_id']" position="replace"/>
+			<xpath expr="//field[@name='partner_shipping_id']" position="after">
+				<field name="l10n_latam_document_type_id" readonly="state == 'posted'"/>
+			</xpath>
+
+			<xpath expr="//field[@name='l10n_pe_edi_retention_type_id']" position="replace"/>
+			<xpath expr="//field[@name='l10n_pe_edi_detraction_payment_type_id']" position="after">
+				<field name="l10n_pe_edi_retention_type_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" readonly="state == 'posted'"/>
+			</xpath>
+
+			<xpath expr="//field[@name='l10n_pe_edi_odoofact_operation_type']" position="attributes">
+				<attribute name="invisible">move_type not in ('out_invoice', 'out_refund', 'out_receipt')</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='l10n_pe_edi_service_order']" position="attributes">
+				<attribute name="invisible">move_type not in ('in_invoice', 'in_refund', 'in_receipt')</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='l10n_pe_edi_shop_id']" position="attributes">
+				<attribute name="invisible">move_type not in ('out_invoice', 'out_refund', 'out_receipt')</attribute>
+			</xpath>
+
+			<xpath expr="//group[@name='reference_guides_group']" position="attributes">
+				<attribute name="invisible">move_type not in ('out_invoice', 'out_refund', 'out_receipt')</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='l10n_pe_edi_detraction_type_id']" position="attributes">
+				<attribute name="invisible">move_type not in ('out_invoice', 'out_refund', 'out_receipt')</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='payment_reference']" position="attributes">
+				<attribute name="readonly">state != 'draft'</attribute>
+			</xpath>
+
+			<field name="l10n_pe_edi_exchange_rate" position="after">
+				<field name="amount_others_purchase" invisible="move_type not in ('in_invoice', 'in_refund', 'in_receipt')"/>
+				<field name="amount_expo" invisible="move_type not in ('out_invoice', 'out_refund', 'out_receipt')"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="view_invoice_tree_l10n_pe_edi_account" model="ir.ui.view">
+		<field name="name">view_invoice_tree_l10n_pe_edi_account</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="l10n_pe_edi_odoofact.view_invoice_tree"/>
+		<field name="arch" type="xml">
+			<field name="l10n_pe_edi_ose_accepted" position="attributes">
+				<attribute name="optional">hide</attribute>
+			</field>
+			<field name="l10n_pe_edi_sunat_accepted" position="attributes">
+				<attribute name="optional">hide</attribute>
+			</field>
+		</field>
+	</record>
+
+	<record id="fix_l10n_latam_document_type_id" model="ir.ui.view">
+		<field name="name">fix_l10n_latam_document_type_id</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="l10n_latam_invoice_document.view_move_form"/>
+		<field name="arch" type="xml">
+			<field name="l10n_latam_document_type_id" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</field>
+			<field name="l10n_latam_document_number" position="attributes">
+				<attribute name="required">partner_id and l10n_latam_use_documents and (l10n_latam_manual_document_number or not highest_name) and not move_type in ('out_invoice','out_refund')</attribute>
+			</field>
+		</field>
+	</record>
+
+</odoo>

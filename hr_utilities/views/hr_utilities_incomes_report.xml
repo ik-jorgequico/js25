@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="action_report_hr_utilities_incomes" model="ir.actions.report">
+            <field name="name">Utilities</field>
+            <field name="model">hr.utilities.incomes</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_utilities.report_utilities_lang</field>
+            <field name="report_file">hr_utilities.report_utilities_lang</field>
+            <field name="print_report_name">'Utility - %s' % (object.employee_id.name)</field>
+            <field name="binding_model_id" ref="model_hr_utilities_incomes"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting -->
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/>
+        </record>
+</odoo>

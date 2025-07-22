@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_2_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="portal_user" string="Portal">
+                    <group string="Usuario portal" name="portal_user">
+                        <group>
+                            <field name="portal_user"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!-- <OLD NEW EMPLOYEE> -->
+    <!-- <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="formats" string="Formatos de ingreso estáticos">
+                    <group string="Reportes" name="files_employee">
+                        <group>
+                            <field name="vida_field" invisible="1"/>
+                            <field name="boletin_field" invisible="1"/>
+                            <field name="work_field" invisible="1"/>
+
+                            <field name="vida_record" filename="vida_field"/>
+                            <field name="boletin_record" filename="boletin_field"/>
+                            <field name="work_record" filename="work_field"/>
+                        </group>
+                        <group>
+                            <field name="security_field" invisible="1"/>
+                            <field name="sst_field" invisible="1"/>
+                            
+                            <field name="security_record" filename="security_field"/>
+                            <field name="sst_record" filename="security_field"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record> -->
+    <!-- </OLD NEW EMPLOYEE> -->
+</odoo>

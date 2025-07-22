@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="hr_lbs_form_inherit" model="ir.ui.view">
+            <field name="name">hr.lbs.line.form.inherit</field>
+            <field name="model">hr.lbs.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_lbs.hr_lbs_line_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_dowload_report_lbs_pdf']" position="after">
+
+                    <button name="action_dowload_report_lbs_work_pdf" string="CERTIFICADO DE TRABAJO" type="object"/>
+                    <button name="action_dowload_report_lbs_cts_pdf" string="CERTIFICADO DE CTS" type="object"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="hr_lbs_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.lbs.line.form.inherit</field>
+            <field name="model">hr.lbs.line</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="hr_lbs.hr_lbs_line_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_dowload_report_lbs_pdf']" position="after">
+
+                    <button name="action_dowload_report_lbs_work_pdf" string="CERTIFICADO DE TRABAJO" type="object"/>
+                    <button name="action_dowload_report_lbs_cts_pdf" string="CERTIFICADO DE CTS" type="object"/>
+
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

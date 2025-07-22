@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="comis_system_pension_tree_view" model="ir.ui.view" >
+        <field name="name">comis.system.pension.tree.view</field >
+        <field name="model">comis.system.pension</field>
+        <field name="arch" type="xml">
+            <tree string = "Sistema de Comisión" >
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="fund" />
+                <field name="bonus" />
+                <field name="flow" />
+                <field name="balance" />
+                <field name="pension_id" />
+                <field name="rem_max" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_comis_system_pension" model="ir.actions.act_window">
+        <field name="name">Sistema de Comisión</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">comis.system.pension</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_action_comis_system_pension" 
+    action="action_comis_system_pension" 
+    name="Sistema de Comisión" 
+    parent="hr_payroll.menu_hr_salary_configuration" 
+    sequence="155"/>
+</odoo>

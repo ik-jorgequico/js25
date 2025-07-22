@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_payroll_hr_salary_rule_form_inherit2" model="ir.ui.view">
+        <field name="name">hr.payroll.hr.salary.rule.form.inherit2</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_view_form"/>
+        
+        <field name="arch" type="xml">
+
+             <xpath expr="//field[@name='code']" position="after">
+                <field name="is_affected"   widget="boolean_toggle"/>
+                <field name="appears_on_utilities" />
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" invisible="1"/>
+             </xpath>
+             
+
+            <xpath expr="//page[@name='accounting']" position="after">
+                <page string="Afectaciones" name="afectations">
+                    <group colspan="4">
+                        <field colspan="2" name="have_5ta" invisible="have_5ta_direct == 'True'"/>
+                        <field colspan="2" name="have_5ta_direct" invisible="have_5ta == 'True'"/>
+                        <field colspan="2" name="have_5ta_grati" />
+                        <field colspan="2" name="have_cts" />
+                        <field colspan="2" name="have_gratification" />
+                        <field colspan="2" name="have_utilities" />
+                        <field colspan="2" name="have_holiday" />
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+
+    </record>
+
+    <record id="hr_salary_rule_form_appears_on_payslip" model="ir.ui.view">
+        <field name="name">hr_salary_rule_form_appears_on_payslip</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='appears_on_payslip']" position="attributes">
+                <attribute name= "invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='report']" position="replace">
+                <page string="Reporte" name="report">
+                    <group>
+                        <group>
+                            <field name="appears_report_payroll"/>
+                        </group>
+                        <group>  
+                            <field name="appears_on_payslip"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

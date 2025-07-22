@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="hr_grati_subline_tree_view" model="ir.ui.view" >
+        <field name="name">hr.grati.subline.tree.view</field >
+        <field name="model">hr.grati.subline</field>
+        
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="cont" />
+                <field name="amount" />
+                <field name="average" />
+                <field name="grati_line" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_grati_subline_form_view" model="ir.ui.view" >
+        <field name="name">hr.grati.subline.form.view</field >
+        <field name="model">hr.grati.subline</field>
+        
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                        <field name="name" />
+                        <field name="cont" />
+                        <field name="amount" />
+                        <field name="average" />
+                        <field name="grati_line" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_grati_subline" model="ir.actions.act_window">
+        <field name="name">GRATI SUBLINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.grati.subline</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Definir el grupo Invisible -->
+    <record id="make_invisible" model="res.groups">
+        <field name="name">Invisible Entradas de trabajo Ausencias</field>
+    </record>
+
+    <!-- Hacer invisible el menú-->
+    <record id="hr_work_entry_contract_enterprise.menu_hr_payroll_work_entries_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+    <record id="hr_payroll.menu_hr_payroll_employees_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+
+    <record id="hr_payroll.menu_hr_payroll_employee_payslips_to_pay" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+
+    <record id="hr_payroll.menu_hr_payroll_employee_payslips" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+
+
+    <!-- Menu de configuracion  -->
+    <menuitem
+        id="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+        groups="hr.group_hr_user"
+        sequence="999" />
+
+    <!-- sub menu de ajuste de configuracion -->
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_global_settings"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+        sequence="666"/>
+
+
+    <!-- Menu de informe  -->
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_report"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+        groups="hr.group_hr_user"
+        sequence="997" />
+    
+       <!-- Menu de reporte  -->
+    <menuitem
+        id="hr_reports_payroll.menu_hr_reports_pdf"
+        name ="Reportes"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+        groups="hr.group_hr_user"
+        sequence="998" />
+
+</odoo>

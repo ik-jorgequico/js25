@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_sunat" name="Sunat" parent="account.menu_finance" sequence="7">
+        <menuitem id="menu_libros_sunat" name="Libros SUNAT" sequence="10">
+            <menuitem id="menu_sunat_diary" name="5 - Libro diario" sequence="500"/>
+            <menuitem id="menu_sunat_major" name="6 - Libro mayor" sequence="600"/>
+            <menuitem id="menu_sunat_purchase" name="8 - Registro de compras" sequence="800"/>
+            <menuitem id="menu_sunat_sale" name="14 - Registro de ventas" sequence="1400"/>
+        </menuitem>
+    </menuitem>
+</odoo>

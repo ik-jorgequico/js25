@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="data_purchase_nodom_form" model="ir.ui.view">
+		<field name="name">data.purchase.nodom.form</field>
+		<field name="model">data.purchase.nodom</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_form_base"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']/label" position="attributes">
+				<attribute name="string">Registro de compras no domiciliados</attribute>
+			</xpath>
+			<page name="lines" position="inside">
+				<field name="child_ids" colspan="4" nolabel="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+			</page>
+		</field>
+	</record>
+
+    <record id="data_purchase_nodom_tree" model="ir.ui.view">
+		<field name="name">data.purchase.nodom.tree</field>
+		<field name="model">data.purchase.nodom</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="data_purchase_nodom_line_tree" model="ir.ui.view">
+		<field name="name">data.purchase.nodom.line.tree</field>
+		<field name="model">data.purchase.nodom.line</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="entry"/>
+				<field name="invoice_date"/>
+				<field name="num_doc"/>
+				<field name="base_imp"/>
+				<field name="igv"/>
+				<field name="inafecto"/>
+				<field name="total_amount"/>
+				<field name="state_ple"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="data_purchase_nodom_line_form" model="ir.ui.view">
+		<field name="name">data.purchase.nodom.line.form</field>
+		<field name="model">data.purchase.nodom.line</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="name"/>
+						<field name="entry"/>
+						<field name="base_imp"/>
+						<field name="percent_igv"/>
+						<field name="igv"/>
+						<field name="inafecto"/>
+						<field name="total_amount"/>
+						<field name="total_real"/>
+						<field name="num_det"/>
+						<field name="currency_line"/>
+					</group>
+					<group>
+						<field name="parent_id"/>
+						<field name="company_id"/>
+                        <field name="country_code"/>
+						<field name="type_purchase_ple"/>
+						<field name="convenio_nodom"/>
+						<field name="type_profit_nodom"/>
+						<field name="op_nodom"/>
+					</group>
+					<group>
+						<field name="serie_cpe" readonly="1"/>
+						<field name="num_cpe" readonly="1"/>
+						<field name="type_cpe" readonly="1"/>
+						<field name="type_doc" readonly="1"/>
+						<field name="num_doc"/>
+						<field name="period_ple"/>
+						<field name="correlativo_ple"/>
+						<field name="state_ple"/>
+						<field name="cuo_sunat"/>
+						<field name="tc_sunat"/>
+					</group>
+					<group>
+						<field name="periodo_sunat"/>
+						<field name="account_date"/>
+						<field name="invoice_date"/>
+						<field name="date_to"/>
+						<field name="date_from"/>
+						<field name="date_due"/>
+						<field name="date_det"/>
+						<field name="dua_year"/>
+					</group>
+                    <group>
+						<field name="date_reversed"/>
+						<field name="tipcomp_reversed"/>
+						<field name="serie_reversed"/>
+						<field name="num_reversed"/>
+                    </group>
+				</group>
+			</form>
+		</field>
+	</record>
+
+    <record id="action_data_purchase_nodom" model="ir.actions.act_window">
+        <field name="name">Registro de compras 8.2</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">data.purchase.nodom</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_sunat_purchase82" 
+        name="8.2 Compras no domiciliados" 
+        parent="menu_sunat_purchase" 
+        sequence="102"
+        groups="account.group_account_manager" 
+        action="action_data_purchase_nodom"/>
+</odoo>

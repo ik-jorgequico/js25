@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_leave_view_form_inherit_inv_vacation" model="ir.ui.view">
+        <field name="name">hr.leave.view.form.inherit.inv.vacation</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_afectations.hr_leave_view_form_inherit_inv"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="action_open_hr_vacation_acum" string="Ver Vacaciones" class="oe_stat_button" icon="fa-book" type="object" invisible="[(employee_id != 'False') and (code !='23')]">
+                <!-- attrs="{'invisible': [('employee_id', '!=', False),('code', '!=', '23')]}"> -->
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Registros por Persona</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//group/label[@for='request_date_from']" position="before">
+                <field name="code" invisible='1' />
+                <field name="selected_period_for_holidays" invisible ="code != '23'" required = "code =='23'" readonly="state not in ('draft','confirm')"/>
+                <field name="balance_holiday" invisible ="code != '23'" readonly="state not in ('draft','confirm')"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

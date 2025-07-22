@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <record id="hr_leave_import_tree" model="ir.ui.view">
+        <field name="name">hr.leave.import.tree</field>
+        <field name="model">hr.leave.import</field>
+        <field name="arch" type="xml">
+            <tree string="Importación de Ausencias">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_leave_import_form" model="ir.ui.view">
+        <field name="name">hr.leave.import.form</field>
+        <field name="model">hr.leave.import</field>
+        <field name="arch" type="xml">
+            <form string="Time Off Type">
+                <header>
+                    <button name="load_data" string="Cargar ausencias" type="object" class="btn-primary" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,calculated" />
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="date_from" force_save="1" readonly="1" invisible="1" />
+                            <field name="date_to" force_save="1" readonly="1" invisible="1" />
+                            <label for="month" string="Período"/>
+                            <div class="o_row">
+                                <field name="month" class="ow_inline"/> - <field name="year" class="ow_inline"/>
+                            </div>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </group>
+                        <group>
+                            <field name="company_id" readonly="1" options="{'no_open': true}" groups="base.group_multi_company"/>
+                                <a href="/hr_afectations/static/src/template/template.xlsx" target="_blank">
+                                    Descargar Plantilla de Importación
+                                </a>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="open_hr_leave_import" model="ir.actions.act_window">
+        <field name="name">Importación de Ausencias</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.leave.import</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hr_leave_import_menu"
+        action="open_hr_leave_import"
+        name="Importación de Ausencias"
+        parent="hr_holidays.menu_hr_holidays_management"
+        sequence="4" />
+</odoo>

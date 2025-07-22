@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="data_sales_import_api_inherit_form_view" model="ir.ui.view">
+		<field name="name">data.sales.import.api.inherit.form.view</field>
+		<field name="model">data.sales</field>
+		<field name="inherit_id" ref="account_sire_import.data_sales_for_account_sire_import"/>
+		<field name="arch" type="xml">
+			<button name="import_from_sire" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</button>
+			<button name="add_credit_notes_sire" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</button>
+		</field>
+	</record>
+
+	<record id="data_sales_inherit_for_account_sire_api" model="ir.ui.view">
+		<field name="name">data.sales.inherit.for.account.sire.api</field>
+		<field name="model">data.sales</field>
+		<field name="inherit_id" ref="account_sire.data_sales_inherit_for_account_sire"/>
+		<field name="arch" type="xml">
+			<button name="action_sire_replace" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</button>
+			<page name="lines" position="after">
+				<page name="sire" string="SIRE" invisible="state != 'draft'">
+					<div class="d-flex" style="margin-bottom: 10px; gap: 10px;">
+						<button name="import_sire_proposal" string="Importar SIRE" type="object" class="oe_highlight" style="margin-right: 10px;"/>
+						<label string="Importa la propuesta SIRE de la SUNAT." class="o_form_label d-flex" style="align-items: center;" for="import_sire_proposal"/>
+					</div>
+					<div class="d-flex" style="margin-bottom: 10px; gap: 10px;">
+						<button name="import_from_sire" string="Agregar Registros" type="object" class="oe_highlight" style="margin-right: 10px;"/>
+						<label string="Añade todos los registros importados de la propuesta SIRE." class="o_form_label d-flex" style="align-items: center;" for="import_from_sire"/>
+					</div>
+					<div class="d-flex" style="margin-bottom: 10px; gap: 10px;">
+						<button name="add_credit_notes_sire" string="Agregar Notas de Crédito" type="object" class="oe_highlight" style="margin-right: 10px;"/>
+						<label string="Añade todas las notas de crédito importados de la propuesta SIRE." class="o_form_label d-flex" style="align-items: center;" for="add_credit_notes_sire"/>
+					</div>
+					<div class="d-flex" style="margin-bottom: 10px; gap: 10px;">
+						<button name="action_sire_replace" string="Reemplazar SIRE" type="object" class="oe_highlight" style="margin-right: 10px;"/>
+						<label string="Reemplaza la propuesta SIRE." class="o_form_label d-flex" style="align-items: center;" for="action_sire_replace"/>
+					</div>
+				</page>
+			</page>
+			<field name="limit_errors" position="after">
+				<field name="days_sire"/>
+			</field>
+		</field>
+	</record>
+</odoo>

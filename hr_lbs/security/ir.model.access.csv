@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_lbs,hr.lbs,model_hr_lbs,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_line,hr.lbs.line,model_hr_lbs_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_cts,hr.lbs.cts,model_hr_lbs_cts,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_cts_variables,hr.lbs.cts.variables,model_hr_lbs_cts_variables,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_vaca,hr.lbs.vaca,model_hr_lbs_vaca,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_vaca_variables,hr.lbs.vaca.variables,model_hr_lbs_vaca_variables,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_grati,hr.lbs.grati,model_hr_lbs_grati,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_grati_variables,hr.lbs.grati.variables,model_hr_lbs_grati_variables,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_ded,hr.lbs.ded,model_hr_lbs_ded,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_deduction,hr.lbs.deduction,model_hr_lbs_deduction,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_input,hr.lbs.input,model_hr_lbs_input,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_bon,hr.lbs.bon,model_hr_lbs_bon,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_lbs_incomes,hr.lbs.incomes,model_hr_lbs_incomes,hr_contract.group_hr_contract_manager,1,1,1,1

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="data_sales_form" model="ir.ui.view">
+		<field name="name">data.sales.form</field>
+		<field name="model">data.sales</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_form_base"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']/label" position="attributes">
+				<attribute name="string">Registro de ventas</attribute>
+			</xpath>
+			<page name="lines" position="inside">
+				<field name="child_ids" colspan="4" nolabel="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+			</page>
+		</field>
+	</record>
+	
+	<record id="data_purchase_tree_view" model="ir.ui.view">
+		<field name="name">data.sales.tree.view</field>
+		<field name="model">data.sales</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_sales_line_tree" model="ir.ui.view">
+		<field name="name">data.sales.line.tree</field>
+		<field name="model">data.sales.line</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="entry"/>
+				<field name="invoice_date"/>
+				<field name="num_doc"/>
+				<field name="base_imp"/>
+				<field name="igv"/>
+				<field name="inafecto"/>
+				<field name="total_amount"/>
+				<field name="tc_sunat"/>
+				<field name="state_ple"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="data_sales_line_form" model="ir.ui.view">
+		<field name="name">data.sales.line.form</field>
+		<field name="model">data.sales.line</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_purchases.account_purchases_line_form_base"/>
+		<field name="arch" type="xml">
+			<field name="base_imp" position="after">
+				<field name="base_desc"/>
+			</field>
+			<field name="igv" position="after">
+				<field name="igv_desc"/>
+			</field>
+			<field name="inafecto" position="after">
+				<field name="exonerado"/>
+				<field name="exportacion"/>
+			</field>
+			<field name="company_id" position="before">
+				<field name="parent_id"/>
+			</field>
+			<field name="company_id" position="after">
+				<field name="type_sale_ple"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="action_data_sales" model="ir.actions.act_window">
+		<field name="name">Registro de ventas 14.1</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">data.sales</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_sunat_sales141"
+		name="14.1 Registro de ventas" 
+		parent="menu_sunat_sale" 
+		sequence="101"
+		groups="account.group_account_manager" 
+		action="action_data_sales"/>
+</odoo>

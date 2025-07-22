@@ -1,0 +1,45 @@
+/* .table-sm th,
+.table-sm td {
+    padding: 0.1rem 0.5rem;
+}
+
+.card-body {
+    padding: 0.5rem;
+}
+
+.card-header {
+    padding: 0.5rem;
+} */
+
+/* ESTILOS PARA ETIQUETA ANULADO EN FACTURAS */
+.col-3 {
+    position: relative;
+    overflow: hidden;
+}
+  
+.ribbon-wrapper {
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ribbon-odoofact {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    position: absolute;
+    padding: 7px 0;
+    left: 45px;
+    top: 25px;
+    width: 140px;
+    background-color: rgba(255, 0, 0, 0.5);
+    color: #FFFFFF;
+}

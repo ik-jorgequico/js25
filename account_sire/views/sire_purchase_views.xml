@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_sire_purchase_form" model="ir.ui.view">
+		<field name="name">account.sire.purchase.form</field>
+		<field name="model">account.sire.purchase</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_sire.account_sire_form_base"/>
+		<field name="arch" type="xml">
+			<field name="igv_dg" position="after">
+				<field name="base_dgng"/>
+				<field name="igv_dgng"/>
+				<field name="base_dng"/>
+				<field name="igv_dng"/>
+			</field>
+			<field name="serie_cpe_nc" position="after">
+				<field name="year_dua_nc"/>
+			</field>
+			<field name="num_cpe_nc" position="after">
+				<field name="bs_ss"/>
+			</field>
+			<field name="id_project" position="after">
+				<field name="porcpart"/>
+				<field name="imb"/>
+				<field name="car_orig"/>
+				<field name="det"/>
+			</field>
+			<field name="est_comp" position="after">
+				<field name="incal"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="account_sire_purchase_tree" model="ir.ui.view">
+		<field name="name">account.sire.purchase.tree</field>
+		<field name="model">account.sire.purchase</field>
+		<field name="mode">primary</field>
+		<field name="inherit_id" ref="account_sire.account_sire_tree_base"/>
+		<field name="arch" type="xml">
+			<field name="igv_dg" position="after">
+				<field name="base_dgng"/>
+				<field name="igv_dgng"/>
+				<field name="base_dng"/>
+				<field name="igv_dng"/>
+			</field>
+			<field name="serie_cpe_nc" position="after">
+				<field name="year_dua_nc"/>
+			</field>
+			<field name="num_cpe_nc" position="after">
+				<field name="bs_ss" optional="hide"/>
+			</field>
+			<field name="id_project" position="after">
+				<field name="porcpart" optional="hide"/>
+				<field name="imb" optional="hide"/>
+				<field name="car_orig" optional="hide"/>
+				<field name="det" optional="hide"/>
+			</field>
+			<field name="est_comp" position="after">
+				<field name="incal" optional="hide"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="account_sire_purchase_filter" model="ir.ui.view">
+		<field name="name">account.sire.purchase.filter</field>
+		<field name="model">account.sire.purchase</field>
+		<field name="arch" type="xml">
+			<search string="Validacion Sire">
+				<group expand="1" string="Group By">
+					<filter string="Validación" name="sire_check" context="{'group_by':'sire_check'}"/>
+				</group>
+			</search>            
+		</field>
+	</record>
+
+	<record id="action_purchase_sire" model="ir.actions.act_window">
+		<field name="name">Sire Compras</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.sire.purchase</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="account_sire.account_sire_purchase_filter"/>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+			</p>
+		</field>
+	</record>
+</odoo>

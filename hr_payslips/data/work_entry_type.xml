@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="work_entry_leave23" model="hr.work.entry.type">
+            <field name="name">S.I. DESCANSO VACACIONAL</field>
+            <field name="code">LEAVE23</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_23'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave29" model="hr.work.entry.type">
+            <field name="name">S.I. DIAS LICENCIA POR ADOPCIÓN</field>
+            <field name="code">LEAVE29</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_29'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave28" model="hr.work.entry.type">
+            <field name="name">S.I. DÍAS LICENCIA POR PATERNIDAD</field>
+            <field name="code">LEAVE28</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_28'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave16" model="hr.work.entry.type">
+            <field name="name">S.I. ENFERMEDAD O ACCIDENTE (PRIMEROS VEINTE DÍAS)</field>
+            <field name="code">LEAVE16</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_16'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave21" model="hr.work.entry.type">
+            <field name="name">S.I. INCAPACIDAD TEMPORAL (INVALIDEZ, ENFERMEDAD Y ACCIDENTES)</field>
+            <field name="code">LEAVE21</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_21'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry__leave26" model="hr.work.entry.type">
+            <field name="name">S.I. LICENCIA U OTROS MOTIVOS CON GOCE DE HABER</field>
+            <field name="code">LEAVE26</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_26'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave22" model="hr.work.entry.type">
+            <field name="name">S.I. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL</field>
+            <field name="code">LEAVE22</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_22'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave_25" model="hr.work.entry.type">
+            <field name="name">S.I. PERMISO Y LICENCIA PARA EL DESEMPEÑO DE CARGOS SINDICALES</field>
+            <field name="code">LEAVE25</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_25'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave_35" model="hr.work.entry.type">
+            <field name="name">S.I.ENFERMEDAD GRAVE O TERMINAL O ACCIDENTE GRAVE DE FAMILIARES DIRECTOS</field>
+            <field name="code">LEAVE35</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_35'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave_07" model="hr.work.entry.type">
+            <field name="name">S.P. FALTA NO JUSTIFICADA</field>
+            <field name="code">LEAVE07</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_07'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave_09" model="hr.work.entry.type">
+            <field name="name">S.P. MATERNIDAD DURANTE EL DESCANSO PRE Y POST NATAL</field>
+            <field name="code">LEAVE09</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_09'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+        <record id="work_entry_leave_05" model="hr.work.entry.type">
+            <field name="name">S.P. PERMISO, LICENCIA U OTROS MOTIVOS SIN GOCE DE HABER</field>
+            <field name="code">LEAVE05</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_05'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+
+
+        <record id="work_entry_leave_01" model="hr.work.entry.type">
+            <field name="name">S.P. SANCIÓN DISCIPLINARIA</field>
+            <field name="code">LEAVE01</field><!-- Codigo -->
+            <field name="sequence">25</field><!-- Secuencia -->
+            <field name="round_days">NO</field><!-- Redondeo -->
+            <field name="is_leave">True</field><!-- Tiempo personal -->
+            <!-- Tipo de ausencia -->
+            <field name="leave_type_ids" eval="[(4, ref('hr_vacation.type_01'))]"/>
+            <field name="is_unforeseen">False</field><!-- Ausencia imprevisa -->
+        </record>
+    </data>
+</odoo>

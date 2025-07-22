@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_5ta,hr.5ta,model_hr_5ta,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_5ta_line,hr.5ta_line,model_hr_5ta_line,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_5ta_subline,hr.5ta_subline,model_hr_5ta_subline,hr_contract.group_hr_contract_manager,1,1,1,1

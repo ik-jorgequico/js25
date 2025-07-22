@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="hr_cts_subline_tree_view" model="ir.ui.view" >
+        <field name="name">hr.cts.subline.tree.view</field >
+        <field name="model">hr.cts.subline</field>
+        
+        <field name="arch" type="xml">
+            <tree  >
+                    <field name="name" />
+                    <field name="cont" />
+                    <field name="amount" />
+                    <field name="average" />
+                    <field name="cts_line" />
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_cts_subline_form_view" model="ir.ui.view" >
+        <field name="name">hr.cts.subline.form.view</field >
+        <field name="model">hr.cts.subline</field>
+        
+        <field name="arch" type="xml">
+            <form>
+            <group>
+            
+                    <field name="name" />
+                    <field name="cont" />
+                    <field name="amount" />
+                    <field name="average" />
+                    <field name="cts_line" invisible="1"/>
+            </group>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_cts_subline" model="ir.actions.act_window">
+        <field name="name">CTS SUBLINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.cts.subline</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+<!-- 
+    <menuitem
+        id="menu_action_cts_subline"
+        action="action_cts_subline"
+        name="Cts Subline"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="107"/> -->
+
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_cargo_rit">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.internal_layout" > -->
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<style>
+								*{
+									font-family: Lato;
+								}
+								.top-part {
+									text-align: center;
+									font-size: 18px;
+								  }
+
+								.body {
+									text-align: justify;
+									font-size: 18px;
+									<!-- text-indent: 1.5em; -->
+									line-height : 25px;
+								  }
+								.forms{
+									text-align: left;
+									font-size: 16px;
+									<!-- text-indent: 0.5em; -->
+									line-height : 5px;
+								  }
+								.espaciador-grande{
+									font-size: 30px;
+								}
+								.date-word{
+									text-align: left;
+									font-size: 18px;
+									line-height : 15px;
+								}
+								.espaciador-medio{
+									font-size: 8px;
+								}
+							</style>
+
+							<div class="top-part">
+								<h2>CARGO DE RECEPCION Y CONFORMIDAD</h2>
+								<h2>REGLAMENTO INTERNO DE</h2>
+								<h2>TRABAJO(RIT)</h2>
+							</div>
+							<br/>
+
+							<div class="body">
+								<p>Bajo mi firma declaro haber recibido, leído y comprendido el <strong>Reglamento Interno de Trabajo
+									(RIT)</strong> de <t t-esc="o.company_id.partner_id.name"/>, los cuales me comprometo a cumplir a cabalidad, no
+									pudiendo alegar desconocimiento de su texto a partir de esta fecha. 	
+								</p>
+								
+							</div>	
+
+							<div class="espaciador-medio">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">NOMBRES Y APELLIDOS:    <t t-esc="o.name"/></p>
+
+							<div class="espaciador-medio">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">NUMERO DE DOCUMENTO:     <t t-esc="o.identification_id"/></p>
+							
+							<div class="espaciador-medio">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">PUESTO QUE TRABAJA:     <t t-esc="o.job_id.name"/></p>
+							
+							<div class="espaciador-grande">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">FIRMA: ____________________________</p>
+
+							<div class="espaciador-medio">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">HUELLA: ____________________________</p>
+
+							<div class="espaciador-medio">
+								<br/><br/><br/>
+							</div>
+
+							<p class="forms">FECHA: <strong><span t-esc="o.first_contract_date.strftime('%d')"/> de 
+								<span t-esc="o.first_contract_date.strftime('%m')         .replace('01','Enero')         .replace('02','Febrero')         .replace('03','Marzo')         .replace('04','Abril')         .replace('05','Mayo')         .replace('06','Junio')         .replace('07','Julio')         .replace('08','Agosto')         .replace('09','Septiembre')         .replace('10','Octubre')         .replace('11','Noviembre')         .replace('12','Diciembre')"/> del 
+								<span t-esc="o.first_contract_date.strftime('%Y')"/></strong></p>
+
+						</div>
+					</t>
+				</t>
+		</t>
+
+</template>
+</odoo>

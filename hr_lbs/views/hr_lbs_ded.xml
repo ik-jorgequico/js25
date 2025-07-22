@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_lbs_ded_tree_view" model="ir.ui.view">
+        <field name="name">hr.lbs.ded.tree.view</field>
+        <field name="model">hr.lbs.ded</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="input_type_id"/>
+                <field name="name"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lbs_ded" model="ir.actions.act_window">
+        <field name="name">LBS Deducciones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.lbs.ded</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

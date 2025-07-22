@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_new_employee" model="mail.template">
+            <field name="name">Template para formato de ingreso</field>
+            <field name="model_id" ref="model_hr_employee" />
+            <field name="subject">Formatos de ingreso</field>
+            <field name="email_from">{{object.company_id.email or '' }}</field>
+            <field name="email_to">{{object.private_email or ''}}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="report_template_ids" eval="[(4, ref('hr_employees.report_dec_no_5tas'))]"/>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tbody>
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                    style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" style="min-width: 590px;">
+                                                <table border="0" cellpadding="0" cellspacing="0"
+                                                    width="100%"
+                                                    style="background-color: white; padding: 0; border-collapse:separate;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                <span style="font-size: 10px;"></span>
+                                                                <br />
+                                                                <span
+                                                                    style="font-size: 20px; font-weight: bold;">Formatos
+                                                                    de Ingresos</span>
+                                                            </td>
+                                                            <td valign="middle" align="right">
+                                                                <img src='company_id.logo'
+                                                                    style="padding: 0px; margin: 0px; height: 48px;" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2"
+                                                                style="text-align:center;">
+                                                                <hr width="100%"
+                                                                    style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;"
+                                                                    contenteditable="false" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="min-width: 590px;">
+                                                <table border="0" cellpadding="0" cellspacing="0"
+                                                    width="590"
+                                                    style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top"
+                                                                style="font-size: 13px;">
+                                                                <div> Estimado Sr(a). <span
+                                                                        t-esc="object.name" />,<br /><br />
+                                                                    Esperamos se encuentre muy bien,
+                                                                    para continuar con la
+                                                                    formalización del ingreso
+                                                                    requerimos del alcance de los
+                                                                    documentos que deben ir en el
+                                                                    file de cada colaborador, para
+                                                                    esto, le pedimos nos ayudes
+                                                                    completando los siguientes
+                                                                    documentos, lo reenvíe escaneado
+                                                                    como respuesta a este correo.<br /><br />                                                                    
+                                                                    
+                                                                    <ul>
+
+                                                                        <li> Ficha de Incorporación</li>
+                                                                        <li> Declaración Jurada de
+                                                                    Domicilio</li>
+                                                                        <li> Declaración Jurada Vida
+                                                                    Ley debe ser legalizado
+                                                                    notarialmente</li>
+                                                                        <li> Fotografía de medio
+                                                                    cuerpo parte superior para el
+                                                                    Fotocheck.</li>
+                                                                        <li> DNI (ambas caras)</li>
+                                                                        <li> DNI de los derechos
+                                                                    habientes (si fuese el caso)</li>
+                                                                        <li> Constancia de No
+                                                                    retención de 5ta, en caso de
+                                                                    haber laborado en otra empresa
+                                                                    durante el presente año
+                                                                            enviarnos el Certificado
+                                                                    de
+                                                                            quinta categoría (del
+                                                                    último
+                                                                            empleador)</li>
+                                                                        <li> Boletín y Formato del
+                                                                    sistema de pensiones (llenar las
+                                                                    2 últimas hojas)</li>
+                                                                        <li> Reporte SENTINEL</li>
+                                                                        <li> Cargo de la entrega de
+                                                                    RISST y RIT</li>
+                                                                        <li> Reglamento Interno de
+                                                                    Seguridad y Salud en el Trabajo
+                                                                    (informativo)</li>
+                                                                        <li> Recomendaciones SST</li>
+                                                                        <li> Reglamento Interno de
+                                                                    Trabajo <span t-esc="object.company_id.name" /> (informativo)</li>
+
+                                                                    </ul>
+                                                                    <br /><br />
+                                                                    Quedamos atentos a cualquier
+                                                                    duda o comentario.<br /><br />
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center"
+                                                style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                                <hr width="100%"
+                                                    style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;" />
+                                                <b>
+                                                    <span t-esc="object.company_id.name" />
+                                                </b>
+                                                <br />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="min-width: 590px;"> Con tecnología de <a
+                                    target="_blank"
+                                    href="https://www.odoo.com?utm_source=db&amp;utm_medium=email"
+                                    style="color: #875A7B;">Odoo</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </field>
+
+            <!-- <field name="report_template_ids" eval="[(4, ref('hr_employees.report_dec_no_5tas'))]"/> -->
+            <!-- <field name="lang">{{ object.partner_id.lang }}</field> -->
+            <!-- <field name="auto_delete" eval="True"/> -->
+
+        </record>
+
+        <!-- <record id="report_dec_street_one_many" model="mail.template.report">
+            <field name="mail_template_id" ref="mail_template_new_employee" />
+            <field name="report_template_id" ref="report_dec_street" />
+            <field name="report_name">Declaracion Jurada de Domicilio</field>
+        </record>
+
+        <record id="report_dec_no_5tas_one_many" model="mail.template.report">
+            <field name="mail_template_id" ref="mail_template_new_employee" />
+            <field name="report_template_id" ref="report_dec_no_5tas" />
+            <field name="report_name">Declaracion Jurada 5ta</field>
+        </record>
+
+        <record id="report_cargo_rits_one_many" model="mail.template.report">
+            <field name="mail_template_id" ref="mail_template_new_employee" />
+            <field name="report_template_id" ref="report_cargo_rits" />
+            <field name="report_name">Cargo RIT</field>
+        </record>
+
+        <record id="report_cargo_rissts_one_many" model="mail.template.report">
+            <field name="mail_template_id" ref="mail_template_new_employee" />
+            <field name="report_template_id" ref="report_cargo_rissts" />
+            <field name="report_name">Constancia Entrega RISST</field>
+        </record>
+
+        <record id="report_entry_forms_one_many" model="mail.template.report">
+            <field name="mail_template_id" ref="mail_template_new_employee" />
+            <field name="report_template_id" ref="report_entry_forms" />
+            <field name="report_name">Ficha Incorporacion Personal</field>
+        </record> -->
+    </data>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_grati_line_form_view" model="ir.ui.view">
+        <field name="name">hr.grati.line.form.view</field>
+        <field name="model">hr.grati.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_from" />
+                    <field name="date_to" />
+                </group>
+                <group>
+                    <field name="name" invisible="1" />
+                    <field name="employee_id" />
+                    <field name="identification_id" />
+                    <field name="first_day_contract" />
+                </group>
+
+                <group>
+                    <field name="salary" />
+                    <field name="family_asig" />
+                    <field name="average_variables" />
+                    <field name="total_amount" />
+                    <field name="number_leave_days" />
+                    <field name="number_total" />
+                    <field name="total" />
+                    <field name="health_regimen" />
+                    <field name="desc_grati" />
+                    <field name="grati_bono" />
+                </group>
+
+                <notebook>
+                    <page name="variables" string="Variables">
+                        <field name="subline_ids" nolabel="1" />
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_grati_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.grati.line.tree.view</field>
+        <field name="model">hr.grati.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_from" optional="hide" />
+                <field name="date_to" optional="hide" />
+
+                <field name="name" column_invisible="1" />
+                <field name="parent_id" column_invisible="1" />
+
+                <field name="employee_id" />
+                <field name="identification_id" />
+
+                <field name="first_day_contract" />
+                <field name="health_bool" />
+
+                <field name="structure_type" widget="badge" 
+                        decoration-success="structure_type == 'RG'" 
+                        decoration-info="structure_type == 'RP'" 
+                        decoration-danger="structure_type == 'RM'"/>
+
+                <field name="salary" />
+                <field name="family_asig" />
+
+                <field name="average_variables" />
+                <field name="total_amount" />
+
+                <field name="number_days" />
+                <field name="number_leave_days" />
+                <field name="number_total" />
+
+                <field name="total" />
+                <field name="health_regimen" />
+                <field name="grati_bruto" />
+                <field name="desc_grati" />
+                <field name="grati_bono" />
+                <field name="subline_ids" optional="hide" />
+                <field name="payday"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_grati_line" model="ir.actions.act_window">
+        <field name="name">GRATIFICACIÓN LINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.grati.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

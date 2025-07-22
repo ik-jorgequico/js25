@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_type_form" model="ir.ui.view">
+        <field name="name">Operation Types.l10n_pe_edi_picking</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='second']" position="after">
+                <group name="third">
+                    <group string="Elecronic picking" name="e-picking">
+                        <field
+                            name="l10n_pe_edi_shop_id"
+                            domain="[('company_id', '=', company_id)]"
+                            required="l10n_pe_edi_enable_epicking == True"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="l10n_pe_edi_enable_epicking"
+                            widget="boolean_toggle"
+                        />
+                        <field
+                            name="l10n_pe_edi_request_document_type_id"
+                            invisible="l10n_pe_edi_enable_epicking == False"
+                            required="l10n_pe_edi_enable_epicking == True"
+                        />
+                        <field
+                            name="l10n_pe_edi_picking_sequence_id"
+                            domain="[('code', 'ilike', 'epicking.sequence')]"
+                            invisible="l10n_pe_edi_enable_epicking == False"
+                            required="l10n_pe_edi_enable_epicking == True"
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.l10n_pe_edi_picking</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="before">
+                <field name="l10n_pe_edi_picking_enable_epicking" invisible="1"/>
+                <field name="l10n_pe_edi_is_electronic" invisible="1"/>
+                <field name="l10n_pe_edi_picking_catalog_18_code" invisible="1"/>
+                <field name="l10n_pe_edi_picking_catalog_20_code" invisible="1"/>
+                <field name="l10n_pe_edi_ose_accepted" invisible="1"/>
+                <field name="l10n_pe_edi_sunat_accepted" invisible="1"/>
+                <field name="canceled_edi_picking_in_sunat" invisible="1"/>
+                <field name="l10n_pe_edi_picking_company_partner_id" invisible="1"/>
+                <field name="l10n_pe_edi_picking_commercial_partner_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//form/sheet" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="l10n_pe_edi_response == False or l10n_pe_edi_response == ''"
+                >
+                    <strong>
+                        <field style="display:inline" name="l10n_pe_edi_response" />
+                    </strong>
+                </div>
+            </xpath>
+            <xpath expr="//form/sheet/div[@name='button_box']" position="after">
+                <widget
+                    name="web_ribbon"
+                    title="Canceled in SUNAT"
+                    bg_color="bg-danger"
+                    invisible="canceled_edi_picking_in_sunat == False"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="object"
+                    class="oe_stat_button"
+                    name="convert_to_electronic"
+                    icon="fa-file-code-o"
+                    invisible="l10n_pe_edi_picking_enable_epicking == False or l10n_pe_edi_is_electronic == True or state != 'done'"
+                >
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Convert to</span>
+                        <span class="o_stat_text">Electronic</span>
+                    </div>
+                </button>
+                <button
+                    string="Send to SUNAT"
+                    class="oe_stat_button text-info"
+                    type="object"
+                    name="action_document_send"
+                    icon="fa-cloud-upload"
+                    invisible="l10n_pe_edi_ose_accepted == True or l10n_pe_edi_is_electronic == False"
+                />
+                <button
+                    string="Check Status in SUNAT"
+                    class="oe_stat_button text-warning"
+                    type="object"
+                    name="action_document_check"
+                    icon="fa-refresh"
+                    invisible="l10n_pe_edi_ose_accepted == False or l10n_pe_edi_sunat_accepted == True or l10n_pe_edi_is_electronic == False"
+                />
+                <button
+                    class="oe_stat_button text-danger"
+                    icon="fa-times"
+                    string="NUBEFACT"
+                    invisible="l10n_pe_edi_is_electronic == False or l10n_pe_edi_ose_accepted == True"
+                />
+                <button
+                    class="oe_stat_button text-success"
+                    icon="fa-check"
+                    string="NUBEFACT"
+                    invisible="l10n_pe_edi_is_electronic == False or l10n_pe_edi_ose_accepted == False"
+                />
+                <button
+                    class="oe_stat_button text-danger"
+                    icon="fa-times"
+                    string="SUNAT"
+                    invisible="l10n_pe_edi_is_electronic == False or l10n_pe_edi_sunat_accepted == True"
+                />
+                <button
+                    class="oe_stat_button text-success"
+                    icon="fa-check"
+                    string="SUNAT"
+                    invisible="l10n_pe_edi_is_electronic == False or l10n_pe_edi_sunat_accepted == False"
+                />
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="action_open_edi_request"
+                    icon="fa-server"
+                    invisible="l10n_pe_edi_request_id == False"
+                >
+                    <div class="o_stat_info">
+                        <field
+                            name="l10n_pe_edi_request_id"
+                            class="o_stat_value"
+                            readonly="1"
+                        />
+                        <span class="o_stat_text">EDI Request</span>
+                    </div>
+                </button>
+            </xpath>
+            <field name="name" position="attributes">
+                <attribute
+                    name="invisible"
+                >name == '/' or l10n_pe_edi_is_electronic == True
+                </attribute>
+            </field>
+            <field name="name" position="after">
+                <field
+                    name="l10n_pe_edi_picking_name"
+                    invisible="l10n_pe_edi_is_electronic == False"
+                />
+            </field>
+            <field name="partner_id" position="after">
+                <label for="l10n_pe_edi_picking_commercial_document_type" invisible="1"/>
+                <div class="d-flex" invisible="1">
+                    <field
+                        name="l10n_pe_edi_picking_commercial_document_type"
+                        required="l10n_pe_edi_is_electronic == True"
+                        readonly="l10n_pe_edi_ose_accepted and state == True"
+                        invisible="1"
+                    />
+                    <field name="l10n_pe_edi_picking_commercial_document_number" invisible="1"/>
+                </div>
+            </field>
+            <xpath expr="//sheet//group//group[2]" position="inside">
+                <field
+                    name="l10n_pe_edi_shop_id"
+                    domain="[('company_id', '=', company_id)]"
+                    options="{'no_create': True}"
+                    invisible="1"
+                />
+                <field
+                    name="l10n_latam_document_type_id"
+                    options="{'no_create': True}"
+                    invisible="1"
+                />
+        
+            </xpath>
+            <xpath expr="//page[@name='note']" position="before">
+                <page
+                    string="E-Picking Data"
+                    name="epicking_data"
+                    invisible="l10n_pe_edi_picking_enable_epicking == False"
+                >
+                    <group string="Transfer" name="epicking_data_transfer">
+                        <group>
+                            <field
+                                name="l10n_pe_edi_picking_catalog_20_id"
+                                options="{'no_open': True, 'no_create': True}"
+                                required="l10n_pe_edi_is_electronic == True"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <field
+                                name="l10n_pe_edi_picking_catalog_20_others"
+                                invisible="l10n_pe_edi_picking_catalog_20_code != '13'"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <field
+                                name="l10n_pe_edi_picking_catalog_18_id"
+                                options="{'no_open': True, 'no_create': True}"
+                                required="l10n_pe_edi_is_electronic == True"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <field
+                                name="l10n_pe_edi_picking_start_transport_date"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                        </group>
+                        <group>
+                            <label for="l10n_pe_edi_picking_total_gross_weight" />
+                            <div class="d-flex">
+                                <field
+                                    name="l10n_pe_edi_picking_total_gross_weight"
+                                    required="l10n_pe_edi_is_electronic == True"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_gross_weight_uom"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                            <field
+                                name="l10n_pe_edi_picking_number_packages"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                        </group>
+                    </group>
+                    <group string="Transport" name="epicking_data_transport">
+                        <group
+                            string="Carrier Data"
+                            name="epicking_data_transport_carrier"
+                        >
+                            <field
+                                name="l10n_pe_edi_picking_carrier_id"
+                                domain="[('l10n_pe_edi_picking_is_carrier', '=', True), ('company_id', 'in', (False, company_id))]"
+                                options="{'no_create': 1}"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <label
+                                for="l10n_pe_edi_picking_carrier_document_type"
+                                string="Document Type"
+                            />
+                            <div class="d-flex">
+                                <field
+                                    name="l10n_pe_edi_picking_carrier_document_type"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['01']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_carrier_doc_number"
+                                    placeholder="Number"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['01']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                            <field
+                                name="l10n_pe_edi_picking_carrier_name"
+                                string="Complete Name"
+                                required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['01']"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <field
+                                name="l10n_pe_edi_picking_carrier_license_plate"
+                                required="l10n_pe_edi_is_electronic == True"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                        </group>
+                        <group
+                            string="Driver Data"
+                            name="epicking_data_transport_driver"
+                        >
+                            <field
+                                name="l10n_pe_edi_picking_driver_id"
+                                domain="[('l10n_pe_edi_picking_is_driver', '=', True), ('company_id', 'in', (False, company_id))]"
+                                options="{'no_create': 1}"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <label
+                                for="l10n_pe_edi_picking_driver_document_type"
+                                string="Document Type"
+                            />
+                            <div class="d-flex">
+                                <field
+                                    name="l10n_pe_edi_picking_driver_document_type"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_driver_doc_number"
+                                    placeholder="Number"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                            <field
+                                name="l10n_pe_edi_picking_driver_complete_name"
+                                string="Complete Name"
+                                required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <label
+                                for="l10n_pe_edi_picking_driver_name"
+                                string="Split Name"
+                            />
+                            <div class="d-flex">
+                                <field
+                                    name="l10n_pe_edi_picking_driver_name"
+                                    placeholder="Name"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_driver_last_name"
+                                    placeholder="Last Name"
+                                    required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                            <field
+                                name="l10n_pe_edi_picking_driver_license_number"
+                                string="License Number"
+                                required="l10n_pe_edi_is_electronic == True and l10n_pe_edi_picking_catalog_18_code in ['02']"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                        </group>
+                    </group>
+                    <group string="Locations" name="epicking_data_locations">
+                        <group
+                            string="Starting Point Data"
+                            name="epicking_data_locations_starting"
+                        >
+                            <field
+                                name="l10n_pe_edi_picking_starting_point_id"
+                                domain="['|', ('id', '=', l10n_pe_edi_picking_company_partner_id), ('parent_id', '=', l10n_pe_edi_picking_company_partner_id), ('company_id', 'in', (False, company_id))]"
+                                options="{'no_create': 1}"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <b>Address</b>
+                            </span>
+                            <div class="o_address_format">
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_street"
+                                    placeholder="Street"
+                                    class="o_address_street"
+                                    required="l10n_pe_edi_is_electronic == True"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_district_id"
+                                    placeholder="District"
+                                    class="o_address_street"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_province_id"
+                                    placeholder="Province"
+                                    class="o_address_city"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_state_id"
+                                    placeholder="State"
+                                    class="o_address_state"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_ubigeo"
+                                    placeholder="Ubigeo"
+                                    class="o_address_zip"
+                                    required="l10n_pe_edi_is_electronic == True"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_starting_point_country_id"
+                                    placeholder="Country"
+                                    class="o_address_country"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                        </group>
+                        <group
+                            string="Arrival Point Data"
+                            name="epicking_data_locations_arrival"
+                        >
+                            <field
+                                name="l10n_pe_edi_picking_arrival_point_id"
+                                domain="['|', ('id', '=', l10n_pe_edi_picking_commercial_partner_id), ('parent_id', '=', l10n_pe_edi_picking_commercial_partner_id), ('company_id', 'in', (False, company_id))]"
+                                options="{'no_create': 1}"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                            />
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <b>Address</b>
+                            </span>
+                            <div class="o_address_format">
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_street"
+                                    placeholder="Street"
+                                    class="o_address_street"
+                                    required="l10n_pe_edi_is_electronic == True"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_district_id"
+                                    placeholder="District"
+                                    class="o_address_street"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_province_id"
+                                    placeholder="Province"
+                                    class="o_address_city"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_state_id"
+                                    placeholder="State"
+                                    class="o_address_state"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_ubigeo"
+                                    placeholder="Ubigeo"
+                                    class="o_address_zip"
+                                    required="l10n_pe_edi_is_electronic == True"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                                <field
+                                    name="l10n_pe_edi_picking_arrival_point_country_id"
+                                    placeholder="Country"
+                                    class="o_address_country"
+                                    options="{'no_create': 1}"
+                                    readonly="l10n_pe_edi_ose_accepted == True"
+                                />
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Other Info" name="epicking_data_other_info">
+                        <group string="Document Related">
+                            <field
+                                name="l10n_pe_edi_invoice_number_ids"
+                                readonly="l10n_pe_edi_ose_accepted == True"
+                                nolabel="1"
+                                colspan="2"
+                            >
+                                <tree editable="bottom">
+                                    <field name="sale_order_name" invisible="1" optional="hide"/>
+                                    <field name="type" />
+                                    <field name="invoice_id" domain="[('invoice_origin', '=', sale_order_name)]"/>
+                                    <field name="series" optional="hide" invisible="1"/>
+                                    <field name="number" optional="hide" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="tree_picking_not_sent" model="ir.ui.view">
+        <field name="name">stock.picking</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'done'" decoration-muted="state == 'cancel'" string="Picking">
+                <field name="scheduled_date" />
+                <field name="name" />
+                <field name="partner_id" groups="base.group_user" string="Customer" />
+                <field name="l10n_pe_edi_picking_name" />
+                <field name="picking_type_id" />
+                <field name="l10n_pe_edi_ose_accepted" string="PSE/OSE"/>
+                <field name="l10n_pe_edi_sunat_accepted" string="SUNAT"/>
+                <field name="state" widget="badge" decoration-danger="state=='cancel'" decoration-info="state== 'assigned'" decoration-muted="state == 'draft'" decoration-success="state == 'done'" decoration-warning="state not in ('draft','cancel','done','assigned')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="model_stock_action_canceled_edi_picking" model="ir.actions.server">
+        <field name="name">Mark as Canceled in SUNAT</field>
+        <field name="model_id" ref="l10n_pe_edi_picking.model_stock_picking"/>
+        <field name="binding_model_id" ref="l10n_pe_edi_picking.model_stock_picking"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_canceled_edi_picking()</field>
+    </record>
+</odoo>

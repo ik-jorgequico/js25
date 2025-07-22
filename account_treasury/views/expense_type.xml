@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_expense_type_form" model="ir.ui.view">
+            <field name="name">expense.type.form</field>
+            <field name="model">expense.type</field>
+            <field name="arch" type="xml">
+                <form string="Expense Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="Concepto de Gastos" name="expense.concept">
+                                <field name="concept_ids" widget="one2many">
+                                    <tree string="Concepto de Gastos" editable="top" limit="25">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_expense_type" model="ir.actions.act_window">
+            <field name="name">Tipos de Gasto</field>
+            <field name="res_model">expense.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id"></field>
+            <field name="search_view_id"/>
+        </record>
+
+        <menuitem id="menu_expense_type" name="Tipos de Gasto" action="action_expense_type" parent="account.account_account_menu" sequence="4"/>
+    </data>
+</odoo>

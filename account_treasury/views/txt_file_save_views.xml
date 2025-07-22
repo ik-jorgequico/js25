@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="save_txt_form_view" model="ir.ui.view">
+        <field name="name">export.txt.data.form.view</field>
+        <field name="model">txt.file.save</field>
+        <field name="arch" type="xml">
+            <form string="Export TXT Files">
+                <field name="output_name" invisible="1" />
+                <div>
+                    <h2>Exportación Completa</h2>
+                    <p>Archivo TXT a exportar: <field name="output_file" readonly="1" filename="output_name"/>
+                    </p>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_vacation_calculate_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.form.view</field>
+        <field name="model">hr.vacation.calculate</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_sheet" string="Calcular" type="object" class="btn-primary"/>
+                    <button name="action_submit" type="object" string="Enviar" invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancelar" invisible="state != 'draft'" />
+                    <button name="action_approve" type="object" string="Aprobar" invisible="state != 'verify'" groups="hr.group_hr_manager" />
+                    <button name="action_refuse" type="object" string="Rechazar" invisible ="state not in ['draft','verify']" groups="hr.group_hr_manager" />
+                    <button name="action_draft" type="object" string="Borrar" invisible ="state not in ['approve','cancel','refuse']" groups="hr.group_hr_manager" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,verify,approve" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_vacation_calculate" class="oe_stat_button"
+                            icon="fa-book" type="object" invisible="child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="child_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Registros Calculo de Vacaciones</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+
+                    <group>
+                        <group>
+                            <label for="month" string="Período"/>
+                            <div class="o_row">
+                                <field name="month" class="ow_inline"/> - <field name="year" class="ow_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="is_w_current_month" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="date_from" force_save="1" readonly="1" invisible="1"/>
+                            <field name="date_to" force_save="1" readonly="1" invisible="1"/>
+                            <field name="xls_binary" filename="xls_filename" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="xls_filename" invisible="1" />
+                            <field name="company_id" readonly="1" options="{'no_open': true}" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Registros">
+                            <field name="child_ids" nolabel="1" readonly="1" force_save="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- seccion correo -->
+				<div class = "oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="activity_ids" widget="mail_activity"/>
+					<field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+				</div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="hr_vacation_calculate_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.tree.view</field>
+        <field name="model">hr.vacation.calculate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf_vacation_calculate" string="LIQUIDACIÓN PDF" type="object" />
+                    <button name="action_submit" type="object" string="Submit" invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state != 'draft'" />
+                    <button name="action_approve" type="object" string="Approve" invisible="state != 'verify'" groups="hr.group_hr_manager" />
+                    <button name="action_refuse" type="object" string="Refuse" invisible ="state not in ['draft','verify']" groups="hr.group_hr_manager" />
+                </header> -->
+                <field name="name" force_save="1" readonly="1" />
+                <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" column_invisible="1"/>
+                <field name="date_from" force_save="1" readonly="1" />
+                <field name="date_to" force_save="1" readonly="1" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular_vacation_calculate">
+        <field name="name">Generar Reporte Tabular</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation_calculate" />
+        <field name="binding_model_id" ref="hr_vacation.model_hr_vacation_calculate" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_dowload_report_tabular_vacation_calculate()
+        </field>
+    </record>
+
+    <record id="action_vacation_calculate" model="ir.actions.act_window">
+        <field name="name">Cálculo de Vacaciones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.calculate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+    <record id="hr_vacation_calculate_line_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.line.form.view</field>
+        <field name="model">hr.vacation.calculate.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" readonly="1" force_save="1" />
+                            <field name="date_to" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <field name="name" invisible="1" />
+                            <field name="employee_id" readonly="1" force_save="1" />
+                            <field name="first_day_contract" readonly="1" force_save="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="salary" readonly="1" force_save="1" />
+                            <field name="family_asig" readonly="1" force_save="1" />
+                            <field name="average_variables" readonly="1" force_save="1" />
+                            <field name="total_amount" readonly="1" force_save="1" />
+                            <field name="number_days" readonly="1" force_save="1" />
+                            <field name="bruto_amount" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <field name="salary_aux" readonly="1" force_save="1" />
+                            <field name="family_asig_aux" readonly="1" force_save="1" />
+                            <field name="average_variables_aux" readonly="1" force_save="1" />
+                            <field name="total_amount_aux" readonly="1" force_save="1" />
+                            <field name="number_days" readonly="1" force_save="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="new_bruto_amount" readonly="1" force_save="1" />
+                        <field name="desc_amount" readonly="1" force_save="1" />
+                        <field name="net_amount" readonly="1" force_save="1" />
+                        <field name="company_id" readonly="1" force_save="1" optional="hide" groups="base.group_multi_company"/>
+                    </group>
+                    <notebook>
+                        <page string="Variables">
+                            <field name="subline_ids" nolabel="1" readonly="1" force_save="1" />
+                        </page>
+    
+                        <page string="Descuentos">
+                            <field name="deduction_payments_ids" nolabel="1" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_vacation_calculate_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.line.tree.view</field>
+        <field name="model">hr.vacation.calculate.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf_vacation_calculate"
+                        string="LIQUIDACIÓN PDF"
+                        type="object"
+                    />
+
+                    <button name="action_compute_payment"
+                        string="Generar Adelantos"
+                        type="object"
+                        class="btn-primary"
+                    />
+
+                    <button name="delete_compute_payment"
+                        string="Elimina Adelantos"
+                        type="object"
+                    />
+                </header> -->
+                <field name="date_from" readonly="1" force_save="1" optional="hide"/>
+                <field name="date_to" readonly="1" force_save="1" optional="hide"/>
+
+                <field name="parent_id" column_invisible="1" />
+                <field name="name" column_invisible="1" />
+
+                <!-- <field name="name" readonly="1" force_save="1" /> -->
+                <field name="employee_id" readonly="1" force_save="1" />
+                
+                <field name="structure_type" widget="badge" 
+                        decoration-success="structure_type == 'RG'" 
+                        decoration-info="structure_type == 'RP'" 
+                        decoration-danger="structure_type == 'RM'"/>
+
+                <field name="is_purchased" readonly="1" force_save="1" />
+                <field name="first_day_contract" readonly="1" force_save="1" />
+                <field name="salary" readonly="1" force_save="1" />
+                <field name="family_asig" readonly="1" force_save="1" />
+                <field name="average_variables" readonly="1" force_save="1" />
+                <field name="total_amount" readonly="1" force_save="1" />
+                <field name="number_days" readonly="1" force_save="1" />
+                <field name="subline_ids" readonly="1" force_save="1" />
+                <field name="state_payment" readonly="1" force_save="1" widget="badge"
+                    decoration-info="state_payment == '0'" decoration-success="state_payment == '1'" />
+                <field name="bruto_amount" readonly="1" force_save="1" />
+                <field name="desc_amount" readonly="1" force_save="1" column_invisible="1"/>
+                <field name="net_amount" readonly="1" force_save="1" column_invisible="1"/>
+                <field name="new_bruto_amount" readonly="1" force_save="1" column_invisible="1"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_calculate_line" model="ir.actions.act_window">
+        <field name="name">VACACIONES</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.calculate.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+    <record id="hr_vacation_calculate_subline_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.subline.tree.view</field>
+        <field name="model">hr.vacation.calculate.subline</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="cont" />
+                <field name="amount" />
+                <field name="average" />
+                <field name="vacation_line" column_invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_vacation_calculate_subline_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.calculate.subline.form.view</field>
+        <field name="model">hr.vacation.calculate.subline</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" />
+                    <field name="cont" />
+                    <field name="amount" />
+                    <field name="average" />
+                    <field name="vacation_line" invisible="1" />
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_calculate_subline" model="ir.actions.act_window">
+        <field name="name">VAC SUBLINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.calculate.subline</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+
+    <record id="hr_vacation_deduction_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.deduction.line.tree.view</field>
+        <field name="model">hr.vacation.deduction.line</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="description" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_vacation_deduction_line_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.deduction.line.form.view</field>
+        <field name="model">hr.vacation.deduction.line</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="description" />
+                    <field name="amount" />
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_deduction_line" model="ir.actions.act_window">
+        <field name="name">Descuentos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.deduction.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+    <!--
+    ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+    <menuitem
+        id="menu_action_vacation_calculate"
+        action="action_vacation_calculate"
+        name="Vacaciones"
+        parent="hr_grati.menu_action_beneficio_social"
+        sequence="105" />
+
+</odoo>

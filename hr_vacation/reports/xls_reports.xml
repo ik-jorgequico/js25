@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<report
+
+    id="detail_record_vacational"
+    model='hr.vacation.acum.line'
+    string="Detalle de Record Vacacional"
+    report_type="xlsx"
+    name="hr_vacation.detail_record_vacational"
+    file="hr_vacation.detail_record_vacational"
+    attachment_use="False"
+    
+/>
+
+<report
+    id="detail_pending_by_period"
+    model='hr.vacation.acum.line'
+    string="Detalle de Vacaciones Pendientes"
+    report_type="xlsx"
+    name="hr_vacation.detail_pending_by_period"
+    file="hr_vacation.detail_pending_by_period"
+    attachment_use="False"
+/>
+</odoo>

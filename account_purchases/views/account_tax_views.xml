@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_tx_form_inherit">
+            <field name="name">view_account_tax_form_inherit</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <field name="tax_scope" position="after">
+                    <field name="type_purchase_ple" invisible="type_tax_use != 'purchase' or tax_scope == False"/>
+                    <field name="type_sale_ple" invisible="type_tax_use != 'sale'"/>
+                </field>
+            </field>
+	</record>
+
+</odoo>

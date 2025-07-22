@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_cts_line_form_view" model="ir.ui.view">
+        <field name="name">hr.cts.line.form.view</field>
+        <field name="model">hr.cts.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>   
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <field name="employee_id" readonly="1" force_save="1"/>
+                        <field name="first_contract_date" readonly="1" force_save="1"/>
+                    </group>
+                    
+                    <group>
+                        <field name="date_from" readonly="1" force_save="1"/>
+                        <field name="date_to" readonly="1" force_save="1"/>
+                    </group>
+                
+                
+                    <group>
+                        <field name="salary" readonly="1" force_save="1"/>
+                        <field name="family_asig" readonly="1" force_save="1"/>
+                        <field name="gratification" readonly="1" force_save="1"/>
+                        <field name="average_variables" readonly="1" force_save="1"/>
+                        <field name="total_amount" readonly="1" force_save="1"/>
+                    </group>
+                    <group>   
+                        <field name="number_leave_days" readonly="1" force_save="1"/>
+                        <field name="number_total" readonly="1" force_save="1"/>
+                        <field name="sub_total" readonly="1" force_save="1"/>
+                        <field name="desc_cts"/>
+                        <field name="text_notes_2" readonly="1" force_save="1"/>
+                    </group>
+                    <group> 
+                        <field name="total" readonly="1" force_save="1"/>
+                    </group>
+                    </group>
+                
+                <notebook>
+                    <page string="Variables">
+                        <field name="subline_ids" nolabel="1" readonly="1" force_save="1"/>
+                    </page>
+                </notebook>
+                </sheet>
+                <!-- seccion correo -->
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_cts_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.cts.line.tree.view</field>
+        <field name="model">hr.cts.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf" string="LIQUIDACIÓN PDF" type="object" />
+                </header> -->
+                <field name="date_from" readonly="1" force_save="1" optional="hide" />
+                <field name="date_to" readonly="1" force_save="1" optional="hide" />
+                <field name="parent_id" column_invisible="1" />
+                <field name="name" column_invisible="1" />
+                <field name="identification_id" readonly="1" force_save="1" optional="hide" />
+                <field name="employee_id" readonly="1" force_save="1" />
+                <field name="structure_type"  widget="badge" 
+                        decoration-success="structure_type == 'RG'" 
+                        decoration-info="structure_type == 'RP'" 
+                        decoration-danger="structure_type == 'RM'"/>
+                <field name="first_contract_date" readonly="1" force_save="1" />
+                <field name="salary" readonly="1" force_save="1" />
+                <field name="family_asig" readonly="1" force_save="1" />
+                <field name="gratification" readonly="1" force_save="1" />
+                <field name="average_variables" readonly="1" force_save="1" />
+                <field name="total_amount" readonly="1" force_save="1" />
+                <field name="number_leave_days" readonly="1" force_save="1" />
+                <field name="number_total" readonly="1" force_save="1" />
+                <field name="desc_cts" />
+                <field name="total" readonly="1" force_save="1" />
+                <field name="subline_ids" readonly="1" force_save="1" optional="hide" />
+                <field name="payday" readonly="1" force_save="1" />
+                <field name="state" readonly="1" force_save="1" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_cts_rule_filter" model="ir.ui.view">
+        <field name="name">hr.cts.line.select</field>
+        <field name="model">hr.cts.line</field>
+        <field name="arch" type="xml">
+            <search string="CTS Line">
+                <field name="employee_id" />
+                <group col="8" colspan="4" expand="0" string="Group By">
+                    <filter string="CTS" name="group_by_parent_id"
+                        context="{'group_by': 'parent_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cts_line" model="ir.actions.act_window">
+        <field name="name">CTS INDIVIDUAL</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.cts.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_group_by_parent_id': 1}</field>
+        <field name="search_view_id" ref="view_hr_cts_rule_filter" />
+    </record>
+
+    <!-- 
+    <menuitem id="menu_action_cts_line" action="action_cts_line" name="CTS INDIVIDUAL" parent="hr_grati.menu_action_beneficio_social" sequence="106"/> -->
+
+</odoo>

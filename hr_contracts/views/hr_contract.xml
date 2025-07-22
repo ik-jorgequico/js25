@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_contract_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='wage']" position="after">
+                <field name="move_sa" />
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='work_entry_source']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+
+            <xpath expr="//page[@name='other']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='calendar_mismatch']" position="after">
+                <field name="reason_low_id" />
+                <field name="last_contract_date" invisible="not reason_low_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

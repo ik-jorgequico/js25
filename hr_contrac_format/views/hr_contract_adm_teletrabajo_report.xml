@@ -1,0 +1,413 @@
+<odoo>
+    <data>
+        <!-- <report id = "report_adm_teletrabajo"
+        string = "CONTRATO POR NECESIDADES DE MERCADO - ADM - labor Teletrabajo"
+        model = "hr.contract"
+        report_type = "qweb-pdf"
+        name = "hr_contrac_format.report_pdf_template_adm_teletrabajo"
+        menu = "False"
+        /> -->
+
+        <record id="report_adm_teletrabajo" model="ir.actions.report">
+            <field name="name">CONTRATO POR NECESIDADES DE MERCADO - ADM - labor Teletrabajo</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_contrac_format.report_pdf_template_adm_teletrabajo</field>
+            <!-- <field name="report_file">hr_contrac_format.report_pdf_template_adm_hybrid</field> -->
+            <!-- <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field> -->
+            <field name="binding_model_id" ref="model_hr_contract"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/> -->
+        </record>
+
+        <template id="report_pdf_template_adm_teletrabajo">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <style>
+                            .page{
+                              font-size: 11pt;
+                              text-align: justify;
+                              line-height: 2em;
+                            }
+
+
+                            .without {
+                                border-top: 0px;
+                                border-right: 0px;
+                                border-bottom: 0px;
+                                border-left: 0px;
+                            }
+
+                            .under{
+                              text-decoration: underline;
+                            }
+            
+                            .with {
+                                border-bottom: 1px solid black;
+                            }
+
+                            .ident{
+                                text-indent: 30px;
+                            }
+
+                            tr,td,th,hr {
+                                border: none;
+                                padding: 0px;
+                                margin: 0px;    
+                            }
+
+                        </style>
+
+                        <div class="page">
+
+                            <h5 style="text-align: center;" class="under">CONTRATO DE TRABAJO DE NATURALEZA TEMPORAL POR NECESIDAD DEL MERCADO </h5>
+
+                            <p>Conste por el presente documento, el Contrato Individual de Trabajo de Naturaleza Temporal por Necesidad del Mercado. que celebran conforme a la Ley de Productividad y Competitividad Laboral aprobado por D.S. 003-97-TR, aprobado por D. S. N° 013-2013-PRODUCE y normas complementarias, de una parte <b><span t-field="o.company_id.name"/></b> con RUC Nro. <b><span t-field="o.company_id.vat"/></b>, con domicilio en <b><span t-field="o.company_id.street"/></b>, distrito de <b><span t-field="o.company_id.city"/></b> , Provincia y Departamento de <b><span t-field="o.company_id.state_id"/></b>, debidamente representada por su Gerente General el señor <b><span t-field="o.company_id.gerente_name"/></b>,identificado con <b><span t-field="o.company_id.gerente_doc_type"/></b> Nro. <b><span t-field="o.company_id.gerente_doc.n"/></b>, con poderes inscritos en la Partida Electrónica Nro.<b><span t-field="o.company_id.gerente_partida_electroc"/></b>  del Registro de Personas Jurídicas de Lima; a quien en adelante se le denominará <b>EL EMPLEADOR</b>; y de otra parte <b><span t-field="o.employee_id.name"/></b> al que en lo sucesivo se le designará como <b>EL TRABAJADOR</b>, identificado con <span t-field="o.employee_id.l10n_latam_identification_type_id.name"/> Nro. <span t-field="o.employee_id.identification_id"/>, con domicilio en <span t-field="o.employee_id.address_home_id.street"/>, Provincia y Departamento de <span t-field="o.employee_id.address_home_id.state_id.name"/>, en los términos y condiciones siguientes:</p>
+
+                            <p class="under"><b>ANTECEDENTES</b></p>
+                              
+                            <p>Primero. - <b>EL EMPLEADOR</b> es una persona jurídica constituida bajo el régimen de la sociedad anónima cerrada, que se dedica a realizar actividades de comercialización de equipos de comunicación digital, telefonía, venta de chips de celulares y cualquier tipo de medio de comunicación, equipo o accesorio que se requiera, y requiere contratar un <span class="under" t-field="o.job_id.name"/> de forma temporal para cubrir las necesidades del área de <span t-field="o.department_id.name"/>. de <b>EL EMPLEADOR</b>.</p>
+
+                            <p><b>EL EMPLEADOR</b>, es una empresa dedicada a la comercialización y distribución de productos de telefonía móvil por mayor y como tal comercializa con tiendas o puntos de venta, mas no con clientes o usuarios finales, por lo que no realiza activación de líneas telefónicas.</p>
+
+                            <p><b>AMBAS PARTES</b> acuerdan que la modalidad de trabajo será a distancia. Es decir, se aplicará una modalidad de <b>TELETRABAJO</b>.</p>
+
+                            <p>Segundo. - <b>El EMPLEADOR</b> y <b>EL TRABAJADOR</b> acuerdan en celebrar un Contrato de Trabajo sujeto a Necesidades de Mercado, que celebran conforme al Art. 58º de la Ley de Productividad y Competitividad Laboral aprobado por D.S. 003-97-TR. La modalidad utilizada se justifica en la necesidad que tiene <b>EL EMPLEADOR</b> de cubrir las necesidades del mercado nacional, debido al incremento coyuntural comercial del rubro de comercialización de venta de equipos de comunicación digital, telefonía, venta de chips de celulares y cualquier tipo de medio de comunicación, equipo o accesorio que se requiera, demostrada según el informe e INEI PRODUCCIÓN DEL III TRIMESTRE DEL 2022, donde se demuestra que la actividad comercial ha tenido un incremento del 5.2% a septiembre del 2022, y también debido al incremento de la competencia en el rubro.</p>
+
+                            <p>En tal sentido, <b>EL EMPLEADOR</b> tiene suscrito con la empresa Telefónica del Perú S.A.A diversos contratos de servicios y franquicia, entre los que se encuentra el de Agentes Alto Valor, mediante los cuales se obliga a la promoción y comercialización de bienes y servicios que Telefónica del Perú S.A.A. presta y tiene en el mercado, y aquellos que considere ofrecer en el mercado.  </p>
+
+                            <p class="under"><b>OBJETO DEL CONTRATO</b></p>
+
+                            <p><b>EL TRABAJADOR</b> posee conocimientos en procesos <span t-field="o.department_id.name"/> en empresas del rubro similar a las de <b>EL EMPLEADOR</b>.
+                            </p>
+                            <p><b>EL EMPLEADOR</b> contrata bajo la modalidad de Necesidades del Mercado a <b>EL TRABAJADOR</b> quien desempeñara el cargo de <span t-field="o.job_id.name"/>, bajo un sistema de contrato a plazo fijo de carácter temporal, en relación con las causas objetivas señaladas en la cláusula anterior.
+                            </p>
+                            <p>Sin embargo, <b>EL EMPLEADOR</b> está facultado a realizar modificaciones razonables en función a la capacidad y aptitud de <b>EL TRABAJADOR</b> y a las necesidades y requerimientos de estas, sin que dichas variaciones signifiquen modificación del presente contrato, categoría y/o remuneración. 
+                            </p>
+                            <p>Queda entendido que la prestación de servicios deberá ser efectuada de manera personal, no pudiendo <b>EL TRABAJADOR</b> ser reemplazado ni ayudado por tercera persona.
+                            </p>
+                            <p class="under"><b>PLAZO DE DURACIÓN </b>
+                            </p>
+                            <p><b>Tercero.</b> - El plazo de vigencia del presente contrato es de <span t-esc="o.month_contract + o.year_contract * 12"/> meses y <span t-field="o.day_contract"/> días, tiempo estimado para cubrir las necesidades a que se hace referencia en la cláusula segunda. La fecha de inicio es el <span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/>, debiendo concluir el <span t-esc="o.date_end.day"/> de <span t-field="o.month_end_word"/> del <span t-esc="o.date_end.year"/>.
+                            </p>
+                            <p>Asimismo, queda establecido que el periodo de prueba es de 03 meses, iniciados a partir del primer día de iniciada la relación laboral, periodo en el cual <b>EL EMPLEADOR</b> podrá despedir o dar por finalizado el contrato sin necesidad de notificar por escrito o justifica el motivo de la decisión.
+                            </p>
+                            <p class="under"><b>JORNADA DE TRABAJO</b>
+                            </p>
+                            <p><b>Cuarto.</b> - Como indica el segundo apartado de la cláusula primera, ambas partes acuerdan que la modalidad de trabajo, con respecto a la jornada laboral, será la de TELETRABAJO, acordando lo siguiente:
+                            </p>
+                            <p class="under">De la modalidad de teletrabajo:
+                            </p>
+                            <p>Ambas partes acuerdan aplicar la modalidad de teletrabajo.
+                            </p>
+                            <p class="under">Del periodo aplicable:
+                            </p>
+                            <p>Ambas partes acuerdan que la modalidad de TELETRABAJO acordada tendrá efecto durante toda la duración del contrato, estipulado en la cláusula tercera, sujetándose a las renovaciones que pudiera tener, y extendiéndose de esa forma.
+                            </p>
+                            <p class="under">De la forma de distribución de la jornada laboral:
+                            </p>
+                            <p><b>EL EMPLEADOR</b> se compromete a fijar como horarios de trabajo los usuales para la clase de trabajo que se contrata, sin exceder el máximo legal de 48 horas a la semana, en turnos fijos y/o rotativos, según lo requieran los servicios para los que se contrata al <b>EL TRABAJADOR</b>.
+                            </p>
+                            <p><b>EL EMPLEADOR</b> acepta que solo se puede distribuir las jornadas hasta un máximo de 6 días a la semana, al final de la jornada <b>EL TRABAJADOR</b> tendrá derecho a su desconexión digital.
+                            </p>
+
+                            <p class="under">Del domicilio donde se realizará el TELETRABAJO:
+                            </p>
+
+                            <p><b>AMBAS PARTES</b> acuerdan que, los días en que se realice el TELETRABAJO será en el domicilio declarado por <b>EL TRABAJADOR</b>, y que se encuentra detallado en la parte introductoria del presente contrato.
+                            </p>
+                            <p class="under">De los mecanismos de comunicación, supervisión y control:
+                            </p>
+                            <p><b>EL TRABAJADOR</b> acepta que los medios de comunicación, supervisión y control serán:
+                            </p>
+
+                            <ul>
+                                <li>El correo corporativo asignado por la empresa con el dominio: @<span t-esc="o.company_id.email.split('@')[1]"/>
+                                </li>
+                                <li>El grupo WhatsApp creado con el número del celular de la empresa asignado.
+                                </li>
+                            </ul>
+                            <p>Ambas herramientas de comunicación servirán para:
+                            </p>
+
+                            <ul>
+                                <li>Generar reporte diario de avances
+                                </li>
+                                <li>Comunicación 
+                                </li>
+                                <li>Envío de toda información y de soporte que sea necesario
+                                </li>
+                                <li>Comunicación de políticas comerciales, corporativas y laborales de la empresa.
+                                </li>
+                            </ul>
+
+                            <p class="under">De las plataformas y tecnologías digitales:
+                            </p>
+                            <p>Ambas partes acuerdan que, para la realización del TELETRABAJO, <b>EL EMPLEADOR</b> entregará, PARA USO EXCLUSIVO DE LAS FUNCIONES A DESEMPEÑAR, a <b>EL TRABAJADOR</b> las siguientes plataformas y tecnologías digitales:
+                            </p>
+
+                            <ul> 
+                                <li>Equipo móvil</li>
+                                <li>Laptop y cargador de laptop.</li>
+                            </ul> 
+                                
+
+                            <p><b>EL TRABAJADOR</b> reconoce y declara que los equipos recibidos no serán usados para realizar otras labores que no sean acorde a las funciones para las cuales ha sido contratada, siendo que el uso de estos equipos se limitara a todas las operaciones laborales a favor de <b>EL EMPLEADOR</b>, pudiendo este último inspeccionar los equipos en cualquier momento, con una comunicación previa de 02 horas antes de la inspección a EL TRABAJADOR por intermedio del correo corporativo.
+                            </p>
+
+                            <p>En caso se descubra que <b>EL TRABAJADOR</b> usa los equipos para realizar otras funciones que no sean a favor de <b>EL EMPLEADOR</b>, este último tendrá la facultad de amonestarlo, suspenderlo y hasta despedirlo por incumplimiento de sus obligaciones laborales.
+                            </p>
+
+                            <p class="under">De los mecanismos de compensación económica:
+                            </p>
+                            <p><b>EL TRABAJADOR</b> acepta que <b>EL EMPLEADOR</b> le otorgue una compensación NO REMUNERATIVA para los gastos por el uso de internet y energía eléctrica, el monto asignado figurará en la boleta de pago como CONDICIÓN DE TRABAJO. Es decir, que no se encuentra afecto al cálculo de beneficios sociales ni aportes al seguro social.
+                            </p>
+
+
+                            <p>El monto asignado asciende a S/ 50.00 (CINCUENTA y 00/100 SOLES), 
+                            </p>
+
+                            <p class="under"><b>CONTRAPRESTACIÓN </b>
+                            </p>
+                            <p><b>Quinto.</b> - La remuneración bruta que percibirá <b>EL TRABAJADOR</b> por todo concepto será de <span t-field="o.wage"/> (<span t-field="o.salary_word"/>).
+                            </p>
+                            <p><b>JSMS</b> hará entrega al <b>TRABAJADOR</b> de la cantidad de S/ <span t-field="o.move_sa"/> (<span t-field="o.move_word"/>) por concepto de transporte. La cantidad entregada bajo este concepto se encuentra supeditada a la asistencia del <b>TRABAJADOR</b> al centro de laborales y es otorgada para cubrir el gasto de traslado al centro laboral. Esta cantidad no tiene carácter remunerativo, por lo que no formará parte de la remuneración computable del <b>TRABAJADOR</b> para el cálculo de sus beneficios laborales.
+                            </p>
+
+
+                            
+
+                            <p class="under"><b>FACULTAD DIRECTRIZ</b>
+                            </p>
+                            <p><b>Sexto. - EL EMPLEADOR</b>, podrá impartir órdenes o directivas observando los criterios de razonabilidad, proporcionalidad, claridad, transparencia y buena fe, las cuales deben ser acatadas por <b>EL TRABAJADOR</b>, quien acepta realizar la labor detallada y declara conocer el horario y Reglamento Interno de Trabajo.
+                            </p>
+                            <p><b>Sétimo.</b> - En el desempeño de su cargo <b>EL TRABAJADOR</b> cumplirá con las obligaciones que a continuación se detallan, sin que éstas tengan carácter limitativo:
+                            </p>
+
+                            <ol type="a">
+                                <li>Desarrollará todas las labores, sin limitación alguna, inherentes al cargo confiado, así como aquéllas que le pudiera impartir <b>EL EMPLEADOR</b>.
+                                </li>
+                                <li><b>EL EMPLEADOR</b> se reserva la reubicación de <b>EL TRABAJADOR</b> dentro de los límites de ley.
+                                </li>
+                                <li>bservará y cumplirá las órdenes y directivas que le sean impartidas por sus superiores y por los representantes o ejecutivos competentes de <b>EL EMPLEADOR</b>.
+                                </li>
+                            </ol>
+
+                            <p class="under"><b>SUBORDINACIÓN</b>
+                            </p>
+                            <p><b>Octavo.</b> - En mérito a la relación de subordinación laboral, <b>EL EMPLEADOR</b> es titular de los derechos patrimoniales derivados de los trabajos e informes, inclusive de las investigaciones, los borradores, los trabajos preliminares y la tecnología utilizada que sean realizados por <b>EL TRABAJADOR</b> en cumplimiento del presente contrato, quedando <b>EL EMPLEADOR</b> facultado para publicar o reproducir en forma íntegra o parcial dicha Información.
+                            </p>
+                            <p class="under">REGLAMENTO INTERNO Y DE SEGURIDAD
+                            </p>
+                            <p><b>Noveno.</b> - <b>EL TRABAJADOR</b> se compromete a desarrollar para <b>EL EMPLEADOR</b> toda su capacidad de trabajo en el desempeño de sus labores, así como cumplir con las normas contenidas en el Reglamento Interno de Trabajo, las del Reglamento de Seguridad e Higiene Ocupacional, y las órdenes que imparta La Empresa en ejercicio de las facultades conferidas en el Art. 9º de la Ley de Productividad y Competitividad Laboral, TUO del D. Leg. 728.
+                            </p>
+                            <p class="under"><b>COMPROMISO DE CONFIDENCIALIDAD</b>
+                            </p>
+                            <p><b>Décimo.</b> - El deber de confidencialidad a que está obligado <b>EL TRABAJADOR</b> comprende, aun cuando no se limita, a las siguientes obligaciones:
+                            </p>
+                            <ol type="1">
+                                <li>El deber de confidencialidad es exigido a todo trabajador como parte de sus obligaciones establecidas en el artículo 9 del Texto Único Ordenado de la Ley de Productividad y Competitividad Laboral y la infracción a este deber se encuentra sancionada en el inciso d) del artículo 25 de la mencionada norma legal.
+                                </li>
+                                <li>En deber de confidencialidad obliga <b>EL TRABAJADOR</b> a no comunicar, poner en conocimiento, divulgar o hacer accesible a otros, trabajadores o no de la empresa, asuntos que sean o hayan sido de su conocimiento voluntaria o involuntariamente por la empresa y que signifiquen datos protegidos o secretos empresariales; salvo autorización expresa del personal autorizado de la empresa.
+                                </li>
+                                <li><b>EL TRABAJADOR</b> declara conocer que son <span class="under">datos protegidos</span>, todos aquellos relacionados con la persona natural, tales como domicilio, teléfono domiciliario y personal, e-mail personal, estado civil o situación marital, cargas familiares, edad, confesión religiosa, fecha de ingreso, estudios, remuneración, retenciones, afiliación pensionaria, sanciones, estímulos, renuncia, causales de despido; etc., que <b>EL TRABAJADOR</b> haya confiado al <b>EL EMPLEADOR</b> o que éste tenga registrado en su file personal. Dicha información únicamente será de manejo de la empresa en cuanto sea legalmente procedente.
+                                </li>
+                                <li><b>EL TRABAJADOR</b> declara conocer que son <span>secretos empresariales</span>, entre otros, los relacionados a: estructura legal, organizacional y física de la empresa, información de personal, contratos laborales, contratos de servicios; información contable, tributaria y/o contractual; programas o software informáticos y tecnología, especializados; información desde y hacia empresas filiales, matrices, proveedores, clientes, etc.; información técnica y/o comercial, costos y precios, información bancaria, datos de los proveedores o de los clientes de la empresa, datos relacionados a insumos, proceso de compra, sistemas de ventas, política de descuentos o créditos, exigencia de garantías; forma de transporte, distribución, producción, almacenaje, embalado, marcas de productos usadas en todos o algunos de los procesos; en relación a los productos comercializados y/o actividades de la empresa. Se encuentran incluidos toda información sobre estos aspectos, proporcionada por otras personas o empresas con la cuales se tenga contrato o vínculo de alguna naturaleza.
+                                </li>
+                                <li><b>EL TRABAJADOR</b> declara conocer que la divulgación de información protegida, así como el uso no autorizado de la misma, por parte de <b>EL TRABAJADOR</b>; trae como consecuencia un grave daño económico para la empresa y en consecuencia, la infracción a esta norma implica falta grave, sin perjuicio del derecho de la empresa a accionar de conformidad con el artículo 165º del Código Penal.
+                                </li>
+                                <li>La obligación contenida en la presente cláusula se mantiene aún después de disuelta la relación laboral con <b>EL TRABAJADOR</b>, por un tiempo adicional de cinco años como mínimo en el caso de los <span class="under">secretos empresariales</span> y en forma indefinida en el caso de los <span class="under">datos protegidos.</span>
+                                </li>
+                                <li>No se considera información protegida aquella que es de público conocimiento o que se puede obtener por medios distintos a la existencia de la relación laboral.
+                                </li>
+                                <li>Es potestad de <b>EL EMPLEADOR</b> el contenido de la presente cláusula, en el Reglamento Interno de la empresa.
+                                </li>
+                            </ol>
+
+                            <p class="under"><b>FUNCIONES Y OBLIGACIONES DEL TRABAJADOR</b></p>
+
+                            <p><b>Décimo Primero.</b> - <b>EL TRABAJADOR</b> se compromete a desarrollar para <b>EL EMPLEADOR</b> toda su capacidad de trabajo en el desempeño de sus labores, comprometiéndose a cumplir con las exigencias laborales que comprenden, aun cuando no se limita, a las siguientes obligaciones:</p>
+
+                            <p class="under">Obligaciones generales</p>
+
+                            <t t-set="amount" t-value="0" />
+
+                            <ol>
+
+                                <li>Cumplir con remitir reportes cada vez que este sea solicitado por <b>EL EMPLEADOR</b>.</li>
+
+                                <li>No dañar la imagen de <b>EL EMPLEADOR</b> frente a sus clientes.</li>
+
+                                <li>Mantener un ritmo de labor constante y efectivo.</li>
+
+                                <li>Tener en constante actualización la información que se maneje.</li>
+
+                                <li>Desarrollar las labores propias y complementarias del puesto para el que fue contratado con carácter de exclusividad, actuando en nombre y representación de <b>EL EMPLEADOR</b>, por lo que su conducta siempre deberá ser responsable.</li>
+
+                                <t t-foreach="o.employee_id.job_id.jobs_ids" t-as="job">
+                                    <t t-set="amount" t-value="amount + 1"/>
+                                    
+                                    <li><span t-field="job.function"/></li>
+                                    
+                                </t>
+                            </ol>
+
+                            <p class="under">Obligaciones sobre los archivos de trabajo</p>
+
+                            <ol >
+                                <li>Se debe guardar en las carpetas de los servidores de la empresa, todos los archivos de trabajo correspondiente o no correspondiente a las funciones de EL TRABAJADOR y siempre y cuando tengan información inherente al giro de la empresa.
+                                </li>
+                                <li><b>EL TRABAJADOR</b> no podrá sustraer de ninguna forma la información de trabajo, así como eliminación de algún archivo, salvo aprobación escrita de <b>EL EMPLEADOR</b>. 
+                                </li>
+                                <li><b>EL TRABAJADOR</b> no podrá tener archivos de trabajo en el “escritorio” de la PC o laptop, solo podrá tener archivos de trabajo almacenados en los lugares indicados en el punto 4 y 5 como correspondan.
+                                </li>
+                            </ol>
+
+                            <p class="under">Disposición de información del trabajo
+                            </p>
+
+                            <ol>
+                                <li><b>EL TRABAJADOR</b> pone a disposición la información de trabajo para toda auditoria que solicite <b>EL EMPLEADOR</b>.
+                                </li>
+                                <li><b>EL TRABAJADOR</b> tiene la obligación de entregar toda información del trabajo (física o virtual) antes de su salida, así mismo, estará supeditado a la entrega efectiva de toda la información, <b>EL EMPLEADOR</b> designará a una persona que se encargará de validar tal información.
+                                </li>
+                            </ol>
+
+                            <p class="under">Obligaciones sobre la desvinculación
+                            </p>
+
+                            <ol>
+                                
+                                <li><b>EL TRABAJADOR</b> no podrá desvincularse de la empresa sin un previo aviso, el cual por ley son con 30 días de anticipación y deberá constar por escrito.
+                                </li>
+                                <li>En el caso de que <b>EL TRABAJADOR</b> se retire en un periodo menor al de 30 días y sin consentimiento de <b>EL EMPLEADOR</b>, se tomará como falta grave y perjuicio hacia la empresa, el cual tendrá lugar a una penalidad.
+                                </li>
+                            </ol>
+                                <p class="under">Asignación de viáticos y rendiciones de estos
+                                </p>
+                            <ol>
+                                <li>Adicionalmente y solo en el caso que la labor de <b>EL TRABAJADOR</b> lo amerite, esto es cuando tenga que realizar viajes para el desarrollo de sus labores, <b>EL EMPLEADOR</b> le hará entrega de una determinada cantidad -está será fijada en el momento- por concepto de viáticos, la cual se calculará en base a las actividades que éste deba realizar.  Los viáticos incluirán únicamente los gastos de alimentación, alojamiento y movilidad (combustible).  Esta cantidad le será entregada a <b>EL TRABAJADOR</b>, siempre que <b>EL TRABAJADOR</b> haya cumplido con sustentar a <b>EL EMPLEADOR</b> la utilización de los viáticos que se le hayan entregado anteriormente.  La sustentación se realizará mediante la presentación de las facturas o boletas de ventas que demuestren los gastos realizados, documentos que deberán ser emitidos conforme a la legislación tributaria vigente y a nombre de <b>EL EMPLEADOR</b>.  Para este sustento solo se admitirán facturas o boletas emitidas a nombre de <b>EL EMPLEADOR</b>.
+                                </li>
+
+                                <li><b>El TRABAJADOR</b> deberá presentar a <b>EL EMPLEADOR</b> la sustentación de los viáticos entregados dentro de los primeros tres (03) días del mes siguiente de entregados dichos viáticos.  En caso de que <b>EL TRABAJADOR</b> no cumpla con realizar dicho sustento en el plazo indicado o que habiéndolo hecho este presente deficiencias por la presentación de facturas y/o boletas de ventas emitidas a nombre de terceras personas o adulteradas, <b>EL EMPLEADOR</b> no entregará a <b>EL TRABAJADOR</b> ninguna otra suma por concepto de viáticos.  Esta situación se mantendrá hasta que <b>EL TRABAJADOR</b> cumpla con rendir o sustentar adecuadamente los viáticos que le fueron entregados para el desarrollo de sus labores.
+                                </li>
+                                <li>En caso <b>EL EMPLEADOR</b>, luego de la revisión de la sustentación de los viáticos realizada por <b>EL TRABAJADOR</b> determine que éste tiene aún cantidades por reintegrar a ella, ésta le informará vía correo electrónico de dicho resultado precisándole la cantidad a reintegrar.  <b>EL TRABAJADOR</b> tiene un plazo de cinco (05) días hábiles contados desde la recepción del correo para reintegrar la cantidad no utilizada.  Las cantidades no reintegradas dentro del plazo indicado serán descontadas de la remuneración mensual, remuneración vacacional, gratificaciones, bonificación extraordinaria, comisiones, compensación por tiempo de servicios - CTS, gratificación trunca, vacaciones truncas, utilidades y de cualquier otro ingreso que pueda percibir <b>EL TRABAJADOR</b> durante la vigencia de la relación laboral y/o que se le pueda otorgar en su liquidación de beneficios sociales.  <b>EL TRABAJADOR</b> desde ya expresa su total consentimiento para que EL EMPLEADOR realice los descuentos correspondientes por este concepto de los derechos laborales indicados anteriormente.
+                                </li>
+                                <li>Las cantidades que <b>EL TRABAJADOR</b> reciba por concepto de viáticos no formarán parte de su remuneración computable para los efectos del cálculo de sus beneficios laborales, toda vez que estas sumas entregadas no son de su libre disponibilidad.
+                                </li>
+                            </ol>
+
+                            <p class="under"><b>NO COMPETENCIA</b></p>
+
+                            <p><b>Décimo Segundo.</b> - <b>EL TRABAJADOR</b> se compromete a no brindar un servicio de forma directa a ningún cliente de <b>EL EMPLEADOR</b> que tenga a la fecha de la firma del presente contrato y a los que pudiera tener a lo largo de su existencia como persona jurídica. Asimismo, no podrá celebrar contratos de asesoría, tercerización o estudio respecto a todos los productos que <b>EL EMPLEADOR</b> ofrece y afines, así no exista el vínculo laboral.</p>
+
+                            <p>Esta cláusula se extiende hasta 02 años de finalizado el vínculo laboral con <b>el trabajador</b>.</p>
+
+                            <p class="under"><b>PENALIDAD</b></p>
+
+                            <p><b>Décimo Tercero.</b> - En caso de incumplimiento por parte del trabajador de las obligaciones señaladas en las cláusulas <span class="under">Décimo, Décimo Primero y Décimo Segundo</span>, quedará obligado a indemnizar a <b>EL EMPLEADOR</b> por los daños y perjuicios que le cause, estableciéndose como penalidad por dicho incumplimiento <span class="under">un monto equivalente a la totalidad de remuneraciones, retribuciones y demás beneficios que hubiera recibido</span> <b>EL TRABAJADOR</b> de <b>EL EMPLEADOR</b> con motivo de su labor. Sin perjuicio de ello, es derecho de <b>EL EMPLEADOR</b> iniciar las acciones legales correspondientes por el daño ulterior que se le pueda causar.</p>
+
+                            <p>Asimismo, queda a salvo el derecho de las personas que se vean afectadas por <b>EL TRABAJADOR</b>, pudiendo accionar contra éste para obtener la indemnización correspondiente.</p>
+
+                            <p class="under"><b>COMPROMISO SOBRE CONFLICTO DE INTERESES</b></p>
+
+                            <p><b>Décimo Cuarto.</b> - Se entiende por conflicto de intereses toda situación o evento en que los intereses personales, directos o indirectos, de <b>EL TRABAJADOR</b> tengan prioridad, sean similares o se encuentren en oposición con los de <b>EL EMPLEADOR</b> ya sea que interfieran con los deberes que le competen a ella, o lo lleven a actuar en su desempeño por motivaciones diferentes al recto y real cumplimiento de sus responsabilidades. Para evitar dicha situación, <b>EL TRABAJADOR</b> se compromete a:</p>
+
+                            <ol>
+                                <li>Comunicar por escrito a la empresa, sus relaciones pasadas o presentes de amistad, parentesco o de tipo comercial con proveedores, clientes, socios comerciales y competidores; en cuanto tenga conocimiento de tal hecho.
+                                </li>
+                                <li>Rechazar cualquier tipo de honorario, comisión, remuneración, compensación, obsequio, dádiva, en dinero o en especie, de terceros, que pueda afectar sus actividades y/o decisiones en relación con las operaciones de empresa.
+                                </li>
+                                <li>Renunciar expresamente al fuero de su domicilio, sometiéndose a la jurisdicción de los jueces de la ciudad de Lima.
+                                </li>
+                                <li>No otorgar regalos, ofrecer obsequios o cualquier otro tipo de compensación a terceros; que puedan facilitar o perjudicar las relaciones de éstos con la empresa; salvo que tenga sustento razonable debido a las actividades comerciales de la empresa.
+                                </li>
+                                <li>No realizar actividades dentro o fuera de la empresa, para sí o a favor de terceros; que impliquen competencia en algún grado con la empresa; en cualquier tiempo, mientras dure su relación con la empresa.
+                                </li>
+                                <li>Usar la información de <b>EL EMPLEADOR</b> o la empresa usuaria para beneficiarse económicamente o perjudicar a ambas empresas.
+                                </li>
+                                <li>No dar a conocer o permitir que terceros tomen conocimiento de información de naturaleza industrial o comercial de la empresa; sin previa autorización escrita de sus representantes legales.
+                                </li>
+                            </ol>
+
+                            <p>Los numerales arriba mencionados deberán considerarse como un ejemplo ilustrativo y no como una descripción exhaustiva de las mismas. <b>EL TRABAJADOR</b> se compromete a actuar de acuerdo con las mismas. 
+                            </p>
+                            <p>Para el efecto, en caso de presentarse un conflicto de intereses, según las situaciones arriba descritas u otras similares, <b>EL TRABAJADOR</b> cursará una carta simple a <b>EL EMPLEADOR</b> poniendo en su conocimiento el hecho.
+                            </p>
+                            <p class="under"><b>CUMPLIMIENTO DE NORMAS LABORALES </b>
+                            </p>
+                            <p><b>Décimo Quinto.</b> - <b>EL TRABAJADOR</b> estará sujeto a las condiciones del presente contrato y en lo no dispuesto por él se rige por la Ley de productividad y competitividad Laboral.
+                            </p>
+                            <p><b>Décimo Sexto.</b> - <b>EL EMPLEADOR</b> cumplirá con las obligaciones laborales establecidas en las normas legales sobre derechos y beneficios de <b>EL TRABAJADOR</b> sujeto al régimen de la actividad privada, de acuerdo con la modalidad contratada. En todo lo no previsto por el presente contrato de trabajo sujeto a modalidad; se aplicará lo dispuesto en el Reglamento de Trabajo y en la legislación laboral vigente.
+                            </p>
+                            <p class="under"><b>FINALIZACIÓN ANTICIPADA</b>
+                            </p>
+                            <p><b>Décimo Sétimo.</b> - <b>EL TRABAJADOR</b> deberá comunicar con treinta (30) días de anticipación, el deseo de finalizar el contrato, según lo establecido en el Art. 18 del D.S. 003-97-T.R. 
+                            </p>
+                            <p><b>Décimo Octavo.</b> - <b>EL EMPLEADOR</b> no está obligado a dar aviso adicional alguno referente al término del presente contrato, el que concluye de acuerdo con la cláusula tercera.
+                            </p>
+                            <p class="under"><b>DISPOSICIONES FINALES</b>
+                            </p>
+                            <p><b>Décimo Noveno.</b> - Todo celular, computadora, laptop o cualquier otro objeto de trabajo perteneciente a <b>EL EMPLEADOR</b>, al no ser devuelto en el plazo acordado será descontado en la liquidación final tanto en equipo como en su consumo.
+                            </p>
+
+                            <p><b>Vigésimo.</b> - La suspensión del contrato de trabajo por alguna de las causas previstas en el Art. 12º de la Ley de Productividad y Competitividad Laboral, TUO del D. Leg. 728, no interrumpirá el plazo de duración del presente Contrato.
+                            </p>
+                            <p><b>Vigésimo Primero.</b> - Las partes señalan que ante la presente situación nacional y que enfrenta el mundo, COVID 19, en lo que corresponda a las normas laborales y civiles que se decreten como parte del estado de emergencia, como la restricción y suspensión de derechos civiles, la empresa se sujetará a esta y <b>EL TRABAJADOR</b> se compromete a acatar las medidas dictadas y de ser necesario aceptar una suspensión perfecta de labores.
+                            </p>
+                            <p><b>Vigésimo Segundo.</b> - En este acto <b>EL TRABAJADOR</b> autoriza en forma expresa el envío a su correo personal de la documentación laboral mencionada en el siguiente apartado. Para estos efectos <b>el trabajador</b> señala que su dirección de correo personal es: <span t-esc="o.employee_id.private_email"/>.
+                            </p>
+                            <p>Las partes acuerdan que de conformidad con el artículo 19° del Decreto Supremo N° 001-98-TR, modificado por el Decreto Supremo N° 009-2011-TR, <span t-field="o.company_id.name"/> podrá utilizar su firma digitalizada en las boletas de pago que le corresponden al TRABAJADOR.  <b>EL EMPLEADOR</b> podrá valerse de tecnologías de la información o comunicación tales como intranet, correo electrónico u otras de similar naturaleza para entregar virtualmente las boletas de pago a <b>EL TRABAJADOR</b>.  <b>EL TRABAJADOR</b> se obliga a acusar recibo por escrito dentro del día útil siguiente de recibida virtualmente la boleta de pago, sin perjuicio que <b>EL EMPLEADOR</b> pueda hacer uso de medio distinto, virtual o físico, para acreditar dicha recepción.
+                            </p>
+                            <p><b>Vigésimo Tercero.</b> - <b>EL TRABAJADOR</b> consiente expresamente que la documentación derivada de la relación laboral sea confeccionada procesada, firmada y remitida de manera electrónica a la casilla indicada en la cláusula anterior. Asimismo, <b>el trabajador</b> autoriza a la Empresa para que envíe al correo antes indicado toda otra información corporativa como comunicaciones internas, invitaciones de capacitaciones, concursos, campañas e Lear Ning etc.
+                            </p>
+                            <p>Todas, las notificaciones por cambios de labores, reubicaciones, amonestaciones, llamadas de atención, renuncia y despido, o aquellas que resulten necesarias como parte de la situación anómala laboral tanto administrativas como operacionales, será mediante: WhatsApp, correo email, u otro medio de comunicación análogo o electrónico, y que esté al alcance de <b>EL TRABAJADOR</b>, la sola verificación del mensaje se considerara como NOTIFICADO.
+                            </p>
+                            <p>Ambas partes suscriben el presente documento en duplicado y en señal de conformidad en Lima al <span t-esc="o.date_start.day"/> de <span t-field="o.month_start_word"/> del <span t-esc="o.date_start.year"/>.
+                            </p>
+
+                            
+                            <br/>
+
+                             <table width= "100%" style="border-collapse: separate;">
+
+                                <tr style="text-align: center; " >
+                                    <td width= "6%"></td>
+                                    <td width= "41%">
+                                        <img class="signature" t-if="o.employee_id.company_id.gerente_firma" t-att-src="image_data_uri(o.employee_id.company_id.gerente_firma)" alt="Firma gerente" />
+                                        <hr style="border:none;"/>                                    </td>
+                                    <td width= "6%"></td>
+                                    <td width= "41%"></td>
+                                    <td width= "6%"></td>
+                                </tr>
+
+                                <tr style="text-align: center; font-size: 10pt;" >
+                                    <td></td>
+                                    <td style ="border-top: 1px solid; height: 30px; "><span style="font-size: 9pt;" t-field="o.employee_id.company_id.gerente_name" /></td> 
+                                    <td></td>
+                                    <td style ="border-top: 1px solid;"><span style="font-size: 9pt;" t-field="o.employee_id.name" /></td>
+                                <td></td>
+
+                                </tr>
+
+                                <tr style="text-align: center; ">
+                                    <td></td>
+                                    <td><span style="font-size: 9pt;">GERENTE GENERAL</span></td>
+                                    <td></td>
+                                    <td><span style="font-size: 9pt;" t-field="o.employee_id.l10n_latam_identification_type_id.name"/> 
+                                        <span style="font-size: 9pt;">Nro.</span> 
+                                    <span style="font-size: 9pt;" t-field="o.employee_id.identification_id"/></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

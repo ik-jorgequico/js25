@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_lbs_vaca_form_view" model="ir.ui.view">
+        <field name="name">hr.lbs.vaca.form.view</field>
+        <field name="model">hr.lbs.vaca</field>
+        
+        <field name="arch" type="xml">
+            <form  >
+            <sheet>
+                <group> 
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group> 
+                    <group>
+                            <field name="name"/>
+                            <field name="period_year"/>
+                            <field name="employee_id"/>
+                            <field name="salary"/>
+                            <field name="family_asig"/>
+                            <field name="average_variables"/>
+                            <field name="base_amount"/>
+                            <field name="number_days"/>
+                            <field name="amount" />
+                            <field name="lbs_vaca_variables"/>
+                    </group>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_lbs_vaca_tree_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.vaca.tree.view</field >
+        <field name="model">hr.lbs.vaca</field>
+        
+        <field name="arch" type="xml">
+            <tree>
+                <field name="type_vacation"/>
+                <field name="period_year"/>
+                <field name="employee_id"/>
+                <field name="salary"/>
+                <field name="family_asig"/>
+                <field name="average_variables"/>
+                <field name="base_amount"/>
+                <field name="number_days"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lbs_vaca" model="ir.actions.act_window">
+        <field name="name">LBS vaca</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.lbs.vaca</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

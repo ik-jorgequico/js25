@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_inherit_hr_cts_macro_form" model="ir.ui.view">
+        <field name="name">hr.cts_macro.form.inherit</field>
+        <field name="model">hr.cts</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_cts.hr_cts_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='compute_sheet']" position="after">
+                <button name="action_dowload_report_macro_cts" string="Generar Macro" type="object" class="btn-primary"/>
+            </xpath>
+
+            <xpath expr="//field[@name='xls_binary']" position="after">
+                <field name="xls_filename_macro" invisible="1"/>
+                <field name="xls_binary_macro" filename="xls_filename_macro" readonly="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

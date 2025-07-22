@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_zonal_tree" model="ir.ui.view">
+            <field name="name">account.zonal.tree</field>
+            <field name="model">account.zonal</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Account Zonal">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_zonal" model="ir.actions.act_window">
+            <field name="name">Zonal</field>
+            <field name="res_model">account.zonal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id"></field>
+            <field name="search_view_id"/>
+        </record>
+
+        <menuitem id="menu_account_zonal"
+            name="Zonal"
+            action="action_account_zonal"
+            parent="account.account_account_menu"
+            sequence="6"/>
+    </data>
+</odoo>

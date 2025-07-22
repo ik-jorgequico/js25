@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tramo_5ta,tramo.5ta,model_tramo_5ta,hr_contract.group_hr_contract_manager,1,1,1,1

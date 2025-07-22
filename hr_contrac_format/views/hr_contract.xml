@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inherit_hr_contract_form" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_type_id']" position="after">
+                <field name="work_type" />
+                <field name="year_contract" invisible="1" />
+                <field name="month_contract" invisible="1" />
+                <field name="day_contract" invisible="1" />
+                <field name="salary_word" invisible="1" />
+                <field name="move_word" invisible="1" />
+                <field name="month_start_word" invisible="1" />
+                <field name="previous_contract" invisible="1" />
+            </xpath>
+
+            <xpath expr="//field[@name='date_end']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="Labores" name="labores" >
+                    <group string="Info" name="labores_inherit">
+                        <field name="labor" />
+                    </group>
+                    <group string="Formato Contrato" name="format">
+                        <field name="pdf_filename" invisible="1" />
+                        <field name="pdf_binary" filename="pdf_filename" readonly="1" />
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="compute_contract_format" string="CONTRATO PDF" type="object" />
+                <button name="send_contract_email" string="ENVIAR POR EMAIL" type="object" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

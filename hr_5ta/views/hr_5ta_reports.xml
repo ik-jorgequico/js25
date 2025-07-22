@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="action_report_5ta" model="ir.actions.report">
+            <field name="name">5TA LINE</field>
+            <field name="model">hr.5ta.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_5ta.report_5ta_lang</field>
+            <field name="report_file">hr_5ta.report_5ta_lang</field>
+            <field name="print_report_name">'5TA - %s' % (object.employee_id.name)</field>
+            <field name="binding_model_id" ref="model_hr_5ta_line"/>
+            <field name="binding_type">report</field>
+            <!-- Erase fields to avoid double PDF posting -->
+            <field name="attachment"></field>
+            <field name="attachment_use" eval="False"/>
+        </record>
+        
+</odoo>

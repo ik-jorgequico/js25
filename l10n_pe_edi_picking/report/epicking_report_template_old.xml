@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_epicking_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div class="page" style="font-size: 0.75rem;">
+                <div id="picking_header" class="row">
+                    <div
+                        t-attf-class="#{'col-8' if report_type != 'html' else 'col-12 col-sm-8'} col-auto mb-2"
+                    >
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-12 col-sm-12 mb-0">
+                                        <strong>ADDRESS</strong>
+                                    </dt>
+                                </dl>
+                            </div>
+                            <div class="card-body">
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-4 col-sm-4 mb-0">
+                                        <span
+                                            class="text-nowrap"
+                                            t-esc="o._get_document_type_description(o.l10n_pe_edi_picking_commercial_document_type) or 'DOCUMENTO'"
+                                        />
+                                        :
+                                    </dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            class="text-nowrap"
+                                            t-esc="o.partner_id.commercial_partner_id.vat or '00000000'"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >DENOMINATION:</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            class="text"
+                                            t-field="o.partner_id.commercial_partner_id.name"
+                                        />
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-0">
+                                    <div class="col-auto col-6 col-sm-6 mb-0">
+                                        <dl class="row mb-0">
+                                            <dt
+                                                class="col-auto col-8 col-sm-8 mb-0"
+                                            >EMISSION DATE</dt>
+                                            <dd class="col-auto col-4 col-sm-4 mb-0">
+                                                <span
+                                                    t-if="o.scheduled_date"
+                                                    t-field="o.scheduled_date"
+                                                    t-options='{"format": "dd/MM/yyyy"}'
+                                                />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-auto col-6 col-sm-6 mb-0">
+                                        <dl class="row mb-0">
+                                            <dt
+                                                class="col-auto col-8 col-sm-8 mb-0"
+                                            >DATE START OF TRANSFER</dt>
+                                            <dd class="col-auto col-4 col-sm-4 mb-0">
+                                                <span
+                                                    t-if="o.l10n_pe_edi_picking_start_transport_date"
+                                                    t-field="o.l10n_pe_edi_picking_start_transport_date"
+                                                />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >MOTION FOR TRANSFER</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-if="o.l10n_pe_edi_picking_catalog_20_id"
+                                            t-field="o.l10n_pe_edi_picking_catalog_20_id.name"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >MODE OF TRANSPORTATION</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-if="o.l10n_pe_edi_picking_catalog_18_id"
+                                            t-field="o.l10n_pe_edi_picking_catalog_18_id.name"
+                                        />
+                                    </dd>
+                                </dl>
+                                <div class="row mb-0">
+                                    <div class="col-auto col-6 col-sm-6 mb-0">
+                                        <dl class="row mb-0">
+                                            <dt
+                                                class="col-auto col-8 col-sm-8 mb-0"
+                                            >TOTAL GROSS WEIGHT</dt>
+                                            <dd class="col-auto col-4 col-sm-4 mb-0">
+                                                <span
+                                                    t-field="o.l10n_pe_edi_picking_total_gross_weight"
+                                                />
+                                                <span
+                                                    t-field="o.l10n_pe_edi_picking_gross_weight_uom"
+                                                />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-auto col-6 col-sm-6 mb-0">
+                                        <dl class="row mb-0">
+                                            <dt
+                                                class="col-auto col-8 col-sm-8 mb-0"
+                                            >NUMBER OF PACKAGES</dt>
+                                            <dd class="col-auto col-4 col-sm-4 mb-0">
+                                                <span
+                                                    t-field="o.l10n_pe_edi_picking_number_packages"
+                                                />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        t-attf-class="#{'col-4' if report_type != 'html' else 'col-12 col-sm-4'} col-auto mb-2 order-first order-sm-last"
+                    >
+                        <div class="card mb-3 text-center">
+                            <div class="card-header">
+                                <h5>
+                                    <span class="font-weight-bold">
+                                        RUC
+                                        <t t-esc="o.company_id.vat" />
+                                    </span>
+                                </h5>
+                                <h5>SENDER REMISSION GUIDE</h5>
+                                <h5>
+                                    <span
+                                        class="font-weight-bold"
+                                        t-esc="o.l10n_pe_edi_picking_name"
+                                    />
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="picking_data_transfer" class="row">
+                    <div
+                        t-attf-class="#{'col-6' if report_type != 'html' else 'col-12 col-sm-6'} col-auto mb-2"
+                    >
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-12 col-sm-12 mb-0">
+                                        <strong
+                                        >DATA OF THE STARTING POINT AND ARRIVAL POINT</strong>
+                                    </dt>
+                                </dl>
+                            </div>
+                            <div class="card-body">
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >STARTING POINT</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        (
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_starting_point_ubigeo"
+                                        />
+                                        )
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_starting_point_state_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_starting_point_state_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_starting_point_province_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_starting_point_province_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_starting_point_district_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_starting_point_district_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_starting_point_street"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >ARRIVAL POINT</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        (
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_arrival_point_ubigeo"
+                                        />
+                                        )
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_arrival_point_state_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_arrival_point_state_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_arrival_point_province_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_arrival_point_province_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <t
+                                            t-if="o.l10n_pe_edi_picking_arrival_point_district_id"
+                                        >
+                                            <span
+                                                t-field="o.l10n_pe_edi_picking_arrival_point_district_id.name"
+                                            />
+                                            -
+                                        </t>
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_arrival_point_street"
+                                        />
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        t-attf-class="#{'col-6' if report_type != 'html' else 'col-12 col-sm-6'} col-auto mb-2"
+                    >
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-12 col-sm-12 mb-0">
+                                        <strong>TRANSPORTATION DATA</strong>
+                                    </dt>
+                                </dl>
+                            </div>
+                            <div class="card-body">
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >CARRIER</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-esc="o._get_document_type_description(o.l10n_pe_edi_picking_carrier_document_type)"
+                                        />
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_carrier_doc_number"
+                                        />
+                                        -
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_carrier_name"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >VEHICLE</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_carrier_license_plate"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-4 col-sm-4 mb-0">DRIVER</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-esc="o._get_document_type_description(o.l10n_pe_edi_picking_driver_document_type)"
+                                        />
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_driver_doc_number"
+                                        />
+                                        -
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_driver_name"
+                                        />
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_driver_last_name"
+                                        />
+                                    </dd>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dt
+                                        class="col-auto col-4 col-sm-4 mb-0"
+                                    >LICENSE</dt>
+                                    <dd class="col-auto col-8 col-sm-8 mb-0">
+                                        <span
+                                            t-field="o.l10n_pe_edi_picking_driver_license_number"
+                                        />
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table
+                    class="table table-sm o_main_table min-vh-50"
+                    name="picking_line_table"
+                >
+                    <thead>
+                        <tr>
+                            <th name="th_code" class="text-start">
+                                <span>CODE</span>
+                            </th>
+                            <th name="th_description" class="text-start">
+                                <span>DESCRIPTION</span>
+                            </th>
+                            <th name="th_uom" class="text-start">
+                                <span>UOM</span>
+                            </th>
+                            <th name="th_qty" class="text-end">
+                                <span>QTY</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t
+                            t-set="move_line_ids"
+                            t-value="o.move_line_ids.filtered(lambda x: x.quantity &gt; 0)"
+                        />
+                        <t t-foreach="move_line_ids" t-as="line">
+                            <tr>
+                                <td name="td_code" class="text-start">
+                                    <span t-field="line.product_id.default_code" />
+                                </td>
+                                <td name="td_description" class="text-start">
+                                    <span
+                                        t-esc="o._get_description_without_product_code(line.product_id, line.product_id.display_name, line.lot_id)"
+                                    />
+                                </td>
+                                <td name="td_uom" class="text-start">
+                                    <span t-field="line.product_uom_id" />
+                                </td>
+                                <td name="td_qty" class="text-end">
+                                    <span t-field="line.quantity" />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div id="picking_data_footer" class="row">
+                    <div
+                        t-attf-class="#{'col-12' if report_type != 'html' else 'col-12 col-sm-12'} col-auto mb-2"
+                    >
+                        <t
+                            t-if="o.l10n_pe_edi_invoice_number_ids"
+                        >
+                            <div class="card mb-2" >
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-auto col-12 col-sm-12 mb-0">
+                                            <strong>DOCUMENT RELATED</strong>
+                                        </dt>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <dd class="col-auto col-12 col-sm-12 mb-0">
+                                            <t t-foreach="o.l10n_pe_edi_invoice_number_ids" t-as="doc">
+                                                <span class="text-nowrap" t-field="doc.type" /> <span class="text-nowrap" t-field="doc.series" />-<span class="text-nowrap" t-field="doc.number" />
+                                            </t>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <dl class="row mb-0">
+                                    <dt class="col-auto col-12 col-sm-12 mb-0">
+                                        <strong>OBSERVATIONS</strong>
+                                    </dt>
+                                </dl>
+                                <dl class="row mb-0">
+                                    <dd class="col-auto col-12 col-sm-12 mb-0">
+                                        <span class="text-nowrap" t-field="o.note" />
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="card w-100" t-if="o.l10n_pe_edi_sunat_accepted">
+                            <div class="card-body p-2">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p>
+                                            Printed representation of the
+                                            <strong>
+                                                <span
+                                                    t-esc="o.picking_type_id and o.picking_type_id.l10n_pe_edi_request_document_type_id.name.capitalize() or 'NO VALID'"
+                                                />
+                                                electronic
+                                                <span t-esc="o.l10n_pe_edi_picking_name or 'NO VALID'" />
+                                            </strong>
+                                            , visit
+                                            <strong>
+                                                <span
+                                                    t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.control_url or 'NO VALID'"
+                                                />
+                                            </strong>
+                                        </p>
+                                        <p>
+                                            <span
+                                                t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.authorization_message or ''"
+                                            />
+                                        </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <img
+                                            t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o._get_qr_code_picking(), 100, 100)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    
+    <template id="electronic_remission">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t
+                    t-call="l10n_pe_edi_picking.report_epicking_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>

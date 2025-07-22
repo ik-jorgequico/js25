@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- HR VACACION -->
+    <record id="hr_vacation_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.form.view</field>
+        <field name="model">hr.vacation</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_sheet"
+                        string="CALCULAR"
+                        type="object"
+                        class="btn-primary"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_vacation_acum" class="oe_stat_button"
+                            icon="fa-book" type="object" invisible="child_acum_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="child_acum_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Ver Personas</span>
+                            </div>
+                        </button>
+                        <button name="action_open_hr_vacation" class="oe_stat_button" icon="fa-book"
+                            type="object" invisible = "child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="child_ids_count" />
+                                </span>
+                                <span class="o_stat_text">Ver Periodos</span>
+                            </div>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="date_to_cese" force_save="1" readonly="1" />
+                        </group>
+                    </group>
+                
+                    <notebook>
+                        <page string="Registros por Persona">
+                            <field name="child_acum_ids" nolabel="1" readonly="1" />
+                        </page>
+                        <page string="Registros por Periodo">
+                            <field name="child_ids" nolabel="1" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+
+    <record id="hr_vacation_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.tree.view</field>
+        <field name="model">hr.vacation</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" force_save="1" readonly="1" />
+                <field name="company_id" options="{'no_create': true,'no_open': True}" groups="base.group_multi_company" invisible="1"/>
+                <field name="date_to_cese" force_save="1" readonly="1" />
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.server" id="action_dowload_report_tabular_vacation">
+        <field name="name">Generar Reporte Tabular</field>
+        <field name="model_id" ref="hr_vacation.model_hr_vacation" />
+        <field name="binding_model_id" ref="hr_vacation.model_hr_vacation" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_dowload_report_tabular_vacation()
+        </field>
+    </record>
+
+    <record id="action_vacation" model="ir.actions.act_window">
+        <field name="name">Record Vacacional</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+        id="menu_action_vacation"
+        action="action_vacation"
+        name="Record Vacional"
+        parent="hr_holidays.menu_hr_holidays_root"
+        sequence="100" />
+
+    <!-- HR VACACION LINE-->
+
+
+    <record id="hr_vacation_line_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.line.form.view</field>
+        <field name="model">hr.vacation.line</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" readonly="1" force_save="1" />
+                            <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/>
+                            <field name="first_contract_date" readonly="1" force_save="1" />
+                            <field name="period_char_date" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <group>
+
+                                <field name="parent_id" invisible="1" />
+                                <field name="number_periods" readonly="1" force_save="1" />
+                                <field name="days_generated" readonly="1" force_save="1" />
+                                <field name="vacation_enjoyed" readonly="1" force_save="1" />
+                                <field name="vacation_purchased" readonly="1" force_save="1" />
+                                <field name="days_earrings" readonly="1" force_save="1" />
+                                <field name="vacation_trunced" readonly="1" force_save="1" />
+                                <field name="vacation_compensable" readonly="1" force_save="1" />
+
+                            </group>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Variables">
+                            <field name="subline_ids" nolabel="1" readonly="1" force_save="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_vacation_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.line.tree.view</field>
+        <field name="model">hr.vacation.line</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="parent_id" column_invisible="1" />
+                <field name="employee_id" readonly="1" force_save="1" />
+                <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/>
+                <field name="first_contract_date" readonly="1" force_save="1" />
+                <field name="period_char_date" readonly="1" force_save="1" />
+                <field name="number_periods" readonly="1" force_save="1" />
+                <field name="days_generated" readonly="1" force_save="1" />
+                <field name="vacation_enjoyed" readonly="1" force_save="1" />
+                <field name="days_earrings" readonly="1" force_save="1" column_invisible="1" />
+                <field name="vacation_purchased" readonly="1" force_save="1" />
+                <field name="vacation_days_earrings" readonly="1" force_save="1" />
+                <field name="vacation_trunced" readonly="1" force_save="1" />
+                <field name="vacation_compensable" readonly="1" force_save="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_vacation_rule_filter" model="ir.ui.view">
+        <field name="name">hr.vacation.line.select</field>
+        <field name="model">hr.vacation.line</field>
+        <field name="arch" type="xml">
+            <search string="VAC Line">
+                <group col="8" colspan="4" expand="0" string="Group By">
+                    <filter string="VAC" name="group_by_parent_id"
+                        context="{'group_by': 'parent_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_line" model="ir.actions.act_window">
+        <field name="name">VACACION INDIVIDUAL</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_group_by_parent_id': 1}</field>
+        <field name="search_view_id" ref="view_hr_vacation_rule_filter" />
+    </record>
+
+
+    <!-- HR VACACION ACUM LINE-->
+
+
+    <record id="hr_vacation_acum_line_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.acum.line.form.view</field>
+        <field name="model">hr.vacation.acum.line</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="employee_id" readonly="1" force_save="1" />
+                        <field name="first_contract_date" readonly="1" force_save="1" />
+                        <field name="last_contract_date" readonly="1" force_save="1" />
+                        <field name="period_char_date" readonly="1" force_save="1" />
+                    </group>
+                    <group>
+                        <field name="parent_id" invisible="1" />
+                        <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/>
+                        <field name="number_periods" readonly="1" force_save="1" />
+                        <field name="days_generated" readonly="1" force_save="1" />
+                        <field name="vacation_enjoyed" readonly="1" force_save="1" />
+                        <field name="vacation_purchased" readonly="1" force_save="1" />
+                        <field name="days_earrings" readonly="1" force_save="1" />
+                        <field name="vacation_trunced" readonly="1" force_save="1" />
+                        <field name="vacation_compensable" readonly="1" force_save="1" />
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Variables">
+                        <field name="child_ids" nolabel="1" readonly="1" force_save="1" />
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+    <!-- Registro por persona -->
+    <record id="hr_vacation_acum_line_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.acum.line.tree.view</field>
+        <field name="model">hr.vacation.acum.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_excel_vac_enjoyed" string="XSLX Record Vac" type="object" />
+                    <button name="action_pending_by_period" string="XSLX Vac Pendientes" type="object" />
+
+                </header> -->
+                <field name="parent_id" column_invisible="1" />
+                <field name="employee_id" readonly="1" force_save="1" />
+                <field name="structure_type_abbr" widget="badge" decoration-success="structure_type_abbr == 'RG'" decoration-info="structure_type_abbr == 'RP'" decoration-danger="structure_type_abbr == 'RM'"/>
+                <field name="first_contract_date" readonly="1" force_save="1" />
+                <field name="period_char_date" readonly="1" force_save="1" />
+                <field name="number_periods" readonly="1" force_save="1" />
+                <field name="days_generated" readonly="1" force_save="1" />
+                <field name="vacation_enjoyed" readonly="1" force_save="1" />
+                <field name="vacation_purchased" readonly="1" force_save="1" />
+                <field name="days_earrings" readonly="1" force_save="1" />
+                <field name="vacation_trunced" readonly="1" force_save="1" />
+                <field name="vacation_compensable" readonly="1" force_save="1" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_acum_line" model="ir.actions.act_window">
+        <field name="name">VACACION ACUM INDIVIDUAL</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.acum.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- HR VACACION SUB LINE-->
+
+    <record id="hr_vacation_subline_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.subline.tree.view</field>
+        <field name="model">hr.vacation.subline</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="leave_id" readonly="1" force_save="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_vacation_subline_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.subline.form.view</field>
+        <field name="model">hr.vacation.subline</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date_from" readonly="1" force_save="1" />
+                        <field name="date_to" readonly="1" force_save="1" />
+                        <field name="leave_id" readonly="1" force_save="1" />
+                        <field name="employee_id" readonly="1" force_save="1" />
+                        <field name="number_real_days" readonly="1" force_save="1" />
+                    </group>
+                    <group>
+                        <field name="vac_line" invisible="1" />
+                    </group>
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_vacation_subline" model="ir.actions.act_window">
+        <field name="name">VACACION SUBLINE</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.subline</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_form_page_tax_sunat" model="ir.ui.view">
+        <field name="name">res.company.page.tax.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <page name="general_info" position="after">
+                <page string="Impuestos SUNAT">
+                    <group>
+                        <group>
+                            <label for="part_workers"/>
+                            <div>
+                                <field name="part_workers" class="oe_inline" nolabel="1"/>
+                                <span class="o_form_label oe_inline">%</span>
+                            </div>
+                            <field name="income_regime"/>
+                        </group>
+                        <group>
+                            <field name="uit_id"/>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

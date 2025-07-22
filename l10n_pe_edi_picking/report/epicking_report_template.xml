@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_epicking_document" >
+			<t t-call="l10n_pe_edi_odoofact.report_peru_layout">
+                <div class="page" style="font-size: 0.75rem;">
+                    <style>
+                        .table_client {
+                            border: 1px solid black;
+                            border-radius: 4px;
+                            table-layout: fixed;
+                            width: 100%;
+                            border-collapse: separate;
+                            font-size: 12px;
+                            padding: 5px;
+                            vertical-align: center;
+                        }
+                        .table_client td {
+                            text-transform: uppercase;
+                            text-align: left;
+                        }
+                        .table_content {
+                            font-size: 12px;
+                            border: 1px solid black;
+                            border-collapse: separate;
+                            border-radius: 4px;
+                            width: 100%;
+                            vertical-align: center;
+                        }
+                        .table_content thead {
+                            text-align: center;
+                            font-size: 12px;
+                        }
+                        .table_content tbody {
+                            text-align: left;
+                            font-size: 10px;
+                            text-transform: uppercase;
+                        }
+                        .table_content th, .table_content td {
+                            padding: 5px;
+                            text-align: center;
+                            border: None;
+                            border-right: 1px solid black;
+                            border-bottom: 1px solid black;
+                        }
+                        .table_content th:last-child, .table_content td:last-child {
+                            border-right: None;
+                        }
+                        .table_content tr:last-child td {
+                            border-bottom: None;
+                        }
+                        .table_info {
+                            width: 100%;
+                            border: 1px solid black;
+                            font-size: 12px;
+                            vertical-align: center;
+                            border-radius: 4px;
+                            border-collapse: separate;
+                        }
+                        .table_info td {
+                            padding: 5px;
+                        }
+                    </style>
+                    
+                    <!-- TABLE 01 -->
+                    <table class="table_client">
+                        <tr>
+                            <th colspan="2"><span>Fecha de Emisión: </span></th>
+                            <td colspan="6"><t t-esc="o.scheduled_date or ''" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Señor(es): </span></th>
+                            <td colspan="6"><t t-esc="o.partner_id.commercial_partner_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Dirección: </span></th>
+                            <td colspan="6">
+                                <span t-esc="o.partner_id.street_name or ''"/> 
+                                <span t-esc="o.partner_id.street_number or ''"/> 
+                                <span t-esc="o.partner_id.street_number2 or ''"/> 
+                                <span t-esc="o.partner_id.street2 or ''"/>
+                                <t t-if="o.partner_id.l10n_pe_district">
+                                    - <span t-esc="o.partner_id.l10n_pe_district.name or ''"/>
+                                </t>
+                                <t t-if="o.partner_id.city_id">
+                                    - <span t-esc="o.partner_id.city_id.name or ''"/>
+                                </t>
+                                <t t-if="o.partner_id.state_id">
+                                    - <span t-esc="o.partner_id.state_id.name or ''"/>
+                                </t>
+                                <t t-if="o.partner_id.country_id">
+                                    - <span t-esc="o.partner_id.country_id.name or ''"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span t-esc="o.partner_id.commercial_partner_id.l10n_latam_identification_type_id.name or 'DOCUMENTO'"/>: </th>
+                            <td colspan="6"><t t-esc="o.partner_id.commercial_partner_id.vat or 'SIN NRO DOCUMENTO'"/></td>
+                        </tr>
+                    </table>
+                    
+                    <br/>
+                    
+                    <!-- TABLE 02 -->
+                    <table class="table_client">
+                        <tr>
+                            <th colspan="2"><span>Fecha de traslado:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_start_transport_date or ''" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></td>
+                            <th colspan="2"><span>Motivo de traslado:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_catalog_20_id.name or ''"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Peso bruto o total:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_total_gross_weight or ''"/></td>
+                            <th colspan="2"><span>Modo de transporte:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_catalog_18_id.name or ''"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Unidad de peso bruto o total:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_gross_weight_uom or ''"/></td>
+                            <th colspan="2"><span>Número de paquetes:</span></th>
+                            <td colspan="2"><span t-esc="o.l10n_pe_edi_picking_number_packages or ''"/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Punto de partida:</span></th>
+                            <td colspan="6">
+                                <t t-if="o.l10n_pe_edi_picking_starting_point_ubigeo">
+                                    (<span t-field="o.l10n_pe_edi_picking_starting_point_ubigeo"/>) 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_starting_point_state_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_starting_point_state_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_starting_point_province_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_starting_point_province_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_starting_point_district_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_starting_point_district_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_starting_point_street">
+                                    <span t-esc="o.l10n_pe_edi_picking_starting_point_street"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Punto de llegada:</span></th>
+                            <td colspan="6">
+                                <t t-if="o.l10n_pe_edi_picking_arrival_point_ubigeo">
+                                    (<span t-field="o.l10n_pe_edi_picking_arrival_point_ubigeo"/>) 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_arrival_point_state_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_arrival_point_state_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_arrival_point_province_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_arrival_point_province_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_arrival_point_district_id">
+                                    <span t-esc="o.l10n_pe_edi_picking_arrival_point_district_id.name"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_arrival_point_street">
+                                    <span t-esc="o.l10n_pe_edi_picking_arrival_point_street"/>
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <br/>
+                    
+                    <!-- TABLE 03 -->
+                    <table class="table_content">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">Ítem</th>
+                                <th style="width: 20%;">Código</th>
+                                <th>Descripción</th>
+                                <th style="width: 10%;">U.M</th>
+                                <th style="width: 10%;">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="item" t-value="0"/>
+                            <t t-foreach="o.move_line_ids_without_package" t-as="line">
+                                <tr>
+                                    <td><span t-esc="item + 1"/></td>
+                                    <td><span t-esc="line.product_id.default_code"/></td>
+                                    <td><span t-esc="line.product_id.name"/></td>
+                                    <td><span t-esc="line.product_id.uom_id.name"/></td>
+                                    <td><span t-esc="line.quantity" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/></td>
+                                </tr>
+                                <t t-set="item" t-value="item + 1"/>
+                            </t>
+                                <tr>
+                                    <td colspan="4" style="text-align: end;"><strong>Total Unidades</strong></td>
+                                    <td><span t-esc="sum(line.quantity for line in o.move_line_ids_without_package)" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    
+                    <br/>
+                    
+                    <!-- TABLE 04 -->
+                    <table class="table_client">
+                        <tr>
+                            <th colspan="2"><span>Transportador:</span></th>
+                            <td colspan="2">
+                                <t t-if="o.l10n_pe_edi_picking_carrier_doc_type">
+                                    <span t-esc="o.l10n_pe_edi_picking_carrier_doc_type.name"/> 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_carrier_doc_number">
+                                    <span t-esc="o.l10n_pe_edi_picking_carrier_doc_number"/> -  
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_carrier_name">
+                                    <span t-esc="o.l10n_pe_edi_picking_carrier_name"/>
+                                </t>
+                            </td>
+                            <th colspan="2"><span>Conductor:</span></th>
+                            <td colspan="2">
+                                <span t-esc="o.l10n_pe_edi_picking_driver_doc_type.name"/>
+                                <t t-if="o.l10n_pe_edi_picking_driver_doc_number">
+                                    <span t-esc="o.l10n_pe_edi_picking_driver_doc_number"/> - 
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_driver_name">
+                                    <span t-esc="o.l10n_pe_edi_picking_driver_name"/>
+                                </t>
+                                <t t-if="o.l10n_pe_edi_picking_driver_last_name">
+                                    <span t-esc="o.l10n_pe_edi_picking_driver_last_name"/> 
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><span>Vehiculo:</span></th>
+                            <td colspan="2">
+                                <t t-if="o.l10n_pe_edi_picking_carrier_license_plate">
+                                    <span t-esc="o.l10n_pe_edi_picking_carrier_license_plate"/>
+                                </t>
+                            </td>
+                            <th colspan="2"><span>Licencia de conducir:</span></th>
+                            <td colspan="2">
+                                <t t-if="o.l10n_pe_edi_picking_driver_license_number">
+                                    <span t-esc="o.l10n_pe_edi_picking_driver_license_number"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr t-if="not is_html_empty(o.note)">
+                            <th colspan="2"><span>Observaciones:</span></th>
+                            <td colspan="6"><span t-esc="o.note or ''"/></td>
+                        </tr>
+                    </table>
+                    
+                    <br/>
+                    
+                    <!-- TABLE 05  t-if="o.l10n_pe_edi_sunat_accepted"-->
+                    <table class="table_info" t-if="o.l10n_pe_edi_sunat_accepted">
+                        <tr>
+                            <td class="td_qr"><span>Representación impresa de la Guía De Remisión Remitente Electrónica, visitar</span>&#160;
+                                <strong>
+                                    <span t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.control_url or 'NO VALID'"/>.
+                                </strong>
+                                <br/>
+                                <span t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.authorization_message or ''"/>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <br/>
+                    
+                    <!-- <table t-if="o.l10n_pe_edi_sunat_accepted">
+                        <tr>
+                            <td>
+                                <img t-attf-src="data:image/png;base64, #{o.qr_code}" style="max-width:100px;max-height: 100px;"/>
+                            </td>
+                        </tr>
+                    </table> -->
+                </div>
+            </t>
+        </template>
+
+        <template id="electronic_remission">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="l10n_pe_edi_picking.report_epicking_document" t-lang="o.partner_id.lang"/>
+                </t>
+                <!-- <div class="footer">
+                    <div style="text-align: center; font-size: 12;">
+                        <span class="page"/>
+                    </div>
+                </div> -->
+            </t>
+        </template>
+    </data>
+</odoo>

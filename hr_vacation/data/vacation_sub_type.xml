@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+        <record id="subtype_01" model="hr.leave.subtype">
+            <field name="name">SP Sanción Disciplinaria</field>              
+            <field name="type_id" ref="type_01"/>  
+        </record>
+
+        <record id="subtype_05" model="hr.leave.subtype">
+            <field name="name">SP Permiso, Licencia u Otros motivos sin goce de haber</field>              
+            <field name="type_id" ref="type_05"/>  
+        </record>
+
+        <record id="subtype_07" model="hr.leave.subtype">
+            <field name="name">SP Falta no justificada</field>              
+            <field name="type_id" ref="type_07"/>  
+        </record>
+
+        <record id="subtype_09" model="hr.leave.subtype">
+            <field name="name">SP Maternidad durante el descanso pre y post natal</field>              
+            <field name="type_id" ref="type_09"/>  
+        </record>
+
+        <record id="subtype_16" model="hr.leave.subtype">
+            <field name="name">SI Enfermedad o Accidente (Primeros veinte dias)</field>              
+            <field name="type_id" ref="type_16"/>  
+        </record>
+
+        <record id="subtype_23" model="hr.leave.subtype">
+            <field name="name">SI Descanso Vacacional</field>              
+            <field name="type_id" ref="type_23"/>  
+        </record>
+
+       <record id="subtype_35" model="hr.leave.subtype">
+            <field name="name">SI Enfermedad Grave o Terminal o Accidente Grave de Familiares Directo</field>              
+            <field name="type_id" ref="type_35"/>  
+        </record>
+
+        <record id="subtype_29" model="hr.leave.subtype">
+            <field name="name">SI Dias Licencia por Adopción</field>              
+            <field name="type_id" ref="type_29"/>  
+        </record>
+
+        <record id="subtype_28" model="hr.leave.subtype">
+            <field name="name">SI Dias Licencia por Paternidad</field>              
+            <field name="type_id" ref="type_28"/>  
+        </record>
+        
+        <record id="subtype_26" model="hr.leave.subtype">
+            <field name="name">Licencia u Otros Motivos con goce de haber</field>              
+            <field name="type_id" ref="type_26"/>  
+        </record>
+
+         <record id="subtype_21" model="hr.leave.subtype">
+            <field name="name">SI Incapacidad Temporal (Invalidez, Enfermeda y Accidentes)</field>              
+            <field name="type_id" ref="type_21"/>  
+        </record>
+
+    </data>
+</odoo>

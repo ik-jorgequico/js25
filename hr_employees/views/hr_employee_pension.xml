@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_employee_pension_tree_view" model="ir.ui.view">
+        <field name="name">hr.employee.pension.tree.view</field>
+        <field name="model">hr.employee.pension</field>
+
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="parent_id" column_invisible="1" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="pension_system_id" />
+                <field name="pension_system_name" column_invisible="1" />
+                <field name="is_onp" column_invisible="1" />
+                 <field name="pension_mode" readonly="pension_system_name=='ONP'"/>
+                <field name="cod_cuspp" readonly="pension_system_name=='ONP'"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

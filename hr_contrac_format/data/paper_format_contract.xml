@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="a4_vertical_contrato" model="report.paperformat">
+            <field name="name">	A4 - FORMATO DE CONTRATO</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">18.00</field>
+            <field name="margin_bottom">18.00</field>
+            <field name="margin_left">20.00</field>
+            <field name="margin_right">30.00</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[
+                                            (4, ref('hr_contrac_format.report_ayr_coordinador')),
+                                            (4, ref('hr_contrac_format.report_ayr_supervisor_ventas')),
+                                            (4, ref('hr_contrac_format.report_ayr_vendor_mass')),
+                                            (4, ref('hr_contrac_format.report_ayr_asesor_ventas')),
+                                            (4, ref('hr_contrac_format.report_ayr_part_time')),
+                                            (4, ref('hr_contrac_format.report_adm_teletrabajo')),
+                                            (4, ref('hr_contrac_format.report_adm_hybrid')),
+                                            (4, ref('hr_contrac_format.report_operative_operative_report')),
+                                            (4, ref('hr_contrac_format.report_operative_seller_report')),
+                                            (4, ref('hr_contrac_format.report_renovation_report'))]"></field>
+        </record>
+    </data>
+</odoo>

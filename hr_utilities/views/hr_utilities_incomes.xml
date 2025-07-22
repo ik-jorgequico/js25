@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_utilities_incomes_form_view" model="ir.ui.view">
+        <field name="name">hr.utilities.incomes.form.view</field>
+        <field name="model">hr.utilities.incomes</field>
+
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_dowload_report_pdf_utilities"
+                        string="PDF"
+                        type="object"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Datos Personales">
+                            <field name="date_from" invisible="1" />
+                            <field name="date_to" invisible="1" />
+                            <field name="employee_id" />
+                            <field name="first_contract_date" />
+                            <field name="last_contract_date" />
+                        </group>
+                        <group string="Calculo Utilidades">
+                            <group string="Remuneracion">
+                                <field name="days_leave" />
+                                <field name="days_work" />
+                                <field name="utilities_days" />
+                            </group>
+                            <group string="Dias trabajados">
+                                <field name="bimp_total" />
+                                <field name="utilities_total" />
+                            </group>
+                            <group string="Totales">
+                                <field name="utilities_total_amount" />
+                                <field name="t_desc" />
+                                <field name="utilities_total_amount_neta" />
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Conceptos de Ingresos">
+                            <field name="income_lines" colspan="4" nolabel="1" force_save="1"
+                                readonly="1">
+                                <tree string="Ingresos">
+                                    <field name="name" />
+                                    <field name="amount" />
+                                </tree>
+                                <form string="Ingresos">
+                                    <group col="4">
+                                        <field name="amount" />
+                                        <field name="type" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Descuentos">
+                             <group string="Descuentos">
+                                <field name="loan" force_save="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_utilities_incomes_tree_view" model="ir.ui.view">
+        <field name="name">hr.utilities.incomes.tree.view</field>
+        <field name="model">hr.utilities.incomes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <header>
+                    <button name="action_dowload_report_pdf_utilities"
+                        string="PDF"
+                        type="object"
+                    />
+                </header> -->
+                <field name="date_from" column_invisible="1" />
+                <field name="date_to" column_invisible="1" />
+                <!-- <field name="identification_id" readonly="1" force_save="1" optional="hide"/> -->
+                <field name="employee_id" readonly="1" force_save="1" />
+                <field name="structure_type"  widget="badge" 
+                        decoration-success="structure_type == 'RG'" 
+                        decoration-info="structure_type == 'RP'" 
+                        decoration-danger="structure_type == 'RM'"/>
+                <field name="first_contract_date" />
+                <field name="last_contract_date" />
+                <field name="days_work" />
+                <field name="utilities_days" />
+                <field name="bimp_total" />
+                <!-- <field name="rem_bruta_5ta_aux" /> -->
+                <field name="utilities_total" />
+                <field name="utilities_total_amount" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_utilities_incomes" model="ir.actions.act_window">
+        <field name="name">Utilidades Ingresos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.utilities.incomes</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

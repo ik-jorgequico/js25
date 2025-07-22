@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.l10n_pe_edi_picking</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='misc']" position="inside">
+                <field name="l10n_pe_edi_picking_is_carrier" widget="boolean_toggle" />
+                <field
+                    name="l10n_pe_edi_picking_license_plate"
+                    invisible="l10n_pe_edi_picking_is_carrier == False"
+                />
+                <field name="l10n_pe_edi_picking_is_driver" widget="boolean_toggle" />
+                <field
+                    name="l10n_pe_edi_picking_license_number"
+                    invisible="l10n_pe_edi_picking_is_driver == False"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

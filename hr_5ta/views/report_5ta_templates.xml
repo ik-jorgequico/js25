@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_5ta">
+	<t t-call="web.external_layout" >
+		<!-- <div class="page" > -->
+			<h6 class="text-center" >CERTIFICADO DE RENTAS Y RETENCIONES DE QUINTA CATEGORIA</h6>
+			<h6 class="text-center" >(Art. 45 del Reglamento del Impuesto a la Renta - D.S.No. 122-94-EF)</h6>
+			<h6 class="text-center" >EJERCICIO GRAVABLE <span t-field="o.date_5ta" t-options='{"format": "yyyy"}'/></h6>
+			<h6 class="text-right" >Fecha: <span t-field="o.date_5ta" t-options='{"format": "dd/MM/yyyy"}' /></h6>
+
+			<div class="text-justify" style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-right: 1px solid #CACACA;
+							border-bottom: 1px solid #CACACA;
+							border-left: 1px solid #CACACA">
+							<span class="text-uppercase" t-field="o.employee_id.company_id.name"/>, CON RUC No. <span class="text-uppercase" t-field="o.employee_id.company_id.vat" />, 
+						CON DOMICILIO FISCAL <span class="text-uppercase" t-field="o.employee_id.company_id.street"/>  <span class="text-uppercase" t-field="o.employee_id.company_id.street_number"/> OFIC.  <span class="text-uppercase" t-field="o.employee_id.company_id.street_number2"/>, <span class="text-uppercase" t-field="o.employee_id.company_id.city"/>, 
+						<span class="text-uppercase" t-field="o.employee_id.company_id.state_id.name"/>, REPRESENTADA POR EL SR.(A). <span class="text-uppercase" t-field="o.employee_id.company_id.gerente_name"/>, CERTIFICA QUE A NUESTRO(A) TRABAJADOR(A) 
+						<span class="text-uppercase" t-field="o.employee_id.name"/> CON <span class="text-uppercase" t-field="o.employee_id.l10n_latam_identification_type_id.name"/> No. <span class="text-uppercase" t-field="o.employee_id.identification_id"/>.
+						SE HA RETENIDO EL IMPUESTO A LA RENTA EN BASE A LAS SIGUIENTES RENTAS, DEDUCCIONES Y CRÉDITOS.
+						
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			<div style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-right: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-left: 1px solid #CACACA">
+							1. RENTAS BRUTAS <br/>
+							&#160; &#160; &#160; REMUNERACIONES AFECTAS (SUELDOS BÁSICOS Y TRAS REMUNERACIONES)<br/>
+							&#160; &#160; &#160; OTRAS CIAS./SUELDO GANADO<br/>
+							&#160; &#160; &#160; REMUNERACIÓN BRUTA TOTAL<br/>
+						</th>
+
+						<th scope="row" class="text-right" style="
+							border-top: 1px solid #CACACA;
+							border-left: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-right: 1px solid #CACACA">
+							<br/>
+							<t t-esc="o.salary_amount + o.lbs" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+							<span t-field="o.salary_amount_5ta" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+							<t t-esc="o.salary_amount + o.lbs + o.salary_amount_5ta" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+  
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			<div style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-left: 1px solid #CACACA;
+							border-bottom: 1px solid #CACACA;
+							border-right: 0px;">
+							2. DEDUCCIONES SOBRE LA RENTA DE 5TA. CATEGORIA <br/>
+							&#160; &#160; &#160; 7 UIT (UNIDAD IMPOSITIVA TRIBUTARIA)<br/>
+						</th>
+
+						<th scope="row" class="text-right" style="
+							border-top: 1px solid #CACACA;
+							border-left: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-right: 1px solid #CACACA">
+							<br/>
+							<span t-field="o.deduction" t-options='{"widget": "monetary", "precision": 2, "display_currency": o.employee_id.company_id.currency_id}'/><br/>
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			<div style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-left: 1px solid #CACACA;
+							border-bottom: 1px solid #CACACA;
+							border-right: 0px;">
+							3. RENTA NETA IMPONIBLE (1-2) <br/>
+							&#160; &#160; &#160; .<br/>
+						</th>
+
+						<th scope="row" class="text-right" style="
+							border-top: 1px solid #CACACA;
+							border-left: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-right: 1px solid #CACACA">
+							<br/>
+							<span t-field="o.base_5ta" t-options='{"widget": "monetary", "precision": 2, "display_currency": o.employee_id.company_id.currency_id}'/><br/>
+
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			<div style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-left: 1px solid #CACACA;
+							border-bottom: 1px solid #CACACA;
+							border-right: 0px;">
+							4. IMPUESTO A LA RENTA <br/>
+							&#160; &#160; &#160; TASA 8%<br/>
+							&#160; &#160; &#160; TASA 14%<br/>
+							&#160; &#160; &#160; TASA 17%<br/>
+							&#160; &#160; &#160; TASA 20%<br/>
+							&#160; &#160; &#160; TASA 30%<br/>
+						</th>
+
+						<th scope="row" class="text-right" style="
+							border-top: 1px solid #CACACA;
+							border-left: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-right: 1px solid #CACACA">
+							<br/>
+							<t t-if="o.base_5ta > 0">
+								<span t-field="o.step_1" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-field="o.step_2" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-field="o.step_3" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-field="o.step_4" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-field="o.step_5" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+							</t>
+							<t t-else="">
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+							</t>
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			<div style="font-size: 12px">
+				<table class="table">
+   
+					<tr>
+						<th scope="row" style="
+							border-top: 1px solid #CACACA;
+							border-left: 1px solid #CACACA;
+							border-bottom: 1px solid #CACACA;
+							border-right: 0px;">
+							5. TOTAL IMPUESTO RETENIDO <br/>
+							&#160; &#160; &#160; OTRAS RETENCIONES (OTRA EMPRESA)<br/>
+							&#160; &#160; &#160; IMPUESTO RETENIDO<br/>
+							&#160; &#160; &#160; DEVOLUCION DE RENTA DE 5TA<br/>
+						</th>
+
+						<th scope="row" class="text-right" style="
+							border-top: 1px solid #CACACA;
+							border-left: 0px;
+							border-bottom: 1px solid #CACACA;
+							border-right: 1px solid #CACACA">
+							<br/>
+							<t t-if="o.base_5ta > 0">
+								<span t-field="o.amount_5ta" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-field="o.tax_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								<span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								  
+						   </t>
+							<t t-else="">
+								  <span t-field="o.amount_5ta" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+								  <span t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}">S/ 0.00</span><br/>
+								  <t t-esc="o.data_5ta_mensual*-1" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;precision&quot;: 2, &quot;display_currency&quot;: o.employee_id.company_id.currency_id}"/><br/>
+							</t>
+						</th>
+
+					</tr>
+
+					
+				</table>
+			
+			</div>
+
+			
+
+	  
+			<br /><br /><br />
+			<div class="row small">
+				<div class="col-6 text-center">
+					<br /><br /><br /><br /><br /><br />
+					<span>__________________________________________</span>
+					<br />
+					<span t-field="o.employee_id.name" />
+				</div>
+
+				<div class="col-6 text-center">
+					<br />
+					<span>__________________________________________</span>
+					<br />
+					<span> </span>
+					<br>GERENTE GENERAL</br>
+				</div>
+			</div>
+		<!-- </div> -->
+	</t>
+</template>
+
+<template id="report_5ta_lang">
+	<t t-call="web.html_container">
+		<t t-foreach="docs" t-as="o">
+			<t t-set="o" t-value="o.with_context(lang=o.employee_id.sudo().address_home_id.lang or o.env.lang)"/>
+			<t t-call="hr_5ta.report_5ta" t-lang="o.env.lang"/>
+		</t>
+	</t>
+</template>
+</odoo>

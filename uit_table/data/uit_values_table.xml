@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+        <!--Tipo de estructura-->
+        <record id = "uit_2020" model = "uit.table">
+            <field name = "year">2020</field>
+            <field name = "name">Unidad Impositiva Tributaria - UIT</field>
+            <field name = "code" >D.S. N° 380-2019-EF</field>
+            <field name = "value" >4300</field>
+        </record>
+
+        <record id = "uit_2021" model = "uit.table">
+            <field name = "year">2021</field>
+            <field name = "name">Unidad Impositiva Tributaria - UIT</field>
+            <field name = "code" >D.S. N° 392-2020-EF</field>
+            <field name = "value" >4400</field>
+        </record>
+
+        <record id = "uit_2022" model = "uit.table">
+            <field name = "year">2022</field>
+            <field name = "name">Unidad Impositiva Tributaria - UIT</field>
+            <field name = "code" >D.S. N° 398-2021-EF</field>
+            <field name = "value" >4600</field>
+        </record>
+
+        <record id = "uit_2023" model = "uit.table">
+            <field name = "year">2023</field>
+            <field name = "name">Unidad Impositiva Tributaria - UIT</field>
+            <field name = "code" >D.S. N° 309-2022-EF</field>
+            <field name = "value" >4950</field>
+        </record>
+
+        <record id = "uit_2024" model = "uit.table">
+            <field name = "year">2024</field>
+            <field name = "name">Unidad Impositiva Tributaria - UIT</field>
+            <field name = "code" >D.S. N° 309-2023-EF</field>
+            <field name = "value" >5150</field>
+        </record>
+
+
+	</data>
+</odoo>

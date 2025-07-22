@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- DATA POR DEFECTO -->
+
+        <record id="hr.departure_resigned" model="hr.departure.reason">
+            <field name="code">01</field>
+            <field name="name">RENUNCIA</field>
+        </record>
+
+        <record id="hr.departure_fired" model="hr.departure.reason">
+            <field name="name">DESPIDO</field>
+        </record>
+
+        <record id="hr.departure_retired" model="hr.departure.reason">
+            <field name="code">05</field>
+            <field name="name">JUBILACIÓN</field>
+        </record>
+
+        <!-- DATA CREADA -->
+        <record id="low_reason_end_contrat" model="hr.departure.reason">
+            <field name="name">TERMINO DE CONTRATO</field>
+        </record>
+
+        <record id="low_reason_probation" model="hr.departure.reason">
+            <field name="name">PERIODO DE PRUEBA</field>
+        </record>
+
+        <record id="low_reason_02" model="hr.departure.reason">
+            <field name="code">02</field>
+            <field name="name">RENUNCIA CON INCENTIVO</field>
+        </record>
+
+        <record id="low_reason_03" model="hr.departure.reason">
+            <field name="code">03</field>
+            <field name="name">DESPIDO O DESTITUCIÓN</field>
+        </record>
+        
+        <record id="low_reason_04" model="hr.departure.reason">
+            <field name="code">04</field>
+            <field name="name">CESE COLECTIVO</field>
+        </record>
+
+        <record id="low_reason_06" model="hr.departure.reason">
+            <field name="code">06</field>
+            <field name="name">INVALIDEZ ABSOLUTA PERMAN</field>
+        </record>
+
+        <record id="low_reason_07" model="hr.departure.reason">
+            <field name="code">07</field>
+            <field name="name">TERMIN OBRA/SERV, CUMPLIM CONDIC RESOL. O VENC PLAZO</field>
+        </record>
+
+        <record id="low_reason_08" model="hr.departure.reason">
+            <field name="code">08</field>
+            <field name="name">MUTUO DISENSO</field>
+        </record>
+
+        <record id="low_reason_09" model="hr.departure.reason">
+            <field name="code">09</field>
+            <field name="name">FALLECIMIENTO</field>
+        </record>
+
+        <record id="low_reason_10" model="hr.departure.reason">
+            <field name="code">10</field>
+            <field name="name">SUSPENSIÓN DE LA PENSIÓN</field>
+        </record>
+
+        <record id="low_reason_11" model="hr.departure.reason">
+            <field name="code">11</field>
+            <field name="name">REASIGNACIÓN</field>
+        </record>
+
+        <record id="low_reason_12" model="hr.departure.reason">
+            <field name="code">12</field>
+            <field name="name">PERMUTA</field>
+        </record>
+
+        <record id="low_reason_13" model="hr.departure.reason">
+            <field name="code">13</field>
+            <field name="name">TRANSFERENCIA</field>
+        </record>
+
+        <record id="low_reason_14" model="hr.departure.reason">
+            <field name="code">14</field>
+            <field name="name">BAJA POR SUC. EN POSIC DEL EMPLEADOR</field>
+        </record>
+
+        <record id="low_reason_15" model="hr.departure.reason">
+            <field name="code">15</field>
+            <field name="name">EXTINCIÓN O LIQUID. DEL EMPLEADOR</field>
+        </record>
+
+        <record id="low_reason_16" model="hr.departure.reason">
+            <field name="code">16</field>
+            <field name="name">OTR MOTIV CADUC PENSIÓN</field>
+        </record>
+
+        <record id="low_reason_17" model="hr.departure.reason">
+            <field name="code">17</field>
+            <field name="name">NO SE INICIÓ LA REL.  LABORAL O PREST. DE SERVICIOS</field>
+        </record>
+
+        <record id="low_reason_18" model="hr.departure.reason">
+            <field name="code">18</field>
+            <field name="name">LÍMITE DE EDAD 70 AÑOS</field>
+        </record>
+
+        <record id="low_reason_19" model="hr.departure.reason">
+            <field name="code">19</field>
+            <field name="name">OTRAS CAUSALES - LEY 30057</field>
+        </record>
+
+        <record id="low_reason_20" model="hr.departure.reason">
+            <field name="code">20</field>
+            <field name="name">INHABILITAC. PARA EJERC. PROF. O FUNC. PÚB. POR MÁS DE 3 MESES - LEY 30057</field>
+        </record>
+
+        <record id="low_reason_99" model="hr.departure.reason">
+            <field name="code">99</field>
+            <field name="name">SVL -HABILITADO PARA PDT PLAME (3)</field>
+        </record>
+    
+
+
+    </data>
+</odoo>

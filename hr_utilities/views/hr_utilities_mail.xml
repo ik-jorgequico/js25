@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<record id="hr_utilities_mail_view" model="ir.ui.view">
+		 <field name="name">hr.utilities.mail.view</field>
+		 <field name="model">hr.utilities.incomes</field>
+		 <field name="inherit_id" ref="hr_utilities.hr_utilities_incomes_form_view"/>
+		 <field name="arch" type="xml">
+				<xpath expr="//header" position="inside">
+					 <button string="Send By Mail"
+                             name="send_utilities_email"
+                             type="object" />
+				</xpath>
+		 </field>
+	</record>
+</odoo>

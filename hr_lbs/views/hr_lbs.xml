@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_lbs_form_view" model="ir.ui.view">
+        <field name="name">hr.lbs.form.view</field>
+        <field name="model">hr.lbs</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="compute_sheet" string="CALCULAR" type="object" class="btn-primary"/>
+                    <button name="draft" string="BORRADOR" type="object" groups="base.group_multi_company"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_hr_lbs" class="oe_stat_button" icon="fa-book" type="object" invisible = "child_ids_count == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="child_ids_count"/></span>
+                                <span class="o_stat_text">Liquidaciones</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <h1>
+                        <field name="name" force_save="1" readonly="1"/>
+                    </h1>
+
+                    <group>
+                        <group>
+                            <label for="month" string="Período"/>
+                            <div class="o_row">
+                                <field name="month" class="ow_inline"/> - <field name="year" class="ow_inline"/>
+                            </div>
+                            <field name="date_from" invisible="1" />
+                            <field name="date_to" invisible="1" />
+                        </group>
+
+                        <group>
+                            <field name="company_id" readonly="1" options="{'no_open': true}" groups="base.group_multi_company"/>
+                        </group>
+
+                        <group>
+                            <field name="xls_filename" invisible="1"/>
+                            <field name="xls_binary" filename="xls_filename" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Registros">
+                            <field name="child_ids" options="{'no_open': true}" nolabel="1" readonly="1" force_save="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- seccion correo -->
+                <div class = "oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="hr_lbs_tree_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.tree.view</field >
+        <field name="model">hr.lbs</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lbs" model="ir.actions.act_window">
+        <field name="name">LBS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.lbs</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+    <record id="hr_lbs_line_form_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.line.form.view</field >
+        <field name="model">hr.lbs.line</field>
+        <field name="arch" type="xml">
+            <form >
+            <header>
+                <button name="action_dowload_report_lbs_pdf" string="LIQUIDACIÓN PDF" type="object" />
+                <button name="compute_sheet_import" string="Calcular Bruto" type="object" />
+                <field name="state" widget="statusbar" statusbar_visible="draft,done,paid" options="{'clickable': '1'}"/>
+            </header>
+
+            <sheet>
+                <h1><field name="name" force_save="1" readonly="1"/></h1>
+                <group>
+                    <group>
+                        <field name="date_from" force_save="1" readonly="1"/>
+                        <field name="date_to"  force_save="1" readonly="1"/>
+                        <field name="name" invisible="1"/>
+                        <field name="employee_id"  readonly="1"/>
+                        <field name="peru_employee_regime"  readonly="1" options="{'no_create': True,'no_open': True}"/>
+                        <field name="first_contract_date"  readonly="1"/>
+                        <field name="last_contract_date"  readonly="1"/>
+                        <field name="time_service"  readonly="1"/>
+                        <field name="reason_low"  readonly="1"/>
+                        <field name="salary" readonly="1"/>
+                        <field name="family_asig" readonly="1"/>
+                    </group>
+
+                    <group>
+                        <field name="vaca_amount"  readonly="1"/>
+                        <field name="grati_amount" readonly="1"/>
+                        <field name="boni_extra_grati_amount" readonly="1"/>
+                        <field name="cts_amount"  readonly="1"/>
+                        <field name="quinta_devolucion" readonly="1"/>
+                        <field name="income_net" readonly="1"/>
+                        <field name="ded_net" readonly="1"/>
+                        <field name="net" readonly="1"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page name="cts" string="CTS">
+                        <field name="cts" nolabel="1" readonly="1"/>
+                    </page>
+
+                    <page name="vaca" string="Vacaciones">
+                        <field name="vaca" nolabel="1" readonly="1"/>
+                    </page>
+
+                    <page name="grati" string="Gratificación">
+                        <field name="grati" nolabel="1" readonly="1"/>
+                    </page>
+
+                    <page string="Ingresos">
+                        <field name="incomes" colspan="4" nolabel="1">
+                            <tree string="Ingresos" editable="bottom">
+                                <field name="name" readonly="1"/>
+                                <field name="total" readonly="1"/>
+                            </tree>
+
+                            <form string="Ingresos">
+                                <group col="4">
+                                <field name="name" readonly="1"/>
+                                <field name="total" readonly="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page string="Otros Ingresos">
+                        <field name="bons" colspan="4" nolabel="1"  invisible="state != 'draft'">
+                            <tree string="Otros Ingresos" editable="bottom">
+                                <field name="parent_id" column_invisible="1" required="0"/>
+                                <field name="input_type_id"/>
+                                <field name="name"/>
+                                <field name="amount"/>
+                                <field name="sequence" column_invisible="1"  />
+                                <field name="code" column_invisible="True"/>
+                                <field name="sequence" column_invisible="True"/>
+                            </tree>
+
+                            <form string="Otros Ingresos">
+                                <group col="4">
+                                    <field name="parent_id" invisible="1" required="0"/>
+                                    <field name="input_type_id"/>
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="sequence" invisible="1"  />
+                                    <field name="code" invisible="True"/>
+                                    <field name="sequence" invisible="True"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page string="Deducciones">
+                        <field name="deductions" colspan="4" nolabel="1">
+                            <tree string="Deducciones" editable="bottom">
+                                <field name="name" readonly="1"/>
+                                <field name="amount_lbs" readonly="1"/>
+                                <field name="amount_report" readonly="1"/>
+                                <field name="total" readonly="1"/>
+                            </tree>
+
+                            <form string="Deduccioens">
+                                <group col="4">
+                                <field name="name" readonly="1"/>
+                                <field name="amount_lbs" readonly="1"/>
+                                <field name="amount_report" readonly="1"/>
+                                <field name="total" readonly="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page string="Otros Descuentos">
+                        <field name="ded" colspan="4" nolabel="1" invisible="state != 'draft'">
+                            <tree string="Otros Descuentos" editable="bottom" >
+                                <field name="parent_id" column_invisible="1" required="0"/>
+                                <field name="input_type_id"/>
+                                <field name="name"/>
+                                <field name="amount"/>
+                                <field name="sequence" column_invisible="1"  />
+                                <field name="code" column_invisible="True"/>
+                                <field name="sequence" column_invisible="True"/>
+                            </tree>
+
+                            <form string="Otros Descuentos">
+                                <group col="4">
+                                    <field name="parent_id" invisible="1" required="0"/>
+                                    <field name="input_type_id"/>
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="sequence" invisible="1"  />
+                                    <field name="code" invisible="True"/>
+                                    <field name="sequence" invisible="True"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page string="Aportaciones">
+                        <field name="aportations" colspan="4" nolabel="1">
+                            <tree string="Aportaciones" editable="bottom">
+                                <field name="name" readonly="1"/>
+                                <field name="amount_lbs" readonly="1"/>
+                                <field name="amount_report" readonly="1"/>
+                                <field name="total" readonly="1"/>
+                            </tree>
+
+                            <form string="LBS Line">
+                                <group col="4">
+                                    <field name="name" readonly="1"/>
+                                    <field name="amount_lbs" readonly="1"/>
+                                    <field name="amount_report" readonly="1"/>
+                                    <field name="total" readonly="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+            <!-- seccion correo -->
+            <div class = "oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+            </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="hr_lbs_line_tree_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.line.tree.view</field >
+        <field name="model">hr.lbs.line</field>
+        <field name="arch" type="xml">
+            <tree >
+                <header>
+                    <button name="action_dowload_report_lbs_pdf" string="LIQUIDACIÓN PDF" type="object" />
+                </header>
+                <field name="date_from" force_save="1" readonly="1"/>
+                <field name="date_to"  force_save="1" readonly="1"/>
+                <field name="name" column_invisible="1"/>
+                <field name="employee_id" filename="xls_filename" readonly="1"/>
+                <field name="first_contract_date" filename="xls_filename" readonly="1"/>
+                <field name="last_contract_date" filename="xls_filename" readonly="1"/>
+                <field name="time_service" filename="xls_filename" readonly="1"/>
+                <field name="reason_low" filename="xls_filename" readonly="1"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'verify'" decoration-success="state in ('done','paid')"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lbs_line" model="ir.actions.act_window">
+        <field name="name">LBS Trabajador</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.lbs.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+    <menuitem
+        id="menu_action_lbs"
+        action="action_lbs"
+        name="LBS"
+        parent="hr_grati.menu_action_beneficio_social"
+        sequence="105"/>
+
+    <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+</odoo>

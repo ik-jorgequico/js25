@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sequence_epicking" model="ir.sequence">
+        <field name="name">E-Picking Sequence</field>
+        <field name="implementation">standard</field>
+        <field name="prefix">T001-</field>
+        <field name="code">epicking.sequence</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

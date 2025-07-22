@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_ticket_document">
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="page">
+                <div id="header">
+                    <div id="header_company" style="text-align:center; font-size:small" class="soticket-header">
+                        <div class="company-data">
+                            <t t-if='o.company_id'>
+                                <tr t-if="o.company_id.logo">
+                                    <div class="text-center">
+                                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height:auto;max-width:100%;" alt="Logo"/>
+                                    </div>
+                                </tr>
+                                <div class="text-center" style="text-transform: uppercase;">
+                                    <b><t t-esc='o.company_id.name'/></b><br/>
+                                    <t t-if='o.company_id.street'>
+                                        <t t-esc='o.company_id.street'/><br/>
+                                    </t> 
+                                    <t t-if='o.company_id.state_id'>
+                                        <span> - </span><t t-esc='o.company_id.state_id.name'/>
+                                    </t>
+                                    <t t-if='o.company_id.partner_id.l10n_pe_district'>
+                                        <span> - </span><t t-esc='o.company_id.partner_id.l10n_pe_district.name'/>
+                                    </t>   
+                                    <t t-if='o.company_id.partner_id.country_id'>
+                                        <span> - </span><t t-esc='o.company_id.partner_id.country_id.name'/>
+                                    </t>
+                                    <t t-if='o.company_id.partner_id.city_id'>
+                                        <span> - </span><t t-esc='o.company_id.partner_id.city_id.name'/>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div id="title">
+                    <div style="text-align:center;font-size: 12px;font-weight: bold;text-transform: uppercase;" class="soticket-header">
+                        <div t-if='o.company_id.vat'>
+                            RUC: <t t-esc='o.company_id.vat'/>
+                        </div> 
+                        <div id="doc_title" style="text-align:center;font-size: 12px;font-weight: bold;">
+                            <span t-if="o.l10n_latam_document_type_id" t-field="o.l10n_latam_document_type_id.report_name"/>
+                        </div>
+                        <div style="text-align:center;font-size: 12px;font-weight: bold;">
+                            <t t-esc='o.name'/>
+                        </div>
+                    </div>
+                </div>
+                <div id="cashier" class="cashier" style="text-align:center;font-size: 12px;">
+                    <div>--------------------------------</div>
+                    <div>Served by <t t-esc="o.invoice_user_id.name" /></div>
+                </div>
+                
+                <br/>
+
+                <div id="data_partner" style="font-size:13px;">
+                    <t t-set="partner" t-value="o.partner_id" />
+                    <t t-if="partner">
+                        <div class="row" style="font-size: small;">
+                            <div class="col-12" style="font-weight: bold;">
+                                CLIENT
+                            </div>
+                        </div>
+                        <div class="row" style="font-size: small;">
+                            <div style="text-align: left;" class="col-12">
+                                <t t-if="partner.vat">
+                                    <t t-if="partner.vat and len(partner.vat) == 8">
+                                        <span class="text-left" style="font-weight: normal; ">
+                                            DNI : <t t-esc="partner.vat" />
+                                        </span>
+                                    </t>
+                                    <t t-if="partner.vat and len(partner.vat) == 11">
+                                        <span class="text-left" style="font-weight: normal; ">
+                                            RUC : <t t-esc="partner.vat" />
+                                        </span>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="row" style="font-size: small;">
+                            <div style="text-align: left;" class="col-12">
+                                <t t-if="partner.name">
+                                    <span style="font-weight: normal;" colspan="2" class="text-left">
+                                        <t t-esc="partner.name" />
+                                    </span>
+                                </t>
+                            </div>
+                        </div>                        
+                    </t>
+                        <div>
+                            <t t-if='o.invoice_date'>
+                                <t style="font-weight: normal;" class="text-left" width="50%">
+                                    <span
+                                        style="font-weight: bold;"
+                                    >DATE INVOICE:</span> <t t-esc="o.invoice_date" />
+                                </t>
+                            </t>
+                        </div>
+                        <div>
+                            <t t-if='o.invoice_date_due'>
+                                <t style="font-weight: normal;" class="text-left" width="50%">
+                                    <span
+                                        style="font-weight: bold;"
+                                    >DATE DUE:</span> <t t-esc="o.invoice_date_due" />
+                                </t>
+                            </t>
+                        </div>
+                        <div>
+                            <t t-if='o.currency_id'>
+                                <t style="font-weight: normal;" class="text-left" width="50%">
+                                    <span
+                                        style="font-weight: bold;"
+                                    >CURRENCY:</span> <t t-esc="o.currency_id.name" />
+                                </t>
+                            </t>
+                        </div>
+                        <div>
+                            <t t-if='o.l10n_pe_edi_igv_percent'>
+                                <t style="font-weight: normal;" class="text-left" width="50%">
+                                    <span
+                                        style="font-weight: bold;"
+                                    >IGV:</span> <t t-esc="o.l10n_pe_edi_igv_percent" />%
+                                </t>
+                            </t>
+                        </div>
+                </div>
+
+                <br/>
+                <div id="product_header">
+                    <div class="row top-dashed" style="font-size: 5px; border-top:1px dashed black; border-bottom:1px dashed black;font-size: small; font-weight: bold">
+                        <div class="col-2">
+                            QTY.
+                        </div>
+                        <div class="col-5">
+                            DESCRIPTION
+                        </div>
+                        <div class="col-2" style="text-align:center;">
+                            P.U.
+                        </div>
+                        <div class="col-3" style="text-align:right;">
+                            TOTAL
+                        </div>
+                    </div>
+                </div>
+                <div id="products_list">
+                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                        <div class="row top-dashed" style="font-size: 5px; font-size: small;">
+                            <div class="col-2" style="padding-left:1px; padding-right:1px">
+                                <t t-esc="line.quantity"/>
+                            </div>
+                            <div class="col-5" style="padding-left:1px; padding-right:1px,line-height: 5px; font-family: 'Francois One', sans-serif;">
+                                    <t t-esc="line.product_id.name"/>
+                            </div>
+                            <div class="col-2 text-right" style="padding-left:1px; padding-right:1px;text-align:right;">
+                                <t t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                            </div>
+                            <div class="col-3 text-right" style="padding-left:1px; padding-right:1px;text-align:right;">
+                                
+                                <t t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <br/>
+                <div id="totals">
+                    <div class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            SUB-TOTAL
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div t-if="o.l10n_pe_edi_amount_free" class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            FREE AMOUNT
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.l10n_pe_edi_amount_free" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div t-if="o.l10n_pe_edi_amount_discount" class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            DISCOUNT
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.l10n_pe_edi_amount_discount * -1" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div t-if="o.l10n_pe_edi_global_discount" class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            GLOBAL DISCOUNT
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.l10n_pe_edi_global_discount * -1" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div t-if="o.l10n_pe_edi_amount_exonerated" class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            AMOUNT EXONERATED
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.l10n_pe_edi_amount_exonerated" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div t-if="o.l10n_pe_edi_amount_unaffected" class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            AMOUNT UNAFFECTED
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.l10n_pe_edi_amount_unaffected" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                        <div class="col-8">
+                            AMOUNT IGV
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="round(o.l10n_pe_edi_amount_igv, 2)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <div class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black; font-weight: bold">
+                        <div class="col-8">
+                            AMOUNT TO PAY
+                        </div>
+                        <div style="text-align: right;" class="col-4">
+                            <t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </div>
+                    </div>
+                    <br />
+                    <!-- =========================== -->
+                    <div class="row" style="font-size: 13.8px;">
+                        <div class="col-12">
+                        <strong>AMOUNT IN LETTERS:</strong> <t t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
+                        </div>
+                        
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6" style="font-size: 6px; font-size: small;">
+                            <strong>METHOD OF PAYMENT:</strong>
+                        </div>
+                        <div class="col-6" style="font-size: 6px; font-size: small;">
+                            <span
+                                t-esc="o.l10n_pe_edi_is_sale_credit and '[CRÉDITO POR PAGAR]' or '[CONTADO]'"
+                            />
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="row" t-if="o.l10n_pe_edi_is_sale_credit">
+                        <div class="col-4" style="font-size: 6px; font-size: small;">
+                            <strong>DUES:</strong>
+                        </div>
+                        <div class="col-8" style="font-size: 6px; font-size: small;">
+                            <span
+                                t-esc="o.get_dues_values_ticket()"
+                            />
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="row" t-if="o.l10n_pe_edi_origin_move_id">
+                        <div class="col-4" style="font-size: 6px; font-size: small;">
+                            <strong>DOCUMENT RELATED:</strong>
+                        </div>
+                        <div class="col-8" style="font-size: 6px; font-size: small;">
+                            <span 
+                                t-esc="o.l10n_pe_edi_origin_move_id.l10n_latam_document_type_id.name" 
+                                style="text-transform: uppercase;"
+                            /> - <span t-esc="o.l10n_pe_edi_origin_move_id.name" />
+                        </div>
+                    </div>
+
+                    <br/>
+                    
+                    <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget['content'] or []"/>
+                    <t t-if="payments_vals">
+                        <div class="row" style="padding-left:-2px; padding-right:1px; font-size: small">
+                            <strong>PAYMENT TYPE:</strong>
+                        </div>
+                        <br/>
+                        <t t-foreach="payments_vals" t-as="payment_vals">
+                            <t t-if="payment_vals['is_exchange'] == 0">
+                                <div class="row" style="font-size: 6px; font-size: small; border-top:1px dashed black;">
+                                    <div class="col-8" style="padding-left:1px; padding-right:1px">
+                                        <t t-esc="payment_vals['journal_name']" />
+                                    </div>
+                                    <div class="col-4 text-right" style="padding-left:1px; padding-right:1px;text-align: right;">
+                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                    <br/>
+                    <!-- ================================ -->
+                </div>
+
+                <div class="row" id="inform">
+                    <div class="col-4" style="font-size: 6px; font-size: small;">
+                        <strong>INFORM:</strong>
+                    </div>
+                    <div class="col-8" style="font-size: 6px; font-size: small;">
+                        <span
+                            t-esc="o.company_id.email"
+                        />
+                    </div>
+                </div>
+                <br/>
+                <div id="footer">       
+                    <div id="footer" class="text-left" style="font-size: small">
+                        <p>Printed representation of 
+                            <strong>
+                                <span t-esc="o.l10n_latam_document_type_id and o.l10n_latam_document_type_id.report_name or 'NO VALID'"/> 
+                                <span t-esc="o.name or 'NO VALID'" />.
+                            </strong>
+                            Visit 
+                            <strong>
+                                <span t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.control_url or 'NO VALID'" />.
+                            </strong>
+                        </p>
+                    </div>
+                    <div id="qr_code" class="text-center">
+                        <div class="inm-qr" style="text-align:center;">                
+                            <img
+                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o._get_qr_code(), 100, 100)"
+                            />
+                        </div>
+                    </div>
+                    <br />
+                    <div id="information" class="text-left" style="font-size: small">
+                        <p>
+                            <span
+                                t-esc="o.company_id.l10n_pe_edi_ose_id and o.company_id.l10n_pe_edi_ose_id.authorization_message or ''"
+                            />
+                        </p>
+                    </div>
+                    <div id="extra_information" class="text-center" style="font-size: small">
+                        <p> 
+                            ORDER
+                            <span
+                                t-esc="o.invoice_origin or ''"
+                            />
+                        </p>
+                        <p>
+                            <span t-esc="o.invoice_date"/>
+                        </p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </template>
+    
+    <template id="report_einvoice_ticket">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.user_id.lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                <t t-call="l10n_pe_edi_odoofact.report_ticket_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

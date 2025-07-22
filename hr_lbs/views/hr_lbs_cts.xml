@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_lbs_cts_form_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.cts.form.view</field >
+        <field name="model">hr.lbs.cts</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group> 
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group> 
+                        <group>
+                            <field name="period_month"/>
+                            <field name="employee_id"/>
+                            <field name="salary"/>
+                            <field name="family_asig"/>
+                            <field name="gratification"/>
+                            <field name="average_variables"/>
+                            <field name="base_amount"/>
+                            <field name="number_days"/>
+                            <field name="amount"/>
+                            <field name="lbs_cts_variables"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_lbs_cts_tree_view" model="ir.ui.view" >
+        <field name="name">hr.lbs.cts.tree.view</field >
+        <field name="model">hr.lbs.cts</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="period_month"/>
+                <field name="salary"/>
+                <field name="family_asig"/>
+                <field name="gratification"/>
+                <field name="average_variables"/>
+                <field name="base_amount"/>
+                <field name="number_days"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_lbs_cts" model="ir.actions.act_window">
+        <field name="name">LBS CTS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.lbs.cts</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

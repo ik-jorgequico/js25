@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Vista para el form -->
+	<record id="acc_detrac_mass_form_view" model="ir.ui.view">
+		<field name="name">acc.detrac.mass.form.view</field>
+		<field name="model">acc.detrac.mass</field>
+		<field name="arch" type="xml">
+			<form string="Detracciones Masivas">
+				<header>
+					<button name="aprobar" string="Aprobar" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+					<button name="action_draft" type="object" class="oe_highlight" string="Reestablecer" invisible="state == 'draft'"/>
+					<button name="action_cancel" type="object" string="Cancelar" invisible="state != 'draft'"/>
+					<button name="action_generate_txt" type="object" string="Generar TXT"/>
+					<button name="action_upload_data" type="object" class="oe_highlight" string="Importar Excel" invisible="not excel_to_upload_ids"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,done,cancel"/>
+				</header>
+
+				<div role="alert" class="alert alert-warning text-center" invisible="not warning">
+					<field name="warning" readonly="1" force_save="1" style="width:100%;"/>
+				</div>
+				
+				<sheet string="Detracciones">
+					<div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="list_payments" icon="fa-list-ul">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Pagos</span>
+                            </div>
+                        </button>
+                    </div>
+					<h1>
+						<field name="name" force_save="1" readonly="1"/>
+					</h1>
+					<group name="group_prin"> 
+						<group>                            		
+							<field name="journal_id" domain="[('type','in',['bank','cash'])]" readonly="state == 'done'" force_save="1"/>
+							<field name="total" force_save="1"/>
+							<field name="lote" invisible="1" force_save="1"/>
+							<field name="excel_to_upload_ids" widget="many2many_binary" force_save="1"/>
+						</group>
+						<group>
+							<field name="payment_date" readonly="state == 'done'" force_save="1"/>
+							<field name="correlative" invisible="1" />
+							<field name="company_id" invisible="1" force_save="1"/>
+							<field name="file_name" invisible="1" force_save="1"/>
+							<field name="file_binary" invisible="file_name == None" filename="file_name" readonly="1" force_save="1"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Detracciones" name="detraction">
+							<field name="line_ids" readonly="state == 'done'"/>
+						</page>
+					</notebook>
+				</sheet>
+				<div class = "oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="activity_ids" widget="mail_activity"/>
+					<field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<!-- Vista para la lista -->
+	<record id="acc_detrac_mass_tree_view" model="ir.ui.view">
+		<field name="name">acc.detrac.mass.tree.view</field>
+		<field name="model">acc.detrac.mass</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="journal_id" />
+				<field name="payment_date"/>
+				<field name="total" />
+				<field name="company_id" column_invisible="1"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_detrac_mass" model="ir.actions.act_window">
+		<field name="name">Detracciones Masivas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">acc.detrac.mass</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+</odoo>

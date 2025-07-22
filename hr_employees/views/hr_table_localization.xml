@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <record id="hr_table_location_tree" model="ir.ui.view">
+        <field name="name">hr.table.location.tree</field>
+        <field name="model">hr.table.location</field>
+        <field name="arch" type="xml">
+            <tree string="Table de Localidad">
+                <field name="name"/>              
+                <field name="code"/>  
+            </tree>
+        </field>
+    </record>
+
+<record id="action_hr_table_location" model="ir.actions.act_window">
+    <field name="name">Tabla de Localidad</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">hr.table.location</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+id="hr_table_location_menu"
+action="action_hr_table_location"
+name="Tabla de Localidad"
+parent="hr.menu_human_resources_configuration"
+sequence="1000"/>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="regime_peru_inherit_contract_form_BfEx" model="ir.ui.view">
+        <field name="name">regime_peru_inherit_contract_form_BfEx</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='information']" position="after">
+                <field name="regime_name" invisible="1"/>
+                <page string="Otros Beneficios" name="otros beneficios" invisible="regime_name not in ('Régimen Pequeña', 'Régimen Micro')">
+                
+                    <group name="otro_beneficios">
+                        <field name="extra_benefits_ids" widget="many2many_tags" options="{'no_create': True,'no_open': True}"/>
+                        <field name="benefit_company" readonly="1" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

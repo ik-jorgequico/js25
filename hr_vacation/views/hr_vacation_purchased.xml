@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_vacation_purchased_form_view" model="ir.ui.view">
+        <field name="name">hr.vacation.purchased.form.view</field>
+        <field name="model">hr.vacation.purchased</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_hr_vacation_acum" string="Ver Vacaciones"
+                        class="oe_stat_button" icon="fa-book" type="object" invisible="employee_id == 'False'">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Registros por Persona</span>
+                        </div>
+                    </button>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" force_save="1" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="selected_period_for_holidays" required="1"/>
+                            <field name="number_real_days" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <label for="date_from" string="Fechas" id="label_dates" />
+                            <div class="o_row o_row_readonly">
+                                <span class="oe_inline">Desde</span>
+                                <field name="date_from" class="oe_inline" nolabel="1" widget="daterange" options="{'related_end_date': 'date_to'}" />
+                                <span class="oe_inline">hasta</span>
+                                <field name="date_to" class="oe_inline" widget="daterange" options="{'related_start_date': 'date_from'}" />
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_vacation_purchased_tree_view" model="ir.ui.view">
+        <field name="name">hr.vacation.purchased.tree.view</field>
+        <field name="model">hr.vacation.purchased</field>
+
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="selected_period_for_holidays" />
+                <field name="number_real_days" />
+                <field name="is_calculated" />
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_vacation_purchased" model="ir.actions.act_window">
+        <field name="name">Compra de Vacaciones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.vacation.purchased</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_action_vacation_purchased"
+        action="action_vacation_purchased"
+        name="Compra de Vacaciones"
+        parent="hr_holidays.menu_hr_holidays_management"
+        sequence="105" />
+
+</odoo>
